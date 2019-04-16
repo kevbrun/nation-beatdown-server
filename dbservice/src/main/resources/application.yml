@@ -1,6 +1,16 @@
 spring:
   application:
     name: nation-database-service
+  h2:
+    console:
+      enabled: true
+    path: h2
+  datasource:
+    url: jdbc:h2:file:~/test
+    username: sa
+    password: sa
+
+
 server:
   port: 0
 eureka:
@@ -9,3 +19,4 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
+
