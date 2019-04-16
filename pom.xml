@@ -16,6 +16,7 @@
     <modules>
         <module>core</module>
         <module>eurekaserver</module>
+		<module>dbservice</module>
         <module>gamelogicservice</module>
 	</modules>
 
