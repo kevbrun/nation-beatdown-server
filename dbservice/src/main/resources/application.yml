@@ -9,10 +9,17 @@ spring:
     url: jdbc:h2:file:~/test
     username: sa
     password: sa
-
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  data:
+    rest:
+      #defaultMediaType: application/json+hal
 
 server:
-  port: 0
+  #port: 0
+  port: 8081
 eureka:
   client:
     serviceUrl:
