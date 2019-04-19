@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.BUILD-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <artifactId>server</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <groupId>ch.nation</groupId>
     </parent>
     <groupId>ch.nation</groupId>
     <artifactId>eurekaserver</artifactId>
@@ -15,11 +14,15 @@
     <description>Eureka Server</description>
 
 
+
+
     <dependencies>
-        <dependency>
+       <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -84,5 +87,6 @@
             <url>https://repo.spring.io/milestone</url>
         </pluginRepository>
     </pluginRepositories>
+
 
 </project>
