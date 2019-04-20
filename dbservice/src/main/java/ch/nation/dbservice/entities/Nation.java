@@ -1,38 +1,27 @@
 package ch.nation.dbservice.entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name="Nation")
 public class Nation extends NationEntityBase implements Serializable {
 
 
-    @Column(unique = true)
-    private String nationName;
+    @OneToOne(mappedBy = "nation")
+    private User user;
 
 
-    public Nation(long id, String uuid, String nationName) {
-        super(id, uuid);
-        this.nationName = nationName;
+
+    public User getUser() {
+        return user;
     }
 
-    public Nation(String nationName) {
-        this.nationName = nationName;
-    }
-
-    public String getNationName() {
-        return nationName;
-    }
-
-    public void setNationName(String nationName) {
-        this.nationName = nationName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
@@ -42,12 +31,19 @@ public class Nation extends NationEntityBase implements Serializable {
         if (!(o instanceof Nation)) return false;
         if (!super.equals(o)) return false;
         Nation nation = (Nation) o;
-        return Objects.equals(nationName, nation.nationName);
+        return Objects.equals(user, nation.user);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), nationName);
+        return Objects.hash(super.hashCode(), user);
+    }
+
+    @Override
+    public String toString() {
+        return "Nation{" +
+                "user=" + user +
+                '}';
     }
 }

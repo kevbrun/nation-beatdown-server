@@ -1,40 +1,41 @@
 package ch.nation.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class UserModel extends AbstractNationModelBase implements Serializable {
 
 
-    private String username;
 
     private String password;
 
     private boolean isAdmin;
 
+    private NationModel nation;
 
-    public UserModel(String uuid, String username, String password, boolean isAdmin) {
+    public UserModel(String uuid, String password, boolean isAdmin, NationModel nation) {
         super(uuid);
-        this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.nation = nation;
     }
 
-    public UserModel(String username, String password, boolean isAdmin) {
-        this.username = username;
+    public UserModel(String password, boolean isAdmin, NationModel nation) {
         this.password = password;
         this.isAdmin = isAdmin;
+        this.nation = nation;
+    }
+
+    public UserModel(String uuid, String description, String password, boolean isAdmin, NationModel nation) {
+        super(uuid, description);
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.nation = nation;
     }
 
     public UserModel(){
         super();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -53,32 +54,17 @@ public class UserModel extends AbstractNationModelBase implements Serializable {
         isAdmin = admin;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserModel userModel = (UserModel) o;
-
-        if (isAdmin != userModel.isAdmin) return false;
-        if (!username.equals(userModel.username)) return false;
-        return password.equals(userModel.password);
+    public NationModel getNation() {
+        return nation;
     }
 
-    @Override
-    public int hashCode() {
-        int result = username.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (isAdmin ? 1 : 0);
-        return result;
+    public void setNation(NationModel nation) {
+        this.nation = nation;
     }
 
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", isAdmin=" + isAdmin +
-                '}';
+    // Helper Functions
+    @JsonIgnore
+    public boolean isPasswordValid() {
+        return password!=null && !password.isBlank();
     }
 }

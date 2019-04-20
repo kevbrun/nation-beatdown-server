@@ -118,6 +118,16 @@
 
 		</profile>
 
+
+		<profile>
+			<id>rest-client</id>
+			<modules>
+				<module>core</module>
+				<module>rest-clients</module>
+			</modules>
+
+		</profile>
+
 	</profiles>
 	<repositories>
 		<repository>

@@ -1,9 +1,8 @@
 package ch.nation.dbservice.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,10 +15,17 @@ public class User extends NationEntityBase implements Serializable {
 
     @Column(unique = true)
     private String username;
-    @Column
+    @Column(nullable = false)
     private String password;
     @Column
     private boolean isAdmin;
+
+
+    @OneToOne
+    @JoinColumn(name="nation_id")
+    @RestResource(path="nation",rel = "nation")
+    private Nation nation;
+
 
 
     public User(long id, String uuid, String username, String password, boolean isAdmin) {
@@ -35,10 +41,17 @@ public class User extends NationEntityBase implements Serializable {
         this.isAdmin = isAdmin;
     }
 
+    public User(long id, String uuid, String description, String username, String password, boolean isAdmin) {
+        super(id, uuid, description);
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
 
     public User(){
         super();
         this.isAdmin = false;
+     //   this.nation = new Nation();
     }
 
 
@@ -64,6 +77,17 @@ public class User extends NationEntityBase implements Serializable {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+
+
+
+    public Nation getNation() {
+        return nation;
+    }
+
+    public void setNation(Nation nation) {
+        this.nation = nation;
     }
 
     @Override

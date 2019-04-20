@@ -14,13 +14,36 @@ public class NationEntityBase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(unique = true)
+    @Column(name="uuid",unique = true,nullable = false)
     private String uuid;
+
+    @Column(name = "name",unique = true,nullable = false)
+    private String name;
+    @Column(name="description")
+    private String description;
+
+    @PrePersist
+    void preInsert() {
+        if (this.uuid == null)   this.uuid = UUID.randomUUID().toString();
+    }
 
 
     public NationEntityBase(long id, String uuid) {
         this.id = id;
         this.uuid = uuid;
+    }
+
+    public NationEntityBase(long id, String uuid, String description) {
+        this.id = id;
+        this.uuid = uuid;
+        this.description = description;
+    }
+
+    public NationEntityBase(long id, String uuid, String name, String description) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.description = description;
     }
 
     public NationEntityBase() {
@@ -33,6 +56,22 @@ public class NationEntityBase implements Serializable {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
@@ -48,5 +87,15 @@ public class NationEntityBase implements Serializable {
     public int hashCode() {
 
         return Objects.hash(id, uuid);
+    }
+
+    @Override
+    public String toString() {
+        return "NationEntityBase{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
