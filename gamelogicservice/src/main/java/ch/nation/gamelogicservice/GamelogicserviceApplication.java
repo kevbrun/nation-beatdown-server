@@ -10,7 +10,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
-@EnableFeignClients(basePackages ={"ch.nation.rest.controller.feign.proxy"})
+@EnableFeignClients(basePackages ={"ch.nation.rest.clients"})
 @ComponentScan(basePackages = {"ch.nation.rest.controller"})
 public class GamelogicserviceApplication {
 

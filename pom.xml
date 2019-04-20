@@ -89,6 +89,7 @@
 			</activation>
 			<modules>
 				<module>core</module>
+				<module>rest-clients</module>
 				<module>eurekaserver</module>
 				<module>dbservice</module>
 				<module>gamelogicservice</module>
@@ -100,6 +101,7 @@
 			<id>gamelogic</id>
 			<modules>
 				<module>core</module>
+				<module>rest-clients</module>
 				<module>gamelogicservice</module>
 
 			</modules>

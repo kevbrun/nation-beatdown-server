@@ -1,4 +1,4 @@
-package ch.nation.rest.controller.feign.proxy;
+package ch.nation.rest.clients;
 
 
 import ch.nation.core.model.UserModel;
