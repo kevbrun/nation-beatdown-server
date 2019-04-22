@@ -2,9 +2,8 @@ package ch.nation.rest.services.impl;
 
 
 import ch.nation.core.model.UserModel;
-import ch.nation.rest.clients.DBRestClient;
+import ch.nation.rest.clients.DBUserRestClient;
 import ch.nation.rest.services.interf.UserService;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +18,20 @@ public class UserServiceImpl implements UserService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
-    private final DBRestClient client;
+    private final DBUserRestClient client;
 
 
     @Autowired
-    public UserServiceImpl(DBRestClient client) {
+    public UserServiceImpl(DBUserRestClient client) {
         this.client = client;
     }
 
 
     @Override
-    public Optional<List<UserModel>> getAll() {
+    public Optional<ArrayList<UserModel>> getAll() {
         LOGGER.info("Try to get all users from database-service");
-        Collection<UserModel> users = client.getAllUserEntities().getContent();
-        List<UserModel> allUsersAsList = new ArrayList<>(users);
+        Collection<UserModel> users = client.getAll().getContent();
+        ArrayList<UserModel> allUsersAsList = new ArrayList<>(users);
 
 
         if(allUsersAsList.size()==0){
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
         if(uuid!=null && !uuid.isBlank()) {
 
 
-            Resource<UserModel> response=   client.getUserById(uuid);
+            Resource<UserModel> response=   client.findById(uuid);
 
 
             if(response!=null){
@@ -74,7 +73,7 @@ public class UserServiceImpl implements UserService {
         if(validateNonExistingUserModelBody(object)) {
 
             if (!checkIfUserExistsInDB(object.getId())) {
-                Resource<UserModel> createdUser = client.createUserEntity(object);
+                Resource<UserModel> createdUser = client.create(object);
                 if (createdUser != null && createdUser.getContent() != null) {
                     LOGGER.info(String.format("User in db CREATED!| Payload: %s", object.toString()));
 
@@ -99,7 +98,7 @@ public class UserServiceImpl implements UserService {
         if(validateExistingUserModelBody(object)){
 
 
-        Resources<Void> deleted=    client.deleteUser(object.getId());
+        Resource<UserModel> deleted=    client.delete(object.getId(),object);
 
 
         LOGGER.info("DELETED!");
@@ -112,16 +111,18 @@ public class UserServiceImpl implements UserService {
         return Optional.empty();
     }
 
+
+
     @Override
     public Optional<UserModel> update(UserModel object) {
 
-        if(validateExistingUserModelBody(object) && checkIfUserExistsInDB(object.getId())){
+        if(checkIfUserExistsInDB(object.getId())){
 
             String uuid = object.getId();
             object.setId(null);
 
 
-            Resource<UserModel> updatedEntry= client.updateUserEntity(uuid,object);
+            Resource<UserModel> updatedEntry= client.update(uuid,object);
 
             if(updatedEntry.getContent()!=null){
                 LOGGER.info(String.format("Updated %s",updatedEntry.getContent().toString()));
@@ -158,4 +159,6 @@ public class UserServiceImpl implements UserService {
 
       return false;
     }
+
+
 }

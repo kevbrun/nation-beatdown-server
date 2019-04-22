@@ -2,20 +2,16 @@ package ch.nation.rest.controller.impl;
 
 
 import ch.nation.core.model.UserModel;
-import ch.nation.rest.clients.DBRestClient;
 import ch.nation.rest.controller.interfaces.UserController;
 import ch.nation.rest.services.interf.UserService;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +32,7 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity<List<UserModel>> getAllUsers() {
 
 
-       Optional<List<UserModel>> resp= client.getAll();
+       Optional<ArrayList<UserModel>> resp= client.getAll();
 
 
        if(resp.isPresent()) return new ResponseEntity<>(resp.get(),HttpStatus.OK);
