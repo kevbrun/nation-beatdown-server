@@ -32,9 +32,6 @@ public interface DBRestServiceBaseInterface<TResult,TResultMult,TInput>  {
     @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
     TResult update(@PathVariable("uuid") String uuid, TInput payload);
 
-    @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
-    TResult delete(@PathVariable("uuid")String uuid, TInput payload);
-
 
 
 

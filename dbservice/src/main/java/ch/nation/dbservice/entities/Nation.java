@@ -21,6 +21,19 @@ public class Nation extends NationEntityBase implements Serializable {
         this.user = user;
     }
 
+    public Nation(User user) {
+        this.user = user;
+
+    }
+
+    public Nation(UUID id, String name, String description) {
+        super(id, name, description);
+    }
+
+    public Nation(){
+        super();
+    }
+
     public User getUser() {
         return user;
     }

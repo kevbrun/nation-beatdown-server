@@ -22,37 +22,6 @@ public interface DBUserRestClient  extends DBRestServiceBaseInterface<Resource<U
 
 
     /**
-    //DB-Users-Related
-    @RequestMapping(method = RequestMethod.GET,path="/users")
-    Resources<UserModel> getAllUserEntities();
-
-     @RequestMapping(method = RequestMethod.DELETE,path="/users")
-    Resources<UserModel> deleteAllUserEntities();
-
-    @RequestMapping(method = RequestMethod.DELETE,path="/users/{uuid}")
-    Resources<Void> deleteUser(@PathVariable("uuid") String uuid);
-
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/users")
-    Resource<UserModel> createUserEntity(UserModel entity);
-
-    @RequestMapping(method = RequestMethod.PATCH,consumes = "application/json",path = "/users/{uuid}")
-    Resource<UserModel> updateUserEntity(@PathVariable("uuid") String uuid,@RequestBody UserModel entity);
-
-    @RequestMapping(method = RequestMethod.GET,path = "/users/{uuid}")
-    Resource<UserModel> getUserById(@PathVariable("uuid") String uuid);
-
-    @RequestMapping(method = RequestMethod.PUT, consumes = "text/uri-list", path="/users/{uuid}/nation")
-    Resource<NationModel> createNationAssociation(@PathVariable("uuid") String uuid, @RequestBody String nationId);
-
-    @RequestMapping(method = RequestMethod.DELETE, consumes = "text/uri-list", path="/users/{uuid}/nation")
-    Resources<NationModel> deleteNationAssociation(@PathVariable("uuid") String uuid, @RequestBody String nationId);
-
-    //DB-Nation-Related
-    @RequestMapping(method = RequestMethod.GET,path="/nations")
-    Resources<NationModel> getAllNationEntities();
-
-    @RequestMapping(method = RequestMethod.GET,path = "/nations/{uuid}")
-    Resource<NationModel> getNationById(@PathVariable("uuid") String uuid);
 
 
 

@@ -97,8 +97,8 @@ public class UserServiceImpl implements UserService {
 
         if(validateExistingUserModelBody(object)){
 
-
-        Resource<UserModel> deleted=    client.delete(object.getId(),object);
+/** TODO IF IS WORKING **/
+        Resource<UserModel> deleted=    client.delete(object.getId());
 
 
         LOGGER.info("DELETED!");
