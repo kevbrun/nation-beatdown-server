@@ -6,21 +6,10 @@ public class NationModel  extends AbstractNationModelBase implements Serializabl
 
     private UserModel user;
 
-    public NationModel(String uuid, UserModel user) {
-        super(uuid);
-        this.user = user;
-    }
 
     public NationModel(UserModel user) {
         this.user = user;
     }
-
-    public NationModel(String uuid, String description, UserModel user) {
-        super(uuid, description);
-        this.user = user;
-    }
-
-
 
     public NationModel(){
         super();
@@ -35,6 +24,11 @@ public class NationModel  extends AbstractNationModelBase implements Serializabl
     }
 
 
-
+    @Override
+    public String toString() {
+        return "NationModel{" +
+                "user=" + user +
+                "} " + super.toString();
+    }
 }
 

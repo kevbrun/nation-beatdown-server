@@ -14,21 +14,8 @@ public class UserModel extends AbstractNationModelBase implements Serializable {
 
     private NationModel nation;
 
-    public UserModel(String uuid, String password, boolean isAdmin, NationModel nation) {
-        super(uuid);
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-    }
 
     public UserModel(String password, boolean isAdmin, NationModel nation) {
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-    }
-
-    public UserModel(String uuid, String description, String password, boolean isAdmin, NationModel nation) {
-        super(uuid, description);
         this.password = password;
         this.isAdmin = isAdmin;
         this.nation = nation;
@@ -66,5 +53,15 @@ public class UserModel extends AbstractNationModelBase implements Serializable {
     @JsonIgnore
     public boolean isPasswordValid() {
         return password!=null && !password.isBlank();
+    }
+
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", nation=" + nation +
+                "} " + super.toString();
     }
 }

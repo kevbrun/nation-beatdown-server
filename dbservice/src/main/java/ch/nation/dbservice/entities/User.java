@@ -26,34 +26,24 @@ public class User extends NationEntityBase implements Serializable {
     @RestResource(path="nation",rel = "nation")
     private Nation nation;
 
-
-
-    public User(long id, String uuid, String username, String password, boolean isAdmin) {
-        super(id, uuid);
+    public User(UUID id, String name, String description, String username, String password, boolean isAdmin, Nation nation) {
+        super(id, name, description);
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.nation = nation;
     }
 
-    public User(String username, String password, boolean isAdmin) {
+    public User(String username, String password, boolean isAdmin, Nation nation) {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.nation = nation;
     }
 
-    public User(long id, String uuid, String description, String username, String password, boolean isAdmin) {
-        super(id, uuid, description);
-        this.username = username;
-        this.password = password;
-        this.isAdmin = isAdmin;
-    }
-
-    public User(){
+    public User() {
         super();
-        this.isAdmin = false;
-     //   this.nation = new Nation();
     }
-
 
     public String getUsername() {
         return username;

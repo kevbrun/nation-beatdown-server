@@ -17,4 +17,7 @@ eureka:
 logging:
   level:
     ch:
-      nation: DEBUG
+      nation:
+        rest:
+          clients: DEBUG
+

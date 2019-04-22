@@ -83,9 +83,9 @@
 
 	<profiles>
 		<profile>
-			<id>all</id>
+			<id>eureka</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
 				<module>core</module>
@@ -96,6 +96,19 @@
 			</modules>
 		</profile>
 
+
+		<profile>
+			<id>all</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>core</module>
+				<module>rest-clients</module>
+				<module>dbservice</module>
+				<module>gamelogicservice</module>
+			</modules>
+		</profile>
 
 		<profile>
 			<id>gamelogic</id>

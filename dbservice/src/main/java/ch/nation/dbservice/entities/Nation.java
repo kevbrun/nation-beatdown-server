@@ -5,6 +5,7 @@ package ch.nation.dbservice.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="Nation")
@@ -15,6 +16,10 @@ public class Nation extends NationEntityBase implements Serializable {
     private User user;
 
 
+    public Nation(UUID id, String name, String description, User user) {
+        super(id, name, description);
+        this.user = user;
+    }
 
     public User getUser() {
         return user;

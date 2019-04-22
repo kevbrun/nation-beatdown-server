@@ -45,10 +45,26 @@
 			<scope>test</scope>
 		</dependency>
 
+
+
+		<!-- MANUAL DEPENDENCIES -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+	<!--		<version>9.1.0</version>-->
+		</dependency>
+
 		<dependency>
 			<groupId>ch.nation</groupId>
 			<artifactId>core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<!-- Required to use PATCH -->
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+
 		</dependency>
 
 	</dependencies>
