@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractNationModelBase>   implements GenericCRUDDao<TResult,ArrayList<TResult>,TInput> {
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
 
@@ -123,7 +123,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
         return Optional.of(result);
     }
 
-    private boolean validateUuid(String uuid){
+    protected boolean validateUuid(String uuid){
         try {
             UUID.fromString(uuid);
         }catch (IllegalArgumentException ex){
