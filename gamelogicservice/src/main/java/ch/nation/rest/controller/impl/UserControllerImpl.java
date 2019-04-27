@@ -20,11 +20,12 @@ public class UserControllerImpl implements UserController {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
-    final UserService client;
+    private final UserService client;
 
 
     @Autowired
     public UserControllerImpl(UserService client) {
+
         this.client = client;
     }
 
@@ -42,7 +43,7 @@ public class UserControllerImpl implements UserController {
 
 
     @Override
-    public ResponseEntity<UserModel> createUser(UserModel requestBody) {
+    public ResponseEntity<UserModel> createUser(UserModel requestBody) throws Exception {
         if(requestBody==null) throw new IllegalArgumentException("Request Body was null!");
 
        Optional<UserModel>  response = client.create(requestBody);
@@ -61,7 +62,7 @@ public class UserControllerImpl implements UserController {
         requestBody.setId(uuid);
         Optional<UserModel> response = client.update(requestBody);
 
-        if(response.isPresent()) return new ResponseEntity<>(HttpStatus.OK);
+        if(response.isPresent()) return new ResponseEntity<>(response.get(),HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

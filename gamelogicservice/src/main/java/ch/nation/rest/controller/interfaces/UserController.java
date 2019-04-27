@@ -17,7 +17,7 @@ public interface UserController {
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/rest/api/v1/users")
-    ResponseEntity<UserModel> createUser(@RequestBody UserModel requestBody);
+    ResponseEntity<UserModel> createUser(@RequestBody UserModel requestBody) throws Exception;
 
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/users/{uuid}")
     ResponseEntity<UserModel> updateUser(@PathVariable("uuid") String uuid, @RequestBody UserModel requestBody);
