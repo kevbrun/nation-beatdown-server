@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 import java.util.Optional;
 
-public interface UserService  extends GenericCRUDDao<UserModel,ArrayList<UserModel>,UserModel> {
+public interface UserService  {
 }

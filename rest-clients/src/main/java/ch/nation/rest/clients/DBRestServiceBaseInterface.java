@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,7 +35,7 @@ public interface DBRestServiceBaseInterface<TResult extends Resource,TResultMult
 
 
     @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
-    TResult update(@PathVariable("uuid") String uuid, TInput payload);
+    TResult update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
 
 
 

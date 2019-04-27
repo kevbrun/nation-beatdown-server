@@ -8,8 +8,8 @@ public interface RestCRUDDao<TResult,TResultMultiple,TInput> {
 
     TResultMultiple getAll();
     TResult findById(String uuid);
-    TResult create(TInput object);
-    TResult delete(String uuid,TInput payload);
-    TResult update(String uuid,TInput payload);
+    TResult create(TInput object) throws Exception;
+    TResult delete(String uuid) throws Exception;
+    TResult update(TInput payload);
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 public interface UserController {
-
+/**
     @RequestMapping(method = RequestMethod.GET,path = "/rest/api/v1/users")
     ResponseEntity<List<UserModel>> getAllUsers();
 
@@ -23,7 +23,7 @@ public interface UserController {
     ResponseEntity<UserModel> updateUser(@PathVariable("uuid") String uuid, @RequestBody UserModel requestBody);
 
     @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/users/{uuid}")
-    ResponseEntity<UserModel> getUserByUuid(@PathVariable("uuid") String uuid);
+    ResponseEntity<UserModel> getUserByUuid(@PathVariable("uuid") String uuid);**/
 
 
 }

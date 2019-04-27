@@ -38,10 +38,9 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
     protected boolean validateUpdateParameter(TInput payload){
         return !payload.getId().isBlank();
     }
-    private boolean validateDeleteParameter(TInput payload){
-        return !payload.getId().isBlank();
+    private boolean validateDeleteParameter(String uuid){
+        return !uuid.isBlank() && validateUuid(uuid);
     }
-
 
 
     @Override
@@ -98,7 +97,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
     public Optional<TResult> update(TInput object) {
         LOGGER.info(String.format("START | Updating entity in db | Payload: %s",object.toString()));
         if(!validateUpdateParameter(object)) throw new IllegalArgumentException(String.format("Payload %s is not valid",object.toString()));
-        TResult result = (TResult) client.update(object.getId(),object);
+        TResult result = (TResult) client.update(object.getId(),object).getContent();
         if(result==null){
             LOGGER.info(String.format("Could not update % entity",object.toString()));
             return Optional.empty();
@@ -108,18 +107,18 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
     }
 
     @Override
-    public Optional<TResult> delete(TInput object) {
-        LOGGER.info(String.format("START | Deleting entity | Payload: %s",object.toString()));
-        if(!validateDeleteParameter(object)) throw new IllegalArgumentException(String.format("Payload %s is not valid",object.toString()));
+    public Optional<TResult> delete(String uuid) {
+        LOGGER.info(String.format("START | Deleting entity | Payload: %s",uuid));
+        if(!validateDeleteParameter(uuid)) throw new IllegalArgumentException(String.format("Payload %s is not valid",uuid));
 
-        TResult result = (TResult) client.delete(object.getId()).getContent();
+        TResult result = (TResult) client.delete(uuid).getContent();
         if(result == null){
-            LOGGER.info(String.format("Could not delete % entity",object.toString()));
+            LOGGER.info(String.format("Could not delete % entity",uuid.toString()));
             return Optional.empty();
         }
 
 
-        LOGGER.info(String.format("FINISH | Deleting entity | Payload: %s",object.toString()));
+        LOGGER.info(String.format("FINISH | Deleting entity | Payload: %s",uuid.toString()));
 
         return Optional.of(result);
     }
