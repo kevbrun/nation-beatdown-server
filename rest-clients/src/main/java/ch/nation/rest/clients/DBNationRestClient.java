@@ -1,4 +1,4 @@
-/**package ch.nation.rest.clients;
+package ch.nation.rest.clients;
 
 import ch.nation.core.model.NationModel;
 import ch.nation.rest.config.FeignClientConfig;
@@ -14,4 +14,3 @@ public interface DBNationRestClient extends DBRestServiceBaseInterface<Resource<
 
 
 }
-**/
