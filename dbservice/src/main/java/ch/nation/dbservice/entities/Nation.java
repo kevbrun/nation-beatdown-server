@@ -1,7 +1,6 @@
 package ch.nation.dbservice.entities;
 
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,8 +10,8 @@ import java.util.UUID;
 @Table(name="Nation")
 public class Nation extends NationEntityBase implements Serializable {
 
-
-    @OneToOne(mappedBy = "nation")
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
 
@@ -26,9 +25,11 @@ public class Nation extends NationEntityBase implements Serializable {
 
     }
 
-    public Nation(UUID id, String name, String description) {
-        super(id, name, description);
+
+    public Nation(String name){
+        super(name);
     }
+
 
     public Nation(){
         super();
@@ -62,6 +63,6 @@ public class Nation extends NationEntityBase implements Serializable {
     public String toString() {
         return "Nation{" +
                 "user=" + user +
-                '}';
+                "} " + super.toString();
     }
 }

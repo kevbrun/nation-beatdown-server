@@ -13,44 +13,38 @@ public class User extends NationEntityBase implements Serializable {
 
 
 
-    @Column(unique = true)
-    private String username;
+
     @Column(nullable = false)
     private String password;
     @Column
     private boolean isAdmin;
-
-
-    @OneToOne
-    @JoinColumn(name="nation_id")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     @RestResource(path="nation",rel = "nation")
     private Nation nation;
 
-    public User(UUID id, String name, String description, String username, String password, boolean isAdmin, Nation nation) {
+
+    public User(UUID id, String name, String description, String password, boolean isAdmin, Nation nation) {
         super(id, name, description);
-        this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
         this.nation = nation;
     }
 
-    public User(String username, String password, boolean isAdmin, Nation nation) {
-        this.username = username;
+    public User(String password, boolean isAdmin, Nation nation) {
         this.password = password;
         this.isAdmin = isAdmin;
         this.nation = nation;
     }
+
+    public User(String username,String password){
+        super(username);
+        this.password =password;
+
+    }
+
 
     public User() {
         super();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -69,9 +63,6 @@ public class User extends NationEntityBase implements Serializable {
         isAdmin = admin;
     }
 
-
-
-
     public Nation getNation() {
         return nation;
     }
@@ -87,13 +78,13 @@ public class User extends NationEntityBase implements Serializable {
         if (!super.equals(o)) return false;
         User user = (User) o;
         return isAdmin == user.isAdmin &&
-                Objects.equals(username, user.username) &&
+
                 Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), username, password, isAdmin);
+        return Objects.hash(super.hashCode(), password, isAdmin);
     }
 }

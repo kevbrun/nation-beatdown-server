@@ -6,8 +6,11 @@ import ch.nation.rest.clients.DBNationRestClient;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.DBUserRestClient;
 import ch.nation.rest.services.interf.NationService;
+import ch.nation.rest.services.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -45,25 +48,16 @@ public class NationServiceImpl extends AbstractGenericEntityService<NationModel,
 
     @Override
     public Optional<NationModel> createAssociationWithUser(String nationUuid,String userUuid) throws Exception {
-        LOGGER.info(String.format("START | Try adding associaton nation to user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
+        LOGGER.info(String.format("START | Try adding associaton between nation and user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
         if(!validateUuid(nationUuid))throw new IllegalArgumentException("Nation uuid is invalid");
-
-/** TODO TESTING**/
-
-        NationModel resource = (NationModel) client.findById(nationUuid).getContent();
-
+        Resource<NationModel> resource =client.findById(nationUuid);
         if(resource==null) throw new Exception(String.format("Could not found nation with uuid %s",nationUuid));
-
         Resource<UserModel> userEntity = userClient.findById(userUuid);
-
         if(userEntity==null || userEntity.getLink("self")==null) throw new Exception("could not found uri for user "+userUuid);
-
-        String uri = userEntity.getId().toString();
-
-        Resource<NationModel> model = ((DBNationRestClient)client).createAssociationWithUser(nationUuid,uri);
-
-
-        LOGGER.info(String.format("FINISH | Try adding associaton nation to user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
-        return Optional.of(model.getContent());
+        String uri = userEntity.getId().getHref();
+        Resource<UserModel> model = ((DBUserRestClient)userClient).associateWithNation(userEntity.getContent().getId(),resource.getLink("self").getHref());
+        resource =client.findById(nationUuid);
+        LOGGER.info(String.format("FINISH | Try adding associaton between nation to user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
+        return Optional.of(resource.getContent());
     }
 }

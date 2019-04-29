@@ -18,6 +18,7 @@ public class NationEntityBase implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @JsonProperty("uuid")
+    @Column(name="id")
     private UUID id;
     @Column(name = "name",unique = true,nullable = false)
     private String name;
@@ -31,6 +32,10 @@ public class NationEntityBase implements Serializable {
     }
 
     public NationEntityBase() {
+    }
+
+    public NationEntityBase(String name){
+        this.name = name;
     }
 
     public String getName() {
@@ -47,6 +52,15 @@ public class NationEntityBase implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     @Override
