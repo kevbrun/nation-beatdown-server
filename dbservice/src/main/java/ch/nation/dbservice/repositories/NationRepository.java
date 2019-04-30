@@ -10,5 +10,7 @@ import java.util.UUID;
 @RepositoryRestResource(collectionResourceRel = "nations",path = "nations")
 public interface NationRepository extends PagingAndSortingRepository<Nation,UUID> {
 
+
+
 }
 
