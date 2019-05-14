@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name="Nation")
+@Entity(name="NATION")
+@Table(name="NATION")
 public class Nation extends NationEntityBase implements Serializable {
 
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name="User")
+@Entity(name="USER")
+@Table(name="USER")
 public class User extends NationEntityBase implements Serializable {
 
 

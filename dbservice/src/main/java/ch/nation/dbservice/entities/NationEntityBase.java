@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table
+@Entity(name="NATION_BASE")
+@Table(name="NATION_BASE")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class NationEntityBase implements Serializable {
 
