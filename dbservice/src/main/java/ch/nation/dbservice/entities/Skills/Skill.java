@@ -4,6 +4,7 @@ package ch.nation.dbservice.entities.Skills;
 import ch.nation.dbservice.entities.Clazzes.CharacterClasses;
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.dbservice.entities.enums.Target;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,24 +16,31 @@ public class Skill extends NationEntityBase {
 
 
     @Column(name="cost")
+    @JsonProperty("cost")
     private int cost;
 
     @Column(name="base_value")
+    @JsonProperty("base_value")
     private int baseValue;
 
     @Column(name="cooldown")
+    @JsonProperty("cooldown")
     private int cooldown;
 
     @Column(name="current_cooldown")
+    @JsonProperty("current_cooldown")
     private int currentCooldownTimer;
 
     @Column(name="skill_bar_order")
+    @JsonProperty("skill_bar_order")
     private int skillBarOrder;
 
     @Column(name="area")
+    @JsonProperty("area")
     private ActionArea actionArea;
 
     @Column(name="skill_target")
+    @JsonProperty("skill_target")
     @Enumerated(EnumType.STRING)
     private Target target;
 
@@ -40,11 +48,13 @@ public class Skill extends NationEntityBase {
     ///TODO CHECK IF IT IS NOT MANY-TO-MANY
     @ManyToOne
     @JoinColumn(name = "clazz_id", insertable = false, updatable = false)
+    @JsonProperty("clazz")
     private CharacterClasses characterClasses;
 
 
     @ManyToMany
     @Column(name="skill_effects")
+    @JsonProperty("skill_effects")
     private List<SkillEffect> skillEffects;
 
 

@@ -5,7 +5,9 @@ import ch.nation.dbservice.entities.enums.SkillEffectTarget;
 import ch.nation.dbservice.entities.enums.StatType;
 import ch.nation.dbservice.entities.enums.TimeReversakSkillEffectRoundDefinition;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
@@ -19,20 +21,25 @@ public class SkillEffect extends NationEntityBase {
 
     @Column(name="effectTarget")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("effectTarget")
     private SkillEffectTarget effectTarget;
 
     @Column(name="calcSource")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("calcSource")
     private StatType typeUsedForCalculation;
 
     @Column(name="calcTarget")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("calcTarget")
     private StatType applyCalculationOnStat;
 
     @Column(name="negative")
+    @JsonProperty("negative")
     private boolean resultIsNegative;
 
     @ManyToMany(mappedBy = "skillEffects")
+    @JsonIgnore
     private List<Skill> skills;
 
 
@@ -41,11 +48,13 @@ public class SkillEffect extends NationEntityBase {
     @Column(name="reversal_def")
     @Enumerated(EnumType.STRING)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("reversal_def")
     private TimeReversakSkillEffectRoundDefinition definition;
 
     @Column(name="count_of_skills")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Value("#{countOfSkillEffectToReverse == 0 ?  countOfSkillEffectToReverse : null}")
+    @JsonProperty("count_of_skills")
     private Integer countOfSkillEffectToReverse;
 
 

@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.User;
 
 import ch.nation.dbservice.entities.Nation;
 import ch.nation.dbservice.entities.NationEntityBase;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -16,9 +17,11 @@ public class User extends NationEntityBase implements Serializable {
 
 
 
-    @Column(nullable = false)
+    @Column(name="password",nullable = false)
+    @JsonProperty("password")
     private String password;
-    @Column
+    @Column(name="admin")
+    @JsonProperty("admin")
     private boolean isAdmin;
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     @RestResource(path="nation",rel = "nation")

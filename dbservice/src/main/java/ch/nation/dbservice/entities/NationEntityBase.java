@@ -22,7 +22,7 @@ public class NationEntityBase implements Serializable {
     private UUID id;
     @Column(name = "name",unique = true,nullable = false)
     private String name;
-    @Column(name="description")
+    @Column(name="desc")
     private String description;
 
     public NationEntityBase(UUID id, String name, String description) {
