@@ -1,7 +1,8 @@
-package ch.nation.dbservice.entities;
+package ch.nation.dbservice.entities.Clazzes;
 
 
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.Skills.Skill;
 
 import javax.persistence.*;
 import java.util.ArrayList;

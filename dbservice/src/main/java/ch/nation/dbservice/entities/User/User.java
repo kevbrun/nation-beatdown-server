@@ -1,5 +1,7 @@
-package ch.nation.dbservice.entities;
+package ch.nation.dbservice.entities.User;
 
+import ch.nation.dbservice.entities.Nation;
+import ch.nation.dbservice.entities.NationEntityBase;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;

@@ -1,6 +1,8 @@
 package ch.nation.dbservice.entities;
 
 
+import ch.nation.dbservice.entities.User.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;

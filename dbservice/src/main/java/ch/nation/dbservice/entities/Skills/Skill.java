@@ -1,14 +1,17 @@
-package ch.nation.dbservice.entities;
+package ch.nation.dbservice.entities.Skills;
 
 
+import ch.nation.dbservice.entities.Clazzes.CharacterClasses;
+import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.dbservice.entities.enums.Target;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name="SKILLS")
 @Entity(name="SKILLS")
-public class Skill extends NationEntityBase{
+public class Skill extends NationEntityBase {
 
 
     @Column(name="cost")
@@ -33,15 +36,19 @@ public class Skill extends NationEntityBase{
     @Enumerated(EnumType.STRING)
     private Target target;
 
+
+    ///TODO CHECK IF IT IS NOT MANY-TO-MANY
     @ManyToOne
     @JoinColumn(name = "clazz_id", insertable = false, updatable = false)
     private CharacterClasses characterClasses;
 
 
-    /** TODO SKILL_EFFECTS **/
+    @ManyToMany
+    @Column(name="skill_effects")
+    private List<SkillEffect> skillEffects;
 
 
-    public Skill(UUID id, String name, String description, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses) {
+    public Skill(UUID id, String name, String description, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
         super(id, name, description);
         this.cost = cost;
         this.baseValue = baseValue;
@@ -51,9 +58,10 @@ public class Skill extends NationEntityBase{
         this.actionArea = actionArea;
         this.target = target;
         this.characterClasses = characterClasses;
+        this.skillEffects = skillEffects;
     }
 
-    public Skill(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses) {
+    public Skill(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
         this.cost = cost;
         this.baseValue = baseValue;
         this.cooldown = cooldown;
@@ -62,9 +70,10 @@ public class Skill extends NationEntityBase{
         this.actionArea = actionArea;
         this.target = target;
         this.characterClasses = characterClasses;
+        this.skillEffects = skillEffects;
     }
 
-    public Skill(String name, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses) {
+    public Skill(String name, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
         super(name);
         this.cost = cost;
         this.baseValue = baseValue;
@@ -74,10 +83,13 @@ public class Skill extends NationEntityBase{
         this.actionArea = actionArea;
         this.target = target;
         this.characterClasses = characterClasses;
+        this.skillEffects = skillEffects;
     }
 
     public Skill() {
     }
+
+
 
     public int getCost() {
         return cost;
@@ -141,5 +153,46 @@ public class Skill extends NationEntityBase{
 
     public void setCharacterClasses(CharacterClasses characterClasses) {
         this.characterClasses = characterClasses;
+    }
+
+    public List<SkillEffect> getSkillEffects() {
+        return skillEffects;
+    }
+
+    public void setSkillEffects(List<SkillEffect> skillEffects) {
+        this.skillEffects = skillEffects;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "cost=" + cost +
+                ", baseValue=" + baseValue +
+                ", cooldown=" + cooldown +
+                ", currentCooldownTimer=" + currentCooldownTimer +
+                ", skillBarOrder=" + skillBarOrder +
+                ", actionArea=" + actionArea +
+                ", target=" + target +
+                ", characterClasses=" + characterClasses +
+                ", skillEffects=" + skillEffects +
+                "} " + super.toString();
+    }
+
+
+        //REGION NOT GENERATED FUNCTIONS
+
+    public void addSkillEffect(SkillEffect skillEffect){
+        if(skillEffect!=null) {
+            this.skillEffects.add(skillEffect);
+            skillEffect.getSkills().add(this);
+        }
+    }
+
+    public void removeSkillEffect(SkillEffect skillEffect){
+        if(skillEffect!=null){
+            this.skillEffects.remove(skillEffect);
+            skillEffect.getSkills().remove(this);
+        }
     }
 }

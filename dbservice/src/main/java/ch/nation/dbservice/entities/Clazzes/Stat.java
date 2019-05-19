@@ -1,4 +1,4 @@
-package ch.nation.dbservice.entities;
+package ch.nation.dbservice.entities.Clazzes;
 
 import ch.nation.dbservice.entities.enums.StatGrowthType;
 

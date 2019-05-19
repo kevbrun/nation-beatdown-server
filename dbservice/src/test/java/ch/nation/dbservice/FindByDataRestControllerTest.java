@@ -2,18 +2,17 @@ package ch.nation.dbservice;
 
 import ch.nation.dbservice.entities.Nation;
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.User;
+import ch.nation.dbservice.entities.User.User;
 import ch.nation.dbservice.repositories.NationRepository;
 import ch.nation.dbservice.repositories.UserRepository;
-import javassist.bytecode.LineNumberAttribute;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -24,7 +23,7 @@ import java.util.Collection;
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
-/**
+
     @Parameterized.Parameter(value=0)
     public String endpoint;
 
@@ -46,6 +45,7 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
 
 
     @Test
+    @Ignore
     public void findByTest(){
 
      created= (NationEntityBase) repository.save(payload);
@@ -72,7 +72,6 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
 
         return params;
     }
-**/
 
 
 
