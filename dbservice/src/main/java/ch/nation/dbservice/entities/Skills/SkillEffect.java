@@ -1,19 +1,16 @@
 package ch.nation.dbservice.entities.Skills;
 
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.enums.SkillEffectTarget;
-import ch.nation.dbservice.entities.enums.StatType;
-import ch.nation.dbservice.entities.enums.TimeReversakSkillEffectRoundDefinition;
-import com.fasterxml.jackson.annotation.JsonFilter;
+import ch.nation.dbservice.entities.Enums.SkillEffectTarget;
+import ch.nation.dbservice.entities.Enums.StatType;
+import ch.nation.dbservice.entities.Enums.TimeReversakSkillEffectRoundDefinition;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 @Table(name="SKILL_EFFECTS")
 @Entity(name="SKILL_EFFECTS")

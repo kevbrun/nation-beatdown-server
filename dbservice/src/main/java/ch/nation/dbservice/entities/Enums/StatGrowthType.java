@@ -1,8 +1,6 @@
-package ch.nation.dbservice.entities.enums;
+package ch.nation.dbservice.entities.Enums;
 
 import ch.nation.dbservice.utils.EnumUtilties;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum StatGrowthType implements IEnumFromValue<StatGrowthType> {
     NONE("None"),LINEAR("Linear"),LOGARITHMIC("Logarithmic"),EXPONENTIAL("Exponential");

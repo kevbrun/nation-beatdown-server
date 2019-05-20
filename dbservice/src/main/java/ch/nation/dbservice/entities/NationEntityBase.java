@@ -21,8 +21,10 @@ public class NationEntityBase implements Serializable {
     @Column(name="id")
     private UUID id;
     @Column(name = "name",unique = true,nullable = false)
+    @JsonProperty("name")
     private String name;
     @Column(name="desc")
+    @JsonProperty("desc")
     private String description;
 
     public NationEntityBase(UUID id, String name, String description) {

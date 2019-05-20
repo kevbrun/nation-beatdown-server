@@ -1,6 +1,6 @@
 package ch.nation.dbservice.projection;
 
-import ch.nation.dbservice.entities.Nation;
+import ch.nation.dbservice.entities.User.Nation;
 import ch.nation.dbservice.entities.User.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;

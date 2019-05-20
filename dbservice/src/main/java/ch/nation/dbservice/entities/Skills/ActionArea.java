@@ -1,8 +1,7 @@
 package ch.nation.dbservice.entities.Skills;
 
-import ch.nation.dbservice.entities.enums.ActionShape;
+import ch.nation.dbservice.entities.Enums.ActionShape;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

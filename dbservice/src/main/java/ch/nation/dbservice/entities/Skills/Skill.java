@@ -1,14 +1,14 @@
 package ch.nation.dbservice.entities.Skills;
 
 
-import ch.nation.dbservice.entities.Clazzes.CharacterClasses;
+import ch.nation.dbservice.entities.Clazzes.CharacterClass;
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.enums.Target;
+import ch.nation.dbservice.entities.Enums.Target;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Table(name="SKILLS")
 @Entity(name="SKILLS")
@@ -46,55 +46,18 @@ public class Skill extends NationEntityBase {
 
 
     ///TODO CHECK IF IT IS NOT MANY-TO-MANY
-    @ManyToOne
-    @JoinColumn(name = "clazz_id", insertable = false, updatable = false)
+    @ManyToMany(mappedBy = "skills")
     @JsonProperty("clazz")
-    private CharacterClasses characterClasses;
+    private List<CharacterClass> characterClasses;
 
 
     @ManyToMany
     @Column(name="skill_effects")
     @JsonProperty("skill_effects")
+    @RestResource(path="skill-effect",rel = "skill-effect")
     private List<SkillEffect> skillEffects;
 
 
-    public Skill(UUID id, String name, String description, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
-        super(id, name, description);
-        this.cost = cost;
-        this.baseValue = baseValue;
-        this.cooldown = cooldown;
-        this.currentCooldownTimer = currentCooldownTimer;
-        this.skillBarOrder = skillBarOrder;
-        this.actionArea = actionArea;
-        this.target = target;
-        this.characterClasses = characterClasses;
-        this.skillEffects = skillEffects;
-    }
-
-    public Skill(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
-        this.cost = cost;
-        this.baseValue = baseValue;
-        this.cooldown = cooldown;
-        this.currentCooldownTimer = currentCooldownTimer;
-        this.skillBarOrder = skillBarOrder;
-        this.actionArea = actionArea;
-        this.target = target;
-        this.characterClasses = characterClasses;
-        this.skillEffects = skillEffects;
-    }
-
-    public Skill(String name, int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionArea actionArea, Target target, CharacterClasses characterClasses, List<SkillEffect> skillEffects) {
-        super(name);
-        this.cost = cost;
-        this.baseValue = baseValue;
-        this.cooldown = cooldown;
-        this.currentCooldownTimer = currentCooldownTimer;
-        this.skillBarOrder = skillBarOrder;
-        this.actionArea = actionArea;
-        this.target = target;
-        this.characterClasses = characterClasses;
-        this.skillEffects = skillEffects;
-    }
 
     public Skill() {
     }
@@ -157,11 +120,11 @@ public class Skill extends NationEntityBase {
         this.target = target;
     }
 
-    public CharacterClasses getCharacterClasses() {
+    public List<CharacterClass> getCharacterClasses() {
         return characterClasses;
     }
 
-    public void setCharacterClasses(CharacterClasses characterClasses) {
+    public void setCharacterClasses(List<CharacterClass> characterClasses) {
         this.characterClasses = characterClasses;
     }
 
@@ -205,4 +168,22 @@ public class Skill extends NationEntityBase {
             skillEffect.getSkills().remove(this);
         }
     }
+
+    public void addCharacterClass(CharacterClass clazz){
+        if(!characterClasses.contains(clazz)){
+            characterClasses.add(clazz);
+            clazz.addSkill(this);
+
+        }
+    }
+
+    public void removeCharacterClass(CharacterClass clazz){
+        if(characterClasses.contains(clazz)){
+            characterClasses.remove(clazz);
+            clazz.removeSkill(this);
+        }
+    }
+
+
+
 }

@@ -1,8 +1,6 @@
-package ch.nation.dbservice.entities.enums;
+package ch.nation.dbservice.entities.Enums;
 
 import ch.nation.dbservice.utils.EnumUtilties;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum  Target implements IEnumFromValue<Target>{
     SELF("Self"),PARTY_ALL("PartyAll"),ENEMY_ALL("EnemyAll"),PARTY_SINGLE("PartySingle"),ENEMY_SINGLE("Enemy_Single"),

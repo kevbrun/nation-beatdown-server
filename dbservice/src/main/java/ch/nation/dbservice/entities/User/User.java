@@ -1,12 +1,13 @@
 package ch.nation.dbservice.entities.User;
 
-import ch.nation.dbservice.entities.Nation;
+import ch.nation.core.model.position.Vector3Int;
 import ch.nation.dbservice.entities.NationEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 

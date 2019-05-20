@@ -1,4 +1,4 @@
-package ch.nation.dbservice.entities.enums;
+package ch.nation.dbservice.entities.Enums;
 
 import ch.nation.dbservice.utils.EnumUtilties;
 

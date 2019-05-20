@@ -3,6 +3,8 @@ package ch.nation.dbservice.entities.Clazzes;
 
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.dbservice.entities.Skills.Skill;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,100 +13,139 @@ import java.util.UUID;
 
 @Entity(name="CLASSES")
 @Table(name="CLASSES")
-public class CharacterClasses extends NationEntityBase {
+public class CharacterClass extends NationEntityBase {
     @Column(name="lvl")
+    @JsonProperty("lvl")
     private int level;
 
     @Column(name ="exp")
+    @JsonProperty("exp")
     private int exp;
+    @JsonProperty("exp_for_level_up")
     @Column(name="exp_for_level_up")
     private int expToLevelUp;
 
 
-    @OneToMany(mappedBy = "characterClasses")
+    @ManyToMany
+    @Column(name="skills")
+    @RestResource(path="skill",rel = "skill")
+    @JsonProperty("skills")
     private List<Skill> skills;
 
 
-
+    @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "hp_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "hp_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "hp_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "hp_growth"))
 
     })
-    @Embedded
+    @Column(name="hp")
+    @JsonProperty("hp")
     private Stat healthPoints;
+
+
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "ap_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "ap_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "ap_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "ap_growth"))
 
 
     })
+    @Column(name="ap")
+    @JsonProperty("ap")
     private Stat actionPoints;
+
+
+
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "speed_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "speed_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "speed_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "speed_growth"))
 
 
     })
+    @Column(name="speed")
+    @JsonProperty("speed")
     private Stat movementSpeed;
+
+
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "str_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "str_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "str_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "str_growth"))
 
 
     })
+    @Column(name="str")
+    @JsonProperty("str")
     private Stat strength;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "vit_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "vit_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "vit_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "vit_growth"))
 
 
     })
+    @Column(name="vit")
+    @JsonProperty("vit")
     private Stat vitality;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "int_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "int_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "int_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "int_growth"))
 
 
     })
+    @Column(name="int")
+    @JsonProperty("int")
     private Stat intelligence;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "dex_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "dex_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "dex_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "dex_growth"))
 
 
     })
+    @Column(name="dex")
+    @JsonProperty("dex")
     private Stat dexterity;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "baseValue", column = @Column(name = "agi_base")),
+            @AttributeOverride(name = "minValue", column = @Column(name = "agi_min")),
             @AttributeOverride(name = "maxValue", column = @Column(name = "agi_max")),
             @AttributeOverride(name = "growthType", column = @Column(name = "agi_growth"))
 
 
     })
+    @Column(name="agi")
+    @JsonProperty("agi")
     private Stat agility;
 //TODO Check if applied stats effect of unity game should be saved too
 
 
-    public CharacterClasses(UUID id, String name, String description, int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
+    public CharacterClass(UUID id, String name, String description, int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
         super(id, name, description);
         this.level = level;
         this.exp = exp;
@@ -120,7 +161,7 @@ public class CharacterClasses extends NationEntityBase {
         this.agility = agility;
     }
 
-    public CharacterClasses(int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
+    public CharacterClass(int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
         this.level = level;
         this.exp = exp;
         this.expToLevelUp = expToLevelUp;
@@ -135,7 +176,7 @@ public class CharacterClasses extends NationEntityBase {
         this.agility = agility;
     }
 
-    public CharacterClasses(String name, int level, int exp, int expToLevelUp, ArrayList<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
+    public CharacterClass(String name, int level, int exp, int expToLevelUp, ArrayList<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
         super(name);
         this.level = level;
         this.exp = exp;
@@ -152,7 +193,7 @@ public class CharacterClasses extends NationEntityBase {
     }
 
 
-    public CharacterClasses() {
+    public CharacterClass() {
     }
 
     public int getLevel() {
@@ -251,9 +292,12 @@ public class CharacterClasses extends NationEntityBase {
         this.agility = agility;
     }
 
+
+
+
     @Override
     public String toString() {
-        return "CharacterClasses{" +
+        return "CharacterClass{" +
                 "level=" + level +
                 ", exp=" + exp +
                 ", expToLevelUp=" + expToLevelUp +
@@ -267,5 +311,23 @@ public class CharacterClasses extends NationEntityBase {
                 ", dexterity=" + dexterity +
                 ", agility=" + agility +
                 "} " + super.toString();
+    }
+
+
+    //Connection functions
+
+    public void addSkill(Skill skill){
+        if(!skills.contains(skill)){
+            skills.add(skill);
+            skill.addCharacterClass(this);
+
+        }
+    }
+
+    public void removeSkill(Skill skill){
+        if(skills.contains(skill)){
+            skills.remove(skill);
+            skill.removeCharacterClass(this);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package ch.nation.dbservice.entities.Clazzes;
 
-import ch.nation.dbservice.entities.enums.StatGrowthType;
+import ch.nation.dbservice.entities.Enums.StatGrowthType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,23 +13,33 @@ public class Stat {
 
 
         @Column(name="base")
+        @JsonProperty("base")
         private float baseValue;
 
+        @Column(name="min")
+        @JsonProperty("min")
+        private float minValue;
+
         @Column(name="max")
+        @JsonProperty("max")
         private float maxValue;
         @Enumerated(EnumType.STRING)
+        @JsonProperty("growthType")
         private StatGrowthType growthType;
 
 
-    public Stat(float baseValue, float maxValue, StatGrowthType growthType) {
-        this.baseValue = baseValue;
-        this.maxValue = maxValue;
-        this.growthType = growthType;
-    }
 
     public Stat() {
     }
 
+
+    public float getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(float minValue) {
+        this.minValue = minValue;
+    }
 
     public float getBaseValue() {
         return baseValue;
