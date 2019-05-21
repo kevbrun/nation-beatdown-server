@@ -6,4 +6,7 @@ public class FloatBonus extends AbstractBonus<Float> {
     public FloatBonus(Float bonus, StatModTarget statTarget) {
         super(bonus, statTarget);
     }
+
+    public FloatBonus() {
+    }
 }

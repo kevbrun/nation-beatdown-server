@@ -7,4 +7,7 @@ public class IntegerBonus extends AbstractBonus<Integer>{
     public IntegerBonus(Integer bonus, StatModTarget statTarget) {
         super(bonus, statTarget);
     }
+
+    public IntegerBonus() {
+    }
 }

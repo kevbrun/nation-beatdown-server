@@ -6,4 +6,7 @@ public class DoubleBonus extends AbstractBonus<Double>{
     public DoubleBonus(Double bonus, StatModTarget statTarget) {
         super(bonus, statTarget);
     }
+
+    public DoubleBonus() {
+    }
 }

@@ -21,6 +21,25 @@ public abstract class AbstractBonus<T> implements Serializable {
         this.statTarget = statTarget;
     }
 
+    public AbstractBonus() {
+    }
+
+    public T getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(T bonus) {
+        this.bonus = bonus;
+    }
+
+    public StatModTarget getStatTarget() {
+        return statTarget;
+    }
+
+    public void setStatTarget(StatModTarget statTarget) {
+        this.statTarget = statTarget;
+    }
+
     @Override
     public String toString() {
         return "AbstractBonus{" +

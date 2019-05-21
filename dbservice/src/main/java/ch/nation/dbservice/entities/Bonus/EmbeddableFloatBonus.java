@@ -10,4 +10,7 @@ public class EmbeddableFloatBonus extends FloatBonus {
     public EmbeddableFloatBonus(Float bonus, StatModTarget statTarget) {
         super(bonus, statTarget);
     }
+
+    public EmbeddableFloatBonus() {
+    }
 }

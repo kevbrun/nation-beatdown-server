@@ -18,6 +18,7 @@ public class SkillCharacteristic extends Characteristics {
 
 
     public SkillCharacteristic() {
+        super();
     }
 
     public Skill getSkill() {
