@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.Clazzes;
 
-import ch.nation.dbservice.entities.Enums.StatGrowthType;
+import ch.nation.core.model.Enums.StatGrowthType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;

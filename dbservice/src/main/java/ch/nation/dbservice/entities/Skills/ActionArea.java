@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.Skills;
 
-import ch.nation.dbservice.entities.Enums.ActionShape;
+import ch.nation.core.model.Enums.ActionShape;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;

@@ -1,9 +1,9 @@
 package ch.nation.dbservice.entities.Skills;
 
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.Enums.SkillEffectTarget;
-import ch.nation.dbservice.entities.Enums.StatType;
-import ch.nation.dbservice.entities.Enums.TimeReversakSkillEffectRoundDefinition;
+import ch.nation.core.model.Enums.SkillEffectTarget;
+import ch.nation.core.model.Enums.StatType;
+import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,6 +48,8 @@ public class SkillEffect extends NationEntityBase {
     @JsonProperty("reversal_def")
     private TimeReversakSkillEffectRoundDefinition definition;
 
+
+    //TODO CHECK IF NOT SAME TABLE INHERTIANCE WOULD BE BETTER?
     @Column(name="count_of_skills")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Value("#{countOfSkillEffectToReverse == 0 ?  countOfSkillEffectToReverse : null}")

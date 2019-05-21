@@ -1,6 +1,7 @@
-package ch.nation.dbservice.entities.Enums;
+package ch.nation.core.model.Enums;
 
-import ch.nation.dbservice.utils.EnumUtilties;
+
+import ch.nation.core.utils.EnumUtilties;
 
 public enum  ActionShape implements IEnumFromValue<ActionShape>{
     FILLED_BLOCK("FilledBlock"),CIRCLE("Circle"),CROSS("Cross"),FILLED_CIRCLE("FilledCircle"),NONE("None");

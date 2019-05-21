@@ -1,4 +1,4 @@
-package ch.nation.dbservice.entities.Enums;
+package ch.nation.core.model.Enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

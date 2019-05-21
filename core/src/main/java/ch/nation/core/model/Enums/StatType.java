@@ -1,6 +1,7 @@
-package ch.nation.dbservice.entities.Enums;
+package ch.nation.core.model.Enums;
 
-import ch.nation.dbservice.utils.EnumUtilties;
+
+import ch.nation.core.utils.EnumUtilties;
 
 public enum  StatType  implements IEnumFromValue<StatType>{
     NONE("None"),HEALTH_POINTS("HealthPoints"),ACTION_POINTS("ActionPoints"),

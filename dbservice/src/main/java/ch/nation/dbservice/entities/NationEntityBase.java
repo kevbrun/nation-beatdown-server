@@ -9,10 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity(name="NATION_BASE")
+/**@Entity(name="NATION_BASE")
 @Table(name="NATION_BASE")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class NationEntityBase implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)**/
+
+@MappedSuperclass
+public abstract class NationEntityBase implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")

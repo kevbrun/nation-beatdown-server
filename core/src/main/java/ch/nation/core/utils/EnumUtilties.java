@@ -1,4 +1,4 @@
-package ch.nation.dbservice.utils;
+package ch.nation.core.utils;
 
 public class EnumUtilties {
 

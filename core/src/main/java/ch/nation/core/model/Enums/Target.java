@@ -1,6 +1,7 @@
-package ch.nation.dbservice.entities.Enums;
+package ch.nation.core.model.Enums;
 
-import ch.nation.dbservice.utils.EnumUtilties;
+
+import ch.nation.core.utils.EnumUtilties;
 
 public enum  Target implements IEnumFromValue<Target>{
     SELF("Self"),PARTY_ALL("PartyAll"),ENEMY_ALL("EnemyAll"),PARTY_SINGLE("PartySingle"),ENEMY_SINGLE("Enemy_Single"),

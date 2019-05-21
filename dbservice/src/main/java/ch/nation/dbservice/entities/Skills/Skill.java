@@ -1,9 +1,11 @@
 package ch.nation.dbservice.entities.Skills;
 
 
+import ch.nation.dbservice.entities.Characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.Clazzes.CharacterClass;
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.Enums.Target;
+import ch.nation.core.model.Enums.Target;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -57,12 +59,23 @@ public class Skill extends NationEntityBase {
     @RestResource(path="skill-effect",rel = "skill-effect")
     private List<SkillEffect> skillEffects;
 
+    @OneToOne(mappedBy = "skill")
+    @JsonIgnore
+    private SkillCharacteristic skillCharacteristic;
+
 
 
     public Skill() {
     }
 
 
+    public SkillCharacteristic getSkillCharacteristic() {
+        return skillCharacteristic;
+    }
+
+    public void setSkillCharacteristic(SkillCharacteristic skillCharacteristic) {
+        this.skillCharacteristic = skillCharacteristic;
+    }
 
     public int getCost() {
         return cost;
