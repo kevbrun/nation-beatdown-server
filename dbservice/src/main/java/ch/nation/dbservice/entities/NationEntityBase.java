@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.UUID;
 
-@MappedSuperclass
+//@MappedSuperclass
 public abstract class NationEntityBase extends AbstractNationEntityBase {
 
 
@@ -24,11 +24,6 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
     @JsonProperty("desc")
     private String description;
 
-    public NationEntityBase(UUID id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public NationEntityBase() {
     }
@@ -59,7 +54,7 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
         if (this == o) return true;
         if (!(o instanceof NationEntityBase)) return false;
         NationEntityBase that = (NationEntityBase) o;
-        return id == that.id &&
+        return getId() == that.getId() &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description);
     }
@@ -67,13 +62,13 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, description);
+        return Objects.hash(getId(), name, description);
     }
 
     @Override
     public String toString() {
         return "NationEntityBase{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

@@ -15,9 +15,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
+/**@RunWith(Parameterized.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)**/
 public  class CreationDataRestControllerTest extends BaseDataRestControllerTest {
 
 
@@ -51,8 +51,8 @@ public  class CreationDataRestControllerTest extends BaseDataRestControllerTest 
     @Parameterized.Parameters // Note 4
     public static Collection<Object[]> data() {
         Collection<Object[]> params = new ArrayList<>();
-        params.add(new Object[] { "/users", new User("Test","Test"),User.class});
-        params.add(new Object[] { "/nations", new Nation("Test"),Nation.class});
+     //   params.add(new Object[] { "/users", new User("Test","Test"),User.class});
+      //  params.add(new Object[] { "/nations", new Nation("Test"),Nation.class});
 
         return params;
     }

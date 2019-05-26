@@ -33,24 +33,6 @@ public class User extends NationEntityBase implements Serializable {
     private List<Game> games;
 
 
-    public User(UUID id, String name, String description, String password, boolean isAdmin, Nation nation) {
-        super(id, name, description);
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-    }
-
-    public User(String password, boolean isAdmin, Nation nation) {
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-    }
-
-    public User(String username,String password){
-        super(username);
-        this.password =password;
-
-    }
 
 
     public User() {

@@ -22,7 +22,7 @@ public abstract class AbstractNationEntityBase implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @JsonProperty("uuid")
     @Column(name="id")
-    protected UUID id;
+    private UUID id;
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created",updatable = false)

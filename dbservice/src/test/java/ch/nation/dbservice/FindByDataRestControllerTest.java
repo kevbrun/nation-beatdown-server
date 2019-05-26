@@ -67,8 +67,8 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
     @Parameterized.Parameters // Note 4
     public static Collection<Object[]> data() {
         Collection<Object[]> params = new ArrayList<>();
-        params.add(new Object[] { "/users", new User("Test","Test"),User.class,UserRepository.class});
-        params.add(new Object[] { "/nations", new Nation("Test"),Nation.class,NationRepository.class});
+       // params.add(new Object[] { "/users", new User("Test","Test"),User.class,UserRepository.class});
+       // params.add(new Object[] { "/nations", new Nation("Test"),Nation.class,NationRepository.class});
 
         return params;
     }

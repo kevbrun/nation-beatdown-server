@@ -16,23 +16,6 @@ public class Nation extends NationEntityBase implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-    public Nation(UUID id, String name, String description, User user) {
-        super(id, name, description);
-        this.user = user;
-    }
-
-    public Nation(User user) {
-        this.user = user;
-
-    }
-
-
-    public Nation(String name){
-        super(name);
-    }
-
-
     public Nation(){
         super();
     }
