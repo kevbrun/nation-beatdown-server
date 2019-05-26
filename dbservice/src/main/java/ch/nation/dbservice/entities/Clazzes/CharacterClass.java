@@ -3,6 +3,8 @@ package ch.nation.dbservice.entities.Clazzes;
 
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.dbservice.entities.Skills.Skill;
+import ch.nation.dbservice.entities.Units.Unit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -32,6 +34,12 @@ public class CharacterClass extends NationEntityBase {
     @JsonProperty("skills")
     private List<Skill> skills;
 
+    @OneToMany(
+            mappedBy = "characterClass",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Unit> units;
 
     @Embedded
     @AttributeOverrides({
@@ -145,55 +153,17 @@ public class CharacterClass extends NationEntityBase {
 //TODO Check if applied stats effect of unity game should be saved too
 
 
-    public CharacterClass(UUID id, String name, String description, int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
-        super(id, name, description);
-        this.level = level;
-        this.exp = exp;
-        this.expToLevelUp = expToLevelUp;
-        this.skills = skills;
-        this.healthPoints = healthPoints;
-        this.actionPoints = actionPoints;
-        this.movementSpeed = movementSpeed;
-        this.strength = strength;
-        this.vitality = vitality;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.agility = agility;
-    }
-
-    public CharacterClass(int level, int exp, int expToLevelUp, List<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
-        this.level = level;
-        this.exp = exp;
-        this.expToLevelUp = expToLevelUp;
-        this.skills = skills;
-        this.healthPoints = healthPoints;
-        this.actionPoints = actionPoints;
-        this.movementSpeed = movementSpeed;
-        this.strength = strength;
-        this.vitality = vitality;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.agility = agility;
-    }
-
-    public CharacterClass(String name, int level, int exp, int expToLevelUp, ArrayList<Skill> skills, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
-        super(name);
-        this.level = level;
-        this.exp = exp;
-        this.expToLevelUp = expToLevelUp;
-        this.skills = skills;
-        this.healthPoints = healthPoints;
-        this.actionPoints = actionPoints;
-        this.movementSpeed = movementSpeed;
-        this.strength = strength;
-        this.vitality = vitality;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.agility = agility;
-    }
 
 
     public CharacterClass() {
+    }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
     }
 
     public int getLevel() {

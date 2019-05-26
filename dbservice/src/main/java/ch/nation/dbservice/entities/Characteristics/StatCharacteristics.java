@@ -12,11 +12,6 @@ public class StatCharacteristics extends Characteristics {
 
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "hpBonus.bonus", column = @Column(name = "hp_bonus")),
-            @AttributeOverride(name = "hpBonus.stat_target", column = @Column(name = "hp_stat_target")),
-
-    })
     @JsonProperty("delta")
     @Column(name = "delta")
     private StatBonusDelta delta;

@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.Bonus;
 
-import ch.nation.core.model.Bonus.IntegerBonus;
+import ch.nation.core.model.Bonus.IBonus;
 import ch.nation.core.model.Enums.StatModTarget;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,7 +11,7 @@ import javax.persistence.Enumerated;
 
 
 @Embeddable
-public class EmbeddableIntegerBonus {
+public class EmbeddableIntegerBonus implements IBonus<Integer> {
     @JsonProperty("bonus")
     private  Integer bonus;
 

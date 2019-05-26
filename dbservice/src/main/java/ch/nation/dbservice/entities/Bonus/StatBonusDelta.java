@@ -182,7 +182,6 @@ public class StatBonusDelta  {
     @JsonProperty("strBonusPerc")
     private EmbeddableFloatBonus intPercentageBonus;
 
-
     public EmbeddableIntegerBonus getHpBonus() {
         return hpBonus;
     }

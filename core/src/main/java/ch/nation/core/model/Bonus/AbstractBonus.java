@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 
 
-public abstract class AbstractBonus<T> implements Serializable {
+public abstract class AbstractBonus<T> implements Serializable,IBonus<T> {
 
     @JsonProperty("bonus")
     private  T bonus;

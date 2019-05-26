@@ -47,7 +47,7 @@ public class Skill extends NationEntityBase {
     private Target target;
 
 
-    ///TODO CHECK IF IT IS NOT MANY-TO-MANY
+
     @ManyToMany(mappedBy = "skills")
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;

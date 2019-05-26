@@ -1,6 +1,7 @@
 package ch.nation.dbservice.entities.User;
 
 import ch.nation.core.model.position.Vector3Int;
+import ch.nation.dbservice.entities.Game.Game;
 import ch.nation.dbservice.entities.NationEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -27,6 +28,9 @@ public class User extends NationEntityBase implements Serializable {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     @RestResource(path="nation",rel = "nation")
     private Nation nation;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Game> games;
 
 
     public User(UUID id, String name, String description, String password, boolean isAdmin, Nation nation) {
@@ -75,6 +79,14 @@ public class User extends NationEntityBase implements Serializable {
 
     public void setNation(Nation nation) {
         this.nation = nation;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 
     @Override
