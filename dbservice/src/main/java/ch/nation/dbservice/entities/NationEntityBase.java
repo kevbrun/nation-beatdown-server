@@ -14,39 +14,15 @@ import java.util.Objects;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class NationEntityBase implements Serializable {
+public abstract class NationEntityBase extends AbstractNationEntityBase {
 
 
-    @JsonIgnore
-    @Transient
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @JsonProperty("uuid")
-    @Column(name="id")
-    private UUID id;
     @Column(name = "name",unique = true,nullable = false)
     @JsonProperty("name")
     private String name;
     @Column(name="desc")
     @JsonProperty("desc")
     private String description;
-
-    @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created",updatable = false)
-    //@JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone="UTC" )
-    @JsonProperty("created")
-    private Calendar creationTimestamp;
-
-    @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="updated")
-    @JsonProperty("updated")
-    private Calendar updateTimemstamp;
 
     public NationEntityBase(UUID id, String name, String description) {
         this.id = id;
@@ -78,30 +54,6 @@ public abstract class NationEntityBase implements Serializable {
     }
 
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Calendar getCreationTimestamp() {
-        return creationTimestamp;
-    }
-
-    public void setCreationTimestamp(Calendar creationTimestamp) {
-        this.creationTimestamp = creationTimestamp;
-    }
-
-    public Calendar getUpdateTimemstamp() {
-        return updateTimemstamp;
-    }
-
-    public void setUpdateTimemstamp(Calendar updateTimemstamp) {
-        this.updateTimemstamp = updateTimemstamp;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -131,18 +83,4 @@ public abstract class NationEntityBase implements Serializable {
     //JPA Annoations
 
 
-    @PrePersist
-    protected void onCreate() {
-        LOGGER.debug(String.format("Execute onCreate()"));
-        creationTimestamp = Calendar.getInstance();
-        updateTimemstamp = Calendar.getInstance();
-
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        LOGGER.debug(String.format("Execute onUpdate() | Entity id=%s,name=%s",this.getId().toString(),this.getName()));
-        updateTimemstamp = Calendar.getInstance();
-
-    }
 }

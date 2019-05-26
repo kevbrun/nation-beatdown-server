@@ -1,15 +1,13 @@
 package ch.nation.dbservice.entities.Units;
 
 import ch.nation.core.model.Enums.UnitState;
-import ch.nation.core.model.position.Vector3Float;
-import ch.nation.core.model.position.Vector3Int;
-import ch.nation.core.model.position.Vector3Number;
-import ch.nation.dbservice.converter.VectorStringConverter;
 import ch.nation.dbservice.entities.Clazzes.CharacterClass;
+import ch.nation.dbservice.entities.Game.PlayerMoveAction;
 import ch.nation.dbservice.entities.NationEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Table(name="UNITS")
@@ -41,6 +39,20 @@ public class Unit extends NationEntityBase {
     @JsonProperty("assets")
     private GraphicalRepresentation graphicalRepresentation;
 
+
+    @OneToMany(
+            mappedBy = "caster",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PlayerMoveAction> source;
+
+    @OneToMany(
+            mappedBy = "target",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PlayerMoveAction> target;
 
     public Unit() {
     }
@@ -85,6 +97,22 @@ public class Unit extends NationEntityBase {
 
     public void setGraphicalRepresentation(GraphicalRepresentation graphicalRepresentation) {
         this.graphicalRepresentation = graphicalRepresentation;
+    }
+
+    public List<PlayerMoveAction> getSource() {
+        return source;
+    }
+
+    public void setSource(List<PlayerMoveAction> source) {
+        this.source = source;
+    }
+
+    public List<PlayerMoveAction> getTarget() {
+        return target;
+    }
+
+    public void setTarget(List<PlayerMoveAction> target) {
+        this.target = target;
     }
 
     @Override

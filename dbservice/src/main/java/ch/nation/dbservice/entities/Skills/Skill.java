@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.Skills;
 
 import ch.nation.dbservice.entities.Characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.Clazzes.CharacterClass;
+import ch.nation.dbservice.entities.Game.PlayerMoveAction;
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.core.model.Enums.Target;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,12 +57,20 @@ public class Skill extends NationEntityBase {
     @ManyToMany
     @Column(name="skill_effects")
     @JsonProperty("skill_effects")
-    @RestResource(path="skill-effect",rel = "skill-effect")
+    @RestResource(path="effects",rel = "effects")
     private List<SkillEffect> skillEffects;
 
     @OneToOne(mappedBy = "skill")
     @JsonIgnore
     private SkillCharacteristic skillCharacteristic;
+
+
+    @OneToMany(
+            mappedBy = "skill",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PlayerMoveAction> actions;
 
 
 

@@ -6,9 +6,7 @@ import ch.nation.core.model.Enums.StatType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity(name = "STAT_PREJUDICE_TRIGGER")
 @DiscriminatorValue("STAT")
@@ -20,10 +18,12 @@ public class StatPrejudiceTrigger extends PrejudiceTrigger {
 
     @JsonProperty("stat")
     @Column(name="stat")
+    @Enumerated(EnumType.STRING)
     private StatType statType;
 
     @JsonProperty("comp")
     @Column(name="comp")
+    @Enumerated(EnumType.STRING)
     private ConditionComparer comparer;
 
 

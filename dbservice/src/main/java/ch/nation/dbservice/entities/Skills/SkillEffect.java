@@ -14,6 +14,9 @@ import java.util.List;
 
 @Table(name="SKILL_EFFECTS")
 @Entity(name="SKILL_EFFECTS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="SKILL_EFFECT_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("BASE_SKILL")
 public class SkillEffect extends NationEntityBase {
 
     @Column(name="effectTarget")
@@ -41,20 +44,6 @@ public class SkillEffect extends NationEntityBase {
 
 
 
-    //Time Reversal Skill Effect properties hide if null for jsonConverter
-    @Column(name="reversal_def")
-    @Enumerated(EnumType.STRING)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty("reversal_def")
-    private TimeReversakSkillEffectRoundDefinition definition;
-
-
-    //TODO CHECK IF NOT SAME TABLE INHERTIANCE WOULD BE BETTER?
-    @Column(name="count_of_skills")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Value("#{countOfSkillEffectToReverse == 0 ?  countOfSkillEffectToReverse : null}")
-    @JsonProperty("count_of_skills")
-    private Integer countOfSkillEffectToReverse;
 
 
     public SkillEffect() {
@@ -102,21 +91,6 @@ public class SkillEffect extends NationEntityBase {
     }
 
 
-    public TimeReversakSkillEffectRoundDefinition getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(TimeReversakSkillEffectRoundDefinition definition) {
-        this.definition = definition;
-    }
-
-    public Integer getCountOfSkillEffectToReverse() {
-        return countOfSkillEffectToReverse;
-    }
-
-    public void setCountOfSkillEffectToReverse(Integer countOfSkillEffectToReverse) {
-        this.countOfSkillEffectToReverse = countOfSkillEffectToReverse;
-    }
 
     @Override
     public String toString() {

@@ -3,13 +3,9 @@ package ch.nation.dbservice.entities.Game;
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.dbservice.entities.User.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Table(name="GAME")
@@ -32,6 +28,12 @@ public class Game extends NationEntityBase {
     private GameStatus status;
 
 
+    @OneToMany(
+            mappedBy = "game",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PlayerMoveAction> moves;
 
 
     public Game() {
@@ -59,6 +61,15 @@ public class Game extends NationEntityBase {
 
     public void setStatus(GameStatus status) {
         this.status = status;
+    }
+
+
+    public List<PlayerMoveAction> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<PlayerMoveAction> moves) {
+        this.moves = moves;
     }
 
     @Override
