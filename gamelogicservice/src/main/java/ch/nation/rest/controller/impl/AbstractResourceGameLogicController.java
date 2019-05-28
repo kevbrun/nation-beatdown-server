@@ -1,23 +1,17 @@
 package ch.nation.rest.controller.impl;
 
-import ch.nation.core.model.AbstractNationModelBase;
-import ch.nation.core.model.UserModel;
+import ch.nation.core.model.dto.AbstractNationDto;
 import ch.nation.core.model.interf.RestCRUDDao;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractResourceGameLogicController<TResult extends  AbstractNationModelBase,TInput extends AbstractNationModelBase> implements RestCRUDDao<ResponseEntity,ResponseEntity,TInput> {
+public abstract class AbstractResourceGameLogicController<TResult extends AbstractNationDto,TInput extends AbstractNationDto> implements RestCRUDDao<ResponseEntity,ResponseEntity,TInput> {
     private final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
 
 

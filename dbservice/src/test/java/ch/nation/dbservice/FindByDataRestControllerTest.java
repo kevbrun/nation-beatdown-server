@@ -1,10 +1,6 @@
 package ch.nation.dbservice;
 
-import ch.nation.dbservice.entities.User.Nation;
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.User.User;
-import ch.nation.dbservice.repositories.NationRepository;
-import ch.nation.dbservice.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

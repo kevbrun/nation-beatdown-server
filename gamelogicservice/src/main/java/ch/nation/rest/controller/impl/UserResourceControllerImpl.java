@@ -1,8 +1,8 @@
 package ch.nation.rest.controller.impl;
 
 
-import ch.nation.core.model.NationModel;
-import ch.nation.core.model.UserModel;
+import ch.nation.core.model.dto.NationDto;
+import ch.nation.core.model.dto.UserDto;
 import ch.nation.rest.controller.interfaces.UserResourceController;
 import ch.nation.rest.services.impl.UserServiceImpl;
 import ch.nation.rest.services.interf.UserService;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-public class UserResourceControllerImpl extends AbstractResourceGameLogicController<UserModel,UserModel> implements UserResourceController {
+public class UserResourceControllerImpl extends AbstractResourceGameLogicController<UserDto,UserDto> implements UserResourceController {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
@@ -37,13 +37,13 @@ public class UserResourceControllerImpl extends AbstractResourceGameLogicControl
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/users")
-    public ResponseEntity update(@RequestBody UserModel payload) {
+    public ResponseEntity update(@RequestBody UserDto payload) {
         return super.update(payload);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/rest/api/v1/users")
-    public ResponseEntity create(@RequestBody UserModel object) throws Exception {
+    public ResponseEntity create(@RequestBody UserDto object) throws Exception {
         return super.create(object);
     }
     @Override
@@ -59,8 +59,8 @@ public class UserResourceControllerImpl extends AbstractResourceGameLogicControl
     }
 
     @Override
-    public ResponseEntity associateWithNation(String uuid, NationModel nationUri) throws Exception {
-       Optional<UserModel> model = client.createAssociationWithNation(uuid,nationUri.getId());
+    public ResponseEntity associateWithNation(String uuid, NationDto nationUri) throws Exception {
+       Optional<UserDto> model = client.createAssociationWithNation(uuid,nationUri.getId());
 
        if(!model.isPresent()){
            LOGGER.info("Could not create association!");
@@ -72,7 +72,7 @@ public class UserResourceControllerImpl extends AbstractResourceGameLogicControl
 
     @Override
     public ResponseEntity getNation(String uuid) {
-        Optional<NationModel> nation = client.getNationAssociatedWithNation(uuid);
+        Optional<NationDto> nation = client.getNationAssociatedWithNation(uuid);
         if(!nation.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(nation.get(),HttpStatus.FOUND);
     }

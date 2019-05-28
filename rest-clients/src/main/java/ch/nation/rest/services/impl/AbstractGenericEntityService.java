@@ -1,19 +1,17 @@
 package ch.nation.rest.services.impl;
 
-import ch.nation.core.model.AbstractNationModelBase;
+import ch.nation.core.model.dto.AbstractNationDto;
 import ch.nation.core.model.interf.GenericCRUDDao;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractNationModelBase>   implements GenericCRUDDao<TResult,ArrayList<TResult>,TInput> {
+public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractNationDto>   implements GenericCRUDDao<TResult,ArrayList<TResult>,TInput> {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 

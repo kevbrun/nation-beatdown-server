@@ -1,16 +1,11 @@
 package ch.nation.dbservice;
 
 
-import ch.nation.dbservice.entities.User.Nation;
 import ch.nation.dbservice.entities.NationEntityBase;
-import ch.nation.dbservice.entities.User.User;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.Collection;

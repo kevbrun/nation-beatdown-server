@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-public interface DBRestServiceBaseInterface<TResult extends Resource,TResultMult extends Resources,TInput>  {
+public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
 
 
@@ -19,23 +19,23 @@ public interface DBRestServiceBaseInterface<TResult extends Resource,TResultMult
 
 
     @RequestMapping(method = RequestMethod.GET)
-    TResultMult getAll();
+    Resources<TResult> getAll();
 
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    TResult create(TInput object);
+    Resource<TResult> create(TInput object);
 
     @RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
-    TResult findById(@PathVariable("uuid")String uuid);
+    Resource<TResult> findById(@PathVariable("uuid")String uuid);
 
 
     @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
-    TResult delete(@PathVariable("uuid")String uuid);
+    Resource<TResult> delete(@PathVariable("uuid")String uuid);
 
 
     @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
-    TResult update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
+    Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
 
 
 
@@ -44,10 +44,10 @@ public interface DBRestServiceBaseInterface<TResult extends Resource,TResultMult
   //  Resources<Void> delete(@PathVariable("uuid") String uuid);
 /**
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    Resource<UserModel> createUserEntity(UserModel entity);
+    Resource<UserDto> createUserEntity(UserDto entity);
 
     @RequestMapping(method = RequestMethod.PATCH,consumes = "application/json",path = "/{uuid}")
-    Resource<UserModel> updateUserEntity(@PathVariable("uuid") String uuid,@RequestBody UserModel entity);
+    Resource<UserDto> updateUserEntity(@PathVariable("uuid") String uuid,@RequestBody UserDto entity);
 
 **/
 

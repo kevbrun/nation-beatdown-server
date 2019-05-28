@@ -1,17 +1,16 @@
 package ch.nation.rest.services.interf;
 
-import ch.nation.core.model.NationModel;
-import ch.nation.core.model.UserModel;
-import org.springframework.http.ResponseEntity;
+import ch.nation.core.model.dto.NationDto;
+import ch.nation.core.model.dto.UserDto;
 
 import java.util.Optional;
 
 public interface NationService {
 
 
-    Optional<UserModel> getUser(String nationUUID);
+    Optional<UserDto> getUser(String nationUUID);
 
-    Optional<NationModel> createAssociationWithUser(String nationUuid,String userUri) throws Exception;
+    Optional<NationDto> createAssociationWithUser(String nationUuid, String userUri) throws Exception;
 
 
 }

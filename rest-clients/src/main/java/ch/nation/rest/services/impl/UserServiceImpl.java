@@ -1,8 +1,8 @@
 package ch.nation.rest.services.impl;
 
 
-import ch.nation.core.model.NationModel;
-import ch.nation.core.model.UserModel;
+import ch.nation.core.model.dto.NationDto;
+import ch.nation.core.model.dto.UserDto;
 import ch.nation.rest.clients.DBNationRestClient;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.DBUserRestClient;
@@ -11,13 +11,12 @@ import ch.nation.rest.services.interf.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class UserServiceImpl extends AbstractGenericEntityService<UserModel,UserModel> implements UserService {
+public class UserServiceImpl extends AbstractGenericEntityService<UserDto,UserDto> implements UserService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
@@ -37,16 +36,16 @@ public class UserServiceImpl extends AbstractGenericEntityService<UserModel,User
 
 
     @Override
-    public Optional<UserModel> createAssociationWithNation(String userUuid, String nationUuid) throws Exception {
-     Optional<NationModel> nationModel=   nationService.createAssociationWithUser(nationUuid,userUuid);
+    public Optional<UserDto> createAssociationWithNation(String userUuid, String nationUuid) throws Exception {
+     Optional<NationDto> nationModel=   nationService.createAssociationWithUser(nationUuid,userUuid);
      if(!nationModel.isPresent()){
          return Optional.empty();
-     }        Optional<UserModel> user=   findById(userUuid);
+     }        Optional<UserDto> user=   findById(userUuid);
         return user;
     }
 
     @Override
-    public Optional<NationModel> getNationAssociatedWithNation(String nationUuid) {
+    public Optional<NationDto> getNationAssociatedWithNation(String nationUuid) {
         return ((NationServiceImpl)nationService).findById(nationUuid);
     }
 }

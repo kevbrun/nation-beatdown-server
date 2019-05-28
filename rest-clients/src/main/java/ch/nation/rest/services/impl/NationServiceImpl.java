@@ -1,23 +1,20 @@
 package ch.nation.rest.services.impl;
 
-import ch.nation.core.model.NationModel;
-import ch.nation.core.model.UserModel;
+import ch.nation.core.model.dto.NationDto;
+import ch.nation.core.model.dto.UserDto;
 import ch.nation.rest.clients.DBNationRestClient;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.DBUserRestClient;
 import ch.nation.rest.services.interf.NationService;
-import ch.nation.rest.services.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 
 @Service
-public class NationServiceImpl extends AbstractGenericEntityService<NationModel,NationModel> implements NationService {
+public class NationServiceImpl extends AbstractGenericEntityService<NationDto,NationDto> implements NationService {
 
 
     private final String REL_USER_LINK="user";
@@ -33,10 +30,10 @@ public class NationServiceImpl extends AbstractGenericEntityService<NationModel,
     }
 
     @Override
-    public Optional<UserModel> getUser(String nationUUID) {
+    public Optional<UserDto> getUser(String nationUUID) {
         LOGGER.info(String.format("START | Try to get user by nation uuid | uuid: %s",nationUUID));
         if(!validateUuid(nationUUID)) throw new IllegalArgumentException("Nation uuid is not valid!");
-        UserModel user =((DBNationRestClient) client).getUserAssociatedWithNation(nationUUID).getContent();
+        UserDto user =((DBNationRestClient) client).getUserAssociatedWithNation(nationUUID).getContent();
         if(user == null){
             LOGGER.info(String.format("No user for Nation uuid: %s",nationUUID));
             return Optional.empty();
@@ -47,15 +44,15 @@ public class NationServiceImpl extends AbstractGenericEntityService<NationModel,
     }
 
     @Override
-    public Optional<NationModel> createAssociationWithUser(String nationUuid,String userUuid) throws Exception {
+    public Optional<NationDto> createAssociationWithUser(String nationUuid, String userUuid) throws Exception {
         LOGGER.info(String.format("START | Try adding associaton between nation and user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
         if(!validateUuid(nationUuid))throw new IllegalArgumentException("Nation uuid is invalid");
-        Resource<NationModel> resource =client.findById(nationUuid);
+        Resource<NationDto> resource =client.findById(nationUuid);
         if(resource==null) throw new Exception(String.format("Could not found nation with uuid %s",nationUuid));
-        Resource<UserModel> userEntity = userClient.findById(userUuid);
+        Resource<UserDto> userEntity = userClient.findById(userUuid);
         if(userEntity==null || userEntity.getLink("self")==null) throw new Exception("could not found uri for user "+userUuid);
         String uri = userEntity.getId().getHref();
-        Resource<UserModel> model = ((DBUserRestClient)userClient).associateWithNation(userEntity.getContent().getId(),resource.getLink("self").getHref());
+        Resource<UserDto> model = ((DBUserRestClient)userClient).associateWithNation(userEntity.getContent().getId(),resource.getLink("self").getHref());
         resource =client.findById(nationUuid);
         LOGGER.info(String.format("FINISH | Try adding associaton between nation to user | uuid nation: %s |  uuid user: %s",nationUuid,userUuid));
         return Optional.of(resource.getContent());

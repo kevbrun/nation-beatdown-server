@@ -1,9 +1,9 @@
 package ch.nation.dbservice;
 
-import ch.nation.dbservice.entities.User.Nation;
-import ch.nation.dbservice.entities.User.User;
-import ch.nation.dbservice.repositories.NationRepository;
-import ch.nation.dbservice.repositories.UserRepository;
+import ch.nation.dbservice.entities.user.Nation;
+import ch.nation.dbservice.entities.user.User;
+import ch.nation.dbservice.repositories.user.NationRepository;
+import ch.nation.dbservice.repositories.user.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
