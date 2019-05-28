@@ -1,6 +1,5 @@
 package ch.nation.core.model.interf;
 
-import java.util.List;
 import java.util.Optional;
 
 

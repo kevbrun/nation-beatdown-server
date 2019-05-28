@@ -1,4 +1,4 @@
-package ch.nation.dbservice.entities.game;
+package ch.nation.dbservice.entities.moves;
 
 import ch.nation.dbservice.entities.units.EmeddableVector3;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity(name="MOVE_SKILL_VALUE")
 @DiscriminatorValue("MOVE")
-public class MoveActionSkillValue extends PlayerMoveAction {
+public class MoveSkillValue extends MoveValue {
 
     @JsonProperty("source")
     @Embedded
@@ -31,12 +31,12 @@ public class MoveActionSkillValue extends PlayerMoveAction {
     })
     private EmeddableVector3 targetPosition;
 
-    public MoveActionSkillValue(EmeddableVector3 sourcePosition, EmeddableVector3 targetPosition) {
+    public MoveSkillValue(EmeddableVector3 sourcePosition, EmeddableVector3 targetPosition) {
         this.sourcePosition = sourcePosition;
         this.targetPosition = targetPosition;
     }
 
-    public MoveActionSkillValue() {
+    public MoveSkillValue() {
     }
 
     public EmeddableVector3 getSourcePosition() {
@@ -57,7 +57,7 @@ public class MoveActionSkillValue extends PlayerMoveAction {
 
     @Override
     public String toString() {
-        return "MoveActionSkillValue{" +
+        return "MoveSkillValue{" +
                 "sourcePosition=" + sourcePosition +
                 ", targetPosition=" + targetPosition +
                 "} " + super.toString();

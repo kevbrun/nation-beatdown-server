@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;

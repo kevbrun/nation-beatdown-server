@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class GraphicalRepresentation {
+public class UnitAssets {
 
 
     @JsonProperty("Beard")

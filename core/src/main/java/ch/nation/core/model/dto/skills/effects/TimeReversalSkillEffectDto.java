@@ -1,26 +1,27 @@
-package ch.nation.dbservice.entities.skills;
+package ch.nation.core.model.dto.skills.effects;
 
+import ch.nation.core.model.Enums.SkillEffectTarget;
+import ch.nation.core.model.Enums.StatType;
 import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
 
+public class TimeReversalSkillEffectDto extends AbstractSkillEffectDto{
 
-@Entity(name="TIME_REVERSAL_SKILL")
-@DiscriminatorValue("TIME_REVERSAL")
-public class TimeReversalSkillEffect extends SkillEffect{
-
-
-    @Column(name="reversal_def")
-    @Enumerated(EnumType.STRING)
     @JsonProperty("reversal_def")
     private TimeReversakSkillEffectRoundDefinition definition;
 
 
-    @Column(name="count_of_skills")
     @JsonProperty("count_of_skills")
     private Integer countOfSkillEffectToReverse;
 
+
+    public TimeReversalSkillEffectDto(SkillEffectTarget effectTarget, StatType typeUsedForCalculation, StatType applyCalculationOnStat, boolean resultIsNegative) {
+        super(effectTarget, typeUsedForCalculation, applyCalculationOnStat, resultIsNegative);
+    }
+
+    public TimeReversalSkillEffectDto() {
+    }
 
     public TimeReversakSkillEffectRoundDefinition getDefinition() {
         return definition;
@@ -38,4 +39,11 @@ public class TimeReversalSkillEffect extends SkillEffect{
         this.countOfSkillEffectToReverse = countOfSkillEffectToReverse;
     }
 
+    @Override
+    public String toString() {
+        return "TimeReversalSkillEffectDto{" +
+                "definition=" + definition +
+                ", countOfSkillEffectToReverse=" + countOfSkillEffectToReverse +
+                "} " + super.toString();
+    }
 }

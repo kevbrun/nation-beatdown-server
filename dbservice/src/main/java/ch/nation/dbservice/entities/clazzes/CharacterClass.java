@@ -37,6 +37,7 @@ public class CharacterClass extends NationEntityBase {
             orphanRemoval = true
     )
     @RestResource(path = "units", rel="units")
+    @JsonProperty("units")
     private List<Unit> units;
 
     @Embedded

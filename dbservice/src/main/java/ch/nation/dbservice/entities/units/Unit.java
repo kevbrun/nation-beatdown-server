@@ -2,7 +2,7 @@ package ch.nation.dbservice.entities.units;
 
 import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
-import ch.nation.dbservice.entities.game.PlayerMoveAction;
+import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.NationEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -40,7 +40,7 @@ public class Unit extends NationEntityBase {
     @Embedded
     @JsonProperty("assets")
     @RestResource(path = "assets", rel="assets")
-    private GraphicalRepresentation graphicalRepresentation;
+    private UnitAssets unitAssets;
 
 
     @OneToMany(
@@ -94,12 +94,12 @@ public class Unit extends NationEntityBase {
         this.position = position;
     }
 
-    public GraphicalRepresentation getGraphicalRepresentation() {
-        return graphicalRepresentation;
+    public UnitAssets getUnitAssets() {
+        return unitAssets;
     }
 
-    public void setGraphicalRepresentation(GraphicalRepresentation graphicalRepresentation) {
-        this.graphicalRepresentation = graphicalRepresentation;
+    public void setUnitAssets(UnitAssets unitAssets) {
+        this.unitAssets = unitAssets;
     }
 
     public List<PlayerMoveAction> getSource() {
@@ -125,7 +125,7 @@ public class Unit extends NationEntityBase {
                 ", state=" + state +
                 ", isDead=" + isDead +
                 ", position=" + position +
-                ", graphicalRepresentation=" + graphicalRepresentation +
+                ", unitAssets=" + unitAssets +
                 "} " + super.toString();
     }
 }

@@ -3,7 +3,7 @@ package ch.nation.dbservice.entities.skills;
 
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
-import ch.nation.dbservice.entities.game.PlayerMoveAction;
+import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.core.model.Enums.Target;
 import com.fasterxml.jackson.annotation.JsonIgnore;

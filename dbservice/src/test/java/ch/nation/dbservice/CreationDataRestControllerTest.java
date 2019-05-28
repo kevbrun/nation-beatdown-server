@@ -3,16 +3,21 @@ package ch.nation.dbservice;
 
 import ch.nation.dbservice.entities.NationEntityBase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**@RunWith(Parameterized.class)
+@RunWith(Parameterized.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)**/
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+@Ignore
 public  class CreationDataRestControllerTest extends BaseDataRestControllerTest {
 
 

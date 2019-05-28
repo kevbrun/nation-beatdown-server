@@ -1,7 +1,8 @@
 package ch.nation.rest.services.impl;
 
-import ch.nation.core.model.dto.NationDto;
-import ch.nation.core.model.dto.UserDto;
+
+import ch.nation.core.model.dto.user.NationDto;
+import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.rest.clients.DBNationRestClient;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.DBUserRestClient;

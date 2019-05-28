@@ -1,11 +1,13 @@
 package ch.nation.core.model.dto;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 
-public abstract class AbstractNationDto implements Serializable {
+public abstract class AbstractDto implements Serializable {
 
     @JsonProperty("uuid")
     private String id;
@@ -21,7 +23,7 @@ public abstract class AbstractNationDto implements Serializable {
     private String type;
 
 
-    public AbstractNationDto() {
+    public AbstractDto() {
         super();
     }
 
@@ -65,9 +67,9 @@ public abstract class AbstractNationDto implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractNationDto)) return false;
+        if (!(o instanceof AbstractDto)) return false;
 
-        AbstractNationDto that = (AbstractNationDto) o;
+        AbstractDto that = (AbstractDto) o;
 
         if (!id.equals(that.id)) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -90,7 +92,7 @@ public abstract class AbstractNationDto implements Serializable {
 
     @Override
     public String toString() {
-        return "AbstractNationDto{" +
+        return "AbstractDto{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

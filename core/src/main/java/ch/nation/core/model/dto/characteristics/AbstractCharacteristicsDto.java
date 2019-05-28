@@ -1,7 +1,7 @@
 package ch.nation.core.model.dto.characteristics;
 
 
-import ch.nation.core.model.dto.AbstractNationDto;
+import ch.nation.core.model.dto.AbstractDto;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = SkillCharacteristicsDto.class, name = "SKILL"),
-        @JsonSubTypes.Type(value = SkillCharacteristicsDto.class, name = "CHAR"),
+        @JsonSubTypes.Type(value = StatCharacteristicsDto.class, name = "STAT"),
      })
-public abstract class AbstractCharacteristics  extends AbstractNationDto {
+public abstract class AbstractCharacteristicsDto extends AbstractDto {
 }

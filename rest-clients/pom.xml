@@ -61,7 +61,7 @@
 		</dependency>
 
 		<dependency>
-			<!-- Required to use PATCH -->
+			<!-- Required NationDto use PATCH -->
 			<groupId>io.github.openfeign</groupId>
 			<artifactId>feign-httpclient</artifactId>
 

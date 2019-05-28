@@ -1,9 +1,11 @@
-package ch.nation.dbservice.entities.game;
+package ch.nation.dbservice.entities.moves;
 
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -18,26 +20,32 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
     @RestResource(path = "game", rel="game")
+    @JsonProperty("game")
     private Game game;
 
 
     @Column(name = "user")
+    @JsonProperty("user")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "caster_id")
+    @JsonProperty("caster")
     private Unit caster;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "target_id")
+    @JsonProperty("target")
     private Unit target;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="skill_id")
+    @JsonProperty("skill")
     private Skill skill;
 
 
     @OneToOne
+    @JsonProperty("value")
     private MoveValue value;
 
 

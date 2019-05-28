@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity(name="CHARACTERISTIC_PREJUDICE_TRIGGER")
-@DiscriminatorValue("CHARACTER")
+@DiscriminatorValue("CHAR")
 public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
 
 

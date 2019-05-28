@@ -1,17 +1,23 @@
-package ch.nation.core.model.dto;
+package ch.nation.core.model.dto.user;
 
+import ch.nation.core.model.dto.AbstractDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class UserDto extends AbstractNationDto implements Serializable {
+public class UserDto extends AbstractDto implements Serializable {
 
 
 
+    @JsonProperty("password")
     private String password;
 
+    @JsonProperty("admin")
     private boolean isAdmin;
 
+
+    @JsonProperty("nation")
     private NationDto nation;
 
 
@@ -21,32 +27,8 @@ public class UserDto extends AbstractNationDto implements Serializable {
         this.nation = nation;
     }
 
-    public UserDto(){
-        super();
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public NationDto getNation() {
-        return nation;
-    }
-
-    public void setNation(NationDto nation) {
-        this.nation = nation;
+    public UserDto() {
     }
 
     // Helper Functions

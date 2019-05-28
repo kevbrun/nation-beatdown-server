@@ -1,7 +1,7 @@
 package ch.nation.rest.clients;
 
-import ch.nation.core.model.dto.NationDto;
-import ch.nation.core.model.dto.UserDto;
+import ch.nation.core.model.dto.user.NationDto;
+import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.rest.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.hateoas.Resource;

@@ -24,7 +24,7 @@ public class User extends NationEntityBase implements Serializable {
     @JsonProperty("admin")
     private boolean isAdmin;
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    @RestResource(path="nation",rel = "nation")
+   @RestResource(path="nation",rel = "nation")
     private Nation nation;
 
     @ManyToMany(mappedBy = "users")
