@@ -1,7 +1,7 @@
 package ch.nation.dbservice.entities.clazzes;
 
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity(name="CLASSES")
 @Table(name="CLASSES")
-public class CharacterClass extends NationEntityBase {
+public class CharacterClass extends NamedEntityBase {
     @Column(name="lvl")
     @JsonProperty("lvl")
     private int level;

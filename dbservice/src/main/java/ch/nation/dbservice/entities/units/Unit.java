@@ -3,7 +3,7 @@ package ch.nation.dbservice.entities.units;
 import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Table(name="UNITS")
 @Entity(name="UNITS")
-public class Unit extends NationEntityBase {
+public class Unit extends NamedEntityBase {
 
 
 

@@ -3,9 +3,9 @@ package ch.nation.rest.services.impl;
 
 import ch.nation.core.model.dto.user.NationDto;
 import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.rest.clients.DBNationRestClient;
+import ch.nation.rest.clients.users.DBNationRestClient;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
-import ch.nation.rest.clients.DBUserRestClient;
+import ch.nation.rest.clients.users.DBUserRestClient;
 import ch.nation.rest.services.interf.NationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;

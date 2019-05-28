@@ -1,7 +1,8 @@
 package ch.nation.dbservice.entities.user;
 
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -10,11 +11,10 @@ import java.util.Objects;
 
 @Entity(name="NATION")
 @Table(name="NATION")
-public class Nation extends NationEntityBase implements Serializable {
+public class Nation extends NamedEntityBase implements Serializable {
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    @RestResource(path = "user", rel="user")
+    @OneToOne(mappedBy = "nation")
+    @RestResource(path = "user", rel="user",exported = false)
     private User user;
 
     public Nation(){

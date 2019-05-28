@@ -1,7 +1,8 @@
 package ch.nation.dbservice.entities.prejudices;
 
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TRIGGER_TYPE",discriminatorType = DiscriminatorType.STRING)
 
-public class PrejudiceTrigger extends NationEntityBase {
+public class PrejudiceTrigger extends AbstractNationEntityBase {
 
     @ManyToMany(mappedBy = "prejudiceTriggers")
     @RestResource(path = "prejudices", rel="prejudices")

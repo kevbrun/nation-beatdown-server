@@ -1,5 +1,6 @@
 package ch.nation.dbservice.entities;
 
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 
 @MappedSuperclass
-public abstract class AbstractNationEntityBase implements Serializable {
+public abstract class AbstractNationEntityBase implements Serializable, IDiscrimantorValue {
     @JsonIgnore
     @Transient
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());

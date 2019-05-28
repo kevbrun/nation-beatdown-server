@@ -1,7 +1,7 @@
 package ch.nation.dbservice.entities.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -16,7 +16,7 @@ import java.util.List;
 )
 @DiscriminatorColumn(name="PREJUDICE_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("STAT")
-public class Prejudice extends NationEntityBase {
+public class Prejudice extends NamedEntityBase {
 
     @JsonProperty("triggers")
     @ManyToMany

@@ -1,7 +1,8 @@
 package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.Enums.GameStatus;
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Table(name="GAME")
 @Entity(name="GAME")
-public class Game extends NationEntityBase {
+public class Game extends AbstractNationEntityBase {
 
 
     @ManyToMany

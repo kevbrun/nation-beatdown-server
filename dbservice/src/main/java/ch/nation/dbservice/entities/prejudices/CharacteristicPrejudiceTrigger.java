@@ -15,8 +15,8 @@ import java.util.List;
 public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
 
 
-    @Column(name="characteristic")
-    @JsonProperty("characteristic")
+    @Column(name="characteristics")
+    @JsonProperty("characteristics")
     @ManyToMany
     @RestResource(path = "characteristics", rel="characteristics")
     private List<Characteristics> characteristics;

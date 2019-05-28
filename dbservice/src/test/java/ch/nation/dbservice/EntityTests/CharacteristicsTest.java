@@ -28,6 +28,7 @@ public class CharacteristicsTest {
     @Test
     public void addStatCharacteristic(){
         StatCharacteristics statCharacteristics = new StatCharacteristics();
+        statCharacteristics.setName("Tell");
 
 
         StatBonusDelta delta = new StatBonusDelta();

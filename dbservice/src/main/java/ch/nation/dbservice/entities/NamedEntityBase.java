@@ -1,20 +1,13 @@
 package ch.nation.dbservice.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.GenericGenerator;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Objects;
-import java.util.UUID;
 
-//@MappedSuperclass
-public abstract class NationEntityBase extends AbstractNationEntityBase {
+import javax.persistence.*;
+import java.util.Objects;
+
+@MappedSuperclass
+public abstract class NamedEntityBase extends AbstractNationEntityBase {
 
 
     @Column(name = "name",unique = true,nullable = false)
@@ -25,10 +18,10 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
     private String description;
 
 
-    public NationEntityBase() {
+    public NamedEntityBase() {
     }
 
-    public NationEntityBase(String name){
+    public NamedEntityBase(String name){
         this.name = name;
     }
 
@@ -52,8 +45,8 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NationEntityBase)) return false;
-        NationEntityBase that = (NationEntityBase) o;
+        if (!(o instanceof NamedEntityBase)) return false;
+        NamedEntityBase that = (NamedEntityBase) o;
         return getId() == that.getId() &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description);
@@ -67,7 +60,7 @@ public abstract class NationEntityBase extends AbstractNationEntityBase {
 
     @Override
     public String toString() {
-        return "NationEntityBase{" +
+        return "NamedEntityBase{" +
                 "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

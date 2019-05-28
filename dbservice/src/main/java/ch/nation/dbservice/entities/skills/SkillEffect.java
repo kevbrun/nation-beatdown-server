@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.skills;
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +15,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="SKILL_EFFECT_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
-public class SkillEffect extends NationEntityBase {
+public class SkillEffect extends NamedEntityBase {
 
     @Column(name="effectTarget")
     @Enumerated(EnumType.STRING)

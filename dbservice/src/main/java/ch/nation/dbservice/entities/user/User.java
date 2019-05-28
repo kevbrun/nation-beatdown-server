@@ -1,7 +1,8 @@
 package ch.nation.dbservice.entities.user;
 
+import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.game.Game;
-import ch.nation.dbservice.entities.NationEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 
 @Entity(name="USER")
 @Table(name="USER")
-public class User extends NationEntityBase implements Serializable {
+public class User extends NamedEntityBase implements Serializable {
 
 
 
@@ -23,8 +24,8 @@ public class User extends NationEntityBase implements Serializable {
     @Column(name="admin")
     @JsonProperty("admin")
     private boolean isAdmin;
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-   @RestResource(path="nation",rel = "nation")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @RestResource(path="nation",rel = "nation",exported = false)
     private Nation nation;
 
     @ManyToMany(mappedBy = "users")

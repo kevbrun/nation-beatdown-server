@@ -1,10 +1,10 @@
 package ch.nation.dbservice.entities.skills;
 
 
+import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
-import ch.nation.dbservice.entities.NationEntityBase;
 import ch.nation.core.model.Enums.Target;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Table(name="SKILLS")
 @Entity(name="SKILLS")
-public class Skill extends NationEntityBase {
+public class Skill extends NamedEntityBase {
 
 
     @Column(name="cost")

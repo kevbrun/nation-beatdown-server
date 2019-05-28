@@ -6,7 +6,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "characteristics",path = "characteristics/stat")
+@RepositoryRestResource(collectionResourceRel = "characteristics",path = "characteristics-stat")
 @Transactional
 public interface StatCharacteristicRepository extends IPageableDao<StatCharacteristics> {
 }

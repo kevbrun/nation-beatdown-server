@@ -1,7 +1,8 @@
-package ch.nation.rest.clients;
+package ch.nation.rest.clients.users;
 
 import ch.nation.core.model.dto.user.NationDto;
 import ch.nation.core.model.dto.user.UserDto;
+import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.hateoas.Resource;

@@ -14,7 +14,6 @@ public class StatCharacteristics extends Characteristics {
     @Embedded
     @JsonProperty("delta")
     @Column(name = "delta")
-    @RestResource(path = "bonus", rel="dbonus_delta")
     private StatBonusDelta delta;
 
 

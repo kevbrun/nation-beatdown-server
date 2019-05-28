@@ -1,6 +1,6 @@
 package ch.nation.dbservice;
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,12 +24,12 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
     public String endpoint;
 
     @Parameterized.Parameter(value=1)
-    public NationEntityBase payload;
+    public NamedEntityBase payload;
 
 
 
     @Parameterized.Parameter(value=2)
-    public Class<? extends NationEntityBase>    classToTest;
+    public Class<? extends NamedEntityBase>    classToTest;
 
 
     @Parameterized.Parameter(value=3)
@@ -37,23 +37,23 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
     public CrudRepository repository;
 
 
-    private NationEntityBase created;
+    private NamedEntityBase created;
 
 
     @Test
     @Ignore
     public void findByTest(){
 
-     created= (NationEntityBase) repository.save(payload);
+     created= (NamedEntityBase) repository.save(payload);
 
-        ResponseEntity<? extends NationEntityBase> responseEntity=   template.getForEntity(endpoint+"/"+created.getId(),classToTest);
+        ResponseEntity<? extends NamedEntityBase> responseEntity=   template.getForEntity(endpoint+"/"+created.getId(),classToTest);
 
 
 
         Assert.assertNotNull(responseEntity);
         Assert.assertNotNull(responseEntity.getBody());
 
-        Assert.assertTrue(responseEntity.getBody() instanceof NationEntityBase);
+        Assert.assertTrue(responseEntity.getBody() instanceof NamedEntityBase);
         Assert.assertTrue(responseEntity.getBody().getId()!=null);
         Assert.assertTrue(responseEntity.getBody().getName().equals(payload.getName()));
 

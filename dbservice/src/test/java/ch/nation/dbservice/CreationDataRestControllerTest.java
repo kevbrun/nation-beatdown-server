@@ -1,7 +1,7 @@
 package ch.nation.dbservice;
 
 
-import ch.nation.dbservice.entities.NationEntityBase;
+import ch.nation.dbservice.entities.NamedEntityBase;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,21 +26,21 @@ public  class CreationDataRestControllerTest extends BaseDataRestControllerTest 
     public String endpoint;
 
     @Parameterized.Parameter(value=1)
-    public NationEntityBase payload;
+    public NamedEntityBase payload;
 
     @Parameterized.Parameter(value=2)
-    public Class<? extends NationEntityBase>    classToTest;
+    public Class<? extends NamedEntityBase>    classToTest;
 
 
     @Test
     public void CreationTest(){
 
-        ResponseEntity<? extends NationEntityBase> responseEntity=   template.postForEntity(endpoint,payload,classToTest);
+        ResponseEntity<? extends NamedEntityBase> responseEntity=   template.postForEntity(endpoint,payload,classToTest);
 
         Assert.assertNotNull(responseEntity);
         Assert.assertNotNull(responseEntity.getBody());
 
-        Assert.assertTrue(responseEntity.getBody() instanceof NationEntityBase);
+        Assert.assertTrue(responseEntity.getBody() instanceof NamedEntityBase);
         Assert.assertTrue(responseEntity.getBody().getId()!=null);
         Assert.assertTrue(responseEntity.getBody().getName().equals(payload.getName()));
     }
