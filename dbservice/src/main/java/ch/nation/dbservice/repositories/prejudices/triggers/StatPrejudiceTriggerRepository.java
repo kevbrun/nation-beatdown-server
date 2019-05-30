@@ -1,4 +1,4 @@
-package ch.nation.dbservice.repositories.prejudices;
+package ch.nation.dbservice.repositories.prejudices.triggers;
 
 import ch.nation.dbservice.entities.prejudices.triggers.StatPrejudiceTrigger;
 import ch.nation.dbservice.repositories.IPageableDao;

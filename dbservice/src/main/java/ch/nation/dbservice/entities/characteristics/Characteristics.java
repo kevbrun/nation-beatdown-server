@@ -1,8 +1,7 @@
 package ch.nation.dbservice.entities.characteristics;
 
 import ch.nation.dbservice.entities.NamedEntityBase;
-import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.prejudices.CharacteristicPrejudiceTrigger;
+import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.rest.core.annotation.RestResource;
 

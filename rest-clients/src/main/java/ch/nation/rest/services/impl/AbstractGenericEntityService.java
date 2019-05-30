@@ -3,6 +3,7 @@ package ch.nation.rest.services.impl;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.interf.GenericCRUDDao;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
+import ch.nation.rest.utils.MessageUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,10 +20,11 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
 
 
     public AbstractGenericEntityService(DBRestServiceBaseInterface client) {
+        LOGGER.info("Set default Service "+client.getClass().getName());
         this.client = client;
     }
 
-    public DBRestServiceBaseInterface getClient() {
+    public DBRestServiceBaseInterface getBindedClient() {
         return client;
     }
 
@@ -83,7 +85,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
 
 
-        TResult result = (TResult) GetClient(object).create(object).getContent();
+        TResult result = (TResult) getBindedClient(object).create(object).getContent();
 
         if (result == null) {
             LOGGER.info(String.format("Could not create | payload: %s!", object.toString()));
@@ -98,7 +100,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
         LOGGER.info(String.format("START | Updating entity in db | Payload: %s", object.toString()));
         if (!validateUpdateParameter(object))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
-        TResult result = (TResult) GetClient(object).update(object.getId(), object).getContent();
+        TResult result = (TResult) getBindedClient(object).update(object.getId(), object).getContent();
         if (result == null) {
             LOGGER.info(String.format("Could not update % entity", object.toString()));
             return Optional.empty();
@@ -138,7 +140,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
 
 
 
-    protected DBRestServiceBaseInterface<TResult,TInput> GetClient(TInput object){
+    protected DBRestServiceBaseInterface<TResult,TInput> getBindedClient(TInput object){
 
 
         return getDefaultClient();
@@ -146,6 +148,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
     }
 
     protected DBRestServiceBaseInterface<TResult,TInput> getDefaultClient(){
+        LOGGER.info(MessageUtils.getSelectedRestClientMessage(client));
         return client;
     }
 

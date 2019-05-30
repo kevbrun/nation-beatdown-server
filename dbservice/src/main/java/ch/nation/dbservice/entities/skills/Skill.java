@@ -6,6 +6,7 @@ import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.core.model.Enums.Target;
+import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;

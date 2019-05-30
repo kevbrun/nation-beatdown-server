@@ -1,6 +1,7 @@
 package ch.nation.core.model.dto.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
+import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

@@ -1,13 +1,10 @@
 package ch.nation.rest.controller.impl;
 
 
-import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
-import ch.nation.core.model.dto.user.NationDto;
 import ch.nation.rest.controller.interfaces.CharacteristicResourceController;
-import ch.nation.rest.services.impl.AbstractGenericEntityService;
-import ch.nation.rest.services.impl.CharacteristicServiceImpl;
-import ch.nation.rest.services.interf.CharacteristicService;
+import ch.nation.rest.services.impl.characteristics.CharacteristicServiceImpl;
+import ch.nation.rest.services.impl.characteristics.CharacteristicService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

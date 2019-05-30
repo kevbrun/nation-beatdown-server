@@ -2,8 +2,8 @@ package ch.nation.dbservice.entities.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.prejudices.triggers.PrejudiceTrigger;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,12 +15,10 @@ import java.util.List;
         strategy = InheritanceType.SINGLE_TABLE
 )
 @DiscriminatorColumn(name="PREJUDICE_TYPE",discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("STAT")
 public class Prejudice extends NamedEntityBase {
 
     @JsonProperty("triggers")
     @ManyToMany
-    @RestResource(path="triggers",rel="prejudice-triggers")
     private List<PrejudiceTrigger> prejudiceTriggers;
 
     @JsonProperty("operation")
