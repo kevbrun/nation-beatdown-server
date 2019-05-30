@@ -19,16 +19,13 @@ public class UserServiceImpl extends AbstractGenericEntityService<UserDto,UserDt
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
-    private final DBRestServiceBaseInterface userClient;
-    private final DBRestServiceBaseInterface nationClient;
+
     private final NationService nationService;
 
     @Autowired
-    public UserServiceImpl(DBUserRestClient client, DBNationRestClient nationClient,NationServiceImpl nationService) {
+    public UserServiceImpl(DBUserRestClient client,NationServiceImpl nationService) {
 
         super(client);
-        this.userClient = client;
-        this.nationClient = nationClient;
         this.nationService = nationService;
 
     }

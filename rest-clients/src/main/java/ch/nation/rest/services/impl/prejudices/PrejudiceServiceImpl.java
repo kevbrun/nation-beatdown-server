@@ -6,17 +6,18 @@ import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.prejudices.DBPrejudiceRestClient;
 import ch.nation.rest.clients.prejudices.DBStatPrejdudiceRestClient;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PrejudiceServiceImpl extends AbstractGenericEntityService<AbstractPrejudiceDto,AbstractPrejudiceDto> implements PrejudiceService {
 
-    private final DBRestServiceBaseInterface baseClient;
     private final DBRestServiceBaseInterface statPrejudiceClient;
 
 
-
+    @Autowired
     public PrejudiceServiceImpl(DBPrejudiceRestClient client, DBStatPrejdudiceRestClient statPrejudiceClient) {
         super(client);
-        this.baseClient = client;
         this.statPrejudiceClient = statPrejudiceClient;
     }
 

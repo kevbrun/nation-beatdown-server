@@ -19,14 +19,12 @@ public class NationServiceImpl extends AbstractGenericEntityService<NationDto,Na
 
 
     private final String REL_USER_LINK="user";
-    private final DBRestServiceBaseInterface client;
 
     private final DBRestServiceBaseInterface userClient;
 
     @Autowired
     public NationServiceImpl(DBNationRestClient client, DBUserRestClient userClient) {
         super(client);
-        this.client = client;
         this.userClient  = userClient;
     }
 

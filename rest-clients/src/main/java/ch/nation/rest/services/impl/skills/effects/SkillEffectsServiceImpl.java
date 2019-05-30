@@ -9,15 +9,17 @@ import ch.nation.rest.clients.skills.effects.DBSkillEffectsRestClient;
 import ch.nation.rest.clients.skills.effects.DBTimeReversalSkillEffectRestClient;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import ch.nation.rest.utils.MessageUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SkillEffectsServiceImpl extends AbstractGenericEntityService<AbstractSkillEffectDto,AbstractSkillEffectDto> implements SkillEffectsService {
 
-    private final  DBRestServiceBaseInterface baseClient;
     private final DBRestServiceBaseInterface timeReversal;
 
+    @Autowired
     public SkillEffectsServiceImpl(DBSkillEffectsRestClient client, DBTimeReversalSkillEffectRestClient timeReversal) {
         super(client);
-        this.baseClient = client;
         this.timeReversal = timeReversal;
     }
 

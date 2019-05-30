@@ -17,18 +17,15 @@ import org.springframework.stereotype.Service;
 public class CharacteristicServiceImpl extends AbstractGenericEntityService<AbstractCharacteristicsDto,AbstractCharacteristicsDto> implements CharacteristicService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    private final DBRestServiceBaseInterface client;
     private final DBSkillCharacteristicRestClient skillCharacteristicRestClient;
     private final DBStatCharacteristicRestClient statCharacteristicRestClient;
-    private final DBBaseCharacteristicRestClient baseCharacteristicRestClient;
 
 
     public CharacteristicServiceImpl(DBStatCharacteristicRestClient statCharacteristicRestClient, DBSkillCharacteristicRestClient skillCharacteristicRestClient, DBBaseCharacteristicRestClient baseCharacteristicRestClient) {
         super(baseCharacteristicRestClient);
         this.statCharacteristicRestClient = statCharacteristicRestClient;
         this.skillCharacteristicRestClient = skillCharacteristicRestClient;
-        this.client = baseCharacteristicRestClient;
-        this.baseCharacteristicRestClient = baseCharacteristicRestClient;
+
     }
 
     @Override

@@ -4,14 +4,17 @@ import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.prejudices.DBPrejudiceRestClient;
 import ch.nation.rest.clients.skills.DBSkillRestClient;
+import ch.nation.rest.services.impl.AbstractGenericEntityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class SkillServiceImpl extends AbstractCharacteristicsDto implements SkillService {
+@Service
+public class SkillServiceImpl extends AbstractGenericEntityService implements SkillService {
 
-    private final DBRestServiceBaseInterface baseClient;
 
-
+    @Autowired
     public SkillServiceImpl(DBSkillRestClient baseClient) {
-        this.baseClient = baseClient;
+        super(baseClient);
     }
 
 

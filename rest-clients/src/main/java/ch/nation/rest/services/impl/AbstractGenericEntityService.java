@@ -16,7 +16,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
-    private final DBRestServiceBaseInterface client;
+    protected final DBRestServiceBaseInterface client;
 
 
     public AbstractGenericEntityService(DBRestServiceBaseInterface client) {
