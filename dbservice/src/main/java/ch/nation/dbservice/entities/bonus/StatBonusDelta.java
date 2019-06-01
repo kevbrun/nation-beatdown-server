@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.bonus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Embeddable
 public class StatBonusDelta  {
@@ -182,6 +183,8 @@ public class StatBonusDelta  {
 
 
     public EmbeddableIntegerBonus getHpBonus() {
+        if(hpBonus==null) hpBonus = new EmbeddableIntegerBonus();
+
         return hpBonus;
     }
 
@@ -190,6 +193,9 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getApBonus() {
+        if(apBonus ==null) apBonus = new EmbeddableIntegerBonus();
+
+
         return apBonus;
     }
 
@@ -198,14 +204,20 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getStrBonus() {
+
+       if(strBonus==null) strBonus =new EmbeddableIntegerBonus();
+
         return strBonus;
     }
 
     public void setStrBonus(EmbeddableIntegerBonus strBonus) {
+
+
         this.strBonus = strBonus;
     }
 
     public EmbeddableIntegerBonus getVitBonus() {
+        if(vitBonus==null) vitBonus = new EmbeddableIntegerBonus();
         return vitBonus;
     }
 
@@ -214,6 +226,8 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getAgiBonus() {
+        if(agiBonus==null) apBonus = new EmbeddableIntegerBonus();
+
         return agiBonus;
     }
 
@@ -222,6 +236,8 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getDexBonus() {
+        if(dexBonus==null) dexBonus = new EmbeddableIntegerBonus();
+
         return dexBonus;
     }
 
@@ -230,6 +246,9 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getIntBonus() {
+
+        if(intBonus == null) intBonus = new EmbeddableIntegerBonus();
+
         return intBonus;
     }
 
@@ -238,6 +257,10 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getHpPercentageBonus() {
+
+
+        if(hpPercentageBonus ==null) hpPercentageBonus = new EmbeddableFloatBonus();
+
         return hpPercentageBonus;
     }
 
@@ -246,6 +269,9 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getApPercentageBonus() {
+        if(apPercentageBonus ==null) apPercentageBonus = new EmbeddableFloatBonus();
+
+
         return apPercentageBonus;
     }
 
@@ -254,6 +280,9 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getStrPercentageBonus() {
+
+        if(strPercentageBonus== null) strPercentageBonus = new EmbeddableFloatBonus();
+
         return strPercentageBonus;
     }
 
@@ -262,6 +291,8 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getVitPercentageBonus() {
+        if(vitPercentageBonus == null) vitPercentageBonus = new EmbeddableFloatBonus();
+
         return vitPercentageBonus;
     }
 
@@ -270,6 +301,9 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getAgiPercentageBonus() {
+
+        if(agiPercentageBonus==null) agiPercentageBonus = new EmbeddableFloatBonus();
+
         return agiPercentageBonus;
     }
 
@@ -278,6 +312,10 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getDexPercentageBonus() {
+
+        if(dexPercentageBonus==null) dexPercentageBonus = new EmbeddableFloatBonus();
+
+
         return dexPercentageBonus;
     }
 
@@ -286,6 +324,10 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getIntPercentageBonus() {
+
+        if(intPercentageBonus ==null) intPercentageBonus = new EmbeddableFloatBonus();
+
+
         return intPercentageBonus;
     }
 
@@ -311,5 +353,33 @@ public class StatBonusDelta  {
                 ", dexPercentageBonus=" + dexPercentageBonus +
                 ", intPercentageBonus=" + intPercentageBonus +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StatBonusDelta)) return false;
+        StatBonusDelta that = (StatBonusDelta) o;
+        return Objects.equals(hpBonus, that.hpBonus) &&
+                Objects.equals(apBonus, that.apBonus) &&
+                Objects.equals(strBonus, that.strBonus) &&
+                Objects.equals(vitBonus, that.vitBonus) &&
+                Objects.equals(agiBonus, that.agiBonus) &&
+                Objects.equals(dexBonus, that.dexBonus) &&
+                Objects.equals(intBonus, that.intBonus) &&
+                Objects.equals(hpPercentageBonus, that.hpPercentageBonus) &&
+                Objects.equals(apPercentageBonus, that.apPercentageBonus) &&
+                Objects.equals(strPercentageBonus, that.strPercentageBonus) &&
+                Objects.equals(vitPercentageBonus, that.vitPercentageBonus) &&
+                Objects.equals(agiPercentageBonus, that.agiPercentageBonus) &&
+                Objects.equals(dexPercentageBonus, that.dexPercentageBonus) &&
+                Objects.equals(intPercentageBonus, that.intPercentageBonus);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(hpBonus, apBonus, strBonus, vitBonus, agiBonus, dexBonus, intBonus, hpPercentageBonus, apPercentageBonus, strPercentageBonus, vitPercentageBonus, agiPercentageBonus, dexPercentageBonus, intPercentageBonus);
     }
 }

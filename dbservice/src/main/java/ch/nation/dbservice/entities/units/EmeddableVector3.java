@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class EmeddableVector3 implements IVector3<Float> {
@@ -26,6 +27,11 @@ public class EmeddableVector3 implements IVector3<Float> {
     public EmeddableVector3() {
     }
 
+    public EmeddableVector3(Float x, Float y, Float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
     @Override
     public Float getX() {
@@ -64,5 +70,21 @@ public class EmeddableVector3 implements IVector3<Float> {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmeddableVector3)) return false;
+        EmeddableVector3 that = (EmeddableVector3) o;
+        return Objects.equals(x, that.x) &&
+                Objects.equals(y, that.y) &&
+                Objects.equals(z, that.z);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y, z);
     }
 }

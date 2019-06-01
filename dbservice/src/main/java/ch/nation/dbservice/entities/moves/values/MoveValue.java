@@ -1,4 +1,4 @@
-package ch.nation.dbservice.entities.moves;
+package ch.nation.dbservice.entities.moves.values;
 
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 

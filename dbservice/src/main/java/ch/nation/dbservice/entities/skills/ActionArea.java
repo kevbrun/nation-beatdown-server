@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Objects;
 
 @Embeddable
 public class ActionArea {
@@ -93,5 +94,23 @@ public class ActionArea {
                 ", offsetInYAxis=" + offsetInYAxis +
                 ", shape=" + shape +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ActionArea)) return false;
+        ActionArea that = (ActionArea) o;
+        return sizeInXAxis == that.sizeInXAxis &&
+                sizeInYAxis == that.sizeInYAxis &&
+                offsetInXAxis == that.offsetInXAxis &&
+                offsetInYAxis == that.offsetInYAxis &&
+                shape == that.shape;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(sizeInXAxis, sizeInYAxis, offsetInXAxis, offsetInYAxis, shape);
     }
 }

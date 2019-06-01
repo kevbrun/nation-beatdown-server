@@ -1,9 +1,10 @@
-package ch.nation.dbservice.entities.moves;
+package ch.nation.dbservice.entities.moves.values;
 
 import ch.nation.dbservice.entities.units.EmeddableVector3;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name="MOVE_SKILL_VALUE")
 @DiscriminatorValue("MOVE")
@@ -37,9 +38,14 @@ public class MoveSkillValue extends MoveValue {
     }
 
     public MoveSkillValue() {
+        super();
+
     }
 
     public EmeddableVector3 getSourcePosition() {
+
+
+        if(sourcePosition==null) sourcePosition = new EmeddableVector3();
         return sourcePosition;
     }
 
@@ -48,6 +54,8 @@ public class MoveSkillValue extends MoveValue {
     }
 
     public EmeddableVector3 getTargetPosition() {
+
+        targetPosition = new EmeddableVector3();
         return targetPosition;
     }
 
@@ -61,5 +69,21 @@ public class MoveSkillValue extends MoveValue {
                 "sourcePosition=" + sourcePosition +
                 ", targetPosition=" + targetPosition +
                 "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MoveSkillValue)) return false;
+        if (!super.equals(o)) return false;
+        MoveSkillValue that = (MoveSkillValue) o;
+        return Objects.equals(sourcePosition, that.sourcePosition) &&
+                Objects.equals(targetPosition, that.targetPosition);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), sourcePosition, targetPosition);
     }
 }

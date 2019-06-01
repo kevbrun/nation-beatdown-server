@@ -22,6 +22,9 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
     public User getUser() {
+
+
+
         return user;
     }
 
@@ -29,6 +32,13 @@ public class Nation extends NamedEntityBase implements Serializable {
         this.user = user;
     }
 
+
+    @Override
+    public String toString() {
+        return "Nation{" +
+                "user=" + user +
+                "} " + super.toString();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,12 +53,5 @@ public class Nation extends NamedEntityBase implements Serializable {
     public int hashCode() {
 
         return Objects.hash(super.hashCode(), user);
-    }
-
-    @Override
-    public String toString() {
-        return "Nation{" +
-                "user=" + user +
-                "} " + super.toString();
     }
 }

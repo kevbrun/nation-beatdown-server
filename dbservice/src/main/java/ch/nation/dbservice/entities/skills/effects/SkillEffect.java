@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name="SKILL_EFFECTS")
 @Entity(name="SKILL_EFFECTS")
@@ -47,8 +49,17 @@ public class SkillEffect extends NamedEntityBase {
 
 
     public SkillEffect() {
+        super();
     }
 
+
+    public SkillEffect(SkillEffectTarget effectTarget, StatType typeUsedForCalculation, StatType applyCalculationOnStat, boolean resultIsNegative, List<Skill> skills) {
+        this.effectTarget = effectTarget;
+        this.typeUsedForCalculation = typeUsedForCalculation;
+        this.applyCalculationOnStat = applyCalculationOnStat;
+        this.resultIsNegative = resultIsNegative;
+        this.skills = skills;
+    }
 
     public SkillEffectTarget getEffectTarget() {
         return effectTarget;
@@ -83,6 +94,10 @@ public class SkillEffect extends NamedEntityBase {
     }
 
     public List<Skill> getSkills() {
+
+
+        if( skills==null)  skills = new ArrayList<>();
+
         return skills;
     }
 
@@ -105,18 +120,36 @@ public class SkillEffect extends NamedEntityBase {
     //REGION NOT GENERATED FUNCTIONS
 
     public void addSkill(Skill skill){
-        if(skill!=null){
+        if(getSkills()!=null){
             this.getSkills().add(skill);
             skill.getSkillEffects().add(this);
         }
     }
 
     public void removeSkill(Skill skill){
-        if(skill!=null){
+        if(this.getSkills()!=null){
             this.getSkills().remove(skill);
             skill.getSkillEffects().remove(this);
         }
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkillEffect)) return false;
+        if (!super.equals(o)) return false;
+        SkillEffect that = (SkillEffect) o;
+        return resultIsNegative == that.resultIsNegative &&
+                effectTarget == that.effectTarget &&
+                typeUsedForCalculation == that.typeUsedForCalculation &&
+                applyCalculationOnStat == that.applyCalculationOnStat &&
+                Objects.equals(skills, that.skills);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), effectTarget, typeUsedForCalculation, applyCalculationOnStat, resultIsNegative, skills);
+    }
 }

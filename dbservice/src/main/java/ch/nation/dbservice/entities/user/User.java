@@ -8,6 +8,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +37,19 @@ public class User extends NamedEntityBase implements Serializable {
 
 
     public User() {
+
+
         super();
+        games = new ArrayList<>();
+
+    }
+
+    public User(String name, String description, String password, boolean isAdmin, Nation nation, List<Game> games) {
+        super(name, description);
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.nation = nation;
+        this.games = games;
     }
 
     public String getPassword() {

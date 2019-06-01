@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -72,6 +73,30 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
     protected void onUpdate() {
         LOGGER.debug(String.format("Execute onUpdate() | Entity id=%s,uuid=%s",this.getId().toString(),this.getId()));
         updateTimemstamp = Calendar.getInstance();
+
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractNationEntityBase)) return false;
+        AbstractNationEntityBase that = (AbstractNationEntityBase) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(creationTimestamp, that.creationTimestamp) &&
+                Objects.equals(updateTimemstamp, that.updateTimemstamp);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(creationTimestamp, updateTimemstamp);
+    }
+
+
+    public boolean sameAsFormer(AbstractNationEntityBase current,AbstractNationEntityBase newItem){
+
+        return current ==null ? newItem == null : current.equals(newItem);
 
     }
 }

@@ -1,6 +1,7 @@
 package ch.nation.dbservice.entities.clazzes;
 
 
+import ch.nation.core.model.Enums.StatGrowthType;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
@@ -8,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name="CLASSES")
 @Table(name="CLASSES")
@@ -38,7 +41,7 @@ public class CharacterClass extends NamedEntityBase {
     )
     @RestResource(path = "units", rel="units")
     @JsonProperty("units")
-    private List<Unit> units;
+    private List<Unit> units = new ArrayList<>();
 
     @Embedded
     @AttributeOverrides({
@@ -155,11 +158,42 @@ public class CharacterClass extends NamedEntityBase {
 
 
     public CharacterClass() {
+        super();
+        if(healthPoints==null) healthPoints = new Stat();
+        if(actionPoints==null) actionPoints = new Stat();
+        if(movementSpeed==null)movementSpeed = new Stat();
+        if(strength==null) strength = new Stat();
+        if(vitality==null) vitality = new Stat();
+        if(intelligence==null) intelligence = new Stat();
+        if(dexterity==null) dexterity = new Stat();
+        if(agility==null) agility = new Stat();
     }
 
+    public CharacterClass(String name, String description, int level, int exp, int expToLevelUp, List<Skill> skills, List<Unit> units, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
+        super(name, description);
+        this.level = level;
+        this.exp = exp;
+        this.expToLevelUp = expToLevelUp;
+        this.skills = skills;
+        this.units = units;
+        this.healthPoints = healthPoints;
+        this.actionPoints = actionPoints;
+        this.movementSpeed = movementSpeed;
+        this.strength = strength;
+        this.vitality = vitality;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
+        this.agility = agility;
+    }
+
+
     public List<Unit> getUnits() {
+
+        //Weak side of relation!
         return units;
     }
+
+
 
     public void setUnits(List<Unit> units) {
         this.units = units;
@@ -190,6 +224,9 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public List<Skill> getSkills() {
+
+        if(skills==null) skills = new ArrayList<>();
+
         return skills;
     }
 
@@ -198,6 +235,7 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getHealthPoints() {
+        if(healthPoints==null) healthPoints = new Stat();
         return healthPoints;
     }
 
@@ -206,6 +244,8 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getActionPoints() {
+        if(actionPoints==null) actionPoints = new Stat();
+
         return actionPoints;
     }
 
@@ -214,6 +254,9 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getMovementSpeed() {
+
+        if(movementSpeed==null) movementSpeed = new Stat();
+
         return movementSpeed;
     }
 
@@ -222,6 +265,9 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getStrength() {
+        if(strength==null) strength = new Stat();
+
+
         return strength;
     }
 
@@ -230,6 +276,10 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getVitality() {
+
+        if(vitality==null) vitality = new Stat();
+
+
         return vitality;
     }
 
@@ -238,6 +288,9 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getIntelligence() {
+        if(intelligence==null) intelligence = new Stat();
+
+
         return intelligence;
     }
 
@@ -246,6 +299,10 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getDexterity() {
+
+        if(dexterity==null) dexterity = new Stat();
+
+
         return dexterity;
     }
 
@@ -254,12 +311,18 @@ public class CharacterClass extends NamedEntityBase {
     }
 
     public Stat getAgility() {
+        if(agility==null) agility = new Stat();
+
+
         return agility;
     }
 
     public void setAgility(Stat agility) {
         this.agility = agility;
     }
+
+
+
 
 
 
@@ -282,21 +345,51 @@ public class CharacterClass extends NamedEntityBase {
                 "} " + super.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CharacterClass)) return false;
+        if (!super.equals(o)) return false;
+        CharacterClass that = (CharacterClass) o;
+        return level == that.level &&
+                exp == that.exp &&
+                expToLevelUp == that.expToLevelUp &&
+                Objects.equals(skills, that.skills) &&
+                Objects.equals(units, that.units) &&
+                Objects.equals(healthPoints, that.healthPoints) &&
+                Objects.equals(actionPoints, that.actionPoints) &&
+                Objects.equals(movementSpeed, that.movementSpeed) &&
+                Objects.equals(strength, that.strength) &&
+                Objects.equals(vitality, that.vitality) &&
+                Objects.equals(intelligence, that.intelligence) &&
+                Objects.equals(dexterity, that.dexterity) &&
+                Objects.equals(agility, that.agility);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), level, exp, expToLevelUp, skills, units, healthPoints, actionPoints, movementSpeed, strength, vitality, intelligence, dexterity, agility);
+    }
+
 
     //Connection functions
 
     public void addSkill(Skill skill){
-        if(!skills.contains(skill)){
-            skills.add(skill);
+        if(!getSkills().contains(skill)){
+            getSkills().add(skill);
             skill.addCharacterClass(this);
 
         }
     }
 
     public void removeSkill(Skill skill){
-        if(skills.contains(skill)){
-            skills.remove(skill);
+        if(getSkills().contains(skill)){
+            getSkills().remove(skill);
             skill.removeCharacterClass(this);
         }
     }
+
+
+
 }

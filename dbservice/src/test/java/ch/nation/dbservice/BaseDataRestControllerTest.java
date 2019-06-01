@@ -10,12 +10,12 @@ public class BaseDataRestControllerTest {
     public TestRestTemplate template;
 
 
- /**   private TestContextManager testContextManager;
+    private TestContextManager testContextManager;
 
     @Before
     public void SetUp() throws Exception {
         this.testContextManager = new TestContextManager(getClass());
         this.testContextManager.prepareTestInstance(this);
-    }**/
+    }
 
 }

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name="GAME")
 @Entity(name="GAME")
@@ -42,9 +44,28 @@ public class Game extends AbstractNationEntityBase {
 
 
     public Game() {
+        super();
+
+    }
+
+    public Game(List<User> users, int round, GameStatus status) {
+        this.users = users;
+        this.round = round;
+        this.status = status;
+    }
+
+
+    public Game(List<User> users, int round, GameStatus status, List<PlayerMoveAction> moves) {
+        this.users = users;
+        this.round = round;
+        this.status = status;
+        this.moves = moves;
     }
 
     public List<User> getUsers() {
+        if(users==null) users = new ArrayList<>();
+
+
         return users;
     }
 
@@ -69,7 +90,8 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-    public List<PlayerMoveAction> getMoves() {
+    public List<PlayerMoveAction> getMoves(){
+        if(moves==null)moves = new ArrayList<>();
         return moves;
     }
 
@@ -84,5 +106,23 @@ public class Game extends AbstractNationEntityBase {
                 ", round=" + round +
                 ", status=" + status +
                 "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Game)) return false;
+        if (!super.equals(o)) return false;
+        Game game = (Game) o;
+        return round == game.round &&
+                Objects.equals(users, game.users) &&
+                status == game.status &&
+                Objects.equals(moves, game.moves);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), users, round, status, moves);
     }
 }

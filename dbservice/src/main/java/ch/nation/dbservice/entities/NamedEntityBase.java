@@ -21,8 +21,9 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     public NamedEntityBase() {
     }
 
-    public NamedEntityBase(String name){
+    public NamedEntityBase(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public String getName() {
@@ -42,21 +43,7 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof NamedEntityBase)) return false;
-        NamedEntityBase that = (NamedEntityBase) o;
-        return getId() == that.getId() &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(description, that.description);
-    }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(getId(), name, description);
-    }
 
     @Override
     public String toString() {
@@ -68,7 +55,18 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     }
 
 
-    //JPA Annoations
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NamedEntityBase)) return false;
+        NamedEntityBase that = (NamedEntityBase) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description);
+    }
 
+    @Override
+    public int hashCode() {
 
+        return Objects.hash(name, description);
+    }
 }

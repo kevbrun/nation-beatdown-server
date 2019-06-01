@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.moves;
 
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.game.Game;
+import ch.nation.dbservice.entities.moves.values.MoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import ch.nation.dbservice.entities.user.User;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name="PLAYER_MOVES")
 @Table(name="PLAYER_MOVES")
@@ -24,7 +26,8 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
     private Game game;
 
 
-    @Column(name = "user")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
     @JsonProperty("user")
     private User user;
 
@@ -51,8 +54,19 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
 
 
     public PlayerMoveAction() {
+        super();
+
     }
 
+
+    public PlayerMoveAction(Game game, User user, Unit caster, Unit target, Skill skill, MoveValue value) {
+        this.game = game;
+        this.user = user;
+        this.caster = caster;
+        this.target = target;
+        this.skill = skill;
+        this.value = value;
+    }
 
     public Game getGame() {
         return game;
@@ -75,7 +89,11 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
     }
 
     public void setCaster(Unit caster) {
-        this.caster = caster;
+        if(this.caster==null){
+
+            this.caster = caster;
+        }
+
     }
 
     public Unit getTarget() {
@@ -100,5 +118,38 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
 
     public void setValue(MoveValue value) {
         this.value = value;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PlayerMoveAction{" +
+                "game=" + game +
+                ", user=" + user +
+                ", caster=" + caster +
+                ", target=" + target +
+                ", skill=" + skill +
+                ", value=" + value +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlayerMoveAction)) return false;
+        if (!super.equals(o)) return false;
+        PlayerMoveAction that = (PlayerMoveAction) o;
+        return Objects.equals(game, that.game) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(caster, that.caster) &&
+                Objects.equals(target, that.target) &&
+                Objects.equals(skill, that.skill) &&
+                Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), game, user, caster, target, skill, value);
     }
 }

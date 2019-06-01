@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Table(name="UNITS")
@@ -58,8 +60,21 @@ public class Unit extends NamedEntityBase {
     private List<PlayerMoveAction> target;
 
     public Unit() {
+        super();
+
+
     }
 
+    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isDead, EmeddableVector3 position, UnitAssets unitAssets, List<PlayerMoveAction> source, List<PlayerMoveAction> target) {
+        super(name, description);
+        this.characterClass = characterClass;
+        this.state = state;
+        this.isDead = isDead;
+        this.position = position;
+        this.unitAssets = unitAssets;
+        this.source = source;
+        this.target = target;
+    }
 
     public CharacterClass getCharacterClass() {
         return characterClass;
@@ -87,6 +102,8 @@ public class Unit extends NamedEntityBase {
 
 
     public EmeddableVector3 getPosition() {
+
+        if(position==null) position = new EmeddableVector3();
         return position;
     }
 
@@ -95,6 +112,7 @@ public class Unit extends NamedEntityBase {
     }
 
     public UnitAssets getUnitAssets() {
+        if(unitAssets==null)unitAssets = new UnitAssets();
         return unitAssets;
     }
 
@@ -103,6 +121,9 @@ public class Unit extends NamedEntityBase {
     }
 
     public List<PlayerMoveAction> getSource() {
+
+        if(source==null) source = new ArrayList<>();
+
         return source;
     }
 
@@ -111,12 +132,16 @@ public class Unit extends NamedEntityBase {
     }
 
     public List<PlayerMoveAction> getTarget() {
+
+        if(target==null) target = new ArrayList<>();
         return target;
     }
 
     public void setTarget(List<PlayerMoveAction> target) {
         this.target = target;
     }
+
+
 
     @Override
     public String toString() {
@@ -127,5 +152,26 @@ public class Unit extends NamedEntityBase {
                 ", position=" + position +
                 ", unitAssets=" + unitAssets +
                 "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Unit)) return false;
+        if (!super.equals(o)) return false;
+        Unit unit = (Unit) o;
+        return isDead == unit.isDead &&
+                Objects.equals(characterClass, unit.characterClass) &&
+                state == unit.state &&
+                Objects.equals(position, unit.position) &&
+                Objects.equals(unitAssets, unit.unitAssets) &&
+                Objects.equals(source, unit.source) &&
+                Objects.equals(target, unit.target);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), characterClass, state, isDead, position, unitAssets, source, target);
     }
 }

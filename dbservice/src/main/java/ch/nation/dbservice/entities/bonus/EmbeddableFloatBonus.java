@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Objects;
 
 @Embeddable
 public class EmbeddableFloatBonus implements IBonus<Float> {
@@ -42,5 +43,21 @@ public class EmbeddableFloatBonus implements IBonus<Float> {
     @Override
     public void setStatTarget(StatModTarget statTarget) {
         this.statTarget = statTarget;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmbeddableFloatBonus)) return false;
+        EmbeddableFloatBonus that = (EmbeddableFloatBonus) o;
+        return Objects.equals(bonus, that.bonus) &&
+                statTarget == that.statTarget;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(bonus, statTarget);
     }
 }

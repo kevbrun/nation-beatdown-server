@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name="SKILLS")
@@ -55,35 +56,39 @@ public class Skill extends NamedEntityBase {
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Column(name="skill_effects")
     @JsonProperty("skill_effects")
     @RestResource(path="effects",rel = "effects")
     private List<SkillEffect> skillEffects;
 
-    @OneToOne(mappedBy = "skill")
+    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
-    private SkillCharacteristic skillCharacteristic;
+    private List<SkillCharacteristic> skillCharacteristic = new ArrayList<>();
 
 
-    @OneToMany(
-            mappedBy = "skill",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<PlayerMoveAction> actions;
+
+    @OneToMany
+            (
+                    mappedBy = "skill",
+                    cascade = CascadeType.ALL,
+                    orphanRemoval = true
+            )
+    private List<PlayerMoveAction> actions = new ArrayList<>();
 
 
 
     public Skill() {
+        super();
     }
 
 
-    public SkillCharacteristic getSkillCharacteristic() {
+    public List<SkillCharacteristic> getSkillCharacteristic() {
+        if(skillCharacteristic==null)skillCharacteristic = new ArrayList<>();
         return skillCharacteristic;
     }
 
-    public void setSkillCharacteristic(SkillCharacteristic skillCharacteristic) {
+    public void setSkillCharacteristic(List<SkillCharacteristic> skillCharacteristic) {
         this.skillCharacteristic = skillCharacteristic;
     }
 
@@ -128,6 +133,9 @@ public class Skill extends NamedEntityBase {
     }
 
     public ActionArea getActionArea() {
+
+        if(actionArea==null)actionArea = new ActionArea();
+
         return actionArea;
     }
 
@@ -144,6 +152,10 @@ public class Skill extends NamedEntityBase {
     }
 
     public List<CharacterClass> getCharacterClasses() {
+
+        if(characterClasses==null) characterClasses = new ArrayList<>();
+
+
         return characterClasses;
     }
 
@@ -152,6 +164,8 @@ public class Skill extends NamedEntityBase {
     }
 
     public List<SkillEffect> getSkillEffects() {
+        if(skillEffects==null) skillEffects = new ArrayList<>();
+
         return skillEffects;
     }
 
@@ -159,6 +173,14 @@ public class Skill extends NamedEntityBase {
         this.skillEffects = skillEffects;
     }
 
+
+    public List<PlayerMoveAction> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<PlayerMoveAction> actions) {
+        this.actions = actions;
+    }
 
     @Override
     public String toString() {
@@ -179,34 +201,47 @@ public class Skill extends NamedEntityBase {
         //REGION NOT GENERATED FUNCTIONS
 
     public void addSkillEffect(SkillEffect skillEffect){
-        if(skillEffect!=null) {
-            this.skillEffects.add(skillEffect);
+        if(getSkillEffects()!=null) {
+            this.getSkillEffects().add(skillEffect);
             skillEffect.getSkills().add(this);
         }
     }
 
     public void removeSkillEffect(SkillEffect skillEffect){
-        if(skillEffect!=null){
+        if(this.getSkillEffects()!=null){
             this.skillEffects.remove(skillEffect);
             skillEffect.getSkills().remove(this);
         }
     }
 
     public void addCharacterClass(CharacterClass clazz){
-        if(!characterClasses.contains(clazz)){
-            characterClasses.add(clazz);
+        if(!getCharacterClasses().contains(clazz)){
+            getCharacterClasses().add(clazz);
             clazz.addSkill(this);
 
         }
     }
 
     public void removeCharacterClass(CharacterClass clazz){
-        if(characterClasses.contains(clazz)){
-            characterClasses.remove(clazz);
+        if(getCharacterClasses().contains(clazz)){
+            getCharacterClasses().remove(clazz);
             clazz.removeSkill(this);
         }
     }
 
+    public void addSkillCharacteristic(SkillCharacteristic characteristic){
+        if(!getSkillCharacteristic().contains(characteristic)){
+            getSkillCharacteristic().add(characteristic);
+            characteristic.addSkill(this);
+        }
+    }
 
+
+    public void removeSkillCharacteristics(SkillCharacteristic characteristic){
+        if(getSkillCharacteristic().contains(characteristic)){
+            getSkillCharacteristic().remove(characteristic);
+            characteristic.setSkill(null);
+        }
+    }
 
 }

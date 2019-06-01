@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Objects;
 
 @Embeddable
 public class Stat {
@@ -30,8 +31,16 @@ public class Stat {
 
 
     public Stat() {
+       super();
     }
 
+
+    public Stat(float baseValue, float minValue, float maxValue, StatGrowthType growthType) {
+        this.baseValue = baseValue;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.growthType = growthType;
+    }
 
     public float getMinValue() {
         return minValue;
@@ -72,5 +81,22 @@ public class Stat {
                 ", maxValue=" + maxValue +
                 ", growthType=" + growthType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Stat)) return false;
+        Stat stat = (Stat) o;
+        return Float.compare(stat.baseValue, baseValue) == 0 &&
+                Float.compare(stat.minValue, minValue) == 0 &&
+                Float.compare(stat.maxValue, maxValue) == 0 &&
+                growthType == stat.growthType;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(baseValue, minValue, maxValue, growthType);
     }
 }

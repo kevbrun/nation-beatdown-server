@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.units;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class UnitAssets {
@@ -93,6 +94,41 @@ public class UnitAssets {
     @JsonProperty("Expression.Dead.Eyebrows")
     private String expressionDeadEyebrows;
 
+
+    public UnitAssets() {
+
+    }
+
+    public UnitAssets(String beard, String shield, String expressionDefaultMouth, String expressionDefaultEyebrows, String expressionDeadEyes, String expressionDefaultEyes, String helmet, String armor, String back, String expressionAngryEyebrows, String body, String ears, String hair, String firearmParams, String head, String expressionAngryMouth, String mask, String bow, String firearms, String cape, String expressionDeadMouth, String expression, String weaponType, String glasses, String primaryMeleeWeapon, String secondaryMeleeWeapon, String expressionAngryEyes, String expressionDeadEyebrows) {
+        this.beard = beard;
+        this.shield = shield;
+        this.expressionDefaultMouth = expressionDefaultMouth;
+        this.expressionDefaultEyebrows = expressionDefaultEyebrows;
+        this.expressionDeadEyes = expressionDeadEyes;
+        this.expressionDefaultEyes = expressionDefaultEyes;
+        this.helmet = helmet;
+        this.armor = armor;
+        this.back = back;
+        this.expressionAngryEyebrows = expressionAngryEyebrows;
+        this.body = body;
+        this.ears = ears;
+        this.hair = hair;
+        this.firearmParams = firearmParams;
+        this.head = head;
+        this.expressionAngryMouth = expressionAngryMouth;
+        this.mask = mask;
+        this.bow = bow;
+        this.firearms = firearms;
+        this.cape = cape;
+        this.expressionDeadMouth = expressionDeadMouth;
+        this.expression = expression;
+        this.weaponType = weaponType;
+        this.glasses = glasses;
+        this.primaryMeleeWeapon = primaryMeleeWeapon;
+        this.secondaryMeleeWeapon = secondaryMeleeWeapon;
+        this.expressionAngryEyes = expressionAngryEyes;
+        this.expressionDeadEyebrows = expressionDeadEyebrows;
+    }
 
     public void setBeard(String beard){
         this.beard = beard;
@@ -356,5 +392,44 @@ public class UnitAssets {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UnitAssets)) return false;
+        UnitAssets that = (UnitAssets) o;
+        return Objects.equals(beard, that.beard) &&
+                Objects.equals(shield, that.shield) &&
+                Objects.equals(expressionDefaultMouth, that.expressionDefaultMouth) &&
+                Objects.equals(expressionDefaultEyebrows, that.expressionDefaultEyebrows) &&
+                Objects.equals(expressionDeadEyes, that.expressionDeadEyes) &&
+                Objects.equals(expressionDefaultEyes, that.expressionDefaultEyes) &&
+                Objects.equals(helmet, that.helmet) &&
+                Objects.equals(armor, that.armor) &&
+                Objects.equals(back, that.back) &&
+                Objects.equals(expressionAngryEyebrows, that.expressionAngryEyebrows) &&
+                Objects.equals(body, that.body) &&
+                Objects.equals(ears, that.ears) &&
+                Objects.equals(hair, that.hair) &&
+                Objects.equals(firearmParams, that.firearmParams) &&
+                Objects.equals(head, that.head) &&
+                Objects.equals(expressionAngryMouth, that.expressionAngryMouth) &&
+                Objects.equals(mask, that.mask) &&
+                Objects.equals(bow, that.bow) &&
+                Objects.equals(firearms, that.firearms) &&
+                Objects.equals(cape, that.cape) &&
+                Objects.equals(expressionDeadMouth, that.expressionDeadMouth) &&
+                Objects.equals(expression, that.expression) &&
+                Objects.equals(weaponType, that.weaponType) &&
+                Objects.equals(glasses, that.glasses) &&
+                Objects.equals(primaryMeleeWeapon, that.primaryMeleeWeapon) &&
+                Objects.equals(secondaryMeleeWeapon, that.secondaryMeleeWeapon) &&
+                Objects.equals(expressionAngryEyes, that.expressionAngryEyes) &&
+                Objects.equals(expressionDeadEyebrows, that.expressionDeadEyebrows);
+    }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(beard, shield, expressionDefaultMouth, expressionDefaultEyebrows, expressionDeadEyes, expressionDefaultEyes, helmet, armor, back, expressionAngryEyebrows, body, ears, hair, firearmParams, head, expressionAngryMouth, mask, bow, firearms, cape, expressionDeadMouth, expression, weaponType, glasses, primaryMeleeWeapon, secondaryMeleeWeapon, expressionAngryEyes, expressionDeadEyebrows);
+    }
 }
