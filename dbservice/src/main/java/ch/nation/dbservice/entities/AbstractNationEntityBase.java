@@ -18,7 +18,7 @@ import java.util.UUID;
 public abstract class AbstractNationEntityBase implements Serializable, IDiscrimantorValue {
     @JsonIgnore
     @Transient
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")

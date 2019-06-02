@@ -15,7 +15,7 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="CHARACTERISTICS_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
-public  class Characteristics extends NamedEntityBase  {
+public  class Characteristic extends NamedEntityBase  {
 
 
     @ManyToMany(mappedBy = "characteristics")
@@ -23,37 +23,27 @@ public  class Characteristics extends NamedEntityBase  {
     @RestResource(path = "triggers", rel="triggers")
     private List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers;
 
-    public Characteristics() {
+    public Characteristic() {
         super();
 
     }
 
 
-    public Characteristics(List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers) {
-        this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
-    }
-
-    public Characteristics(String name, String description, List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers) {
-        super(name, description);
-        this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
-    }
-
     public List<CharacteristicPrejudiceTrigger> getCharacteristicPrejudiceTriggers() {
-        if(characteristicPrejudiceTriggers==null)  characteristicPrejudiceTriggers = new ArrayList<>();
-                return characteristicPrejudiceTriggers;
+        if(characteristicPrejudiceTriggers==null) characteristicPrejudiceTriggers = new ArrayList<>();
+        return characteristicPrejudiceTriggers;
     }
 
     public void setCharacteristicPrejudiceTriggers(List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers) {
         this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Characteristics)) return false;
+        if (!(o instanceof Characteristic)) return false;
         if (!super.equals(o)) return false;
-        Characteristics that = (Characteristics) o;
+        Characteristic that = (Characteristic) o;
         return Objects.equals(characteristicPrejudiceTriggers, that.characteristicPrejudiceTriggers);
     }
 
@@ -62,4 +52,26 @@ public  class Characteristics extends NamedEntityBase  {
 
         return Objects.hash(super.hashCode(), characteristicPrejudiceTriggers);
     }
+
+
+
+    //Manuel
+    public void addTrigger(CharacteristicPrejudiceTrigger trigger){
+       if(!getCharacteristicPrejudiceTriggers().contains(trigger)){
+           getCharacteristicPrejudiceTriggers().add(trigger);
+           trigger.addCharacteristic(this);
+       }
+
+    }
+
+
+    //Manuel
+    public void removeTrigger(CharacteristicPrejudiceTrigger trigger){
+        if(getCharacteristicPrejudiceTriggers().contains(trigger)){
+            getCharacteristicPrejudiceTriggers().remove(trigger);
+            trigger.removeCharacteristic(this);
+        }
+
+    }
+
 }

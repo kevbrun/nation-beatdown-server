@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 @Table(name="UNITS")
 @Entity(name="UNITS")
+@Transactional
 public class Unit extends NamedEntityBase {
 
 
@@ -50,14 +52,14 @@ public class Unit extends NamedEntityBase {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PlayerMoveAction> source;
+    private List<PlayerMoveAction> source = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "target",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PlayerMoveAction> target;
+    private List<PlayerMoveAction> target = new ArrayList<>();
 
     public Unit() {
         super();
@@ -174,4 +176,38 @@ public class Unit extends NamedEntityBase {
 
         return Objects.hash(super.hashCode(), characterClass, state, isDead, position, unitAssets, source, target);
     }
+
+
+    //JPA
+
+    public void addCasterMovement(PlayerMoveAction action){
+        if(!getSource().add(action)){
+            getSource().add(action);
+            action.setCaster(this);
+
+            }
+    }
+
+    public void addTargetMovement(PlayerMoveAction action){
+        if(!getTarget().add(action)){
+            getTarget().add(action);
+            action.setTarget(this);
+        }
+    }
+
+
+    public void removeCasterMovement(PlayerMoveAction action){
+        if(getSource().contains(action)){
+            getSource().remove(action);
+            action.setCaster(null);
+        }
+    }
+
+    public void removeTargetMovement(PlayerMoveAction action){
+        if(getTarget().contains(action)){
+            getTarget().remove(action);
+            action.setTarget(null);
+        }
+    }
+
 }

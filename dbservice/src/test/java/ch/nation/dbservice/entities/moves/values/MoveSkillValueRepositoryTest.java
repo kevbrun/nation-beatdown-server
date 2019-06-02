@@ -2,11 +2,12 @@ package ch.nation.dbservice.entities.moves.values;
 
 import ch.nation.dbservice.entities.AbstractEntityTest;
 import ch.nation.dbservice.entities.AbstractNamedEntityTest;
+import ch.nation.dbservice.entities.IHasDiscriminatorValue;
 import ch.nation.dbservice.repositories.moves.values.MoveSkillValueRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MoveSkillValueRepositoryTest extends AbstractEntityTest<MoveSkillValue,MoveSkillValueRepository> {
+public class MoveSkillValueRepositoryTest extends AbstractEntityTest<MoveSkillValue,MoveSkillValueRepository> implements IHasDiscriminatorValue {
 
 
     @Override
@@ -38,4 +39,12 @@ public class MoveSkillValueRepositoryTest extends AbstractEntityTest<MoveSkillVa
     }
 
 
+    @Override
+    @Test
+    public void test_if_has_discriminator_value() {
+        entityToTest = repo.save(entityToTest);
+
+        Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("MOVE"));
+
+    }
 }

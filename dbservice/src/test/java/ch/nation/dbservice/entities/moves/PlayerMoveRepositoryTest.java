@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
 public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveAction,PlayerMoveRepository> implements IHasDiscriminatorValue {
 
 
@@ -40,7 +42,9 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
 
 
     @Test
+    @Transactional
     public void test_adding_caster(){
+        LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
         Unit dummy = new Unit();
         dummy.setName("123 Polizei");
         dummy = unitRepository.save(dummy);
@@ -55,10 +59,60 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
 
 
         Assert.assertEquals("123 Polizei",action.getCaster().getName());
+        Assert.assertTrue(action.getCaster().equals(dummy));
 
 
 
     }
+
+
+    @Test
+    @Transactional
+    public void test_adding_target(){
+
+        LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
+        Unit dummy = new Unit();
+        dummy.setName("123 Polizei");
+        dummy = unitRepository.save(dummy);
+
+
+        PlayerMoveAction action = repo.save(entityToTest);
+
+        action.setTarget(dummy);
+
+
+        action  = repo.save(action);
+
+
+        Assert.assertEquals("123 Polizei",action.getTarget().getName());
+        Assert.assertTrue(action.getTarget().equals(dummy));
+
+
+
+    }
+
+    @Test
+    @Transactional
+    public void remove_caster(){
+        LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
+        Unit dummy = new Unit();
+        dummy.setName("123 Polizei");
+        dummy = unitRepository.save(dummy);
+
+
+        PlayerMoveAction action = repo.save(entityToTest);
+
+        action.setCaster(dummy);
+
+
+        action  = repo.save(action);
+
+
+        action.setCaster(null);
+        Assert.assertTrue(action.getCaster()==null);
+        Assert.assertTrue(dummy.getSource().size()==0);
+    }
+
 
 
 

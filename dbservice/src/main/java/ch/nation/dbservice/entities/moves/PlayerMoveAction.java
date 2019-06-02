@@ -10,11 +10,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 @Entity(name="PLAYER_MOVES")
 @Table(name="PLAYER_MOVES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Transactional
 public class PlayerMoveAction extends AbstractNationEntityBase {
 
 
@@ -88,11 +90,30 @@ public class PlayerMoveAction extends AbstractNationEntityBase {
         return caster;
     }
 
-    public void setCaster(Unit caster) {
-        if(this.caster==null){
 
-            this.caster = caster;
+    public void setCaster(Unit caster) {
+
+        LOGGER.info("Custom set Method called");
+
+        if(caster!=null){
+
+
+            if(this.caster!=null){
+                this.caster.removeCasterMovement(this);
+
+
+                this.caster = caster;
+                caster.addCasterMovement(this);
+            }else{
+                this.caster = caster;
+                caster.addCasterMovement(this);
+            }
+
+        }else{
+            this.caster.removeCasterMovement(this);
+            this.caster=null;
         }
+
 
     }
 

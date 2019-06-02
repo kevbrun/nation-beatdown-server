@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.prejudices.triggers;
 
-import ch.nation.dbservice.entities.characteristics.Characteristics;
+import ch.nation.dbservice.entities.characteristics.Characteristic;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -21,24 +21,24 @@ public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
     @JsonProperty("characteristics")
     @ManyToMany
     @RestResource(path = "characteristics", rel="characteristics")
-    private List<Characteristics> characteristics;
+    private List<Characteristic> characteristics;
 
     public CharacteristicPrejudiceTrigger() {
 
     }
 
-    public CharacteristicPrejudiceTrigger(List<Characteristics> characteristics) {
+    public CharacteristicPrejudiceTrigger(List<Characteristic> characteristics) {
         this.characteristics = characteristics;
     }
 
-    public List<Characteristics> getCharacteristics() {
+    public List<Characteristic> getCharacteristics() {
 
         if( characteristics==null)  characteristics = new ArrayList<>();
 
         return characteristics;
     }
 
-    public void setCharacteristics(List<Characteristics> characteristics) {
+    public void setCharacteristics(List<Characteristic> characteristics) {
         this.characteristics = characteristics;
     }
 
@@ -63,4 +63,25 @@ public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
 
         return Objects.hash(super.hashCode(), characteristics);
     }
+
+
+
+    //CONNECTORS
+
+    public void addCharacteristic(Characteristic characteristic){
+        if(!getCharacteristics().contains(characteristic)){
+            getCharacteristics().add(characteristic);
+            characteristic.addTrigger(this);
+
+        }
+    }
+
+    public void removeCharacteristic(Characteristic characteristic){
+        if(getCharacteristics().contains(characteristic)){
+            getCharacteristics().remove(characteristic);
+            characteristic.removeTrigger(this);
+
+        }
+    }
+
 }

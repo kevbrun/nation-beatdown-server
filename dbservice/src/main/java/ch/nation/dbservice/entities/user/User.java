@@ -25,11 +25,11 @@ public class User extends NamedEntityBase implements Serializable {
     @Column(name="admin")
     @JsonProperty("admin")
     private boolean isAdmin;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @RestResource(path="nation",rel = "nation",exported = false)
     private Nation nation;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users",fetch = FetchType.LAZY)
     @RestResource(path = "games", rel="games")
     private List<Game> games;
 

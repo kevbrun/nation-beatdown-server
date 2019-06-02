@@ -89,7 +89,7 @@ public class Prejudice extends NamedEntityBase {
     @Override
     public String toString() {
         return "Prejudice{" +
-                "prejudiceTriggers=" + prejudiceTriggers +
+
                 ", triggerOperation=" + triggerOperation +
                 "} " + super.toString();
     }

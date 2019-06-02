@@ -3,7 +3,6 @@ package ch.nation.dbservice.entities.characteristics;
 
 import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
 import ch.nation.dbservice.entities.skills.Skill;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Objects;
 
 @Entity(name="SKILL_CHARACTERISTICS")
 @DiscriminatorValue("SKILL")
-public class SkillCharacteristic extends Characteristics {
+public class SkillCharacteristic extends Characteristic {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,15 +22,7 @@ public class SkillCharacteristic extends Characteristics {
         this.skill = skill;
     }
 
-    public SkillCharacteristic(List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers, Skill skill) {
-        super(characteristicPrejudiceTriggers);
-        this.skill = skill;
-    }
 
-    public SkillCharacteristic(String name, String description, List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers, Skill skill) {
-        super(name, description, characteristicPrejudiceTriggers);
-        this.skill = skill;
-    }
 
     public SkillCharacteristic() {
         super();
