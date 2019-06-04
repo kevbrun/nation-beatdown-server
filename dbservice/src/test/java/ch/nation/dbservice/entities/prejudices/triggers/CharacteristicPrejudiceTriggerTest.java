@@ -77,6 +77,11 @@ public class CharacteristicPrejudiceTriggerTest extends AbstractEntityTest<Chara
         trigger=characteristicPrejudiceTriggerRepository.save(trigger);
 
         characteristic.addTrigger(trigger);
+
+        CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
+        trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
+        characteristic.addTrigger(trigger2);
+
         characteristic  = characteristicsRepository.save(characteristic);
 
 
