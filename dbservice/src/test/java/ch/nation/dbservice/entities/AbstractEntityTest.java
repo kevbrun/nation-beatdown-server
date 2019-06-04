@@ -24,7 +24,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
-@TestPropertySource(locations = "classpath:application.properties")
+@TestPropertySource(locations = "classpath:test-application.properties")
 public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBase,TRepo extends IPageableDao<TEntity>> {
 
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());

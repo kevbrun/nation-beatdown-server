@@ -96,6 +96,45 @@ public class CharacteristicPrejudiceTriggerTest extends AbstractEntityTest<Chara
     }
 
 
+    @Test
+    @Transactional
+    public void remove_multiple_characteristic_to_prejudice_trigger(){
+        entityToTest = repo.save(entityToTest);
+
+        Characteristic characteristic = new Characteristic();
+        characteristic.setName("Inteligent aber hässlich!");
+        characteristic = characteristicsRepository.save(characteristic);
 
 
+
+        CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
+        trigger=characteristicPrejudiceTriggerRepository.save(trigger);
+
+        characteristic.addTrigger(trigger);
+
+        CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
+        trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
+        characteristic.addTrigger(trigger2);
+
+        characteristic  = characteristicsRepository.save(characteristic);
+
+
+        characteristic.removeTrigger(trigger);
+        characteristic = characteristicsRepository.save(characteristic);
+
+
+
+
+
+        Assert.assertTrue(characteristic.getCharacteristicPrejudiceTriggers().size()==1);
+
+    }
+
+
+    @Override
+    public void cleanUp() {
+        super.cleanUp();
+        characteristicsRepository.deleteAll();
+        characteristicPrejudiceTriggerRepository.deleteAll();
+    }
 }
