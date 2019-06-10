@@ -1,7 +1,7 @@
 package ch.nation.rest.controller.impl;
 
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.interf.RestCRUDDao;
+import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,11 +11,11 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public abstract class AbstractResourceGameLogicController<TResult extends AbstractDto,TInput extends AbstractDto> implements RestCRUDDao<ResponseEntity,ResponseEntity,TInput> {
-    private final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
+public abstract class AbstractResourceGameLogicController<TResult extends AbstractDto,TInput extends AbstractDto> implements RestCRUDDao<TInput> {
+    protected final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
 
 
-    private final AbstractGenericEntityService service;
+    protected final AbstractGenericEntityService service;
 
 
     public AbstractResourceGameLogicController(AbstractGenericEntityService service) {

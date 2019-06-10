@@ -1,6 +1,5 @@
 package ch.nation.rest.utils;
 
-import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 
 public final class MessageUtils {

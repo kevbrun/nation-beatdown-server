@@ -1,8 +1,6 @@
 package ch.nation.rest.services.impl.skills.effects;
 
-import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import ch.nation.core.model.dto.skills.effects.AbstractSkillEffectDto;
-import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
 import ch.nation.core.model.dto.skills.effects.TimeReversalSkillEffectDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.skills.effects.DBSkillEffectsRestClient;

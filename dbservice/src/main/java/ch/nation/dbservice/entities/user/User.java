@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.user;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.game.Game;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -25,7 +26,8 @@ public class User extends NamedEntityBase implements Serializable {
     @Column(name="admin")
     @JsonProperty("admin")
     private boolean isAdmin;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonManagedReference
     @RestResource(path="nation",rel = "nation",exported = false)
     private Nation nation;
 

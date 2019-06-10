@@ -1,8 +1,9 @@
-package ch.nation.rest.controller.impl;
+package ch.nation.rest.controller.impl.users;
 
 
 import ch.nation.core.model.dto.user.NationDto;
 import ch.nation.core.model.dto.user.UserDto;
+import ch.nation.rest.controller.impl.AbstractMassResourceGameLogicController;
 import ch.nation.rest.controller.interfaces.UserResourceController;
 import ch.nation.rest.services.impl.users.UserServiceImpl;
 import ch.nation.rest.services.impl.users.UserService;
@@ -13,32 +14,42 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class UserResourceControllerImpl extends AbstractResourceGameLogicController<UserDto,UserDto> implements UserResourceController {
+public class UserResourceControllerImpl extends AbstractMassResourceGameLogicController<UserDto,UserDto> implements UserResourceController {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-
-    private final UserService client;
 
 
     @Autowired
     public UserResourceControllerImpl(UserServiceImpl client) {
         super(client);
-        this.client = client;
+
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path = "/rest/api/v1/users")
+    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/users")
     public ResponseEntity getAll() {
         return super.getAll();
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/users")
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
     public ResponseEntity update(@RequestBody UserDto payload) {
         return super.update(payload);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/users/batch_update")
+    public ResponseEntity update(@RequestBody  List<UserDto> payload) {
+        return super.update(payload);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/users/batch_delete")
+    public ResponseEntity delete(@RequestBody List<UserDto> payload) {
+        return super.delete(payload);
     }
 
     @Override
@@ -47,7 +58,7 @@ public class UserResourceControllerImpl extends AbstractResourceGameLogicControl
         return super.create(object);
     }
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,consumes = "application/json",path = "/rest/api/v1/users/{uuid}")
+    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/users/{uuid}")
     public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
         return super.delete(uuid);
     }
@@ -58,22 +69,8 @@ public class UserResourceControllerImpl extends AbstractResourceGameLogicControl
         return super.findById(uuid);
     }
 
-    @Override
-    public ResponseEntity associateWithNation(String uuid, NationDto nationUri) throws Exception {
-       Optional<UserDto> model = client.createAssociationWithNation(uuid,nationUri.getId());
 
-       if(!model.isPresent()){
-           LOGGER.info("Could not create association!");
-           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-       }
 
-        return new ResponseEntity<>(model.get(),HttpStatus.CREATED);
-    }
 
-    @Override
-    public ResponseEntity getNation(String uuid) {
-        Optional<NationDto> nation = client.getNationAssociatedWithNation(uuid);
-        if(!nation.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(nation.get(),HttpStatus.FOUND);
-    }
+
 }

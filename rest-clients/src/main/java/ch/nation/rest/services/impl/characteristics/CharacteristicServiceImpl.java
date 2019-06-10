@@ -9,8 +9,8 @@ import ch.nation.rest.clients.characteristics.DBSkillCharacteristicRestClient;
 import ch.nation.rest.clients.characteristics.DBStatCharacteristicRestClient;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import ch.nation.rest.utils.MessageUtils;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -6,5 +6,5 @@ import ch.nation.rest.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "units-db-service",value="nation-database-service",path = "/units",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBUnitRestClient extends DBRestServiceBaseInterface<UnitDto,UnitDto> {
+public interface DBRestUnitRestClient extends DBRestServiceBaseInterface<UnitDto,UnitDto> {
 }

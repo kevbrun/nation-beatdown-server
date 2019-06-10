@@ -1,8 +1,5 @@
 package ch.nation.rest.services.impl.skills;
 
-import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
-import ch.nation.rest.clients.DBRestServiceBaseInterface;
-import ch.nation.rest.clients.prejudices.DBPrejudiceRestClient;
 import ch.nation.rest.clients.skills.DBSkillRestClient;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.springframework.beans.factory.annotation.Autowired;

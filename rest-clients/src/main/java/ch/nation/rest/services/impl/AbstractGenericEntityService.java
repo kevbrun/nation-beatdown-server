@@ -1,7 +1,7 @@
 package ch.nation.rest.services.impl;
 
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.interf.GenericCRUDDao;
+import ch.nation.core.model.interf.services.GenericCRUDDao;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.utils.MessageUtils;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractDto>   implements GenericCRUDDao<TResult,ArrayList<TResult>,TInput> {
+public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractDto>   implements GenericCRUDDao<TResult,TInput> {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
@@ -44,7 +44,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
 
 
     @Override
-    public Optional<ArrayList<TResult>> getAll() {
+    public Optional<Collection<TResult>> getAll() {
         LOGGER.info(String.format("START | Get ALL | Used client %s", client.getClass().getName()));
 
         Collection<TResult> resultsFromDB = client.getAll().getContent();
