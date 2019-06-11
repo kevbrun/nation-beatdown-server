@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name="STAT_CHARACTERISTICS")
-@DiscriminatorValue("STAT")
+@DiscriminatorValue("CHARACTERISTICS_STAT")
 public class StatCharacteristic extends Characteristic {
 
 

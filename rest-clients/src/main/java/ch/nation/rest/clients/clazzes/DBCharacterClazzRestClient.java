@@ -7,4 +7,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "classes-db-rest-service",value="nation-database-service",path = "/classes",decode404 = true, configuration = FeignClientConfig.class)
 public interface DBCharacterClazzRestClient extends DBRestServiceBaseInterface<CharacterClassDto,CharacterClassDto> {
+
+
+    @Override
+    default String getType() {
+        return CharacterClassDto.class.getName();
+    }
 }

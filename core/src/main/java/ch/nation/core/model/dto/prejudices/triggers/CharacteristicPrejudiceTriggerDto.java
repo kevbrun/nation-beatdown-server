@@ -31,4 +31,10 @@ public class CharacteristicPrejudiceTriggerDto extends AbstractDto {
                 "characteristics=" + characteristics +
                 "} " + super.toString();
     }
+
+
+    @Override
+    public String ResourceCollectionName() {
+        return "prejudices";
+    }
 }

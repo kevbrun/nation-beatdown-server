@@ -20,7 +20,7 @@ public final class DummyEntitiesCreator {
         Unit unit = new Unit();
         unit.setName("Kevin");
         unit.setPosition(new EmeddableVector3(5f,5f,5f));
-        unit.setDead(true);
+        unit.setUnitIsDead(true);
    //     unit.setCharacterClass(getClazz());
 
 

@@ -45,7 +45,7 @@ public class SkillCharacteristicRepoTest extends AbstractNamedEntityTest<SkillCh
     public void test_if_has_discriminator_value() {
         SkillCharacteristic statCharacteristics = repo.save(entityToTest);
 
-        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"SKILL");
+        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"SkillCharacteristic");
 
 
     }

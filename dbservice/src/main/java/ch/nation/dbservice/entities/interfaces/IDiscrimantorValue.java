@@ -10,10 +10,10 @@ public interface IDiscrimantorValue {
 
     @Transient
     @JsonProperty("type")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public default String getDiscriminatorValue(){
-        DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
 
-        return val == null ? null : val.value();
+      return  this.getClass().getSimpleName();
+
+
     }
 }

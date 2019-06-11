@@ -7,4 +7,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "characteristic-skill-db-rest-service",value="nation-database-service",path = "/characteristics-skill",decode404 = true, configuration = FeignClientConfig.class)
 public interface DBSkillCharacteristicRestClient extends DBRestServiceBaseInterface<SkillCharacteristicsDto,SkillCharacteristicsDto> {
+
+    @Override
+    default String getType() {
+        return SkillCharacteristicsDto.class.getName();
+    }
 }

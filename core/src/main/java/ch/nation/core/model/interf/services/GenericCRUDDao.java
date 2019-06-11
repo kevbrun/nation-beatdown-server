@@ -9,7 +9,7 @@ public interface GenericCRUDDao<TResultSingle,TInput> {
     Optional<Collection<TResultSingle>> getAll();
     Optional<TResultSingle> findById(String uuid);
     Optional<TResultSingle> create(TInput object) throws Exception;
-    Optional<TResultSingle> delete(String uuid);
+    Optional<Boolean> delete(String uuid);
     Optional<TResultSingle> update(TInput object);
 
 

@@ -10,6 +10,11 @@ import java.util.Collection;
 
 public interface DBRestMassServiceBaseInterface<TResult,TInput>   {
 
+    default String getType(){
+
+        return this.getClass().getName();
+    }
+
 
         @RequestMapping(method = RequestMethod.POST,path="/update-batch")
     Resources<TResult> updateBatch(@RequestBody Collection<TInput> payload);

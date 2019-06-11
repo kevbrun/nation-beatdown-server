@@ -23,6 +23,9 @@ public class TimeReversalSkillEffectDto extends AbstractSkillEffectDto{
     public TimeReversalSkillEffectDto() {
     }
 
+
+
+
     public TimeReversakSkillEffectRoundDefinition getDefinition() {
         return definition;
     }

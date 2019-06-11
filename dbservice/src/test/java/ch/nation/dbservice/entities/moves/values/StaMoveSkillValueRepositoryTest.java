@@ -25,7 +25,7 @@ public class StaMoveSkillValueRepositoryTest extends AbstractEntityTest<StatMove
     @Test
     public void test_if_has_discriminator_value() {
         entityToTest =  repo.save(entityToTest);
-        Assert.assertEquals("STAT",entityToTest.getDiscriminatorValue());
+        Assert.assertEquals("StatMoveValue",entityToTest.getDiscriminatorValue());
     }
 
     @Test

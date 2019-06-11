@@ -4,6 +4,7 @@ import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -34,7 +35,7 @@ public class Unit extends NamedEntityBase {
 
     @JsonProperty("dead")
     @Column(name="is_dead")
-    private boolean isDead;
+    private boolean UnitIsDead;
 
    // @Column(name="position")
     @JsonProperty("pos")
@@ -61,21 +62,36 @@ public class Unit extends NamedEntityBase {
     )
     private List<PlayerMoveAction> target = new ArrayList<>();
 
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+
     public Unit() {
         super();
 
 
     }
 
-    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isDead, EmeddableVector3 position, UnitAssets unitAssets, List<PlayerMoveAction> source, List<PlayerMoveAction> target) {
+    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isUnitDead, EmeddableVector3 position, UnitAssets unitAssets, List<PlayerMoveAction> source, List<PlayerMoveAction> target) {
         super(name, description);
         this.characterClass = characterClass;
         this.state = state;
-        this.isDead = isDead;
+        this.UnitIsDead = isUnitDead;
         this.position = position;
         this.unitAssets = unitAssets;
         this.source = source;
         this.target = target;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public CharacterClass getCharacterClass() {
@@ -94,12 +110,12 @@ public class Unit extends NamedEntityBase {
         this.state = state;
     }
 
-    public boolean isDead() {
-        return isDead;
+    public boolean isUnitIsDead() {
+        return UnitIsDead;
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
+    public void setUnitIsDead(boolean unitIsDead) {
+        UnitIsDead = unitIsDead;
     }
 
 
@@ -150,7 +166,7 @@ public class Unit extends NamedEntityBase {
         return "Unit{" +
                 "characterClass=" + characterClass +
                 ", state=" + state +
-                ", isDead=" + isDead +
+                ", UnitIsDead=" + UnitIsDead +
                 ", position=" + position +
                 ", unitAssets=" + unitAssets +
                 "} " + super.toString();
@@ -162,7 +178,7 @@ public class Unit extends NamedEntityBase {
         if (!(o instanceof Unit)) return false;
         if (!super.equals(o)) return false;
         Unit unit = (Unit) o;
-        return isDead == unit.isDead &&
+        return UnitIsDead == unit.UnitIsDead &&
                 Objects.equals(characterClass, unit.characterClass) &&
                 state == unit.state &&
                 Objects.equals(position, unit.position) &&
@@ -174,7 +190,7 @@ public class Unit extends NamedEntityBase {
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), characterClass, state, isDead, position, unitAssets, source, target);
+        return Objects.hash(super.hashCode(), characterClass, state, UnitIsDead, position, unitAssets, source, target);
     }
 
 

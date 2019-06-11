@@ -7,4 +7,9 @@ public abstract class AbstractPrejudiceDto extends AbstractDto {
 
     public AbstractPrejudiceDto() {
     }
+
+    @Override
+    public String ResourceCollectionName() {
+        return "prejudices";
+    }
 }

@@ -20,6 +20,11 @@ public class NationDto extends AbstractDto implements Serializable {
         super();
     }
 
+    @Override
+    public String ResourceCollectionName() {
+        return "nations";
+    }
+
     public UserDto getUser() {
         return user;
     }

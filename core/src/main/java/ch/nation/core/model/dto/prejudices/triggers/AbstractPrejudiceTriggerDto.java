@@ -17,4 +17,9 @@ public abstract class AbstractPrejudiceTriggerDto extends AbstractDto {
 
     public AbstractPrejudiceTriggerDto() {
     }
+
+    @Override
+    public String ResourceCollectionName() {
+        return "triggers";
+    }
 }

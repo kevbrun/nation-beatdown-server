@@ -64,6 +64,11 @@ public class SkillDto extends AbstractDto {
     public SkillDto() {
     }
 
+    @Override
+    public String ResourceCollectionName() {
+        return "skills";
+    }
+
     public int getCost() {
         return cost;
     }

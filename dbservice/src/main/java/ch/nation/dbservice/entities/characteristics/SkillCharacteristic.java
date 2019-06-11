@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity(name="SKILL_CHARACTERISTICS")
-@DiscriminatorValue("SKILL")
+@DiscriminatorValue("CHARACTERISTICS_SKILL")
 public class SkillCharacteristic extends Characteristic {
 
 

@@ -44,7 +44,7 @@ public class MoveSkillValueRepositoryTest extends AbstractEntityTest<MoveSkillVa
     public void test_if_has_discriminator_value() {
         entityToTest = repo.save(entityToTest);
 
-        Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("MOVE"));
+        Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("MoveSkillValue"));
 
     }
 }

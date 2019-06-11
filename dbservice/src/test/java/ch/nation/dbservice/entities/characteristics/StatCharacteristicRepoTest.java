@@ -39,7 +39,7 @@ public class StatCharacteristicRepoTest extends AbstractNamedEntityTest<StatChar
     public void test_if_has_discriminator_value() {
         StatCharacteristic statCharacteristics = repo.save(entityToTest);
 
-        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"STAT");
+        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"StatCharacteristic");
 
 
     }

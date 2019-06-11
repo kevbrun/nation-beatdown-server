@@ -17,7 +17,7 @@ public class UnitDto extends AbstractDto {
     private UnitState state;
 
     @JsonProperty("dead")
-    private boolean isDead;
+    private Boolean isDead;
 
     // @Column(name="position")
     @JsonProperty("pos")
@@ -31,7 +31,12 @@ public class UnitDto extends AbstractDto {
     public UnitDto() {
     }
 
-    public UnitDto(CharacterClassDto characterClass, UnitState state, boolean isDead, Vector3Float position, UnitAssetsDto unitAssets) {
+    @Override
+    public String ResourceCollectionName() {
+        return "units";
+    }
+
+    public UnitDto(CharacterClassDto characterClass, UnitState state, Boolean isDead, Vector3Float position, UnitAssetsDto unitAssets) {
         this.characterClass = characterClass;
         this.state = state;
         this.isDead = isDead;
@@ -56,11 +61,11 @@ public class UnitDto extends AbstractDto {
         this.state = state;
     }
 
-    public boolean isDead() {
+    public Boolean isDead() {
         return isDead;
     }
 
-    public void setDead(boolean dead) {
+    public void setDead(Boolean dead) {
         isDead = dead;
     }
 

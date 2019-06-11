@@ -1,6 +1,8 @@
 package ch.nation.rest.services.impl.units;
 
 import ch.nation.core.model.dto.unit.UnitDto;
+import ch.nation.rest.clients.factory.DBMassRestClientFactory;
+import ch.nation.rest.clients.factory.DBRestClientFactory;
 import ch.nation.rest.clients.units.DBMassRestUnitRestClient;
 import ch.nation.rest.clients.units.DBRestUnitRestClient;
 import ch.nation.rest.services.impl.AbstractMassGenericEntityService;
@@ -12,10 +14,7 @@ public class UnitServiceImpl extends AbstractMassGenericEntityService<UnitDto,Un
 
 
     @Autowired
-    public UnitServiceImpl(DBRestUnitRestClient client, DBMassRestUnitRestClient massClient) {
-        super(client, massClient);
-
+    public UnitServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
+        super(UnitDto.class,factory, massRestClientFactory);
     }
-
-
 }

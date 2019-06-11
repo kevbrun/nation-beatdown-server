@@ -77,6 +77,11 @@ public class CharacterClassDto extends AbstractDto {
     public CharacterClassDto() {
     }
 
+    @Override
+    public String ResourceCollectionName() {
+        return "classes";
+    }
+
     public int getLevel() {
         return level;
     }

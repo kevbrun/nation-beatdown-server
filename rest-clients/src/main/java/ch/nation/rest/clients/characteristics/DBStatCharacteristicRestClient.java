@@ -7,6 +7,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "characteristic-stat-db-rest-service",value="nation-database-service",path = "/characteristics-stat",decode404 = true, configuration = FeignClientConfig.class)
 public interface DBStatCharacteristicRestClient extends DBRestServiceBaseInterface<StatCharacteristicsDto,StatCharacteristicsDto> {
+
+
+    @Override
+    default String getType() {
+        return StatCharacteristicsDto.class.getName();
+    }
 }
 
 

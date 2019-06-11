@@ -14,7 +14,7 @@ import java.util.Objects;
 @Entity(name="CHARACTERISTICS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="CHARACTERISTICS_TYPE",discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("BASE")
+@DiscriminatorValue("CHARACTERISTICS_BASE")
 public  class Characteristic extends NamedEntityBase  {
 
 

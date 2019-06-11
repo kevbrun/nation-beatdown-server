@@ -9,6 +9,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 public interface DBStatPrejdudiceRestClient extends DBRestServiceBaseInterface<StatPrejudiceDto,StatPrejudiceDto> {
 
 
-
-
+    @Override
+    default String getType() {
+        return StatPrejudiceDto.class.getName();
+    }
 }

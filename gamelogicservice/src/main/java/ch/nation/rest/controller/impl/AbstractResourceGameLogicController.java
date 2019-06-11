@@ -4,11 +4,17 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractResourceGameLogicController<TResult extends AbstractDto,TInput extends AbstractDto> implements RestCRUDDao<TInput> {
@@ -52,9 +58,9 @@ public abstract class AbstractResourceGameLogicController<TResult extends Abstra
     @Override
     public ResponseEntity delete(String uuid) throws Exception {
         if(uuid==null) throw new IllegalArgumentException("Request Body was null!");
-        Optional<TResult> response = service.delete(uuid);
+        Optional<Boolean> response = service.delete(uuid);
         if(!response.isPresent()) throw new Exception("Could not delete user!");
-        return new ResponseEntity<>(response.get(),HttpStatus.OK);
+        return  ResponseEntity.ok(new Resource(Boolean.valueOf(response.get())));
     }
 
     @Override
@@ -65,4 +71,18 @@ public abstract class AbstractResourceGameLogicController<TResult extends Abstra
 
         return new ResponseEntity<>(response.get(),HttpStatus.OK);
     }
+
+
+    public ResponseEntity createAssociation(String uuid,List<AbstractDto> children) throws Exception {
+        if(uuid==null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        if(children.size()==0) return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+        Optional<TResult> result = service.createAssocation(uuid,children);
+
+        return new ResponseEntity<>(result.get(),HttpStatus.OK);
+    }
+
+
+
+
 }

@@ -7,4 +7,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "game-rest-service",value="nation-database-service",path = "/games",decode404 = true, configuration = FeignClientConfig.class)
 public interface DBGameRestClient extends DBRestServiceBaseInterface<GameDto,GameDto> {
+
+    @Override
+    default String getType() {
+        return GameDto.class.getName();
+    }
 }

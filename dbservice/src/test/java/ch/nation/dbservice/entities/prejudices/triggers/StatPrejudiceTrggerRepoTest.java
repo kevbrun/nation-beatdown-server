@@ -37,7 +37,7 @@ public class StatPrejudiceTrggerRepoTest extends AbstractEntityTest<StatPrejudic
     @Test
     public void test_if_has_discriminator_value() {
         entityToTest=   repo.save(entityToTest);
-        Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("STAT"));
+        Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("StatPrejudiceTrigger"));
 
     }
 }

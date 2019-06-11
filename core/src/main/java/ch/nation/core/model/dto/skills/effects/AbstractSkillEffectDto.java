@@ -43,6 +43,11 @@ public class AbstractSkillEffectDto extends AbstractDto {
     public AbstractSkillEffectDto() {
     }
 
+    @Override
+    public String ResourceCollectionName() {
+        return "skill_effects";
+    }
+
     public SkillEffectTarget getEffectTarget() {
         return effectTarget;
     }
