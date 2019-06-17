@@ -9,6 +9,7 @@ import ch.nation.rest.services.impl.AbstractMassGenericEntityService;
 import ch.nation.rest.services.impl.units.UnitService;
 import ch.nation.rest.services.impl.units.UnitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class UnitResourceController extends AbstractMassResourceGameLogicControl
 
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/units/batch_delete")
-    public ResponseEntity delete(@RequestBody List<UnitDto> payload) {
+    public ResponseEntity delete(@RequestBody Resources<UnitDto> payload) {
         return super.delete(payload);
     }
 

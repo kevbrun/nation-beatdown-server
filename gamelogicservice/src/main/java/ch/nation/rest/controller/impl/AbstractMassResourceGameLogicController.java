@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,13 +40,15 @@ public class AbstractMassResourceGameLogicController<TResult extends AbstractDto
     }
 
     public @ResponseBody
-    ResponseEntity delete(@RequestBody List<TInput> payload) {
+    ResponseEntity delete(@RequestBody Resources<TInput> payload) {
 
-        if(payload.size()==0) return ResponseEntity.notFound().build();
-        if(payload.size()==1) return update(payload.get(0));
+        if(payload.getContent().size()==0) return ResponseEntity.notFound().build();
+
+        List<TInput> inputList = new ArrayList<>(payload.getContent());
+        if(payload.getContent().size()==1) return update(inputList.get(0));
 
         LOGGER.info("More than one item found. Start mass update");
-        Optional<Resource<Boolean>> response = ((AbstractMassGenericEntityService)service).batchDeletion(payload);
+        Optional<Resource<Boolean>> response = ((AbstractMassGenericEntityService)service).batchDeletion(inputList);
         if(response.isPresent()) return new ResponseEntity<>(response.get(),HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 

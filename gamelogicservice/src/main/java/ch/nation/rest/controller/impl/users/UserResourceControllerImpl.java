@@ -10,6 +10,7 @@ import ch.nation.rest.services.impl.users.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,7 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
 
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/users/batch_delete")
-    public ResponseEntity delete(@RequestBody List<UserDto> payload) {
+    public ResponseEntity delete(@RequestBody Resources<UserDto> payload) {
         return super.delete(payload);
     }
 
