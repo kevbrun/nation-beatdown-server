@@ -2,7 +2,7 @@ package ch.nation.core.model.dto.skills.effects;
 
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value =SkillEffectDto.class, name = "BASE"),
         @JsonSubTypes.Type(value =TimeReversalSkillEffectDto.class, name = "TIME_REVERSAL"),
 })
-public class AbstractSkillEffectDto extends AbstractDto {
+public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
 
     @JsonProperty("effectTarget")
     private SkillEffectTarget effectTarget;

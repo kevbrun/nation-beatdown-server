@@ -51,14 +51,17 @@ public class Skill extends NamedEntityBase {
 
 
 
-    @ManyToMany(mappedBy = "skills")
+    @ManyToMany(mappedBy = "skills",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name="skill_effects")
-    @JsonProperty("skill_effects")
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "SKILL_SKILL_EFFECTS",
+            joinColumns = { @JoinColumn(name = "skill_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_effect_id") }
+    )
     @RestResource(path="effects",rel = "effects")
     private List<SkillEffect> skillEffects;
 

@@ -1,11 +1,11 @@
 package ch.nation.core.model.dto.prejudices.triggers;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 
 import java.util.List;
 
-public class CharacteristicPrejudiceTriggerDto extends AbstractDto {
+public class CharacteristicPrejudiceTriggerDto extends NamedObjectAbstractDto {
 
     private List<AbstractCharacteristicsDto> characteristics;
 

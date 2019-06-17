@@ -1,14 +1,10 @@
 package ch.nation.core.model.dto.characteristics;
 
 
-import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.move.MoveSkillValueDto;
-import ch.nation.core.model.dto.move.StatMoveValueDtoDto;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 
 
-public abstract class AbstractCharacteristicsDto extends AbstractDto {
+public abstract class AbstractCharacteristicsDto extends NamedObjectAbstractDto {
 
 
      @Override

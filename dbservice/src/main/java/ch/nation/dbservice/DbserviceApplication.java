@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {"ch.nation.dbservice.config","ch.nation.dbservice.entities","ch.nation.dbservice.repositories"})
+@ComponentScan(basePackages = {"ch.nation.dbservice.config","ch.nation.dbservice.entities","ch.nation.dbservice.repositories","ch.nation.dbservice.utils"
+,"ch.nation.dbservice.dummyImporter"})
 public class DbserviceApplication {
 
 	public static void main(String[] args) {

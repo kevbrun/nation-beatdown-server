@@ -1,12 +1,10 @@
 package ch.nation.rest.services.impl;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericMassCrudDao;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
 import ch.nation.rest.clients.factory.DBRestClientFactory;
 import ch.nation.rest.clients.DBRestMassServiceBaseInterface;
-import ch.nation.rest.clients.DBRestServiceBaseInterface;
-import ch.nation.rest.clients.users.DBMassUserRestClient;
 import ch.nation.rest.utils.MessageUtils;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-public class AbstractMassGenericEntityService<TResult,TInput extends AbstractDto>
+public class AbstractMassGenericEntityService<TResult,TInput extends NamedObjectAbstractDto>
         extends AbstractGenericEntityService<TResult,TInput> implements  GenericMassCrudDao<TResult,TInput> {
 
 

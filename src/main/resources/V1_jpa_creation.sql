@@ -1,0 +1,45 @@
+create table characteristics (characteristics_type varchar(31) not null, id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, agi_bonus integer, agi_stat_target varchar(255), agi_perc_bonus float, agi_perc_stat_target varchar(255), ap_bonus integer, ap_stat_target varchar(255), ap_perc_bonus float, ap_perc_stat_target varchar(255), dex_bonus integer, dex_stat_target varchar(255), dex_perc_bonus float, dex_perc_stat_target varchar(255), hp_bonus integer, hp_stat_target varchar(255), hp_perc_bonus float, hp_perc_stat_target varchar(255), int_bonus integer, int_stat_target varchar(255), int_perc_bonus float, int_perc_stat_target varchar(255), str_bonus integer, str_stat_target varchar(255), str_perc_bonus float, str_perc_stat_target varchar(255), vit_bonus integer, vit_stat_target varchar(255), vit_perc_bonus float, vit_perc_stat_target varchar(255), skill_id binary, primary key (id))
+create table classes (id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, ap_base float, ap_growth varchar(255), ap_max float, ap_min float, agi_base float, agi_growth varchar(255), agi_max float, agi_min float, dex_base float, dex_growth varchar(255), dex_max float, dex_min float, exp integer, exp_for_level_up integer, hp_base float, hp_growth varchar(255), hp_max float, hp_min float, int_base float, int_growth varchar(255), int_max float, int_min float, lvl integer, speed_base float, speed_growth varchar(255), speed_max float, speed_min float, str_base float, str_growth varchar(255), str_max float, str_min float, vit_base float, vit_growth varchar(255), vit_max float, vit_min float, primary key (id))
+create table classes_skills (character_classes_id binary not null, skills_id binary not null)
+create table game (id binary not null, created timestamp, updated timestamp, round integer, stats varchar(255), primary key (id))
+create table game_users (games_id binary not null, users_id binary not null)
+create table move_value (action_type varchar(31) not null, id binary not null, created timestamp, updated timestamp, value float, source_x float, source_y float, source_z float, target_x float, target_y float, target_z float, primary key (id))
+create table nation (id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, primary key (id))
+create table player_moves (id binary not null, created timestamp, updated timestamp, caster_id binary, game_id binary, skill_id binary, target_id binary, user_id binary, value_id binary, primary key (id))
+create table prejudice_triggers (trigger_type varchar(31) not null, id binary not null, created timestamp, updated timestamp, comp varchar(255), stat varchar(255), threshold float, primary key (id))
+create table prejudice_triggers_characteristics (characteristic_prejudice_triggers_id binary not null, characteristics_id binary not null)
+create table prejudices (prejudice_type varchar(31) not null, id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, trigger_operation varchar(255), agi_bonus integer, agi_stat_target varchar(255), agi_perc_bonus float, agi_perc_stat_target varchar(255), ap_bonus integer, ap_stat_target varchar(255), ap_perc_bonus float, ap_perc_stat_target varchar(255), dex_bonus integer, dex_stat_target varchar(255), dex_perc_bonus float, dex_perc_stat_target varchar(255), hp_bonus integer, hp_stat_target varchar(255), hp_perc_bonus float, hp_perc_stat_target varchar(255), int_bonus integer, int_stat_target varchar(255), int_perc_bonus float, int_perc_stat_target varchar(255), str_bonus integer, str_stat_target varchar(255), str_perc_bonus float, str_perc_stat_target varchar(255), vit_bonus integer, vit_stat_target varchar(255), vit_perc_bonus float, vit_perc_stat_target varchar(255), primary key (id))
+create table prejudices_prejudice_triggers (prejudices_id binary not null, prejudice_triggers_id binary not null)
+create table skill_effects (skill_effect_type varchar(31) not null, id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, calc_target varchar(255), effect_target varchar(255), negative boolean, calc_source varchar(255), count_of_skills integer, reversal_def varchar(255), primary key (id))
+create table skills (id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, offsetxaxis integer, offsetyaxis integer, shape varchar(255), sizexaxis integer, sizeyaxis integer, base_value integer, cooldown integer, cost integer, current_cooldown integer, skill_bar_order integer, skill_target varchar(255), primary key (id))
+create table skills_skill_effects (skills_id binary not null, skill_effects_id binary not null)
+create table units (id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, is_dead boolean, x float, y float, z float, state varchar(255), armor varchar(255), back varchar(255), beard varchar(255), body varchar(255), bow varchar(255), cape varchar(255), ears varchar(255), expression varchar(255), expression_angry_eyebrows varchar(255), expression_angry_eyes varchar(255), expression_angry_mouth varchar(255), expression_dead_eyebrows varchar(255), expression_dead_eyes varchar(255), expression_dead_mouth varchar(255), expression_default_eyebrows varchar(255), expression_default_eyes varchar(255), expression_default_mouth varchar(255), firearm_params varchar(255), firearms varchar(255), glasses varchar(255), hair varchar(255), head varchar(255), helmet varchar(255), mask varchar(255), primary_melee_weapon varchar(255), secondary_melee_weapon varchar(255), shield varchar(255), weapon_type varchar(255), clazz_id binary, user_id binary, primary key (id))
+create table user (id binary not null, created timestamp, updated timestamp, desc varchar(255), name varchar(255) not null, admin boolean, password varchar(255) not null, nation_id binary, primary key (id))
+alter table characteristics add constraint UK_p0bo0c4li14uo36djle1dj4ya unique (name)
+alter table classes add constraint UK_pgs3gcxax70h9jugbt24ugwcg unique (name)
+alter table nation add constraint UK_lmxvw7vx74qojkki6jxduu886 unique (name)
+alter table prejudices add constraint UK_ajrpxsfphtck0n5uctjcbly92 unique (name)
+alter table skill_effects add constraint UK_99o5hkpjgn2m6pvb1v77j1g5q unique (name)
+alter table skills add constraint UK_85woe63nu9klkk9fa73vf0jd0 unique (name)
+alter table units add constraint UK_etw07nfppovq9p7ov8hcb38wy unique (name)
+alter table user add constraint UK_gj2fy3dcix7ph7k8684gka40c unique (name)
+alter table characteristics add constraint FKtnm4u8fyjpl32ifnpjtnw1311 foreign key (skill_id) references skills
+alter table classes_skills add constraint FKrqjidy900gcabrjpxpcheokhr foreign key (skills_id) references skills
+alter table classes_skills add constraint FKw4dftp5cwtk8vvo73wf9og6v foreign key (character_classes_id) references classes
+alter table game_users add constraint FK4wuej17nes0j63g9q14hjd3pr foreign key (users_id) references user
+alter table game_users add constraint FKdhgffv340wnkoef3gj2t719aj foreign key (games_id) references game
+alter table player_moves add constraint FKo5m2en36tspmgw42ilk2eq1o3 foreign key (caster_id) references units
+alter table player_moves add constraint FK56b0oefihi2dh6rgr5ydwp50 foreign key (game_id) references game
+alter table player_moves add constraint FKaltoakpxvgkp1xyo33fk6ohut foreign key (skill_id) references skills
+alter table player_moves add constraint FKhje6k6gati63y0yewa5smh16g foreign key (target_id) references units
+alter table player_moves add constraint FK2qkqomdjaipgl4vhx4dhmegjo foreign key (user_id) references user
+alter table player_moves add constraint FKq0l80374vos02vsx8rkhsqbqa foreign key (value_id) references move_value
+alter table prejudice_triggers_characteristics add constraint FK60wtebbw9yeg81189df15h0kf foreign key (characteristics_id) references characteristics
+alter table prejudice_triggers_characteristics add constraint FK6lucga6g69aoh6tdq1p0k2g0u foreign key (characteristic_prejudice_triggers_id) references prejudice_triggers
+alter table prejudices_prejudice_triggers add constraint FK8nry0xjr7c66rqp5esgc4gu6j foreign key (prejudice_triggers_id) references prejudice_triggers
+alter table prejudices_prejudice_triggers add constraint FKe4l8hnif2kkrdedkmt46nmlo8 foreign key (prejudices_id) references prejudices
+alter table skills_skill_effects add constraint FK529potg03oi56dht17sxjfps9 foreign key (skill_effects_id) references skill_effects
+alter table skills_skill_effects add constraint FK17nd0aksgr8la5v2a5ieclkrb foreign key (skills_id) references skills
+alter table units add constraint FK27rbwiloceukb6hnx3639bhcv foreign key (clazz_id) references classes
+alter table units add constraint FKfga09dieihbk9p91rols02oa4 foreign key (user_id) references user
+alter table user add constraint FKf8x97xvl5vcdl8p3fpk4o4cng foreign key (nation_id) references nation

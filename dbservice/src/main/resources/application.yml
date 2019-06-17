@@ -1,4 +1,6 @@
 spring:
+  flyway:
+    baselineOnMigrate: true
   application:
     name: nation-database-service
   h2:
@@ -12,6 +14,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+ #     ddl-auto: create-drop
     show-sql: true
   data:
     rest:

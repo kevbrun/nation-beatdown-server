@@ -1,6 +1,9 @@
 package ch.nation.rest.controller.impl;
 
 import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.dto.clazzes.CharacterClassDto;
+import ch.nation.core.model.interf.rest.FindByNameCRUDDao;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.slf4j.LoggerFactory;
@@ -8,16 +11,13 @@ import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.slf4j.Logger;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractResourceGameLogicController<TResult extends AbstractDto,TInput extends AbstractDto> implements RestCRUDDao<TInput> {
+public abstract class AbstractResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> implements RestCRUDDao<TInput> , FindByNameCRUDDao<CharacterClassDto> {
     protected final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
 
 
@@ -72,6 +72,17 @@ public abstract class AbstractResourceGameLogicController<TResult extends Abstra
         return new ResponseEntity<>(response.get(),HttpStatus.OK);
     }
 
+
+    public ResponseEntity findByName(@RequestParam("name") String name)
+    {
+       if(name==null | name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
+       Optional<TResult> response = service.findByName(name);
+        if(!response.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+
+        return new ResponseEntity<>(response.get(),HttpStatus.OK);
+
+    }
 
     public ResponseEntity createAssociation(String uuid,List<AbstractDto> children) throws Exception {
         if(uuid==null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");

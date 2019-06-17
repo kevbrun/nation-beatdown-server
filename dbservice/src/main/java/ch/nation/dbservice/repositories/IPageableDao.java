@@ -16,4 +16,5 @@ public interface IPageableDao<T extends AbstractNationEntityBase> extends Paging
     Iterable<T> findAll();
     Iterable<T> findAll(Sort sort);
     Page<T> findAll(Pageable pageable);
+
 }

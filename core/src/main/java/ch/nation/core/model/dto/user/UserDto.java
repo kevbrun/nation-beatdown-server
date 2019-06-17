@@ -1,6 +1,6 @@
 package ch.nation.core.model.dto.user;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserDto extends AbstractDto implements Serializable {
+public class UserDto extends NamedObjectAbstractDto implements Serializable {
 
 
 

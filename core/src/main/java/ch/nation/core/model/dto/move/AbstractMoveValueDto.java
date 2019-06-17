@@ -1,11 +1,9 @@
 package ch.nation.core.model.dto.move;
 
-import ch.nation.core.model.dto.AbstractDto;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 
 
-public abstract class AbstractMoveValueDto extends AbstractDto {
+public abstract class AbstractMoveValueDto extends NamedObjectAbstractDto {
 
     @Override
     public String ResourceCollectionName() {

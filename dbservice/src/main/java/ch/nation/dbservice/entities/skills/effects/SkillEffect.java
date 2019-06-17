@@ -39,7 +39,7 @@ public class SkillEffect extends NamedEntityBase {
     @JsonProperty("negative")
     private boolean resultIsNegative;
 
-    @ManyToMany(mappedBy = "skillEffects")
+    @ManyToMany(mappedBy = "skillEffects",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JsonIgnore
     @RestResource(path = "skills", rel="skills")
     private List<Skill> skills;

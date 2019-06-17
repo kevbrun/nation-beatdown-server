@@ -1,7 +1,7 @@
 package ch.nation.core.model.dto.skills;
 
 import ch.nation.core.model.Enums.Target;
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.skills.effects.AbstractSkillEffectDto;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class SkillDto extends AbstractDto {
+public class SkillDto extends NamedObjectAbstractDto {
 
     @JsonProperty("cost")
     private int cost;

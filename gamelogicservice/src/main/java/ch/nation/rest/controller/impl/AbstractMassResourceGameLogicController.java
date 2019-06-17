@@ -1,10 +1,6 @@
 package ch.nation.rest.controller.impl;
 
-import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.interf.rest.MassRestCRUDDao;
-import ch.nation.core.model.interf.services.GenericCRUDDao;
-import ch.nation.rest.clients.DBRestMassServiceBaseInterface;
-import ch.nation.rest.services.impl.AbstractGenericEntityService;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.rest.services.impl.AbstractMassGenericEntityService;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -17,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractMassResourceGameLogicController<TResult extends AbstractDto,TInput extends AbstractDto> extends AbstractResourceGameLogicController<TResult,TInput>    {
+public class AbstractMassResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult,TInput>    {
 
 
     public AbstractMassResourceGameLogicController(AbstractMassGenericEntityService service) {

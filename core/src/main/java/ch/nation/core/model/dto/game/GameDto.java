@@ -1,8 +1,8 @@
 package ch.nation.core.model.dto.game;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 
-public class GameDto extends AbstractDto {
+public class GameDto extends NamedObjectAbstractDto {
     @Override
     public String ResourceCollectionName() {
         return "games";

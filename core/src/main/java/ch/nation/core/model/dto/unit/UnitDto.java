@@ -1,12 +1,12 @@
 package ch.nation.core.model.dto.unit;
 
 import ch.nation.core.model.Enums.UnitState;
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.position.Vector3Float;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UnitDto extends AbstractDto {
+public class UnitDto extends NamedObjectAbstractDto {
 
 
     @JsonProperty("class")

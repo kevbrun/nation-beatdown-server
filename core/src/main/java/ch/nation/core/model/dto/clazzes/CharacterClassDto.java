@@ -1,13 +1,13 @@
 package ch.nation.core.model.dto.clazzes;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class CharacterClassDto extends AbstractDto {
+public class CharacterClassDto extends NamedObjectAbstractDto {
 
 
     @JsonProperty("lvl")

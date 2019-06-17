@@ -1,11 +1,11 @@
 package ch.nation.core.model.dto.user;
 
-import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class NationDto extends AbstractDto implements Serializable {
+public class NationDto extends NamedObjectAbstractDto implements Serializable {
 
 
     @JsonProperty("user")

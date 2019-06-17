@@ -1,7 +1,9 @@
 package ch.nation.rest.services.impl;
 
 import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
+import ch.nation.core.model.interf.services.GenericFindByNameService;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
 import ch.nation.rest.clients.factory.DBRestClientFactory;
@@ -15,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
-public abstract class AbstractGenericEntityService<TResult,TInput extends AbstractDto>   implements GenericCRUDDao<TResult,TInput> {
+public abstract class AbstractGenericEntityService<TResult,TInput extends NamedObjectAbstractDto>   implements GenericCRUDDao<TResult,TInput>, GenericFindByNameService<TResult> {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
@@ -91,6 +93,24 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends Abstra
         LOGGER.info("Found entry: %s", response.toString());
         LOGGER.info(String.format("FINISH | Find By Id | uuid : %s", uuid));
 
+        return Optional.of(response);
+    }
+
+    @Override
+    public Optional<TResult> findByName(String name) {
+        LOGGER.info(String.format("START | Find By Name | name : %s", name));
+        if(name==null ||name.isBlank()) throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", name));
+        TResult response = (TResult) GetBaseClient().findByName(name).getContent();
+
+        if (response == null) {
+
+            LOGGER.info(String.format("Nothing found | name: %s!", name));
+            return Optional.empty();
+        }
+
+
+        LOGGER.info("Found entry: %s", response.toString());
+        LOGGER.info(String.format("STOP | Find By Name | name : %s", name));
         return Optional.of(response);
     }
 

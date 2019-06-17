@@ -28,8 +28,12 @@ public class CharacterClass extends NamedEntityBase {
     private int expToLevelUp;
 
 
-    @ManyToMany
-    @Column(name="skills")
+    @ManyToMany(cascade = { CascadeType.ALL })
+  //  @Column(name="skills")
+
+    @JoinTable(name="CLASS_TO_SKILL",
+            joinColumns={@JoinColumn(name="CLASS_ID", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="SKILL_ID", referencedColumnName="id")})
     @RestResource(path="skill",rel = "skill")
     @JsonProperty("skills")
     private List<Skill> skills;

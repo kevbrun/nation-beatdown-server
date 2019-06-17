@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserResourceControllerImpl extends AbstractMassResourceGameLogicController<UserDto,UserDto> implements UserResourceController {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
@@ -30,7 +31,7 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/users")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getAll() {
         return super.getAll();
     }
@@ -42,38 +43,45 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/users/batch_update")
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/batch_update")
     public ResponseEntity update(@RequestBody  List<UserDto> payload) {
         return super.update(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/users/batch_delete")
+    @RequestMapping(method = RequestMethod.DELETE,path = "/batch_delete")
     public ResponseEntity delete(@RequestBody Resources<UserDto> payload) {
         return super.delete(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/rest/api/v1/users")
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity create(@RequestBody UserDto object) throws Exception {
         return super.create(object);
     }
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/users/{uuid}")
+    @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
     public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
         return super.delete(uuid);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/users/{uuid}")
+    @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
     public ResponseEntity findById(@PathVariable("uuid")String uuid) {
                 return super.findById(uuid);
     }
 
 
     @Override
-    @RequestMapping(method = RequestMethod.PUT,path="/rest/api/v1/users/{uuid}")
+    @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
     public ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@RequestBody List<AbstractDto> children) throws Exception {
         return super.createAssociation(uuid, children);
     }
+
+
+  /**  @Override
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity findByName(@RequestParam("name") String name) {
+        return super.findByName(name);
+    }**/
 }

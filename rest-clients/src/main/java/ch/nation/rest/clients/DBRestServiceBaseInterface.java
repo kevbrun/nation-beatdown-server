@@ -6,9 +6,13 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import zipkin2.internal.Trace;
+
+
 
 import java.util.List;
 
@@ -35,6 +39,8 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
     ResponseEntity<?> delete(@PathVariable("uuid")String uuid);
 
+    @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
+    Resource<TResult> findByName(@RequestParam("name")String name);
 
     //TODO PUT OR PATCH?
     @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")

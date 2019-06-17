@@ -5,8 +5,7 @@ import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.units.DBMassRestUnitRestClient;
 import ch.nation.rest.clients.units.DBRestUnitRestClient;
 import ch.nation.rest.controller.impl.AbstractMassResourceGameLogicController;
-import ch.nation.rest.services.impl.AbstractMassGenericEntityService;
-import ch.nation.rest.services.impl.units.UnitService;
+
 import ch.nation.rest.services.impl.units.UnitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
@@ -17,6 +16,8 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/units")
+
 public class UnitResourceController extends AbstractMassResourceGameLogicController<UnitDto,UnitDto> {
 
 
@@ -27,46 +28,45 @@ public class UnitResourceController extends AbstractMassResourceGameLogicControl
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/units")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getAll() {
         return super.getAll();
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path = "/rest/api/v1/units")
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
     public ResponseEntity update(@RequestBody UnitDto payload) {
         return super.update(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/units/batch_update")
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/batch_update")
     public ResponseEntity update(@RequestBody List<UnitDto> payload) {
         return super.update(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/units/batch_delete")
+    @RequestMapping(method = RequestMethod.DELETE,path = "/batch_delete")
     public ResponseEntity delete(@RequestBody Resources<UnitDto> payload) {
         return super.delete(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/rest/api/v1/units")
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity create(@RequestBody UnitDto object) throws Exception {
         return super.create(object);
     }
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/rest/api/v1/units/{uuid}")
+    @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
     public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
         return super.delete(uuid);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/units/{uuid}")
+    @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
     public ResponseEntity findById(@PathVariable("uuid")String uuid) {
         return super.findById(uuid);
     }
-
 
 
 

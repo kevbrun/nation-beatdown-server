@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/characteristics")
 public class CharacteristicResourceControllerImpl extends AbstractResourceGameLogicController<AbstractCharacteristicsDto,AbstractCharacteristicsDto> implements CharacteristicResourceController {
 
     private final CharacteristicService service;
@@ -21,34 +22,35 @@ public class CharacteristicResourceControllerImpl extends AbstractResourceGameLo
 
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path = "/rest/api/v1/characteristics")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getAll() {
         return super.getAll();
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/rest/api/v1/characteristics")
+    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
     public ResponseEntity update(@RequestBody AbstractCharacteristicsDto payload) {
         return super.update(payload);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/rest/api/v1/characteristics")
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity create(@RequestBody AbstractCharacteristicsDto object) throws Exception {
         return super.create(object);
     }
 
 
     @Override
-    @RequestMapping(method = RequestMethod.DELETE,consumes = "application/json",path = "/rest/api/v1/characteristics/{uuid}")
+    @RequestMapping(method = RequestMethod.DELETE,consumes = "application/json",path = "/{uuid}")
     public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
         return super.delete(uuid);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/rest/api/v1/characteristics/{uuid}")
+    @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
     public ResponseEntity findById(@PathVariable("uuid")String uuid) {
         return super.findById(uuid);
     }
+
 
 }
