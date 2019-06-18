@@ -1,31 +1,26 @@
-package ch.nation.rest.controller.impl.units;
+package ch.nation.rest.controller.impl.skills;
 
+import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.unit.UnitDto;
-import ch.nation.rest.clients.DBRestServiceBaseInterface;
-import ch.nation.rest.clients.units.DBMassRestUnitRestClient;
-import ch.nation.rest.clients.units.DBRestUnitRestClient;
-import ch.nation.rest.controller.impl.AbstractMassResourceGameLogicController;
-
-import ch.nation.rest.services.impl.units.UnitServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
+import ch.nation.rest.services.impl.AbstractGenericEntityService;
+import ch.nation.rest.services.impl.skills.SkillService;
+import ch.nation.rest.services.impl.skills.SkillServiceImpl;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/units")
-
-public class UnitResourceController extends AbstractMassResourceGameLogicController<UnitDto,UnitDto> {
-
+@RequestMapping("/skills")
+public class SkillResourceController extends AbstractResourceGameLogicController<SkillDto,SkillDto> {
 
 
-    @Autowired
-    public UnitResourceController(UnitServiceImpl client) {
-        super(client);
+    public SkillResourceController(SkillServiceImpl service) {
+        super(service);
     }
+
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
@@ -35,25 +30,13 @@ public class UnitResourceController extends AbstractMassResourceGameLogicControl
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody UnitDto payload) {
+    public ResponseEntity update(@RequestBody SkillDto payload) {
         return super.update(payload);
-    }
-
-    @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json",path="/batch_update")
-    public ResponseEntity update(@RequestBody List<UnitDto> payload) {
-        return super.update(payload);
-    }
-
-    @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/batch_delete")
-    public ResponseEntity delete(@RequestBody Resources<UnitDto> payload) {
-        return super.delete(payload);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity create(@RequestBody UnitDto object) throws Exception {
+    public ResponseEntity create(@RequestBody SkillDto object) throws Exception {
         return super.create(object);
     }
     @Override
@@ -75,5 +58,7 @@ public class UnitResourceController extends AbstractMassResourceGameLogicControl
     public ResponseEntity findByName(@RequestParam("name") String name) {
         return super.findByName(name);
     }
+
+
 
 }

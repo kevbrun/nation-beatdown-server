@@ -53,9 +53,9 @@ public class CharacterClassRessourceController extends AbstractResourceGameLogic
         return super.findById(uuid);
     }
 
-  /**  @Override
-    @RequestMapping(method = RequestMethod.GET)
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search")
     public ResponseEntity findByName(@RequestParam("name") String name) {
         return super.findByName(name);
-    }**/
+    }
 }

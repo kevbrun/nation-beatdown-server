@@ -9,6 +9,8 @@ import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -44,19 +46,20 @@ public class Skill extends NamedEntityBase {
     @JsonProperty("area")
     private ActionArea actionArea;
 
-    @Column(name="skill_target")
+    @Column(name="skill_target",nullable = false)
     @JsonProperty("skill_target")
     @Enumerated(EnumType.STRING)
     private Target target;
 
 
 
-    @ManyToMany(mappedBy = "skills",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy = "skills",fetch=FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(
             name = "SKILL_SKILL_EFFECTS",
             joinColumns = { @JoinColumn(name = "skill_id") },
@@ -195,7 +198,6 @@ public class Skill extends NamedEntityBase {
                 ", skillBarOrder=" + skillBarOrder +
                 ", actionArea=" + actionArea +
                 ", target=" + target +
-                ", characterClasses=" + characterClasses +
                 ", skillEffects=" + skillEffects +
                 "} " + super.toString();
     }

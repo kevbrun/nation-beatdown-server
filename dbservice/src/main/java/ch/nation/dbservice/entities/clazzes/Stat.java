@@ -26,7 +26,7 @@ public class Stat {
         private float maxValue;
         @Enumerated(EnumType.STRING)
         @JsonProperty("growthType")
-        private StatGrowthType growthType;
+        private StatGrowthType growthType = StatGrowthType.NONE;
 
 
 

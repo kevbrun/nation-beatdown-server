@@ -1,20 +1,20 @@
 package ch.nation.rest.controller.impl.users;
 
 
-import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.rest.controller.impl.AbstractMassResourceGameLogicController;
-import ch.nation.rest.controller.interfaces.UserResourceController;
-import ch.nation.rest.clients.factory.DBRestClientFactory;
-import ch.nation.rest.services.impl.users.UserServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resources;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+        import ch.nation.core.model.dto.AbstractDto;
+        import ch.nation.core.model.dto.user.UserDto;
+        import ch.nation.rest.controller.impl.AbstractMassResourceGameLogicController;
+        import ch.nation.rest.controller.interfaces.UserResourceController;
+        import ch.nation.rest.clients.factory.DBRestClientFactory;
+        import ch.nation.rest.services.impl.users.UserServiceImpl;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.hateoas.Resources;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -68,7 +68,7 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
     public ResponseEntity findById(@PathVariable("uuid")String uuid) {
-                return super.findById(uuid);
+        return super.findById(uuid);
     }
 
 
@@ -79,9 +79,9 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
     }
 
 
-  /**  @Override
-    @RequestMapping(method = RequestMethod.GET)
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search")
     public ResponseEntity findByName(@RequestParam("name") String name) {
         return super.findByName(name);
-    }**/
+    }
 }

@@ -20,24 +20,24 @@ import java.util.Objects;
 @DiscriminatorValue("BASE")
 public class SkillEffect extends NamedEntityBase {
 
-    @Column(name="effectTarget")
+    @Column(name="effectTarget",nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("effectTarget")
-    private SkillEffectTarget effectTarget;
+    private SkillEffectTarget effectTarget = SkillEffectTarget.NONE;
 
-    @Column(name="calcSource")
+    @Column(name="calcSource",nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("calcSource")
-    private StatType typeUsedForCalculation;
+    private StatType typeUsedForCalculation= StatType.NONE;
 
-    @Column(name="calcTarget")
+    @Column(name="calcTarget",nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("calcTarget")
-    private StatType applyCalculationOnStat;
+    private StatType applyCalculationOnStat = StatType.NONE;
 
     @Column(name="negative")
     @JsonProperty("negative")
-    private boolean resultIsNegative;
+    private boolean resultIsNegative = true;
 
     @ManyToMany(mappedBy = "skillEffects",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JsonIgnore

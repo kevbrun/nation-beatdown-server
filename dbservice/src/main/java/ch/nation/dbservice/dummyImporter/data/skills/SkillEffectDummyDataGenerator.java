@@ -47,6 +47,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setResultIsNegative(true);
         effect.setTypeUsedForCalculation(StatType.DEXTERITY);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
+
         entities.add(effect);
 
     }
@@ -71,6 +72,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setDescription("Etwas bewegt sich");
         effect.setResultIsNegative(false);
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
+        effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
 
         entities.add(effect);
@@ -85,6 +87,9 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         reversalSkillEffect.setName("Einen Schritt zurück!");
         reversalSkillEffect.setDefinition(TimeReversakSkillEffectRoundDefinition.STEP);
         reversalSkillEffect.setCountOfSkillEffectToReverse(1);
+        reversalSkillEffect.setTypeUsedForCalculation(StatType.NONE);
+        reversalSkillEffect.setApplyCalculationOnStat(StatType.NONE);
+        reversalSkillEffect.setEffectTarget(SkillEffectTarget.TARGET);
         entities.add(reversalSkillEffect);
     }
 

@@ -76,8 +76,16 @@ public abstract class AbstractResourceGameLogicController<TResult extends NamedO
     public ResponseEntity findByName(@RequestParam("name") String name)
     {
        if(name==null | name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
-       Optional<TResult> response = service.findByName(name);
-        if(!response.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        Optional<TResult> response;
+       try {
+        response = service.findByName(name);
+
+       }catch (NullPointerException ex){
+           LOGGER.error(ex.getMessage());
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+       if(!response.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 
         return new ResponseEntity<>(response.get(),HttpStatus.OK);
@@ -87,9 +95,7 @@ public abstract class AbstractResourceGameLogicController<TResult extends NamedO
     public ResponseEntity createAssociation(String uuid,List<AbstractDto> children) throws Exception {
         if(uuid==null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
         if(children.size()==0) return new ResponseEntity(HttpStatus.NO_CONTENT);
-
         Optional<TResult> result = service.createAssocation(uuid,children);
-
         return new ResponseEntity<>(result.get(),HttpStatus.OK);
     }
 

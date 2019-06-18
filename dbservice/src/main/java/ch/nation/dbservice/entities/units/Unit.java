@@ -35,7 +35,7 @@ public class Unit extends NamedEntityBase {
 
     @JsonProperty("dead")
     @Column(name="is_dead")
-    private boolean UnitIsDead;
+    private boolean UnitIsDead = false;
 
    // @Column(name="position")
     @JsonProperty("pos")

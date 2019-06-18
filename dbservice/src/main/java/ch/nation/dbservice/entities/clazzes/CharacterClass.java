@@ -6,6 +6,8 @@ import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -28,7 +30,8 @@ public class CharacterClass extends NamedEntityBase {
     private int expToLevelUp;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
   //  @Column(name="skills")
 
     @JoinTable(name="CLASS_TO_SKILL",
@@ -42,9 +45,11 @@ public class CharacterClass extends NamedEntityBase {
             mappedBy = "characterClass",
             cascade = CascadeType.ALL,
             orphanRemoval = true
+
     )
     @RestResource(path = "units", rel="units")
     @JsonProperty("units")
+
     private List<Unit> units = new ArrayList<>();
 
     @Embedded
@@ -378,6 +383,7 @@ public class CharacterClass extends NamedEntityBase {
 
 
     //Connection functions
+
 
     public void addSkill(Skill skill){
         if(!getSkills().contains(skill)){
