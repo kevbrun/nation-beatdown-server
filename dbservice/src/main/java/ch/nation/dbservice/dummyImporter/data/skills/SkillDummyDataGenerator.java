@@ -9,7 +9,7 @@ import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
-public class gkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
+public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
     private  SkillEffectRepository skillEffectRepository;
     private  SkillRepository skillRepository;
