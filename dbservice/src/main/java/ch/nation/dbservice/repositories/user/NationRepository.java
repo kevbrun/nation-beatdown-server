@@ -1,7 +1,7 @@
 package ch.nation.dbservice.repositories.user;
 
 import ch.nation.dbservice.entities.user.Nation;
-import ch.nation.dbservice.projection.INatioinExcerptProjection;
+import ch.nation.dbservice.entities.projection.INatioinExcerptProjection;
 import ch.nation.dbservice.repositories.INamedObjectDao;
 import ch.nation.dbservice.repositories.IPageableDao;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

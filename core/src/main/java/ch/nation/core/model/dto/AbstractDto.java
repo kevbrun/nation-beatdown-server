@@ -55,8 +55,8 @@ import java.io.Serializable;
 
 
         //SKILL_EFFECTS
-   //     @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
-   //     @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
+        @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
+        @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
 
 
         //UNITS

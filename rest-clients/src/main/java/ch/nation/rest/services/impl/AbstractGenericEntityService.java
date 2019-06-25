@@ -12,6 +12,7 @@ import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -21,7 +22,6 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
- //   protected final DBRestServiceBaseInterface client;
     protected final DBRestClientFactory factory;
     protected final DBMassRestClientFactory massRestClientFactory;
     private final  String resourceClassName;
@@ -172,7 +172,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
 
-    public Optional<TResult> createAssocation(String uuid,List<AbstractDto> children) throws Exception {
+    public Optional<TResult> createAssociation(String uuid,List<AbstractDto> children) throws Exception {
 
         Resource<TResult> resultEntity = null;
         LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid,children.getClass().getName()));
@@ -191,7 +191,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
             if (childObject.getContent() == null) throw new Exception("Could not find child node!");
 
 
-            boolean result = createSingleAssocation((Resource<AbstractDto>) parent, childObject);
+            boolean result = createSingleAssociation((Resource<AbstractDto>) parent, childObject);
 
             LOGGER.info("Status for creation: "+result);
 
@@ -207,9 +207,23 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
 
+    public Optional<?> getChildrenEntites(String uuid, String resource){
+        Resources<?> results =null;
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid,resource));
+        if(!validateUuid(uuid) && resource==null && resource.isEmpty()) throw new IllegalArgumentException("Uuid or resource type is null!");
+
+         results = getDefaultClient().getChildrenEntities(uuid,resource);
 
 
-    protected boolean createSingleAssocation(Resource<AbstractDto>  parentObject, Resource<AbstractDto> child) throws ExecutionControl.NotImplementedException {
+         LOGGER.info("Found entries: "+results.getContent().size());
+
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid,resource));
+
+        return Optional.of(results.getContent());
+    }
+
+
+    protected boolean createSingleAssociation(Resource<AbstractDto>  parentObject, Resource<AbstractDto> child) throws ExecutionControl.NotImplementedException {
 
 
      boolean wasCreated = false;

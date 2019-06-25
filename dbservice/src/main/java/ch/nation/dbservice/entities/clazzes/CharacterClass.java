@@ -5,6 +5,7 @@ import ch.nation.core.model.Enums.StatGrowthType;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -17,6 +18,8 @@ import java.util.Objects;
 
 @Entity(name="CLASSES")
 @Table(name="CLASSES")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class CharacterClass extends NamedEntityBase {
     @Column(name="lvl")
     @JsonProperty("lvl")
@@ -37,13 +40,13 @@ public class CharacterClass extends NamedEntityBase {
     @JoinTable(name="CLASS_TO_SKILL",
             joinColumns={@JoinColumn(name="CLASS_ID", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="SKILL_ID", referencedColumnName="id")})
-    @RestResource(path="skill",rel = "skill")
+    @RestResource(path="skill",rel = "skill",exported = false)
     @JsonProperty("skills")
     private List<Skill> skills;
 
     @OneToMany(
             mappedBy = "characterClass",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             orphanRemoval = true
 
     )

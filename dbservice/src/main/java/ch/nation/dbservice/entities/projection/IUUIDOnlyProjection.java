@@ -1,8 +1,7 @@
-package ch.nation.dbservice.projection;
+package ch.nation.dbservice.entities.projection;
 
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.projection.components.IUuidProjection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 

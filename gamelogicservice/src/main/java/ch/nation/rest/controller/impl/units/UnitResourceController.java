@@ -76,4 +76,10 @@ public class UnitResourceController extends AbstractMassResourceGameLogicControl
         return super.findByName(name);
     }
 
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
+        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
+    }
 }

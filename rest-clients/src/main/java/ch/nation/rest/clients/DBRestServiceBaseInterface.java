@@ -50,6 +50,12 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
     ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
 
+    @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
+    Resources<?> getChildrenEntities(@PathVariable("parent_uuid")String uuid,@PathVariable("resource") String resource);
+
+
+
+
     //  @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
   //  Resources<Void> delete(@PathVariable("uuid") String uuid);
 /**

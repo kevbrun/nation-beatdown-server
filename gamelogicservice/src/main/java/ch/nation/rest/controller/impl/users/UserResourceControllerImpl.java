@@ -79,9 +79,18 @@ public class UserResourceControllerImpl extends AbstractMassResourceGameLogicCon
     }
 
 
+    //Query API
+
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/search")
     public ResponseEntity findByName(@RequestParam("name") String name) {
         return super.findByName(name);
+    }
+
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
+        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
     }
 }

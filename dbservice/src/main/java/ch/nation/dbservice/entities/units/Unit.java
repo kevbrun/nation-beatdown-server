@@ -5,6 +5,7 @@ import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 @Table(name="UNITS")
 @Entity(name="UNITS")
-@Transactional
+//@Transactional Removed for testing @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Unit extends NamedEntityBase {
 
 
@@ -25,7 +26,7 @@ public class Unit extends NamedEntityBase {
     @JsonProperty("class")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clazz_id")
-    @RestResource(path = "classes", rel="classes")
+    @RestResource(path = "classes", rel="classes",exported = false)
     private CharacterClass characterClass;
 
     @JsonProperty("state")
@@ -93,6 +94,7 @@ public class Unit extends NamedEntityBase {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     public CharacterClass getCharacterClass() {
         return characterClass;

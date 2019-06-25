@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractMassResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult,TInput>    {
+public abstract class AbstractMassResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult,TInput>    {
 
 
     public AbstractMassResourceGameLogicController(AbstractMassGenericEntityService service) {

@@ -66,7 +66,7 @@ public class SkillDto extends NamedObjectAbstractDto {
 
     @Override
     public String ResourceCollectionName() {
-        return "skills";
+        return "Skills";
     }
 
     public int getCost() {

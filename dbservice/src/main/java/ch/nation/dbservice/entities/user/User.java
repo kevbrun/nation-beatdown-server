@@ -43,6 +43,7 @@ public class User extends NamedEntityBase implements Serializable {
 
 
     @OneToMany(mappedBy = "user")
+    @RestResource(path = "units", rel="units")
     private List<Unit> units = new ArrayList<>();
 
 

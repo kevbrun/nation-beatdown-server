@@ -5,6 +5,7 @@ import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.interf.rest.FindByNameCRUDDao;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
+import ch.nation.rest.controller.interfaces.ChildrenNodeDao;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> implements RestCRUDDao<TInput> , FindByNameCRUDDao<CharacterClassDto> {
+public abstract class AbstractResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> implements RestCRUDDao<TInput> , FindByNameCRUDDao<CharacterClassDto> , ChildrenNodeDao {
     protected final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
 
 
@@ -95,11 +96,17 @@ public abstract class AbstractResourceGameLogicController<TResult extends NamedO
     public ResponseEntity createAssociation(String uuid,List<AbstractDto> children) throws Exception {
         if(uuid==null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
         if(children.size()==0) return new ResponseEntity(HttpStatus.NO_CONTENT);
-        Optional<TResult> result = service.createAssocation(uuid,children);
+        Optional<TResult> result = service.createAssociation(uuid,children);
         return new ResponseEntity<>(result.get(),HttpStatus.OK);
     }
 
 
-
-
+    @Override
+    public ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection) {
+        if(uuid==null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        if(resourceCollection==null || resourceCollection.isBlank()) throw new IllegalArgumentException("resourceCollection is null or empty!");
+        Optional<?> result  = service.getChildrenEntites(uuid,resourceCollection);
+        if(!result.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(result.get(),HttpStatus.OK);
+    }
 }

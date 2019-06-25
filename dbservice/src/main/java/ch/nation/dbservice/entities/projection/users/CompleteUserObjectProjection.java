@@ -1,4 +1,4 @@
-package ch.nation.dbservice.projection.users;
+package ch.nation.dbservice.entities.projection.users;
 
 import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.units.Unit;

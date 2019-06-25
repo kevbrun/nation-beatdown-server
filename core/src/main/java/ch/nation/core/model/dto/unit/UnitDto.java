@@ -25,7 +25,7 @@ public class UnitDto extends NamedObjectAbstractDto {
     private Vector3Float position;
 
     @JsonProperty("assets")
-    private UnitAssetsDto unitAssets;
+    private UnitAssetsDto unitAssets = new UnitAssetsDto();
 
 
     public UnitDto() {

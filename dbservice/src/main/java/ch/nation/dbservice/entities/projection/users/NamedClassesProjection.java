@@ -1,4 +1,4 @@
-package ch.nation.dbservice.projection.users;
+package ch.nation.dbservice.entities.projection.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
