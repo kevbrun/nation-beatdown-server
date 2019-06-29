@@ -47,8 +47,16 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
 
 
-    @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+
+    @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
     ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
+
+    /**    @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+    ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
+
+
+   @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+    ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody List<String> links);**/
 
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
     Resources<?> getChildrenEntities(@PathVariable("parent_uuid")String uuid,@PathVariable("resource") String resource);

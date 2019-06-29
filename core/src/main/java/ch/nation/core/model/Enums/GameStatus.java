@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum GameStatus implements IEnumFromValue<GameStatus>{
-    IN_PROGRESS("InProgress"),WAITING_FOR_PLAYER("WaitingForPlayer"),FINISHED("Finished");
+    NONE("None"),IN_PROGRESS("InProgress"),WAITING_FOR_PLAYER("WaitingForPlayer"),FINISHED("Finished");
 
     private String str;
 

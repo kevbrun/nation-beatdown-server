@@ -11,6 +11,7 @@ import ch.nation.rest.utils.MessageUtils;
 import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
@@ -223,7 +224,7 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
 
-    protected boolean createSingleAssociation(Resource<AbstractDto>  parentObject, Resource<AbstractDto> child) throws ExecutionControl.NotImplementedException {
+    protected boolean createSingleAssociation(Resource<AbstractDto>  parentObject, Resource<AbstractDto> child)  {
 
 
      boolean wasCreated = false;

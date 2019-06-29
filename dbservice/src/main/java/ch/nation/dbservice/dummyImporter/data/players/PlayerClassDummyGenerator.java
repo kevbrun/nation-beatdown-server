@@ -15,6 +15,7 @@ public class PlayerClassDummyGenerator extends AbstractDummyGenerator<User> {
     private final UserRepository userRepository;
     private final UnitRepository unitRepository;
 
+
     public PlayerClassDummyGenerator(UserRepository repository, UnitRepository unitRepository) throws Exception {
         this.userRepository = repository;
         this.unitRepository = unitRepository;
@@ -35,15 +36,22 @@ public class PlayerClassDummyGenerator extends AbstractDummyGenerator<User> {
         user.setNation(nation);
 
 
-        userRepository.save(user);
+          user=  userRepository.save(user);
 
         Iterable<Unit> units= unitRepository.findAll();
 
-        List<Unit> unitList = new ArrayList<>();
-        units.forEach((item)-> user.addUnit(item));
-       // user.setUnits(unitList);
+
+        for (Unit unit:
+             units) {
+
+            user.addUnit(unit);
+        user=      userRepository.save(user);
+
+        }
 
         userRepository.save(user);
 
     }
+
+
 }

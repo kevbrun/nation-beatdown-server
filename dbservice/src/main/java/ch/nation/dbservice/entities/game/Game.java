@@ -18,11 +18,15 @@ import java.util.Objects;
 public class Game extends AbstractNationEntityBase {
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "games_users",
+            joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id",
+                    referencedColumnName = "id"))
     @Column(name="users")
     @JsonProperty("users")
     @RestResource(path = "users", rel="users")
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @JsonProperty("round")
     @Column(name = "round")
@@ -40,7 +44,7 @@ public class Game extends AbstractNationEntityBase {
             orphanRemoval = true
     )
     @RestResource(path = "moves", rel="moves")
-    private List<PlayerMoveAction> moves;
+    private List<PlayerMoveAction> moves = new ArrayList<>();
 
 
     public Game() {
@@ -70,6 +74,16 @@ public class Game extends AbstractNationEntityBase {
     }
 
     public void setUsers(List<User> users) {
+        if (this.users == null) {
+            this.users = users;
+        } else if(this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.users.clear();
+            if(users != null){
+                this.users.addAll(users);
+            }
+        }
+
+
         this.users = users;
     }
 
@@ -124,5 +138,34 @@ public class Game extends AbstractNationEntityBase {
     public int hashCode() {
 
         return Objects.hash(super.hashCode(), users, round, status, moves);
+    }
+
+
+    //JPA
+
+    public void addUser(User user){
+        if(!this.users.contains(user)){
+            this.users.add(user);
+            user.addGame(this);
+        }
+    }
+
+    public void removeUser(User user){
+        if(this.users.contains(user)){
+            this.users.remove(user);
+            user.removeGame(this);
+        }
+    }
+
+    @PrePersist
+    public void prePersist(){
+        for (User user:
+             users) {
+            user.addGame(this);
+
+
+        }
+
+
     }
 }

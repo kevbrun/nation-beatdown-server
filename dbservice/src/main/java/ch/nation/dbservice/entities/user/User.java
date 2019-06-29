@@ -42,7 +42,7 @@ public class User extends NamedEntityBase implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @RestResource(path = "units", rel="units")
     private List<Unit> units = new ArrayList<>();
 
@@ -93,7 +93,18 @@ public class User extends NamedEntityBase implements Serializable {
     }
 
     public void setGames(List<Game> games) {
-        this.games = games;
+        if (this.games == null) {
+            this.games = games;
+        } else if(this.games != games) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.games.clear();
+            if(games != null){
+                this.games.addAll(games);
+            }
+        }
+
+
+
+        //this.games = games;
     }
 
     public List<Unit> getUnits() {
@@ -142,9 +153,24 @@ public class User extends NamedEntityBase implements Serializable {
         unit.setUser(this);
     }
 
-    public void removeComment(Unit comment) {
+    public void removeUnit(Unit comment) {
         units.remove(comment);
         comment.setUser(null);
+    }
+
+    public void addGame(Game game){
+        if(!this.games.contains(game)){
+            this.games.add(game);
+            game.addUser(this);
+        }
+    }
+
+
+    public void removeGame(Game game){
+        if(this.games.contains(game)){
+            this.games.remove(game);
+            game.removeUser(this);
+        }
     }
 
     @PrePersist
@@ -152,6 +178,10 @@ public class User extends NamedEntityBase implements Serializable {
     public void updateAddressAssociation(){
         for(Unit unit : this.units){
             unit.setUser(this);
+        }
+
+        for(Game game: this.games){
+            game.addUser(this);
         }
     }
 

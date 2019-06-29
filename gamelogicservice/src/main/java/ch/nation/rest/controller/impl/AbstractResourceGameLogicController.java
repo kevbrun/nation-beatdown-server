@@ -56,6 +56,8 @@ public abstract class AbstractResourceGameLogicController<TResult extends NamedO
     }
 
 
+
+
     @Override
     public ResponseEntity delete(String uuid) throws Exception {
         if(uuid==null) throw new IllegalArgumentException("Request Body was null!");
