@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "users",path = "users"/**,excerptProjection = CompleteUserObjectProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "users",path = "users"/**,excerptProjection = MaxUserResponseProjection.class**/)
 @Transactional
 public interface UserRepository extends IPageableDao<User>, INamedObjectDao<User> {
 

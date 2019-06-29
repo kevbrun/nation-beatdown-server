@@ -16,3 +16,5 @@ public interface GenericCRUDDao<TResultSingle,TInput> {
 
 
 }
+
+

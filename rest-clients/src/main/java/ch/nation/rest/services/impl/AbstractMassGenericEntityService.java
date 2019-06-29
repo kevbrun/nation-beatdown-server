@@ -1,5 +1,6 @@
 package ch.nation.rest.services.impl;
 
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericMassCrudDao;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;

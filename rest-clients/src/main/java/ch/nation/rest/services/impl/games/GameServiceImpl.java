@@ -1,5 +1,6 @@
 package ch.nation.rest.services.impl.games;
 
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.user.UserDto;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,5 +65,30 @@ public class GameServiceImpl extends AbstractGenericEntityService<GameDto,GameDt
         return new ResponseEntity(resource.get(),HttpStatus.OK);
 
 
+    }
+
+    @Override
+    public Optional<Collection<GameDto>> getAll(QueryProjection queryProjection) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<GameDto> findById(String uuid, QueryProjection queryProjection) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<GameDto> create(GameDto object, QueryProjection queryProjection) throws Exception {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Boolean> delete(String uuid, QueryProjection queryProjection) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<GameDto> update(GameDto object, QueryProjection queryProjection) {
+        return Optional.empty();
     }
 }

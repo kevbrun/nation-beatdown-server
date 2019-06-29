@@ -1,6 +1,7 @@
 package ch.nation.core.model.interf.rest;
 
 
+import ch.nation.core.model.interf.services.GenericCRUDQueryable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;

@@ -3,6 +3,7 @@ package ch.nation.rest.services.impl;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
+import ch.nation.core.model.interf.services.GenericCRUDQueryable;
 import ch.nation.core.model.interf.services.GenericFindByNameService;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
