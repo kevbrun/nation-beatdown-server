@@ -24,6 +24,10 @@ public class AbstractMassGenericEntityService<TResult,TInput extends NamedObject
 
     @Override
     public Optional<Collection<TResult>> batchUpdate(Collection<TInput> object) {
+        return  batchUpdate(object,QueryProjection.def);
+    }
+
+    public Optional<Collection<TResult>> batchUpdate(Collection<TInput> object, QueryProjection projection){
 
         ArrayList results = new ArrayList(object.size());
         LOGGER.info(String.format("START | Batch Update | Used client %s", GetMassClient().getClass().getName()));
@@ -31,10 +35,10 @@ public class AbstractMassGenericEntityService<TResult,TInput extends NamedObject
         if(object.size()>0){
 
 
-      Resources<TResult>   response =   GetMassClient().updateBatch(object);
+            Resources<TResult>   response =   GetMassClient().updateBatch(object, projection);
 
-        LOGGER.info("Items received: "+response.getContent().size());
-        results.add(response.getContent());
+            LOGGER.info("Items received: "+response.getContent().size());
+            results.add(response.getContent());
 
 
 
@@ -44,14 +48,13 @@ public class AbstractMassGenericEntityService<TResult,TInput extends NamedObject
         return Optional.of(results);
     }
 
-    @Override
-    public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object) {
+    public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object, QueryProjection projection){
         LOGGER.info(String.format("START | Batch Update | Used client %s", GetMassClient().getClass().getName()));
         Boolean deletionStatus = false;
         if(object.size()>0){
 
 
-            Resource<Boolean> response =   GetMassClient().deleteBatch(object);
+            Resource<Boolean> response =   GetMassClient().deleteBatch(object, projection);
 
             LOGGER.info("Bool received: "+response.getContent());
             deletionStatus = response.getContent();
@@ -64,6 +67,12 @@ public class AbstractMassGenericEntityService<TResult,TInput extends NamedObject
 
 
         return Optional.of(new Resource<Boolean>(deletionStatus));
+
+    }
+
+    @Override
+    public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object) {
+        return batchDeletion(object,QueryProjection.def);
     }
 
 

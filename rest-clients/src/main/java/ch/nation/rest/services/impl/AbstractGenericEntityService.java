@@ -1,15 +1,14 @@
 package ch.nation.rest.services.impl;
 
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
-import ch.nation.core.model.interf.services.GenericCRUDQueryable;
 import ch.nation.core.model.interf.services.GenericFindByNameService;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
 import ch.nation.rest.clients.factory.DBRestClientFactory;
 import ch.nation.rest.utils.MessageUtils;
-import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
@@ -20,22 +19,21 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
-public abstract class AbstractGenericEntityService<TResult,TInput extends NamedObjectAbstractDto>   implements GenericCRUDDao<TResult,TInput>, GenericFindByNameService<TResult> {
+public abstract class AbstractGenericEntityService<TResult, TInput extends NamedObjectAbstractDto> implements GenericCRUDDao<TResult, TInput>, GenericFindByNameService<TResult> {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 
     protected final DBRestClientFactory factory;
     protected final DBMassRestClientFactory massRestClientFactory;
-    private final  String resourceClassName;
+    private final String resourceClassName;
 
 
-    public AbstractGenericEntityService(Class<?> resourceClass,DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
+    public AbstractGenericEntityService(Class<?> resourceClass, DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
         this.factory = factory;
         this.massRestClientFactory = massRestClientFactory;
         this.resourceClassName = resourceClass.getName();
 
     }
-
 
 
     protected boolean validateCreateParameter(TInput payload) {
@@ -44,13 +42,13 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
 
-    public String GetResourceName(){
+    public String GetResourceName() {
 
         return resourceClassName;
     }
 
 
-    private DBRestServiceBaseInterface GetBaseClient(){
+    private DBRestServiceBaseInterface GetBaseClient() {
         return DBRestClientFactory.getService(GetResourceName());
     }
 
@@ -65,9 +63,15 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
 
     @Override
     public Optional<Collection<TResult>> getAll() {
+
+        return getAll(QueryProjection.def);
+
+    }
+
+    public Optional<Collection<TResult>> getAll(QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Get ALL | Used client %s", GetBaseClient().getClass().getName()));
 
-        Collection<TResult> resultsFromDB = GetBaseClient().getAll().getContent();
+        Collection<TResult> resultsFromDB = GetBaseClient().getAll(queryProjection).getContent();
         ArrayList<TResult> responseList = new ArrayList<>(resultsFromDB);
 
         if (responseList.size() > 0) {
@@ -77,15 +81,20 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
         LOGGER.info(String.format("FINISH | Getting ALL entities | Used client %s", GetBaseClient().getClass().getName()));
 
         return Optional.empty();
-    }
 
+    }
 
     @Override
     public Optional<TResult> findById(String uuid) {
+        return findById(uuid, QueryProjection.def);
+    }
+
+
+    public Optional<TResult> findById(String uuid, QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Find By Id | uuid : %s", uuid));
         if (!validateUuid(uuid))
             throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", uuid));
-        TResult response = (TResult) GetBaseClient().findById(uuid).getContent();
+        TResult response = (TResult) GetBaseClient().findById(uuid, queryProjection).getContent();
 
         if (response == null) {
 
@@ -98,11 +107,11 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
         return Optional.of(response);
     }
 
-    @Override
-    public Optional<TResult> findByName(String name) {
+    public Optional<TResult> findByName(String name, QueryProjection projection) {
         LOGGER.info(String.format("START | Find By Name | name : %s", name));
-        if(name==null ||name.isBlank()) throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", name));
-        TResult response = (TResult) GetBaseClient().findByName(name).getContent();
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", name));
+        TResult response = (TResult) GetBaseClient().findByName(name, projection).getContent();
 
         if (response == null) {
 
@@ -117,28 +126,42 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
     @Override
+    public Optional<TResult> findByName(String name) {
+        return findByName(name, QueryProjection.def);
+    }
+
+    @Override
     public Optional<TResult> create(TInput object) throws Exception {
+        return create(object, QueryProjection.def);
+    }
+
+    public Optional<TResult> create(TInput object, QueryProjection projection) throws Exception {
         LOGGER.info(String.format("Creating entity in db | Payload: %s", object.toString()));
         if (!validateCreateParameter(object))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
 
 
-        TResult result = (TResult) getBindedClient(object).create(object).getContent();
+        TResult result = (TResult) getBindedClient(object).create(object, projection).getContent();
 
         if (result == null) {
             LOGGER.info(String.format("Could not create | payload: %s!", object.toString()));
             throw new Exception("Internal error");
         }
         return Optional.of(result);
+
     }
 
 
     @Override
     public Optional<TResult> update(TInput object) {
+        return update(object, QueryProjection.def);
+    }
+
+    public Optional<TResult> update(TInput object, QueryProjection projection) {
         LOGGER.info(String.format("START | Updating entity in db | Payload: %s", object.toString()));
         if (!validateUpdateParameter(object))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
-        TResult result = (TResult) getBindedClient(object).update(object.getId(), object).getContent();
+        TResult result = (TResult) getBindedClient(object).update(object.getId(), object, projection).getContent();
         if (result == null) {
             LOGGER.info(String.format("Could not update % entity", object.toString()));
             return Optional.empty();
@@ -147,17 +170,17 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
         return Optional.of(result);
     }
 
-    @Override
-    public Optional<Boolean> delete(String uuid) {
+
+    public Optional<Boolean> delete(String uuid, QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Deleting entity | Payload: %s", uuid));
         boolean deletionWasSuccesfull = false;
 
         if (!validateDeleteParameter(uuid))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
 
-        ResponseEntity<?> result = GetBaseClient().delete(uuid);
+        ResponseEntity<?> result = GetBaseClient().delete(uuid, queryProjection);
 
-        if(result.getStatusCode().is2xxSuccessful()){
+        if (result.getStatusCode().is2xxSuccessful()) {
             deletionWasSuccesfull = true;
         }
 
@@ -173,94 +196,160 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
         return Optional.of(deletionWasSuccesfull);
     }
 
+    @Override
+    public Optional<Boolean> delete(String uuid) {
+        return delete(uuid, QueryProjection.def);
 
-    public Optional<TResult> createAssociation(String uuid,List<AbstractDto> children) throws Exception {
+    }
+
+
+    public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children) throws Exception {
+        return createAssociation(uuid, children, QueryProjection.def);
+    }
+
+    public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
 
         Resource<TResult> resultEntity = null;
-        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid,children.getClass().getName()));
+        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
         if (!validateDeleteParameter(uuid))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
 
-        Resource<TResult> parent= GetBaseClient().findById(uuid);
+        Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
 
-        if(parent.getContent()==null) throw new Exception("Could not find parent entity with uuid:"+uuid);
+        if (parent.getContent() == null) throw new Exception("Could not find parent entity with uuid:" + uuid);
 
-
-
-        for(AbstractDto child : children) {
-            Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId());
+/**
+        for (AbstractDto child : children) {
+            Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.max);
 
             if (childObject.getContent() == null) throw new Exception("Could not find child node!");
 
 
             boolean result = createSingleAssociation((Resource<AbstractDto>) parent, childObject);
 
-            LOGGER.info("Status for creation: "+result);
+            LOGGER.info("Status for creation: " + result);
+
+
+        }**/
+
+         StringBuilder builder = new StringBuilder();
+
+         //Resources<?> childrens = getChildren(uuid,children.get(0).ResourceCollectionName(),QueryProjection.min);
+
+
+        for (AbstractDto child:
+             children) {
+
+            Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
+            if(childObject!=null) builder.append(childObject.getLink(Link.REL_SELF).getHref()).append("\n");
+
+
+
+        }
+
+        String listOfUris = builder.toString();
+
+       ResponseEntity<?> responseEntity= GetBaseClient().createAssocationsPut(uuid,children.get(0).ResourceCollectionName(),listOfUris,projection);
+
+
+       LOGGER.info(""+responseEntity.getStatusCode());
+
+
+        resultEntity = GetBaseClient().findById(uuid, projection);
+
+        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
+
+        return Optional.of(resultEntity.getContent());
+
+
+    }
+
+    public Optional<?> createEntityWithChildren(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+        Optional<TResult> parentResult= create(parent,projection);
+        if(!parentResult.isPresent()) throw new Exception("Could not create parent node!");
+
+        List<AbstractDto> createdChildren = new ArrayList<>(children.size());
+
+
+       DBRestServiceBaseInterface client= getBindedClient(children.get(0));
+
+        for (AbstractDto child:
+                children) {
+          Resource<AbstractDto> dto=  client.create(child,QueryProjection.min);
+
+          if(dto==null || dto.getContent().getId()==null || dto.getContent().getId().isEmpty())  throw  new Exception("ERROR COULD NOT CREATE CHILD NODE!");
+
+          createdChildren.add(dto.getContent());
 
 
         }
 
 
-        resultEntity =  GetBaseClient().findById(uuid);
+             return    createAssociation(((AbstractDto)parentResult.get()).getId(),createdChildren,QueryProjection.def);
 
-        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid,children.getClass().getName()));
-
-        return Optional.of(resultEntity.getContent());
     }
 
 
-    public Optional<?> getChildrenEntites(String uuid, String resource){
-        Resources<?> results =null;
-        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid,resource));
-        if(!validateUuid(uuid) && resource==null && resource.isEmpty()) throw new IllegalArgumentException("Uuid or resource type is null!");
+    public Optional<?> getChildrenEntites(String uuid, String resource) {
+      return getChildrenEntites(uuid,resource,QueryProjection.def);
+    }
 
-         results = getDefaultClient().getChildrenEntities(uuid,resource);
+    public Optional<?> getChildrenEntites(String uuid, String resource, QueryProjection queryProjection) {
+
+        return Optional.of(getChildren(uuid,resource,queryProjection).getContent());
+    }
+
+    public Resources<?> getChildren(String uuid, String resource, QueryProjection projection){
+        Resources<?> results = null;
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+        if (!validateUuid(uuid) && resource == null && resource.isEmpty())
+            throw new IllegalArgumentException("Uuid or resource type is null!");
+
+        results = getDefaultClient().getChildrenEntities(uuid, resource, projection);
 
 
-         LOGGER.info("Found entries: "+results.getContent().size());
+        LOGGER.info("Found entries: " + results.getContent().size());
 
-        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid,resource));
-
-        return Optional.of(results.getContent());
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+       return results;
     }
 
 
-    protected boolean createSingleAssociation(Resource<AbstractDto>  parentObject, Resource<AbstractDto> child)  {
+/**       protected boolean createSingleAssociation(Resource<AbstractDto> parentObject, Resource<AbstractDto> child, QueryProjection queryProjection) {
 
 
-     boolean wasCreated = false;
-        if(parentObject.getContent()!=null && child.getContent()!=null){
-
+        boolean wasCreated = false;
+        if (parentObject.getContent() != null && child.getContent() != null) {
 
 
             parentObject.add(child.getId());
             String childrenURl = child.getId().getHref();
-            ResponseEntity<Resource<TResult>> updatedParent = getBindedClient(parentObject.getContent()).createAssocations(parentObject.getContent().getId(),child.getContent().ResourceCollectionName(),childrenURl);
+            ResponseEntity<Resource<TResult>> updatedParent = getBindedClient(parentObject.getContent()).createAssocations(parentObject.getContent().getId(), child.getContent().ResourceCollectionName(), childrenURl,queryProjection);
 
 
-            if(updatedParent.getStatusCode()!= HttpStatus.NO_CONTENT){
+            if (updatedParent.getStatusCode() != HttpStatus.NO_CONTENT) {
                 LOGGER.error("Could not update associations");
-            }else{
+            } else {
                 wasCreated = true;
             }
 
 
-
-
-
-
-        }else{
+        } else {
             LOGGER.info("Could not create relationship. The parent or child is null");
         }
 
 
-
-
         return wasCreated;
-    }
+    }**/
 
 
-    protected boolean validateUuid(String uuid) {
+ /**   protected boolean createSingleAssociation(Resource<AbstractDto> parentObject, Resource<AbstractDto> child) {
+        return createSingleAssociation(parentObject,child,QueryProjection.def);
+
+    }**/
+
+
+        protected boolean validateUuid(String uuid) {
         try {
             UUID.fromString(uuid);
         } catch (IllegalArgumentException ex) {
@@ -271,16 +360,14 @@ public abstract class AbstractGenericEntityService<TResult,TInput extends NamedO
     }
 
 
+    protected DBRestServiceBaseInterface<TResult, TInput> getBindedClient(AbstractDto object) {
 
-
-    protected DBRestServiceBaseInterface<TResult,TInput> getBindedClient(AbstractDto object){
-
-       DBRestServiceBaseInterface client=  DBRestClientFactory.getService(object.getClass().getName());
+        DBRestServiceBaseInterface client = DBRestClientFactory.getService(object.getClass().getName());
         LOGGER.info(MessageUtils.getSelectedRestClientMessage(client));
-       return client;
+        return client;
     }
 
-    protected DBRestServiceBaseInterface<TResult,TInput> getDefaultClient(){
+    protected DBRestServiceBaseInterface<TResult, TInput> getDefaultClient() {
         DBRestServiceBaseInterface client = DBRestClientFactory.getService(GetResourceName());
         LOGGER.info(MessageUtils.getSelectedRestClientMessage(client));
         return client;

@@ -3,7 +3,9 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum  QueryProjection implements IEnumFromValue<QueryProjection>{
-    MIN("min"),DEFAULT(""),MAX("max");
+    min("min"),
+    def("default"),
+    max("max");
 
     private String str;
 

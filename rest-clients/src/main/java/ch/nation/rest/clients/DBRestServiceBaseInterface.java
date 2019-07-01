@@ -1,6 +1,8 @@
 package ch.nation.rest.clients;
 
 
+import ch.nation.core.model.Enums.QueryProjection;
+import ch.nation.core.model.dto.AbstractDto;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -24,43 +26,63 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
         return this.getClass().getName();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    Resources<TResult> getAll();
+    @RequestMapping(method = RequestMethod.GET,path = "")
+    Resources<TResult> getAll(@RequestParam(value = "projection",required = false) QueryProjection projection);
+
+  //  Resources<TResult> getAll();
 
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    Resource<TResult> create(TInput object);
+    Resource<TResult> create(TInput object,@RequestParam(value = "projection",required = false) QueryProjection projection);
+
+    //@RequestMapping(method = RequestMethod.POST,consumes = "application/json")
+    //Resource<TResult> create(TInput object);
 
     @RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
-    Resource<TResult> findById(@PathVariable("uuid")String uuid);
+    Resource<TResult> findById(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
+    //@RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
+    //Resource<TResult> findById(@PathVariable("uuid")String uuid);
 
     @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
-    ResponseEntity<?> delete(@PathVariable("uuid")String uuid);
+    ResponseEntity<?> delete(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection);
+
+   // @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
+   // ResponseEntity<?> delete(@PathVariable("uuid")String uuid);
 
     @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
-    Resource<TResult> findByName(@RequestParam("name")String name);
+    Resource<TResult> findByName(@RequestParam("name")String name,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-    //TODO PUT OR PATCH?
+
+  //  @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
+   // Resource<TResult> findByName(@RequestParam("name")String name);
+
+
     @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
-    Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
+    Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload,@RequestParam(value = "projection",required = false) QueryProjection projection);
+
+ //   @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
+ //   Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
 
 
+  //  @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+  //  ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
 
+    //TODO PUT PATCH OR POST?
     @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
-    ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
+    ResponseEntity<Resource<TResult>> createAssocationsPatch(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-    /**    @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
-    ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
+    @RequestMapping(method = RequestMethod.PUT ,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+    ResponseEntity<Resource<TResult>> createAssocationsPut(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links,@RequestParam(value = "projection",required = false) QueryProjection projection);
+
+    @RequestMapping(method = RequestMethod.POST ,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
+    ResponseEntity<Resource<TResult>> createAssocationsPost(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
-   @RequestMapping(method = RequestMethod.PUT,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
-    ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody List<String> links);**/
 
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
-    Resources<?> getChildrenEntities(@PathVariable("parent_uuid")String uuid,@PathVariable("resource") String resource);
-
+    Resources<AbstractDto> getChildrenEntities(@PathVariable("parent_uuid")String uuid, @PathVariable("resource") String resource, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
 

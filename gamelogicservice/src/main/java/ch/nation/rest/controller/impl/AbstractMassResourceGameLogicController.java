@@ -1,5 +1,6 @@
 package ch.nation.rest.controller.impl;
 
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.rest.services.impl.AbstractMassGenericEntityService;
 import org.springframework.hateoas.Resource;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractMassResourceGameLogicController<TResult extends NamedObjectAbstractDto,TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult,TInput>    {
+public abstract class AbstractMassResourceGameLogicController<TResult extends NamedObjectAbstractDto, TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult, TInput> {
 
 
     public AbstractMassResourceGameLogicController(AbstractMassGenericEntityService service) {
@@ -21,31 +22,43 @@ public abstract class AbstractMassResourceGameLogicController<TResult extends Na
     }
 
 
+    public @ResponseBody
+    ResponseEntity update(@RequestBody List<TInput> payload, QueryProjection projection) {
+
+        if (payload.size() == 0) return ResponseEntity.notFound().build();
+        if (payload.size() == 1) return update(payload.get(0));
+
+        LOGGER.info("More than one item found. Start mass update");
+        Optional<List<TResult>> response = ((AbstractMassGenericEntityService) service).batchUpdate(payload, projection);
+        if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
 
     public @ResponseBody
     ResponseEntity update(@RequestBody List<TInput> payload) {
+        return update(payload, QueryProjection.def);
 
-        if(payload.size()==0) return ResponseEntity.notFound().build();
-        if(payload.size()==1) return update(payload.get(0));
+    }
 
-        LOGGER.info("More than one item found. Start mass update");
-        Optional<List<TResult>> response = ((AbstractMassGenericEntityService)service).batchUpdate(payload);
-        if(response.isPresent()) return new ResponseEntity<>(response.get(),HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public @ResponseBody
+    ResponseEntity delete(@RequestBody Resources<TInput> payload, QueryProjection projection) {
+        return delete(payload, projection);
 
     }
 
     public @ResponseBody
     ResponseEntity delete(@RequestBody Resources<TInput> payload) {
 
-        if(payload.getContent().size()==0) return ResponseEntity.notFound().build();
+        if (payload.getContent().size() == 0) return ResponseEntity.notFound().build();
 
         List<TInput> inputList = new ArrayList<>(payload.getContent());
-        if(payload.getContent().size()==1) return update(inputList.get(0));
+        if (payload.getContent().size() == 1) return update(inputList.get(0));
 
         LOGGER.info("More than one item found. Start mass update");
-        Optional<Resource<Boolean>> response = ((AbstractMassGenericEntityService)service).batchDeletion(inputList);
-        if(response.isPresent()) return new ResponseEntity<>(response.get(),HttpStatus.OK);
+        Optional<Resource<Boolean>> response = ((AbstractMassGenericEntityService) service).batchDeletion(inputList);
+        if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }

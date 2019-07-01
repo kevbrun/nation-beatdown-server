@@ -7,18 +7,14 @@ import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
 import ch.nation.rest.clients.factory.DBRestClientFactory;
 import ch.nation.rest.services.impl.AbstractGenericEntityService;
-import ch.nation.rest.services.impl.users.UserService;
 import ch.nation.rest.services.impl.users.UserServiceImpl;
 
-import org.apache.catalina.User;
-import org.apache.logging.log4j.spi.LoggerRegistry;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +30,7 @@ public class GameServiceImpl extends AbstractGenericEntityService<GameDto,GameDt
     }
 
 
-    public ResponseEntity create(String playerOneUuid, String playerTwoUuid) throws Exception {
+    public ResponseEntity create(String playerOneUuid, String playerTwoUuid, QueryProjection projection) throws Exception {
        Optional<UserDto> playerOne = userService.findById(playerOneUuid);
         if(!playerOne.isPresent()) throw new Error("Player with uuid"+playerOneUuid+"does not exist");
         Optional<UserDto> playerTwo = userService.findById(playerTwoUuid);
@@ -46,7 +42,7 @@ public class GameServiceImpl extends AbstractGenericEntityService<GameDto,GameDt
         gameDto.setName(playerOne.get().getName()+" vs "+playerTwo.get().getName());
 
 
-        Resource<GameDto> response = getDefaultClient().create(gameDto);
+        Resource<GameDto> response = getDefaultClient().create(gameDto,projection);
 
         if(response.getContent()==null) throw new Error("Could not create Game!");
 
@@ -66,29 +62,9 @@ public class GameServiceImpl extends AbstractGenericEntityService<GameDto,GameDt
 
 
     }
+    public ResponseEntity create(String playerOneUuid, String playerTwoUuid) throws Exception {
+        return create(playerOneUuid,playerTwoUuid, QueryProjection.def);
 
-    @Override
-    public Optional<Collection<GameDto>> getAll(QueryProjection queryProjection) {
-        return Optional.empty();
     }
 
-    @Override
-    public Optional<GameDto> findById(String uuid, QueryProjection queryProjection) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<GameDto> create(GameDto object, QueryProjection queryProjection) throws Exception {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Boolean> delete(String uuid, QueryProjection queryProjection) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<GameDto> update(GameDto object, QueryProjection queryProjection) {
-        return Optional.empty();
-    }
 }
