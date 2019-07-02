@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.util.List;
+import java.util.UUID;
 
 @Projection(name = "min", types = {Game.class})
 public interface MinGameResponseProjection extends MinimizedEntityResponseProjection
@@ -17,4 +18,10 @@ public interface MinGameResponseProjection extends MinimizedEntityResponseProjec
     public GameStatus getStatus();
     @JsonProperty("users")
     List<UserMinResponseProjection> getUsers();
+    @JsonProperty("current_player")
+    public String getCurrentPlayerUuid();
+    @JsonProperty("first_player")
+    UUID getFirstPlayerUuid() ;
+    @JsonProperty("next_player")
+    UUID getNextPlayerUuid();
 }

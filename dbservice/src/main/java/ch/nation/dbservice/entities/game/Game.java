@@ -2,7 +2,6 @@ package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Table(name="GAME")
 @Entity(name="GAME")
@@ -36,6 +36,19 @@ public class Game extends AbstractNationEntityBase {
     @JsonProperty("status")
     @Column(name = "stats")
     private GameStatus status;
+
+
+    @JsonProperty("current_player")
+    @Column(name="current_player",nullable = false)
+    private String currentPlayerUuid;
+
+    @JsonProperty("first_player")
+    @Column(name="first_player",nullable = false)
+    private String firstPlayerUuid;
+
+    @JsonProperty("next_player")
+    @Column(name="next_player",nullable = false)
+    private String nextPlayerUuid;
 
 
     @OneToMany(
@@ -103,6 +116,30 @@ public class Game extends AbstractNationEntityBase {
         this.status = status;
     }
 
+
+    public String getCurrentPlayerUuid() {
+        return currentPlayerUuid;
+    }
+
+    public void setCurrentPlayerUuid(String currentPlayerUuid) {
+        this.currentPlayerUuid = currentPlayerUuid;
+    }
+
+    public String getFirstPlayerUuid() {
+        return firstPlayerUuid;
+    }
+
+    public void setFirstPlayerUuid(String firstPlayerUuid) {
+        this.firstPlayerUuid = firstPlayerUuid;
+    }
+
+    public String getNextPlayerUuid() {
+        return nextPlayerUuid;
+    }
+
+    public void setNextPlayerUuid(String nextPlayerUuid) {
+        this.nextPlayerUuid = nextPlayerUuid;
+    }
 
     public List<PlayerMoveAction> getMoves(){
         if(moves==null)moves = new ArrayList<>();

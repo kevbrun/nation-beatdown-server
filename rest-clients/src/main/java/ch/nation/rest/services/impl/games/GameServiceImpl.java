@@ -40,7 +40,10 @@ public class GameServiceImpl extends AbstractGenericEntityService<GameDto,GameDt
         LOGGER.info("I start to create the game!");
         GameDto gameDto = new GameDto();
         gameDto.setName(playerOne.get().getName()+" vs "+playerTwo.get().getName());
-
+        gameDto.setRound(1);
+        gameDto.setFirstPlayerUuid(playerOneUuid);
+        gameDto.setNextPlayerUuid(playerTwoUuid);
+        gameDto.setCurrentPlayerUuid(playerOneUuid);
 
         Resource<GameDto> response = getDefaultClient().create(gameDto,projection);
 

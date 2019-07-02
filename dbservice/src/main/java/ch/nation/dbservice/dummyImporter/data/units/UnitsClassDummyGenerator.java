@@ -35,6 +35,7 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit.setPosition(new EmeddableVector3(5f,5f,5f));
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
+        unitAssets.setWeaponType("Melee1H");
         unitAssets.setHelmet("Samurai/NinjaHelm2 [Paint]");
         unit.setUnitAssets(unitAssets);
 
@@ -61,6 +62,8 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Samurai/NinjaHelm2 [Paint]");
         unit.setUnitAssets(unitAssets);
+        unitAssets.setWeaponType("Melee1H");
+
 
         unit = unitRepository.save(unit);
 
@@ -84,6 +87,8 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("SpellMasters/InquisitorHat1 [Paint]");
+        unitAssets.setWeaponType("Melee1H");
+
         unit.setUnitAssets(unitAssets);
         unit = unitRepository.save(unit);
 
@@ -103,10 +108,11 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Basic/HawkHelm");
+        unitAssets.setWeaponType("Melee1H");
         unit.setUnitAssets(unitAssets);
         unit = unitRepository.save(unit);
 
-        CharacterClass characterClass = characterClassRepository.findByName("Zeitmagier");
+        CharacterClass characterClass = characterClassRepository.findByName("Zeitjäger");
 
         unit.setCharacterClass(characterClass);
 

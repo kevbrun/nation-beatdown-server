@@ -4,6 +4,7 @@ import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
+import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
@@ -31,7 +32,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
     createSchadenDexEffekt();
     createSchadenStrEffekt();
-    createSelfMoveEffect();
+   createSelfMoveEffect();
+   createMoveEffect();
     createTimeReversalSkill();
 
 
@@ -48,7 +50,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.DEXTERITY);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
 
-        entities.add(effect);
+        skillEffectRepository.save(effect);
 
     }
 
@@ -61,12 +63,29 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.STRENGTH);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
 
-        entities.add(effect);
+        skillEffectRepository.save(effect);
+
 
 
     }
 
     private void createSelfMoveEffect(){
+        SelfMoveEffect effect =new SelfMoveEffect();
+        effect.setName("Selbstbewegungseffekt!");
+        effect.setDescription("Deine Figure bewegt sich");
+        effect.setResultIsNegative(false);
+        effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
+        effect.setApplyCalculationOnStat(StatType.NONE);
+        effect.setEffectTarget(SkillEffectTarget.CASTER);
+
+        skillEffectRepository.save(effect);
+
+
+
+
+    }
+
+    private void createMoveEffect(){
         SkillEffect effect =new SkillEffect();
         effect.setName("Bewegungseffekt!");
         effect.setDescription("Etwas bewegt sich");
@@ -75,9 +94,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
 
-        entities.add(effect);
-
-
+        skillEffectRepository.save(effect);
 
     }
 
@@ -90,12 +107,10 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         reversalSkillEffect.setTypeUsedForCalculation(StatType.NONE);
         reversalSkillEffect.setApplyCalculationOnStat(StatType.NONE);
         reversalSkillEffect.setEffectTarget(SkillEffectTarget.TARGET);
-        entities.add(reversalSkillEffect);
+        skillEffectRepository.save(reversalSkillEffect);
+
     }
 
 
-    @Override
-    public void persistData() {
-        skillEffectRepository.saveAll(entities);
-    }
+
 }

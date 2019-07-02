@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.skills.effects;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,7 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="SKILL_EFFECT_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
-public class SkillEffect extends NamedEntityBase {
+public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
 
     @Column(name="effectTarget",nullable = false)
     @Enumerated(EnumType.STRING)

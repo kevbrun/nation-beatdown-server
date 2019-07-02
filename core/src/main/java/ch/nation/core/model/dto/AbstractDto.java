@@ -15,10 +15,7 @@ import ch.nation.core.model.dto.skills.effects.TimeReversalSkillEffectDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.NationDto;
 import ch.nation.core.model.dto.user.UserDto;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
 @JsonTypeInfo(
@@ -52,11 +49,14 @@ import java.io.Serializable;
 
         //SKILL
         @JsonSubTypes.Type(value = SkillDto.class, name = "Skill"),
+        @JsonSubTypes.Type(value = SkillDto.class, name = "MoveSkill"),
+        @JsonSubTypes.Type(value = SkillDto.class, name = "SelfMoveSkill"),
 
 
         //SKILL_EFFECTS
         @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
         @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
+        @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SelfMoveEffect"),
 
 
         //UNITS
@@ -73,6 +73,7 @@ import java.io.Serializable;
 
 
 })
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class AbstractDto implements Serializable {
     @JsonProperty("uuid")
     protected String id;

@@ -18,7 +18,6 @@ import java.util.Objects;
 
 @Table(name="UNITS")
 @Entity(name="UNITS")
-//@Transactional Removed for testing @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Unit extends NamedEntityBase {
 
 
@@ -32,7 +31,7 @@ public class Unit extends NamedEntityBase {
     @JsonProperty("state")
     @Column(name="state")
     @Enumerated(EnumType.STRING)
-    private UnitState state;
+    private UnitState state = UnitState.INIT_OBJECT;
 
     @JsonProperty("dead")
     @Column(name="is_dead")

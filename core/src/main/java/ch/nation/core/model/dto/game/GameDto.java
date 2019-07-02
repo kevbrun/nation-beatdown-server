@@ -20,6 +20,16 @@ public class GameDto extends NamedObjectAbstractDto {
     @JsonProperty("status")
     private GameStatus status;
 
+    @JsonProperty("current_player")
+    private String currentPlayerUuid;
+
+    @JsonProperty("first_player")
+    private String firstPlayerUuid;
+
+    @JsonProperty("next_player")
+    private String nextPlayerUuid;
+
+
 
     public GameDto() {
         super();
@@ -72,6 +82,29 @@ public class GameDto extends NamedObjectAbstractDto {
         }
     }
 
+    public String getCurrentPlayerUuid() {
+        return currentPlayerUuid;
+    }
+
+    public void setCurrentPlayerUuid(String currentPlayerUuid) {
+        this.currentPlayerUuid = currentPlayerUuid;
+    }
+
+    public String getFirstPlayerUuid() {
+        return firstPlayerUuid;
+    }
+
+    public void setFirstPlayerUuid(String firstPlayerUuid) {
+        this.firstPlayerUuid = firstPlayerUuid;
+    }
+
+    public String getNextPlayerUuid() {
+        return nextPlayerUuid;
+    }
+
+    public void setNextPlayerUuid(String nextPlayerUuid) {
+        this.nextPlayerUuid = nextPlayerUuid;
+    }
 
     @Override
     public String toString() {
@@ -79,7 +112,9 @@ public class GameDto extends NamedObjectAbstractDto {
                 "users=" + users +
                 ", round=" + round +
                 ", status=" + status +
-                ", id='" + id + '\'' +
+                ", currentPlayerUuid='" + currentPlayerUuid + '\'' +
+                ", firstPlayerUuid='" + firstPlayerUuid + '\'' +
+                ", nextPlayerUuid='" + nextPlayerUuid + '\'' +
                 "} " + super.toString();
     }
 }

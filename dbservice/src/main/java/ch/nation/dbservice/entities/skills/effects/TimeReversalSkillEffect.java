@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.skills.effects;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,8 +13,8 @@ import java.util.Objects;
 
 
 @Entity(name="TIME_REVERSAL_SKILL")
-@DiscriminatorValue("TIME_REVERSAL")
-public class TimeReversalSkillEffect extends SkillEffect{
+@DiscriminatorValue("TIME_REVERSAL_EFFECT")
+public class TimeReversalSkillEffect extends SkillEffect implements IDiscrimantorValue {
 
 
     @Column(name="reversal_def")

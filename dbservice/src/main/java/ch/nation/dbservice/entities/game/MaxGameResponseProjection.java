@@ -7,9 +7,11 @@ import ch.nation.dbservice.entities.projection.users.TimestampProjection;
 import ch.nation.dbservice.entities.user.MaxUserResponseProjection;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.util.List;
+import java.util.UUID;
 
 @Projection(name = "max", types = {Game.class})
 public interface MaxGameResponseProjection extends TimestampProjection,MinimizedEntityResponseProjection {
@@ -21,5 +23,11 @@ public interface MaxGameResponseProjection extends TimestampProjection,Minimized
     public GameStatus getStatus();
     @JsonProperty("users")
     List<MaxUserResponseProjection> getUsers();
+    @JsonProperty("current_player")
+    public UUID getCurrentPlayerUuid();
+    @JsonProperty("first_player")
+    UUID getFirstPlayerUuid() ;
+    @JsonProperty("next_player")
+    UUID getNextPlayerUuid();
 
 }

@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "skill_effects",path = "skill-effects")
+@RepositoryRestResource(collectionResourceRel = "skill-effects",path = "skill-effects")
 @Transactional
 public interface SkillEffectRepository extends IPageableDao<SkillEffect>, INamedObjectDao<SkillEffect> {
 }

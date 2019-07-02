@@ -40,7 +40,7 @@ public class SkillDto extends NamedObjectAbstractDto {
     @JsonProperty("clazz")
     private List<CharacterClassDto> characterClasses;
 
-    @JsonProperty("skill_effects")
+    @JsonProperty("effects")
     private List<AbstractSkillEffectDto> skillEffects;
 
 

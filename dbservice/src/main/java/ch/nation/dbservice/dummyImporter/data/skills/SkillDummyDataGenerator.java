@@ -4,7 +4,10 @@ import ch.nation.core.model.Enums.ActionShape;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.skills.ActionArea;
+import ch.nation.dbservice.entities.skills.MoveSkill;
+import ch.nation.dbservice.entities.skills.SelfMoveSkill;
 import ch.nation.dbservice.entities.skills.Skill;
+import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
@@ -26,7 +29,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     @Override
     protected void handleCration() throws Exception {
         LOGGER.info("START CREATING  SKILLS!");
-        createSelfMoveSkill();
+       createSelfMoveSkill();
         createNahkampfSkill();
         createMoveOtherSkill();
         createFernkampfSkill();
@@ -35,7 +38,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
     private void createSelfMoveSkill() throws Exception {
-        Skill skill =  new Skill();
+        Skill skill =  new SelfMoveSkill();
         skill.setName("Bewegung Schweinebacke!");
         skill.setDescription("Setzt eigene Einheit in Bewegung");
         skill.setCost(20);
@@ -47,11 +50,11 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setActionArea(actionArea);
        skill= skillRepository.save(skill);
 
-       SkillEffect effect= skillEffectRepository.findByName("Bewegungseffekt!");
+       SkillEffect effect= skillEffectRepository.findByName("Selbstbewegungseffekt!");
 
 
 
-       if(effect==null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+       if(effect==null) throw new Exception("Could not find. Skill Effect with name: Selbstbewegungseffekt!");
 
        skill.addSkillEffect(effect);
        skillRepository.save(skill);
@@ -61,7 +64,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
     private void createMoveOtherSkill() throws Exception {
-        Skill skill =  new Skill();
+        Skill skill =  new MoveSkill();
         skill.setName("Bewegung du Sack!");
         skill.setDescription("Bewege gegnerisch Einheit!");
         skill.setCost(20);

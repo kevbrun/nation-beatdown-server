@@ -4,6 +4,7 @@ package ch.nation.dbservice.entities.skills;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.PlayerMoveAction;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
@@ -19,7 +20,12 @@ import java.util.List;
 
 @Table(name="SKILLS")
 @Entity(name="SKILLS")
-public class Skill extends NamedEntityBase {
+@Inheritance(
+        strategy = InheritanceType.SINGLE_TABLE
+)
+@DiscriminatorColumn(name="SKILL_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("BASE_SKILL")
+public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
 
     @Column(name="cost")
@@ -65,7 +71,8 @@ public class Skill extends NamedEntityBase {
             joinColumns = { @JoinColumn(name = "skill_id") },
             inverseJoinColumns = { @JoinColumn(name = "skill_effect_id") }
     )
-    @RestResource(path="effects",rel = "effects")
+    @RestResource(path="effects",rel = "effects",exported = false)
+    @JsonProperty("effects")
     private List<SkillEffect> skillEffects;
 
     @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,orphanRemoval = true)
@@ -190,7 +197,7 @@ public class Skill extends NamedEntityBase {
 
     @Override
     public String toString() {
-        return "Skill{" +
+        return this.getClass().getName()+"{" +
                 "cost=" + cost +
                 ", baseValue=" + baseValue +
                 ", cooldown=" + cooldown +

@@ -43,7 +43,7 @@ public class DummyImportRunner  implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         LOGGER.info("START MIGRATION OF DUMMY DATA!");
         SkillEffectDummyDataGenerator skillEffectDummyData = new SkillEffectDummyDataGenerator(skillEffectRepository);
-        SkillDummyDataGenerator skillDummyDataGenerator = new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
+    SkillDummyDataGenerator skillDummyDataGenerator = new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
         CharacterClassDummyGenerator characterClassDummyGenerator = new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
         UnitsClassDummyGenerator unitsClassDummyGenerator = new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
         PlayerClassDummyGenerator playerClassDummyGenerator = new PlayerClassDummyGenerator(userRepository,unitRepository);
