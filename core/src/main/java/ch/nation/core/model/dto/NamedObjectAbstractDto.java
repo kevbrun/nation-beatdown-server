@@ -1,20 +1,5 @@
 package ch.nation.core.model.dto;
 
-import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
-import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
-import ch.nation.core.model.dto.clazzes.CharacterClassDto;
-import ch.nation.core.model.dto.game.GameDto;
-import ch.nation.core.model.dto.move.MoveSkillValueDto;
-import ch.nation.core.model.dto.move.PlayerMoveActionDto;
-import ch.nation.core.model.dto.move.StatMoveValueDtoDto;
-import ch.nation.core.model.dto.prejudices.StatPrejudiceDto;
-import ch.nation.core.model.dto.prejudices.triggers.CharacteristicPrejudiceTriggerDto;
-import ch.nation.core.model.dto.skills.SkillDto;
-import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
-import ch.nation.core.model.dto.skills.effects.TimeReversalSkillEffectDto;
-import ch.nation.core.model.dto.unit.UnitDto;
-import ch.nation.core.model.dto.user.NationDto;
-import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.*;
 
 

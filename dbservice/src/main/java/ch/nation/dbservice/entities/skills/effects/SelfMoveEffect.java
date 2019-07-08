@@ -9,4 +9,6 @@ import javax.persistence.Table;
 @Entity(name="SELF_MOVE_SKILL_EFFECTS")
 @DiscriminatorValue("SELF_MOVE_EFFECT")
 public class SelfMoveEffect extends SkillEffect implements  IDiscrimantorValue{
+
+    //TODO IMPLEMENT
 }

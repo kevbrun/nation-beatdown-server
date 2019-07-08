@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveAction,PlayerMoveRepository> implements IHasDiscriminatorValue {
+public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,PlayerMoveRepository> implements IHasDiscriminatorValue {
 
 
     @Autowired
@@ -26,11 +26,11 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
     public void setUp() {
         super.setUp();
 
-        entityToTest = new PlayerMoveAction();
+        entityToTest = new BasePlayerMove();
         listOfEntities.add(entityToTest);
 
 
-        PlayerMoveAction second = new PlayerMoveAction();
+        BasePlayerMove second = new BasePlayerMove();
         listOfEntities.add(second);
 
     }
@@ -50,7 +50,7 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
         dummy = unitRepository.save(dummy);
 
 
-        PlayerMoveAction action = repo.save(entityToTest);
+        BasePlayerMove action = repo.save(entityToTest);
 
         action.setCaster(dummy);
 
@@ -76,7 +76,7 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
         dummy = unitRepository.save(dummy);
 
 
-        PlayerMoveAction action = repo.save(entityToTest);
+        BasePlayerMove action = repo.save(entityToTest);
 
         action.setTarget(dummy);
 
@@ -100,7 +100,7 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<PlayerMoveActio
         dummy = unitRepository.save(dummy);
 
 
-        PlayerMoveAction action = repo.save(entityToTest);
+        BasePlayerMove action = repo.save(entityToTest);
 
         action.setCaster(dummy);
 

@@ -128,6 +128,14 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClass.addSkill(skill);
 
+
+        Skill timeTravelCompleteRoundSkill = skillRepository.findByName("Zurückgesetzt");
+
+        if(timeTravelCompleteRoundSkill==null) throw new Exception("Could not found Zurückgesetzt!");
+
+
+        characterClass.addSkill(timeTravelCompleteRoundSkill);
+
         Skill moveSkill = skillRepository.findByName("Bewegung Schweinebacke!");
 
         if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");

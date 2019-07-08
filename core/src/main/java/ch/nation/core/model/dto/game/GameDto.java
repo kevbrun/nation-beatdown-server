@@ -2,6 +2,7 @@ package ch.nation.core.model.dto.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.catalina.User;
@@ -29,7 +30,8 @@ public class GameDto extends NamedObjectAbstractDto {
     @JsonProperty("next_player")
     private String nextPlayerUuid;
 
-
+    @JsonProperty("moves")
+    private List<AbstractPlayerMoveDto> actions;
 
     public GameDto() {
         super();
@@ -43,6 +45,14 @@ public class GameDto extends NamedObjectAbstractDto {
         return "games";
     }
 
+
+    public List<AbstractPlayerMoveDto> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<AbstractPlayerMoveDto> actions) {
+        this.actions = actions;
+    }
 
     public List<UserDto> getUsers() {
         return users;

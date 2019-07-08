@@ -1,7 +1,6 @@
 package ch.nation.dbservice.dummyImporter.data.skills;
 
-import ch.nation.core.model.Enums.ActionShape;
-import ch.nation.core.model.Enums.Target;
+import ch.nation.core.model.Enums.*;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.skills.ActionArea;
 import ch.nation.dbservice.entities.skills.MoveSkill;
@@ -9,6 +8,7 @@ import ch.nation.dbservice.entities.skills.SelfMoveSkill;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
+import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
@@ -33,6 +33,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createNahkampfSkill();
         createMoveOtherSkill();
         createFernkampfSkill();
+        createTimeTravelSkill();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -61,6 +62,34 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
 
        entities.add(skill);
+    }
+
+
+    private void createTimeTravelSkill() throws Exception {
+        Skill timeTravelSkill = new Skill();
+        timeTravelSkill.setName("Zurückgesetzt");
+        timeTravelSkill.setDescription("Setze die Figur um einen Zug zurück");
+        timeTravelSkill.setCost(30);
+        timeTravelSkill.setCooldown(5);
+        timeTravelSkill.setSkillBarOrder(1);
+        timeTravelSkill.setTarget(Target.ANY_SINGLE);
+        ActionArea actionArea = new ActionArea();
+        actionArea.setSizeInXAxis(4);
+        actionArea.setSizeInXAxis(4);
+        actionArea.setShape(ActionShape.CIRCLE);
+        timeTravelSkill.setActionArea(actionArea);
+
+
+      timeTravelSkill=  skillRepository.save(timeTravelSkill);
+
+       SkillEffect effect= skillEffectRepository.findByName("Runde zurücksetzen");
+        if(effect==null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+
+        timeTravelSkill.addSkillEffect(effect);
+
+        skillRepository.save(timeTravelSkill);
+
+
     }
 
     private void createMoveOtherSkill() throws Exception {

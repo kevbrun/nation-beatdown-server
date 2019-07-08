@@ -2,7 +2,7 @@ package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
-import ch.nation.dbservice.entities.moves.PlayerMoveAction;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Table(name="GAME")
 @Entity(name="GAME")
@@ -57,7 +56,7 @@ public class Game extends AbstractNationEntityBase {
             orphanRemoval = true
     )
     @RestResource(path = "moves", rel="moves")
-    private List<PlayerMoveAction> moves = new ArrayList<>();
+    private List<BasePlayerMove> moves = new ArrayList<>();
 
 
     public Game() {
@@ -72,7 +71,7 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-    public Game(List<User> users, int round, GameStatus status, List<PlayerMoveAction> moves) {
+    public Game(List<User> users, int round, GameStatus status, List<BasePlayerMove> moves) {
         this.users = users;
         this.round = round;
         this.status = status;
@@ -141,12 +140,22 @@ public class Game extends AbstractNationEntityBase {
         this.nextPlayerUuid = nextPlayerUuid;
     }
 
-    public List<PlayerMoveAction> getMoves(){
+    public List<BasePlayerMove> getMoves(){
         if(moves==null)moves = new ArrayList<>();
         return moves;
     }
 
-    public void setMoves(List<PlayerMoveAction> moves) {
+    public void setMoves(List<BasePlayerMove> moves) {
+        if (this.moves == null) {
+            this.moves = moves;
+        } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.moves.clear();
+            if(moves != null){
+                this.moves.addAll(moves);
+            }
+        }
+
+
         this.moves = moves;
     }
 

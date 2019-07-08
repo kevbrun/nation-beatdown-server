@@ -5,7 +5,7 @@ import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.moves.PlayerMoveAction;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -59,6 +59,7 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
 
 
+
     @ManyToMany(mappedBy = "skills",fetch=FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
@@ -87,7 +88,7 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
                     cascade = CascadeType.ALL,
                     orphanRemoval = true
             )
-    private List<PlayerMoveAction> actions = new ArrayList<>();
+    private List<BasePlayerMove> actions = new ArrayList<>();
 
 
 
@@ -187,11 +188,11 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     }
 
 
-    public List<PlayerMoveAction> getActions() {
+    public List<BasePlayerMove> getActions() {
         return actions;
     }
 
-    public void setActions(List<PlayerMoveAction> actions) {
+    public void setActions(List<BasePlayerMove> actions) {
         this.actions = actions;
     }
 

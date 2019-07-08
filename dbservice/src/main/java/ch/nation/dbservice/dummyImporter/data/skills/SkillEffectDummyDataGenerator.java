@@ -35,6 +35,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
    createSelfMoveEffect();
    createMoveEffect();
     createTimeReversalSkill();
+        createCompleteRoundSkillEffect();
 
 
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
@@ -112,5 +113,17 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     }
 
 
+    private void createCompleteRoundSkillEffect(){
+        TimeReversalSkillEffect timeReversalSkillEffect = new TimeReversalSkillEffect();
+        timeReversalSkillEffect.setName("Runde zurücksetzen");
+        timeReversalSkillEffect.setDefinition(TimeReversakSkillEffectRoundDefinition.COMPLETE_ROUND);
+        timeReversalSkillEffect.setCountOfSkillEffectToReverse(1);
+        timeReversalSkillEffect.setEffectTarget(SkillEffectTarget.TARGET);
+        timeReversalSkillEffect.setApplyCalculationOnStat(StatType.NONE);
+        timeReversalSkillEffect.setTypeUsedForCalculation(StatType.NONE);
+
+        skillEffectRepository.save(timeReversalSkillEffect);
+
+    }
 
 }

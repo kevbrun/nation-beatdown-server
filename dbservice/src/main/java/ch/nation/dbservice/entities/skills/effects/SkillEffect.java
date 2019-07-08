@@ -4,6 +4,7 @@ import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,6 +47,8 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
     private List<Skill> skills;
 
 
+    @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<BasePlayerMove> playerMoves;
 
 
 
@@ -107,6 +110,13 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
     }
 
 
+    public List<BasePlayerMove> getPlayerMoves() {
+        return playerMoves;
+    }
+
+    public void setPlayerMoves(List<BasePlayerMove> playerMoves) {
+        this.playerMoves = playerMoves;
+    }
 
     @Override
     public String toString() {

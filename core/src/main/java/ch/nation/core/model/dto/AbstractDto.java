@@ -4,9 +4,9 @@ import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
 import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.dto.game.GameDto;
-import ch.nation.core.model.dto.move.MoveSkillValueDto;
-import ch.nation.core.model.dto.move.PlayerMoveActionDto;
-import ch.nation.core.model.dto.move.StatMoveValueDtoDto;
+import ch.nation.core.model.dto.move.BasePlayerMoveDto;
+import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
+import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.prejudices.StatPrejudiceDto;
 import ch.nation.core.model.dto.prejudices.triggers.CharacteristicPrejudiceTriggerDto;
 import ch.nation.core.model.dto.skills.SkillDto;
@@ -32,9 +32,9 @@ import java.io.Serializable;
 
 
         //MOVES
-        @JsonSubTypes.Type(value = MoveSkillValueDto.class, name = "MoveSkillValue"),
-        @JsonSubTypes.Type(value = StatMoveValueDtoDto.class, name = "StatMoveValue"),
-        @JsonSubTypes.Type(value = PlayerMoveActionDto.class, name = "PlayerMoveAction"),
+        @JsonSubTypes.Type(value = StatSkillPlayerMoveSkillValueDto.class, name = "StatPlayerMoveValue"),
+        @JsonSubTypes.Type(value = MoveSkillEffectPlayerMoveSkillValueDto.class, name = "MoveSkillPlayerMoveValue"),
+        @JsonSubTypes.Type(value = BasePlayerMoveDto.class, name = "BasePlayerMove"),
 
 
         //PREJUDICES
@@ -44,7 +44,6 @@ import java.io.Serializable;
         //TRIGGERS
         @JsonSubTypes.Type(value = CharacteristicPrejudiceTriggerDto.class, name = "CharacteristicPrejudiceTrigger"),
         @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice"),
-
 
 
         //SKILL
@@ -64,7 +63,6 @@ import java.io.Serializable;
 
         //NATION
         @JsonSubTypes.Type(value = NationDto.class, name = "Nation"),
-
 
         //USER
         @JsonSubTypes.Type(value = UserDto.class, name = "User")

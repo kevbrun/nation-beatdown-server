@@ -2,15 +2,13 @@ package ch.nation.dbservice.entities.units;
 
 import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
-import ch.nation.dbservice.entities.moves.PlayerMoveAction;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,14 +51,14 @@ public class Unit extends NamedEntityBase {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PlayerMoveAction> source = new ArrayList<>();
+    private List<BasePlayerMove> source = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "target",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PlayerMoveAction> target = new ArrayList<>();
+    private List<BasePlayerMove> target = new ArrayList<>();
 
 
     @ManyToOne
@@ -74,7 +72,7 @@ public class Unit extends NamedEntityBase {
 
     }
 
-    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isUnitDead, EmeddableVector3 position, UnitAssets unitAssets, List<PlayerMoveAction> source, List<PlayerMoveAction> target) {
+    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isUnitDead, EmeddableVector3 position, UnitAssets unitAssets, List<BasePlayerMove> source, List<BasePlayerMove> target) {
         super(name, description);
         this.characterClass = characterClass;
         this.state = state;
@@ -139,24 +137,24 @@ public class Unit extends NamedEntityBase {
         this.unitAssets = unitAssets;
     }
 
-    public List<PlayerMoveAction> getSource() {
+    public List<BasePlayerMove> getSource() {
 
         if(source==null) source = new ArrayList<>();
 
         return source;
     }
 
-    public void setSource(List<PlayerMoveAction> source) {
+    public void setSource(List<BasePlayerMove> source) {
         this.source = source;
     }
 
-    public List<PlayerMoveAction> getTarget() {
+    public List<BasePlayerMove> getTarget() {
 
         if(target==null) target = new ArrayList<>();
         return target;
     }
 
-    public void setTarget(List<PlayerMoveAction> target) {
+    public void setTarget(List<BasePlayerMove> target) {
         this.target = target;
     }
 
@@ -197,7 +195,7 @@ public class Unit extends NamedEntityBase {
 
     //JPA
 
-    public void addCasterMovement(PlayerMoveAction action){
+    public void addCasterMovement(BasePlayerMove action){
         if(!getSource().add(action)){
             getSource().add(action);
             action.setCaster(this);
@@ -205,7 +203,7 @@ public class Unit extends NamedEntityBase {
             }
     }
 
-    public void addTargetMovement(PlayerMoveAction action){
+    public void addTargetMovement(BasePlayerMove action){
         if(!getTarget().add(action)){
             getTarget().add(action);
             action.setTarget(this);
@@ -213,14 +211,14 @@ public class Unit extends NamedEntityBase {
     }
 
 
-    public void removeCasterMovement(PlayerMoveAction action){
+    public void removeCasterMovement(BasePlayerMove action){
         if(getSource().contains(action)){
             getSource().remove(action);
             action.setCaster(null);
         }
     }
 
-    public void removeTargetMovement(PlayerMoveAction action){
+    public void removeTargetMovement(BasePlayerMove action){
         if(getTarget().contains(action)){
             getTarget().remove(action);
             action.setTarget(null);
