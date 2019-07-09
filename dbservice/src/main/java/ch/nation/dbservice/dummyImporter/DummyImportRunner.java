@@ -1,12 +1,15 @@
 package ch.nation.dbservice.dummyImporter;
 
 import ch.nation.dbservice.dummyImporter.data.clazzes.CharacterClassDummyGenerator;
+import ch.nation.dbservice.dummyImporter.data.moves.MoveDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.players.PlayerClassDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillEffectDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.units.UnitsClassDummyGenerator;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
+import ch.nation.dbservice.repositories.game.GameRepository;
+import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 import ch.nation.dbservice.repositories.units.UnitRepository;
@@ -27,15 +30,19 @@ public class DummyImportRunner  implements ApplicationRunner {
     private final SkillEffectRepository skillEffectRepository;
     private final SkillRepository skillRepository;
     private final UserRepository userRepository;
+    private final GameRepository gameRepository;
+    private final PlayerMoveRepository playerMoveRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository) {
+    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository) {
         this.unitRepository = unitRepository;
         this.characterClassRepository = characterClassRepository;
         this.skillEffectRepository = skillEffectRepository;
         this.skillRepository = skillRepository;
         this.userRepository = userRepository;
+        this.gameRepository = gameRepository;
+        this.playerMoveRepository = playerMoveRepository;
     }
 
 
@@ -47,16 +54,11 @@ public class DummyImportRunner  implements ApplicationRunner {
         CharacterClassDummyGenerator characterClassDummyGenerator = new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
         UnitsClassDummyGenerator unitsClassDummyGenerator = new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
         PlayerClassDummyGenerator playerClassDummyGenerator = new PlayerClassDummyGenerator(userRepository,unitRepository);
+        MoveDummyGenerator moveDummyGenerator = new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository);
 
 
         LOGGER.info("FINISH MIGRATING DATA");
     }
-
-
-    private void createNahkampfSkillEffect(){
-
-   }
-
 
 
     private void LoadCharacterClasses(){

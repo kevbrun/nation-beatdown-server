@@ -8,8 +8,7 @@ import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -25,6 +24,7 @@ import java.util.List;
 )
 @DiscriminatorColumn(name="SKILL_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE_SKILL")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
 
@@ -82,12 +82,14 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
 
 
-    @OneToMany
-            (
-                    mappedBy = "skill",
-                    cascade = CascadeType.ALL,
-                    orphanRemoval = true
-            )
+    @OneToMany(
+            mappedBy = "skill",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    @JsonIgnore
+    @RestResource(exported = false  )
     private List<BasePlayerMove> actions = new ArrayList<>();
 
 
@@ -193,7 +195,19 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     }
 
     public void setActions(List<BasePlayerMove> actions) {
-        this.actions = actions;
+        LOGGER.info("Execute custom setter");
+        if (this.actions == null) {
+            this.actions = actions;
+        } else if(this.actions != actions) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.actions.clear();
+            if(actions != null){
+                this.actions.addAll(actions);
+            }
+        }
+
+
+
+
     }
 
     @Override

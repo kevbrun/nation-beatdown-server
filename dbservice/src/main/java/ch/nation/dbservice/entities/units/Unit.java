@@ -5,6 +5,7 @@ import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -49,15 +50,23 @@ public class Unit extends NamedEntityBase {
     @OneToMany(
             mappedBy = "caster",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
-    private List<BasePlayerMove> source = new ArrayList<>();
+    @RestResource(exported = false)
+    @JsonProperty("caster")
+    @JsonManagedReference(value="unit-caster")
+    private List<BasePlayerMove> caster = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "target",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
+    @RestResource(exported = false)
+    @JsonProperty("target")
+    @JsonManagedReference(value = "unit-target")
     private List<BasePlayerMove> target = new ArrayList<>();
 
 
@@ -79,7 +88,7 @@ public class Unit extends NamedEntityBase {
         this.UnitIsDead = isUnitDead;
         this.position = position;
         this.unitAssets = unitAssets;
-        this.source = source;
+        this.caster = source;
         this.target = target;
     }
 
@@ -129,6 +138,8 @@ public class Unit extends NamedEntityBase {
     }
 
     public UnitAssets getUnitAssets() {
+        LOGGER.info("Execute custom setter");
+
         if(unitAssets==null)unitAssets = new UnitAssets();
         return unitAssets;
     }
@@ -137,15 +148,27 @@ public class Unit extends NamedEntityBase {
         this.unitAssets = unitAssets;
     }
 
-    public List<BasePlayerMove> getSource() {
+    public List<BasePlayerMove> getCaster() {
 
-        if(source==null) source = new ArrayList<>();
+        if(caster ==null) caster = new ArrayList<>();
 
-        return source;
+        return caster;
     }
 
-    public void setSource(List<BasePlayerMove> source) {
-        this.source = source;
+    public void setCaster(List<BasePlayerMove> caster) {
+        LOGGER.info("Execute custom setter");
+
+        if (this.caster == null) {
+            this.caster = caster;
+        } else if(this.caster != caster) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.caster.clear();
+            if(caster != null){
+                this.caster.addAll(caster);
+            }
+        }
+
+
+
     }
 
     public List<BasePlayerMove> getTarget() {
@@ -155,7 +178,18 @@ public class Unit extends NamedEntityBase {
     }
 
     public void setTarget(List<BasePlayerMove> target) {
-        this.target = target;
+
+        if (this.target == null) {
+            this.target = target;
+        } else if(this.target != target) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.target.clear();
+            if(target != null){
+                this.target.addAll(target);
+            }
+        }
+
+
+
     }
 
 
@@ -182,22 +216,22 @@ public class Unit extends NamedEntityBase {
                 state == unit.state &&
                 Objects.equals(position, unit.position) &&
                 Objects.equals(unitAssets, unit.unitAssets) &&
-                Objects.equals(source, unit.source) &&
+                Objects.equals(caster, unit.caster) &&
                 Objects.equals(target, unit.target);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), characterClass, state, UnitIsDead, position, unitAssets, source, target);
+        return Objects.hash(super.hashCode(), characterClass, state, UnitIsDead, position, unitAssets, caster, target);
     }
 
 
     //JPA
 
     public void addCasterMovement(BasePlayerMove action){
-        if(!getSource().add(action)){
-            getSource().add(action);
+        if(!getCaster().add(action)){
+            getCaster().add(action);
             action.setCaster(this);
 
             }
@@ -212,8 +246,8 @@ public class Unit extends NamedEntityBase {
 
 
     public void removeCasterMovement(BasePlayerMove action){
-        if(getSource().contains(action)){
-            getSource().remove(action);
+        if(getCaster().contains(action)){
+            getCaster().remove(action);
             action.setCaster(null);
         }
     }

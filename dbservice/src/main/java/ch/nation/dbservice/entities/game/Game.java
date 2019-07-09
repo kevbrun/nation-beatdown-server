@@ -4,6 +4,8 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -52,10 +54,12 @@ public class Game extends AbstractNationEntityBase {
 
     @OneToMany(
             mappedBy = "game",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = false,
+            fetch = FetchType.LAZY
     )
     @RestResource(path = "moves", rel="moves")
+    @JsonProperty("moves")
+ //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> moves = new ArrayList<>();
 
 
@@ -86,6 +90,8 @@ public class Game extends AbstractNationEntityBase {
     }
 
     public void setUsers(List<User> users) {
+        LOGGER.info("Execute custom setter");
+
         if (this.users == null) {
             this.users = users;
         } else if(this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
@@ -96,7 +102,7 @@ public class Game extends AbstractNationEntityBase {
         }
 
 
-        this.users = users;
+   //     this.users = users;
     }
 
     public int getRound() {
@@ -141,11 +147,14 @@ public class Game extends AbstractNationEntityBase {
     }
 
     public List<BasePlayerMove> getMoves(){
+        LOGGER.info("Execute custom getter");
+
         if(moves==null)moves = new ArrayList<>();
         return moves;
     }
 
     public void setMoves(List<BasePlayerMove> moves) {
+        LOGGER.info("Execute custom setter");
         if (this.moves == null) {
             this.moves = moves;
         } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
@@ -156,7 +165,7 @@ public class Game extends AbstractNationEntityBase {
         }
 
 
-        this.moves = moves;
+     //   this.moves = moves;
     }
 
     @Override
@@ -210,6 +219,10 @@ public class Game extends AbstractNationEntityBase {
             user.addGame(this);
 
 
+        }
+
+        for(BasePlayerMove move : moves){
+            move.setGame(this);
         }
 
 

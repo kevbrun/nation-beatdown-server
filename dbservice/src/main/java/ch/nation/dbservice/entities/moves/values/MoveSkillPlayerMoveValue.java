@@ -5,10 +5,11 @@ import ch.nation.dbservice.entities.units.EmeddableVector3;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @DiscriminatorValue("MOVE")
 @Entity(name="PLAYER_MOVE_SKILL_VALUE")
-public class MoveSkillPlayerMoveValue extends AbstractBasePlayerMoveValue implements IDiscrimantorValue {
+public class MoveSkillPlayerMoveValue extends BasePlayerMoveValue implements IDiscrimantorValue {
 
     @JsonProperty("source")
     @Embedded
@@ -48,5 +49,30 @@ public class MoveSkillPlayerMoveValue extends AbstractBasePlayerMoveValue implem
 
     public void setTargetPosition(EmeddableVector3 targetPosition) {
         this.targetPosition = targetPosition;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MoveSkillPlayerMoveValue)) return false;
+        if (!super.equals(o)) return false;
+        MoveSkillPlayerMoveValue that = (MoveSkillPlayerMoveValue) o;
+        return Objects.equals(sourcePosition, that.sourcePosition) &&
+                Objects.equals(targetPosition, that.targetPosition);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), sourcePosition, targetPosition);
+    }
+
+    @Override
+    public String toString() {
+        return "MoveSkillPlayerMoveValue{" +
+                "sourcePosition=" + sourcePosition +
+                ", targetPosition=" + targetPosition +
+                "} " + super.toString();
     }
 }

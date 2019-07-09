@@ -16,6 +16,8 @@ spring:
       ddl-auto: create
  #     ddl-auto: create-drop
     show-sql: true
+    jdbc:
+      time_zone: UTC+2
   data:
     rest:
       #defaultMediaType: application/json+hal
@@ -26,6 +28,7 @@ spring:
       org.hibernate: DEBUG
       org.springframework.orm.jpa: INFO
       org.springframework.transaction: DEBUG
+      org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 
 server:
   #port: 0
@@ -36,7 +39,4 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-
-
-
 

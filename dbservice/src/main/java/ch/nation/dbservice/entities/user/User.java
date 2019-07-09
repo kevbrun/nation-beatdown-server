@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.user;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.game.Game;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,12 +41,13 @@ public class User extends NamedEntityBase implements Serializable {
     @RestResource(path = "games", rel="games")
     private List<Game> games;
 
-
-
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @RestResource(path = "units", rel="units")
     private List<Unit> units = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @RestResource(path = "moves", rel="moves")
+    private List<BasePlayerMove> playerMoves = new ArrayList<>();
 
     public User() {
 
@@ -62,6 +64,26 @@ public class User extends NamedEntityBase implements Serializable {
         this.isAdmin = isAdmin;
         this.nation = nation;
         this.games = games;
+    }
+
+    public List<BasePlayerMove> getPlayerMoves() {
+        return playerMoves;
+    }
+
+    public void setPlayerMoves(List<BasePlayerMove> playerMoves) {
+        if (this.playerMoves == null) {
+            this.playerMoves = playerMoves;
+        } else if(this.playerMoves != playerMoves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.playerMoves.clear();
+            if(playerMoves != null){
+                this.playerMoves.addAll(playerMoves);
+            }
+        }
+
+
+
+
+
     }
 
     public String getPassword() {

@@ -3,30 +3,32 @@ package ch.nation.dbservice.entities.moves;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.moves.values.AbstractBasePlayerMoveValue;
+import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import ch.nation.dbservice.entities.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity(name="PLAYER_MOVES")
 @Table(name="PLAYER_MOVES")
 @Transactional
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrimantorValue {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id")
-    @RestResource(path = "game", rel="game")
+    @RestResource(path = "games", rel="games",exported = false)
     @JsonProperty("game")
+    @JsonIgnore
     private Game game;
 
 
@@ -34,30 +36,36 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     private int round;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     @JsonProperty("user")
+    @RestResource(path = "users", rel="users",exported = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "caster_id")
     @JsonProperty("caster")
+    @RestResource(path = "caster", rel="caster",exported = false)
+    @JsonBackReference(value = "unit-caster")
     private Unit caster;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "target_id")
-    @JsonProperty("target")
+    @RestResource(path = "target", rel="target",exported = false)
+    @JsonBackReference(value = "unit-target")
     private Unit target;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="skill_id")
     @JsonProperty("skill")
+    @RestResource(path = "skills", rel="skills",exported = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Skill skill;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty("effect_values")
     @RestResource(path = "values",rel = "values",exported = false)
-    private List<AbstractBasePlayerMoveValue> appliedEffects;
+    private List<BasePlayerMoveValue> appliedEffects = new ArrayList<>();
 
 
 
@@ -67,13 +75,22 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
 
-    public List<AbstractBasePlayerMoveValue> getAppliedEffects() {
+    public List<BasePlayerMoveValue> getAppliedEffects() {
         return appliedEffects;
     }
 
-    public void setAppliedEffects(List<AbstractBasePlayerMoveValue> appliedEffects) {
+    public void setAppliedEffects(List<BasePlayerMoveValue> appliedEffects) {
+        LOGGER.info("Execute custom setter");
 
-        this.appliedEffects = appliedEffects;
+        if (this.appliedEffects == null) {
+            this.appliedEffects = appliedEffects;
+        } else if(this.appliedEffects != appliedEffects) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.appliedEffects.clear();
+            if(appliedEffects != null){
+                this.appliedEffects.addAll(appliedEffects);
+            }
+        }
+
     }
 
     public Game getGame() {
@@ -106,7 +123,7 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     public void setCaster(Unit caster) {
 
-        LOGGER.info("Custom set Method called");
+   /**     LOGGER.info("Custom set Method called");
 
         if(caster!=null) {
 
@@ -122,10 +139,12 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
                 caster.addCasterMovement(this);
             }
 
-        }   else if(caster!=null && this.caster.getSource()!=null){
+        }   else if(caster!=null && this.caster.getCaster()!=null){
             this.caster.removeCasterMovement(this);
             this.caster=null;
-        }
+        }**/
+
+   this.caster = caster;
 
 
     }
@@ -135,7 +154,30 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
     public void setTarget(Unit target) {
-        this.target = target;
+
+        LOGGER.info("Custom set Method called");
+
+     /**   if(target!=null) {
+
+
+            if (this.target != null) {
+                this.target.removeCasterMovement(this);
+
+
+                this.target = caster;
+                target.addCasterMovement(this);
+            } else {
+                this.target = caster;
+                target.addCasterMovement(this);
+            }
+
+        }   else if(target!=null && this.target.getTarget()!=null){
+            this.target.removeCasterMovement(this);
+            this.target=null;
+        }**/
+     this.target = target;
+
+
     }
 
     public Skill getSkill() {

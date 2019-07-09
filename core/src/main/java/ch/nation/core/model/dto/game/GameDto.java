@@ -6,6 +6,7 @@ import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.catalina.User;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.ArrayList;
 import java.util.List;

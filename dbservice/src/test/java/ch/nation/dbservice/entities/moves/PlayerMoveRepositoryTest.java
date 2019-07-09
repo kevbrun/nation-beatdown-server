@@ -110,7 +110,7 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
 
         action.setCaster(null);
         Assert.assertTrue(action.getCaster()==null);
-        Assert.assertTrue(dummy.getSource().size()==0);
+        Assert.assertTrue(dummy.getCaster().size()==0);
     }
 
 

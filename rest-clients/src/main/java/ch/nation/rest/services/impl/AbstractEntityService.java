@@ -112,9 +112,9 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
 
         //TODO WHY binded client?
-     //   TResult result = (TResult) getBindedClient(object).create(object, projection).getContent();
-        TResult result = (TResult) getDefaultClient().create(object, projection).getContent();
-
+       TResult result = (TResult) getBindedClient(object).create(object, projection).getContent();
+    //    TResult result = (TResult) getDefaultClient().create(object, projection).getContent();
+//
         if (result == null) {
             LOGGER.info(String.format("Could not create | payload: %s!", object.toString()));
             throw new Exception("Internal error");
@@ -183,7 +183,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         if (!validateDeleteParameter(uuid))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
 
-        Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
+          Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
 
 
 
@@ -195,8 +195,6 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
             Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
             if(childObject!=null) builder.append(childObject.getLink(Link.REL_SELF).getHref()).append("\n");
-
-
 
         }
 
@@ -217,7 +215,76 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
     }
 
-    public Optional<?> createEntityWithChildren(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+    public Optional<TResult> createAssociation(String uuid, AbstractDto child, String resourceName,QueryProjection projection){
+
+        Resource<TResult> resultResource=null;
+        ResponseEntity resultEntity=null;
+        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, child.getClass().getName()));
+        if (!validateDeleteParameter(uuid))
+            throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
+
+        Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
+        Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
+        if(childObject!=null) {
+            String childLink = childObject.getLink(Link.REL_SELF).getHref().toString();
+
+            resultEntity = GetBaseClient().createAssocationsPut(uuid, resourceName, childLink, projection);
+
+            resultResource = GetBaseClient().findById(uuid,QueryProjection.max);
+
+            return Optional.of(resultResource.getContent());
+        }
+        LOGGER.info(String.format("FINISH | Creating assocation | Payload: %s | Child Type: %s", uuid, child.getClass().getName()));
+        return Optional.empty();
+    }
+
+    /**  public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
+        ResponseEntity<Resource<TResult>> resultEntity = null;
+        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
+        if (!validateDeleteParameter(uuid))
+            throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
+
+        Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
+
+        Resources<AbstractDto> fetchedChildren = (Resources<AbstractDto>) getChildren(uuid,children.get(0).ResourceCollectionName(),QueryProjection.min);
+        StringBuilder builder = new StringBuilder();
+
+        for (AbstractDto child:
+                children) {
+
+            Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
+            if(childObject!=null) builder.append(childObject.getLink(Link.REL_SELF).getHref()).append("\n");
+
+        }
+
+
+        if(fetchedChildren.getContent()==null){
+
+
+            LOGGER.debug("New relation must be created!");
+            resultEntity =   getBindedClient((AbstractDto) parent.getContent()).createAssocationsPost(uuid,children.get(0).ResourceCollectionName(),builder.toString(),QueryProjection.max);
+
+
+
+        }else if(fetchedChildren.getContent()!=null && fetchedChildren.getContent() instanceof List ){
+
+
+
+        }
+            else {
+            resultEntity = getBindedClient((AbstractDto) parent.getContent()).createAssocationsPut(uuid,children.get(0).ResourceCollectionName(),builder.toString(),QueryProjection.max);
+        }
+
+
+
+
+        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
+
+        return Optional.of(resultEntity.getBody().getContent());
+    }**/
+
+
+        public Optional<?> createEntityWithChildren(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
         Optional<TResult> parentResult= create(parent,projection);
         if(!parentResult.isPresent()) throw new Exception("Could not create parent node!");
 
@@ -266,10 +333,6 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
        return results;
     }
 
-    /**   protected boolean createSingleAssociation(Resource<AbstractDto> parentObject, Resource<AbstractDto> child) {
-           return createSingleAssociation(parentObject,child,QueryProjection.def);
-
-       }**/
 
 
            protected boolean validateUuid(String uuid) {
