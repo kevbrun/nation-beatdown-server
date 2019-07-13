@@ -1,23 +1,27 @@
 package ch.nation.rest.controller.impl.game;
 
+import ch.nation.core.model.Enums.GameStatus;
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
 import ch.nation.rest.services.impl.games.GameResourceServiceImpl;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/games")
-public class GameNamedResourceController extends AbstractNamedResourceGameLogicController<GameDto,GameDto> {
+public class GameResourceController extends AbstractNamedResourceGameLogicController<GameDto,GameDto> {
 
         private final UserResourceServiceImpl userService;
 
-        public GameNamedResourceController(final GameResourceServiceImpl service, UserResourceServiceImpl userService) {
+        public GameResourceController(final GameResourceServiceImpl service, UserResourceServiceImpl userService) {
         super(service);
             this.userService = userService;
         }
@@ -53,10 +57,27 @@ public class GameNamedResourceController extends AbstractNamedResourceGameLogicC
 
     }
 
-    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH},consumes = "application/json",path = "/logic/{gameUuid}")
-    public ResponseEntity endTurn(@PathVariable("gameUuid") String gameUuid, @RequestBody GameDto gameState){
-            return ((GameResourceServiceImpl)service).endTurn(gameUuid,gameState);
+
+    @RequestMapping(method = RequestMethod.POST,path = {"/search/{userUuid}"})
+    public ResponseEntity  getGamesByUserAndGameStatus(@PathVariable("userUuid") String userUuid, @RequestParam("status")GameStatus status, @RequestParam(value = "projection",required = false)QueryProjection projection){
+            if(userUuid==null) return ResponseEntity.notFound().build();
+            if(status.equals(GameStatus.NONE)) return ResponseEntity.notFound().build();
+
+             Optional<?> response =null;
+
+            if(projection==null){
+
+                response =((GameResourceServiceImpl)service).GetGamesByUserAndStatus(userUuid,status);
+
+            }else{
+              response=  ((GameResourceServiceImpl)service).GetGamesByUserAndStatus(userUuid,status,projection);
             }
+            if(!response.isPresent()) return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+            return new ResponseEntity<>(response.get(),HttpStatus.OK);
+
+
+    }
+
 
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")

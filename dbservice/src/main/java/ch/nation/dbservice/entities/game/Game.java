@@ -4,8 +4,6 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -35,8 +33,8 @@ public class Game extends AbstractNationEntityBase {
 
     @Enumerated(EnumType.STRING)
     @JsonProperty("status")
-    @Column(name = "stats")
-    private GameStatus status;
+    @Column(name = "status")
+    private GameStatus gameStatus = GameStatus.NONE;
 
 
     @JsonProperty("current_player")
@@ -68,17 +66,17 @@ public class Game extends AbstractNationEntityBase {
 
     }
 
-    public Game(List<User> users, int round, GameStatus status) {
+    public Game(List<User> users, int round, GameStatus gameStatus) {
         this.users = users;
         this.round = round;
-        this.status = status;
+        this.gameStatus = gameStatus;
     }
 
 
-    public Game(List<User> users, int round, GameStatus status, List<BasePlayerMove> moves) {
+    public Game(List<User> users, int round, GameStatus gameStatus, List<BasePlayerMove> moves) {
         this.users = users;
         this.round = round;
-        this.status = status;
+        this.gameStatus = gameStatus;
         this.moves = moves;
     }
 
@@ -113,14 +111,13 @@ public class Game extends AbstractNationEntityBase {
         this.round = round;
     }
 
-    public GameStatus getStatus() {
-        return status;
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
-    public void setStatus(GameStatus status) {
-        this.status = status;
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
-
 
     public String getCurrentPlayerUuid() {
         return currentPlayerUuid;
@@ -173,7 +170,7 @@ public class Game extends AbstractNationEntityBase {
         return "game{" +
                 "users=" + users +
                 ", round=" + round +
-                ", status=" + status +
+                ", gameStatus=" + gameStatus +
                 "} " + super.toString();
     }
 
@@ -185,14 +182,14 @@ public class Game extends AbstractNationEntityBase {
         Game game = (Game) o;
         return round == game.round &&
                 Objects.equals(users, game.users) &&
-                status == game.status &&
+                gameStatus == game.gameStatus &&
                 Objects.equals(moves, game.moves);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), users, round, status, moves);
+        return Objects.hash(super.hashCode(), users, round, gameStatus, moves);
     }
 
 

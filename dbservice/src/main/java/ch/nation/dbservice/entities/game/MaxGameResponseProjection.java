@@ -20,7 +20,7 @@ public interface MaxGameResponseProjection extends TimestampProjection,Minimized
     @JsonProperty("round")
     public int getRound();
     @JsonProperty("status")
-    public GameStatus getStatus();
+    public GameStatus getGameStatus();
     @JsonProperty("users")
     List<MaxUserResponseProjection> getUsers();
     @JsonProperty("current_player")

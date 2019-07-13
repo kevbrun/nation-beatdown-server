@@ -15,7 +15,7 @@ public interface MinGameResponseProjection extends MinimizedEntityResponseProjec
     @JsonProperty("round")
     public int getRound();
     @JsonProperty("status")
-    public GameStatus getStatus();
+    public GameStatus getGameStatus();
     @JsonProperty("users")
     List<UserMinResponseProjection> getUsers();
     @JsonProperty("current_player")
