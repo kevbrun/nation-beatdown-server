@@ -4,13 +4,14 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Table(name="GAME")
 @Entity(name="GAME")
@@ -33,8 +34,8 @@ public class Game extends AbstractNationEntityBase {
 
     @Enumerated(EnumType.STRING)
     @JsonProperty("status")
-    @Column(name = "status")
-    private GameStatus gameStatus = GameStatus.NONE;
+    @Column(name = "status",nullable = false)
+    private GameStatus gameStatus = GameStatus.None;
 
 
     @JsonProperty("current_player")
@@ -59,6 +60,17 @@ public class Game extends AbstractNationEntityBase {
     @JsonProperty("moves")
  //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> moves = new ArrayList<>();
+
+
+
+    //ONE-TO-MANY????
+    @OneToMany   // unidirectional
+    @JoinTable(name="USER_GAME_RUNTIME_INFO",
+            joinColumns=@JoinColumn(name="GAME"),
+            inverseJoinColumns=@JoinColumn(name="GAME_INFO"))
+    @MapKeyJoinColumn(name="USER")
+    @JsonProperty("runtime")
+    private Map<User,GameUserRuntimeInfo> userGameUserRuntimeInfoMap;
 
 
     public Game() {
@@ -87,6 +99,8 @@ public class Game extends AbstractNationEntityBase {
         return users;
     }
 
+
+
     public void setUsers(List<User> users) {
         LOGGER.info("Execute custom setter");
 
@@ -101,6 +115,14 @@ public class Game extends AbstractNationEntityBase {
 
 
    //     this.users = users;
+    }
+
+    public Map<User, GameUserRuntimeInfo> getUserGameUserRuntimeInfoMap() {
+        return userGameUserRuntimeInfoMap;
+    }
+
+    public void setUserGameUserRuntimeInfoMap(Map<User, GameUserRuntimeInfo> userGameUserRuntimeInfoMap) {
+        this.userGameUserRuntimeInfoMap = userGameUserRuntimeInfoMap;
     }
 
     public int getRound() {
@@ -142,6 +164,7 @@ public class Game extends AbstractNationEntityBase {
     public void setNextPlayerUuid(String nextPlayerUuid) {
         this.nextPlayerUuid = nextPlayerUuid;
     }
+
 
     public List<BasePlayerMove> getMoves(){
         LOGGER.info("Execute custom getter");

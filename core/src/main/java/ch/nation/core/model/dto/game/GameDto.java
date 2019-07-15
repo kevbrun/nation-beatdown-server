@@ -4,12 +4,16 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.user.UserDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.catalina.User;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class GameDto extends NamedObjectAbstractDto {
 
@@ -34,11 +38,14 @@ public class GameDto extends NamedObjectAbstractDto {
     @JsonProperty("moves")
     private List<AbstractPlayerMoveDto> actions;
 
+    @JsonProperty("runtime")
+    private Map<String,GameUserRuntimeInfoDto> userGameUserRuntimeInfoMap;
+
     public GameDto() {
         super();
         users = new ArrayList<>();
         round = 1;
-        status = GameStatus.NONE;
+        status = GameStatus.None;
     }
 
     @Override
@@ -77,6 +84,15 @@ public class GameDto extends NamedObjectAbstractDto {
 
     public void setStatus(GameStatus status) {
         this.status = status;
+    }
+
+
+    public Map<String, GameUserRuntimeInfoDto> getUserGameUserRuntimeInfoMap() {
+        return userGameUserRuntimeInfoMap;
+    }
+
+    public void setUserGameUserRuntimeInfoMap(Map<String, GameUserRuntimeInfoDto> userGameUserRuntimeInfoMap) {
+        this.userGameUserRuntimeInfoMap = userGameUserRuntimeInfoMap;
     }
 
     public void addUser(UserDto userDto){

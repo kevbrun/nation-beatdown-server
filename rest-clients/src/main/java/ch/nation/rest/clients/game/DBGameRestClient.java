@@ -28,8 +28,8 @@ public interface DBGameRestClient extends DBRestServiceBaseInterface<GameDto,Gam
 
 
 
-    @RequestMapping(method = RequestMethod.GET,path="/{status}")
-    Resources<GameDto> GetGameByUserAndGameStatus(UserDto userDto, @PathVariable("status") GameStatus status, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    @RequestMapping(method = RequestMethod.GET,path="/search/findByUsers_IdAndGameStatus")
+    Resources<GameDto> GetGameByUserAndGameStatus(@RequestParam("uuid") String userUuid,@RequestParam("status") GameStatus status, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
 }

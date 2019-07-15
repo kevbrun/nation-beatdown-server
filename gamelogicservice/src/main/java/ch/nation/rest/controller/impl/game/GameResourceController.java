@@ -58,10 +58,10 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     }
 
 
-    @RequestMapping(method = RequestMethod.POST,path = {"/search/{userUuid}"})
+    @RequestMapping(method = RequestMethod.GET,path = {"/search/{userUuid}"})
     public ResponseEntity  getGamesByUserAndGameStatus(@PathVariable("userUuid") String userUuid, @RequestParam("status")GameStatus status, @RequestParam(value = "projection",required = false)QueryProjection projection){
             if(userUuid==null) return ResponseEntity.notFound().build();
-            if(status.equals(GameStatus.NONE)) return ResponseEntity.notFound().build();
+            if(status.equals(GameStatus.None)) return ResponseEntity.notFound().build();
 
              Optional<?> response =null;
 

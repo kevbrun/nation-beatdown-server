@@ -4,6 +4,7 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
+import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
 import ch.nation.rest.clients.factory.DBRestClientFactory;
@@ -17,10 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Timestamp;
+import java.util.*;
 
 
 @Service
@@ -43,6 +42,11 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
         if(!playerTwo.isPresent()) throw new Error("Player with uuid"+playerTwoUuid+"does not exist");
 
 
+
+        long considerationTime = 60* 5*1000;
+
+
+
         LOGGER.info("I start to create the game!");
         GameDto gameDto = new GameDto();
         gameDto.setName(playerOne.get().getName()+" vs "+playerTwo.get().getName());
@@ -50,7 +54,12 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
         gameDto.setFirstPlayerUuid(playerOneUuid);
         gameDto.setNextPlayerUuid(playerTwoUuid);
         gameDto.setCurrentPlayerUuid(playerOneUuid);
-        gameDto.setStatus(GameStatus.IN_PROGRESS);
+        gameDto.setStatus(GameStatus.InProgress);
+        Map<String,GameUserRuntimeInfoDto> runtimeInfoDtoMap =new HashMap<>();
+        runtimeInfoDtoMap.put(playerOne.get().getId(),new GameUserRuntimeInfoDto(considerationTime));
+        runtimeInfoDtoMap.put(playerTwo.get().getId(),new GameUserRuntimeInfoDto(considerationTime));
+
+
 
         Resource<GameDto> response = getDefaultClient().create(gameDto,projection);
 
@@ -83,10 +92,11 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
     @Override
     public Optional<Collection<GameDto>> GetGamesByUserAndStatus(String userUuid, GameStatus status, QueryProjection projection) {
         LOGGER.info(String.format("START | Get Game by player and state | User  %s | Status two %s", userUuid,status));
-        Optional<UserDto> user= userService.findById(userUuid,QueryProjection.min);
-        if(!user.isPresent()) throw new IllegalArgumentException("Player does not exist. UUid"+userUuid);
-        Resources<GameDto>  dto= ((DBGameRestClient)getDefaultClient()).GetGameByUserAndGameStatus(user.get(),status,QueryProjection.max);
-        if(dto==null) LOGGER.info("Could not find games for given status!");
+        Resources<GameDto>  dto= ((DBGameRestClient)getDefaultClient()).GetGameByUserAndGameStatus(userUuid,status,QueryProjection.max);
+        if(dto==null) {
+            LOGGER.info("Could not find games for given user or status! Empty List will be returned");
+            return Optional.of(new ArrayList<GameDto>());
+        }
         LOGGER.info(String.format("STOP | Get Game by player and state | User  %s | Status two %s", userUuid,status));
         return Optional.of(dto.getContent());
     }
