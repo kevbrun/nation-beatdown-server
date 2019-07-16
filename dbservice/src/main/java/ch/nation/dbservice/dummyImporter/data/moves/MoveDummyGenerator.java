@@ -2,6 +2,7 @@ package ch.nation.dbservice.dummyImporter.data.moves;
 
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.game.Game;
+import ch.nation.dbservice.entities.game.GameUserRuntimeInfo;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.moves.values.MoveSkillPlayerMoveValue;
@@ -9,6 +10,7 @@ import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.EmeddableVector3;
 import ch.nation.dbservice.entities.user.User;
 import ch.nation.dbservice.repositories.game.GameRepository;
+import ch.nation.dbservice.repositories.game.GameUserRuntimeRepository;
 import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.user.UserRepository;
@@ -22,14 +24,15 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
     private final PlayerMoveRepository playerMoveRepository;
     private final GameRepository gameRepository;
     private final SkillRepository skillRepository;
+    private final GameUserRuntimeRepository gameUserRuntimeRepository;
 
-
-    public MoveDummyGenerator(final UserRepository userRepository, final PlayerMoveRepository playerMoveRepository, GameRepository gameRepository, SkillRepository skillRepository) throws Exception {
+    public MoveDummyGenerator(final UserRepository userRepository, final PlayerMoveRepository playerMoveRepository, GameRepository gameRepository, SkillRepository skillRepository, GameUserRuntimeRepository gameUserRuntimeRepository) throws Exception {
         super();
         this.userRepository = userRepository;
         this.playerMoveRepository = playerMoveRepository;
         this.gameRepository = gameRepository;
         this.skillRepository = skillRepository;
+        this.gameUserRuntimeRepository = gameUserRuntimeRepository;
         handleCration();
     }
 
@@ -45,7 +48,16 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         game.setNextPlayerUuid(player.getId().toString());
         game.setFirstPlayerUuid(player.getId().toString());
 
+        List<GameUserRuntimeInfo> infos =new ArrayList<>();
+        GameUserRuntimeInfo info = new GameUserRuntimeInfo();
+
+        info.setPlayerUuid(player.getId().toString());
+        info.setConsiderationTime(6000);
+                infos.add(info);
+        game.setUserRuntimeInfos(infos);
+
        game = gameRepository.save(game);
+
 
 
        BasePlayerMove move = new BasePlayerMove();
@@ -59,8 +71,9 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         values.add(value);
         move.setAppliedEffects(values);
 
-       move= playerMoveRepository.save(move);
-       move.setGame(game);
+         move= playerMoveRepository.save(move);
+
+        // move.setGame(game);
         move.setUser(player);
         move.setCaster(player.getUnits().get(0));
         move.setCaster(player.getUnits().get(0));

@@ -33,7 +33,7 @@ public abstract class AbstractNamedResourceGameLogicController<TResult extends N
 
     }
 
-    public ResponseEntity findByName(@RequestParam("name") String name, QueryProjection projection){
+    public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection",required = false)QueryProjection projection){
         if (name == null | name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
 
         Optional<TResult> response;

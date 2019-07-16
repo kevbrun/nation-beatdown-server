@@ -50,27 +50,14 @@ public class Game extends AbstractNationEntityBase {
     @Column(name="next_player",nullable = false)
     private String nextPlayerUuid;
 
-
     @OneToMany(
             mappedBy = "game",
-            orphanRemoval = false,
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
     )
-    @RestResource(path = "moves", rel="moves")
-    @JsonProperty("moves")
- //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<BasePlayerMove> moves = new ArrayList<>();
-
-
-
-    //ONE-TO-MANY????
-    @OneToMany   // unidirectional
-    @JoinTable(name="USER_GAME_RUNTIME_INFO",
-            joinColumns=@JoinColumn(name="GAME"),
-            inverseJoinColumns=@JoinColumn(name="GAME_INFO"))
-    @MapKeyJoinColumn(name="USER")
-    @JsonProperty("runtime")
-    private Map<User,GameUserRuntimeInfo> userGameUserRuntimeInfoMap;
+    @RestResource(path = "user-runtimes", rel="user-runtimes",exported = true)
+    @JsonProperty("runtimes")
+    private List<GameUserRuntimeInfo> userRuntimeInfos = new ArrayList<>();
 
 
     public Game() {
@@ -85,12 +72,6 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-    public Game(List<User> users, int round, GameStatus gameStatus, List<BasePlayerMove> moves) {
-        this.users = users;
-        this.round = round;
-        this.gameStatus = gameStatus;
-        this.moves = moves;
-    }
 
     public List<User> getUsers() {
         if(users==null) users = new ArrayList<>();
@@ -99,31 +80,6 @@ public class Game extends AbstractNationEntityBase {
         return users;
     }
 
-
-
-    public void setUsers(List<User> users) {
-        LOGGER.info("Execute custom setter");
-
-        if (this.users == null) {
-            this.users = users;
-        } else if(this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
-            this.users.clear();
-            if(users != null){
-                this.users.addAll(users);
-            }
-        }
-
-
-   //     this.users = users;
-    }
-
-    public Map<User, GameUserRuntimeInfo> getUserGameUserRuntimeInfoMap() {
-        return userGameUserRuntimeInfoMap;
-    }
-
-    public void setUserGameUserRuntimeInfoMap(Map<User, GameUserRuntimeInfo> userGameUserRuntimeInfoMap) {
-        this.userGameUserRuntimeInfoMap = userGameUserRuntimeInfoMap;
-    }
 
     public int getRound() {
         return round;
@@ -166,27 +122,6 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-    public List<BasePlayerMove> getMoves(){
-        LOGGER.info("Execute custom getter");
-
-        if(moves==null)moves = new ArrayList<>();
-        return moves;
-    }
-
-    public void setMoves(List<BasePlayerMove> moves) {
-        LOGGER.info("Execute custom setter");
-        if (this.moves == null) {
-            this.moves = moves;
-        } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
-            this.moves.clear();
-            if(moves != null){
-                this.moves.addAll(moves);
-            }
-        }
-
-
-     //   this.moves = moves;
-    }
 
     @Override
     public String toString() {
@@ -206,13 +141,16 @@ public class Game extends AbstractNationEntityBase {
         return round == game.round &&
                 Objects.equals(users, game.users) &&
                 gameStatus == game.gameStatus &&
-                Objects.equals(moves, game.moves);
+                Objects.equals(currentPlayerUuid, game.currentPlayerUuid) &&
+                Objects.equals(firstPlayerUuid, game.firstPlayerUuid) &&
+                Objects.equals(nextPlayerUuid, game.nextPlayerUuid) &&
+                Objects.equals(userRuntimeInfos, game.userRuntimeInfos);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), users, round, gameStatus, moves);
+        return Objects.hash(super.hashCode(), users, round, gameStatus, currentPlayerUuid, firstPlayerUuid, nextPlayerUuid, userRuntimeInfos);
     }
 
 
@@ -232,7 +170,64 @@ public class Game extends AbstractNationEntityBase {
         }
     }
 
+
+
+    public List<GameUserRuntimeInfo> getUserRuntimeInfos() {
+
+        return userRuntimeInfos;
+    }
+
+    public void setUserRuntimeInfos(List<GameUserRuntimeInfo> userRuntimeInfos) {
+        LOGGER.info("Execute custom setter: setUserRuntimeInfos");
+
+        if (this.userRuntimeInfos == null) {
+            this.userRuntimeInfos = userRuntimeInfos;
+        } else if(this.userRuntimeInfos != userRuntimeInfos) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.userRuntimeInfos.clear();
+            if(userRuntimeInfos != null){
+                this.userRuntimeInfos.addAll(userRuntimeInfos);
+            }
+        }
+
+
+    }
+
+    public void addUserRuntimeInfos(GameUserRuntimeInfo info) {
+
+        if (!userRuntimeInfos.contains(info)) {
+            userRuntimeInfos.add(info);
+            info.setGame(this);
+        }
+    }
+
+    public void removeUserRuntimeInfos(GameUserRuntimeInfo info){
+        if (userRuntimeInfos.contains(info)) {
+            userRuntimeInfos.remove(info);
+            info.setGame(null);
+        }
+    }
+
+    public void setUsers(List<User> users) {
+        LOGGER.info("Execute custom setter: setUsers");
+
+        if (this.users == null) {
+            this.users = users;
+        } else if(this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.users.clear();
+            if(users != null){
+                this.users.addAll(users);
+            }
+        }
+
+
+        //     this.users = users;
+    }
+
+
+
+
     @PrePersist
+    @PreUpdate
     public void prePersist(){
         for (User user:
              users) {
@@ -241,9 +236,10 @@ public class Game extends AbstractNationEntityBase {
 
         }
 
-        for(BasePlayerMove move : moves){
-            move.setGame(this);
+        for(GameUserRuntimeInfo runtime : userRuntimeInfos){
+            runtime.setGame(this);
         }
+
 
 
     }

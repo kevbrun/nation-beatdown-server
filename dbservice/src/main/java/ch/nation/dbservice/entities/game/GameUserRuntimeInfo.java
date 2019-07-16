@@ -1,27 +1,63 @@
 package ch.nation.dbservice.entities.game;
 
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name="USER_RUNTIME_INFO")
 @Table(name="USER_RUNTIME_INFO")
-public class GameUserRuntimeInfo extends AbstractNationEntityBase {
+public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDiscrimantorValue {
 
 
     @JsonProperty("consideration_time")
     private long considerationTime;
+    @OneToMany(
+            mappedBy = "gameInfo",
+            orphanRemoval = false,
+            fetch = FetchType.LAZY
+    )
+    @RestResource(path = "moves", rel="moves",exported = true)
+    @JsonProperty("moves")
+    //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<BasePlayerMove> moves = new ArrayList<>();
+
+    @JsonProperty("player_uuid")
+    private String playerUuid;
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="game_id")
+    @RestResource(path = "games",rel = "games",exported = false)
+    @JsonIgnore
+    private Game game;
 
     public GameUserRuntimeInfo() {
     }
 
-    public GameUserRuntimeInfo(long considerationTime) {
-        this.considerationTime = considerationTime;
+
+    public String getPlayerUuid() {
+        return playerUuid;
+    }
+
+    public void setPlayerUuid(String playerUuid) {
+        this.playerUuid = playerUuid;
+    }
+
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public long getConsiderationTime() {
@@ -31,4 +67,40 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase {
     public void setConsiderationTime(long considerationTime) {
         this.considerationTime = considerationTime;
     }
+
+
+
+    public List<BasePlayerMove> getMoves(){
+        LOGGER.info("Execute custom getter");
+
+        if(moves==null)moves = new ArrayList<>();
+        return moves;
+    }
+
+    public void setMoves(List<BasePlayerMove> moves) {
+        LOGGER.info("Execute custom setter: setMoves");
+        if (this.moves == null) {
+            this.moves = moves;
+        } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.moves.clear();
+            if(moves != null){
+                this.moves.addAll(moves);
+            }
+        }
+
+
+        //   this.moves = moves;
+    }
+
+
+
+    @PrePersist
+    @PreUpdate
+    public void PreUpdate(){
+
+        for(BasePlayerMove move : moves){
+            move.setGameInfo(this);
+        }
+    }
+
 }

@@ -12,13 +12,11 @@ import ch.nation.rest.clients.game.DBGameRestClient;
 import ch.nation.rest.services.impl.AbstractNamedEntityService;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 
-import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -26,6 +24,7 @@ import java.util.*;
 public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,GameDto> implements GameResourceService {
 
     private final UserResourceServiceImpl userService;
+
 
     public GameResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory, UserResourceServiceImpl userService) {
         super(GameDto.class,factory, massRestClientFactory);
@@ -55,26 +54,26 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
         gameDto.setNextPlayerUuid(playerTwoUuid);
         gameDto.setCurrentPlayerUuid(playerOneUuid);
         gameDto.setStatus(GameStatus.InProgress);
-        Map<String,GameUserRuntimeInfoDto> runtimeInfoDtoMap =new HashMap<>();
-        runtimeInfoDtoMap.put(playerOne.get().getId(),new GameUserRuntimeInfoDto(considerationTime));
-        runtimeInfoDtoMap.put(playerTwo.get().getId(),new GameUserRuntimeInfoDto(considerationTime));
+
+        List<AbstractDto> children = new ArrayList<>();
+        children.add(new GameUserRuntimeInfoDto(playerOneUuid,considerationTime));
+        children.add(new GameUserRuntimeInfoDto(playerTwoUuid,considerationTime));
+
+        Optional<GameDto> response = (Optional<GameDto>) createEntityAndCreateChildren(gameDto,children,QueryProjection.max);
+
+
+        if(!response.isPresent()) throw new Error("Could not create Game!");
 
 
 
-        Resource<GameDto> response = getDefaultClient().create(gameDto,projection);
+        gameDto = (GameDto) response.get();
 
-        if(response.getContent()==null) throw new Error("Could not create Game!");
-
-
-
-        gameDto = response.getContent();
-
-        LOGGER.info("Add players to game!");
+         LOGGER.info("Add players to game!");
         List<AbstractDto> userList = new ArrayList<>(2);
         userList.add(playerOne.get());
         userList.add(playerTwo.get());
 
-        Optional<GameDto> resource =  createAssociation(gameDto.getId(),userList);
+        Optional<GameDto> resource =  createAssociation(gameDto.getId(),userList,projection);
 
         LOGGER.info("Creation was succesfull!");
         LOGGER.info(String.format("STOP | Create Game | User one %s | User two %s", playerOneUuid,playerTwoUuid));

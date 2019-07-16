@@ -284,29 +284,37 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
     }**/
 
 
-        public Optional<?> createEntityWithChildren(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
-        Optional<TResult> parentResult= create(parent,projection);
-        if(!parentResult.isPresent()) throw new Exception("Could not create parent node!");
-
-        List<AbstractDto> createdChildren = new ArrayList<>(children.size());
 
 
-       DBRestServiceBaseInterface client= getBindedClient(children.get(0));
+        public Optional<?> createChildrenAndAddToParent(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+            return    createAssociation((parent).getId(),createChildren(children,QueryProjection.def).get(),projection);
+        }
 
-        for (AbstractDto child:
-                children) {
-          Resource<AbstractDto> dto=  client.create(child,QueryProjection.min);
-
-          if(dto==null || dto.getContent().getId()==null || dto.getContent().getId().isEmpty())  throw  new Exception("ERROR COULD NOT CREATE CHILD NODE!");
-
-          createdChildren.add(dto.getContent());
-
-
+        public Optional<?> addChildrenToParent(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+            return createAssociation(parent.getId(),children,projection);
         }
 
 
-             return    createAssociation(((AbstractDto)parentResult.get()).getId(),createdChildren,QueryProjection.def);
+        public Optional<List<AbstractDto>> createChildren(List<AbstractDto> children, QueryProjection projection) throws Exception {
+            List<AbstractDto> createdChildren = new ArrayList<>(children.size());
+            DBRestServiceBaseInterface client= getBindedClient(children.get(0));
+            for (AbstractDto child:
+                    children) {
+                Resource<AbstractDto> dto=  client.create(child,QueryProjection.def);
 
+                if(dto==null || dto.getContent().getId()==null || dto.getContent().getId().isEmpty())  throw  new Exception("ERROR COULD NOT CREATE CHILD NODE!");
+
+                createdChildren.add(dto.getContent());
+
+
+            }
+            return Optional.of(createdChildren);
+        }
+
+        public Optional<?> createEntityAndCreateChildren(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+            Optional<TResult> parentResult= create(parent);
+            if(!parentResult.isPresent()) throw new Exception("Could not create parent node!");
+            return createChildrenAndAddToParent((TInput) parentResult.get(),children,projection);
     }
 
     public Optional<?> getChildrenEntites(String uuid, String resource) {

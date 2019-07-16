@@ -5,6 +5,7 @@ import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -53,9 +54,10 @@ public class Unit extends NamedEntityBase {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    @RestResource(exported = false)
+    @RestResource(rel = "caster",path = "caster")
     @JsonProperty("caster")
-    @JsonManagedReference(value="unit-caster")
+  // @JsonManagedReference(value="unit-caster")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> caster = new ArrayList<>();
 
     @OneToMany(
@@ -64,9 +66,10 @@ public class Unit extends NamedEntityBase {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    @RestResource(exported = false)
+    @RestResource(rel="target",path = "target",exported = true)
     @JsonProperty("target")
-    @JsonManagedReference(value = "unit-target")
+ //   @JsonManagedReference(value = "unit-target")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> target = new ArrayList<>();
 
 

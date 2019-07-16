@@ -4,6 +4,7 @@ import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
 import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.dto.game.GameDto;
+import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
@@ -11,6 +12,7 @@ import ch.nation.core.model.dto.prejudices.StatPrejudiceDto;
 import ch.nation.core.model.dto.prejudices.triggers.CharacteristicPrejudiceTriggerDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
+import ch.nation.core.model.dto.skills.effects.StatSkillEffectDto;
 import ch.nation.core.model.dto.skills.effects.TimeReversalSkillEffectDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.NationDto;
@@ -35,6 +37,7 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = StatSkillPlayerMoveSkillValueDto.class, name = "StatPlayerMoveValue"),
         @JsonSubTypes.Type(value = MoveSkillEffectPlayerMoveSkillValueDto.class, name = "MoveSkillPlayerMoveValue"),
         @JsonSubTypes.Type(value = BasePlayerMoveDto.class, name = "BasePlayerMove"),
+        @JsonSubTypes.Type(value = GameUserRuntimeInfoDto.class, name = "GameUserRuntimeInfo"),
 
 
         //PREJUDICES
@@ -56,6 +59,7 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
         @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
         @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SelfMoveEffect"),
+        @JsonSubTypes.Type(value = StatSkillEffectDto.class, name = "StatSkillEffect"),
 
 
         //UNITS

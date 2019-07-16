@@ -6,7 +6,6 @@ import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.rest.controller.interfaces.ChildrenNodeDao;
 import ch.nation.rest.services.impl.AbstractEntityService;
-import ch.nation.rest.services.impl.AbstractNamedEntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
@@ -72,7 +71,7 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
         List<AbstractDto> dto = (List<AbstractDto>) body.get("parent");
 
-        Optional<TResult> response = service.createEntityWithChildren((NamedObjectAbstractDto) dto.get(0),body.get("children"),projection);
+        Optional<TResult> response = service.createEntityAndCreateChildren((NamedObjectAbstractDto) dto.get(0),body.get("children"),projection);
         if(!response.isPresent()) throw new Error("Could not create object internal error");
        return new ResponseEntity<>(response.get(), HttpStatus.CREATED);
 

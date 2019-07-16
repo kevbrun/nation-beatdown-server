@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.moves;
 
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.game.Game;
+import ch.nation.dbservice.entities.game.GameUserRuntimeInfo;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
@@ -24,47 +25,47 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
 
 
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
-    @RestResource(path = "games", rel="games",exported = false)
-    @JsonProperty("game")
+    @RestResource(path = "user-runtimes", rel="user-runtimes",exported = false)
     @JsonIgnore
-    private Game game;
+    private GameUserRuntimeInfo gameInfo;
 
 
     @Column(name="round")
+    @JsonProperty("round")
     private int round;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     @JsonProperty("user")
-    @RestResource(path = "users", rel="users",exported = false)
+    @RestResource(path = "users", rel="users",exported = true)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "caster_id")
     @JsonProperty("caster")
-    @RestResource(path = "caster", rel="caster",exported = false)
-    @JsonBackReference(value = "unit-caster")
+    @RestResource(path = "caster", rel="caster",exported = true)
+ //  @JsonBackReference(value = "unit-caster")
     private Unit caster;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "target_id")
-    @RestResource(path = "target", rel="target",exported = false)
-    @JsonBackReference(value = "unit-target")
+    @RestResource(path = "target", rel="target",exported = true)
+   // @JsonBackReference(value = "unit-target")
+    @JsonProperty("target")
     private Unit target;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="skill_id")
     @JsonProperty("skill")
-    @RestResource(path = "skills", rel="skills",exported = false)
+    @RestResource(path = "skill", rel="skill",exported = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Skill skill;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty("effect_values")
-    @RestResource(path = "values",rel = "values",exported = false)
+    @RestResource(path = "values",rel = "values",exported = true)
     private List<BasePlayerMoveValue> appliedEffects = new ArrayList<>();
 
 
@@ -93,12 +94,13 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     }
 
-    public Game getGame() {
-        return game;
+
+    public GameUserRuntimeInfo getGameInfo() {
+        return gameInfo;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameInfo(GameUserRuntimeInfo gameInfo) {
+        this.gameInfo = gameInfo;
     }
 
     public User getUser() {
@@ -190,44 +192,12 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
 
 
-    @Override
-    public String toString() {
-        return "BasePlayerMove{" +
-                "game=" + game +
-                ", user=" + user +
-                ", caster=" + caster +
-                ", target=" + target +
-                ", skill=" + skill +
-                "} " + super.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BasePlayerMove)) return false;
-        if (!super.equals(o)) return false;
-        BasePlayerMove that = (BasePlayerMove) o;
-        return Objects.equals(game, that.game) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(caster, that.caster) &&
-                Objects.equals(target, that.target) &&
-                Objects.equals(skill, that.skill);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), game, user, caster, target, skill);
-    }
-
 
     //JPA FUNC
     @PrePersist
     @PreUpdate
     public void BeforePersist(){
-        if(game!=null &&game.getRound()!=round){
-            round = game.getRound();
-        }
+
     }
 
 }

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
         @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
         @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "SelfMoveEffect"),
+        @JsonSubTypes.Type(value = StatSkillEffectDto.class, name = "StatSkillEffect"),
 })
 public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
 

@@ -6,6 +6,7 @@ import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
+import ch.nation.dbservice.entities.skills.effects.StatSkillEffect;
 import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
@@ -43,7 +44,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
     private void createSchadenDexEffekt() {
         SkillEffect effect;
-        effect =  new SkillEffect();
+        effect =  new StatSkillEffect();
         effect.setName("Schadenseffekt (Dex)");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");
@@ -56,7 +57,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     }
 
     private void createSchadenStrEffekt() {
-        SkillEffect effect =new SkillEffect();
+        SkillEffect effect = new StatSkillEffect();
         effect.setName("Schadenseffekt (Str)");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");

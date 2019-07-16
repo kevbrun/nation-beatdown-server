@@ -99,4 +99,14 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
         return current ==null ? newItem == null : current.equals(newItem);
 
     }
+
+    @Override
+    public String toString() {
+        return "AbstractNationEntityBase{" +
+                "id=" + id +
+                ", creationTimestamp=" + creationTimestamp +
+                ", updateTimemstamp=" + updateTimemstamp +
+                ", type="+getDiscriminatorValue()+
+                '}';
+    }
 }

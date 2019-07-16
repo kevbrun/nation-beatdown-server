@@ -35,15 +35,14 @@ public class GameDto extends NamedObjectAbstractDto {
     @JsonProperty("next_player")
     private String nextPlayerUuid;
 
-    @JsonProperty("moves")
-    private List<AbstractPlayerMoveDto> actions;
+    @JsonProperty("runtimes")
+    private List<GameUserRuntimeInfoDto> userGameUserRuntimeInfo;
 
-    @JsonProperty("runtime")
-    private Map<String,GameUserRuntimeInfoDto> userGameUserRuntimeInfoMap;
 
     public GameDto() {
         super();
         users = new ArrayList<>();
+        userGameUserRuntimeInfo = new ArrayList<>();
         round = 1;
         status = GameStatus.None;
     }
@@ -54,13 +53,6 @@ public class GameDto extends NamedObjectAbstractDto {
     }
 
 
-    public List<AbstractPlayerMoveDto> getActions() {
-        return actions;
-    }
-
-    public void setActions(List<AbstractPlayerMoveDto> actions) {
-        this.actions = actions;
-    }
 
     public List<UserDto> getUsers() {
         return users;
@@ -87,12 +79,12 @@ public class GameDto extends NamedObjectAbstractDto {
     }
 
 
-    public Map<String, GameUserRuntimeInfoDto> getUserGameUserRuntimeInfoMap() {
-        return userGameUserRuntimeInfoMap;
+    public List<GameUserRuntimeInfoDto> getUserGameUserRuntimeInfo() {
+        return userGameUserRuntimeInfo;
     }
 
-    public void setUserGameUserRuntimeInfoMap(Map<String, GameUserRuntimeInfoDto> userGameUserRuntimeInfoMap) {
-        this.userGameUserRuntimeInfoMap = userGameUserRuntimeInfoMap;
+    public void setUserGameUserRuntimeInfo(List<GameUserRuntimeInfoDto> userGameUserRuntimeInfo) {
+        this.userGameUserRuntimeInfo = userGameUserRuntimeInfo;
     }
 
     public void addUser(UserDto userDto){

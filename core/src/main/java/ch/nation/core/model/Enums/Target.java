@@ -5,7 +5,7 @@ import ch.nation.core.utils.EnumUtilties;
 
 public enum  Target implements IEnumFromValue<Target>{
     SELF("Self"),PARTY_ALL("PartyAll"),ENEMY_ALL("EnemyAll"),PARTY_SINGLE("PartySingle"),ENEMY_SINGLE("EnemySingle"),
-    ANY_SINGLE("AnySingle"),ANY_ALL("AnyAll");
+    ANY_SINGLE("AnySingle"),ANY_ALL("AnyAll"),NONE("None");
 
     private String str;
 
