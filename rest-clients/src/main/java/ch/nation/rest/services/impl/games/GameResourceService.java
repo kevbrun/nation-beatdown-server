@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface GameResourceService {
 
 
-    Optional<Collection<GameDto>> GetGamesByUserAndStatus(String userUuid, GameStatus status, QueryProjection projection);
-    Optional<Collection<GameDto>> GetGamesByUserAndStatus(String userUuid, GameStatus status);
-    Optional<Collection<GameDto>> GetGamesByUserAndStatus(UserDto user, GameStatus status, QueryProjection projection);
-    Optional<Collection<GameDto>> GetGamesByUserAndStatus(UserDto user, GameStatus status);
+    Optional<Collection<GameDto>> getGamesByUserAndStatus(String userUuid, GameStatus status, QueryProjection projection);
+    Optional<Collection<GameDto>> getGamesByUserAndStatus(String userUuid, GameStatus status);
+    Optional<Collection<GameDto>> getGamesByUserAndStatus(UserDto user, GameStatus status, QueryProjection projection);
+    Optional<Collection<GameDto>> getGamesByUserAndStatus(UserDto user, GameStatus status);
 
 }

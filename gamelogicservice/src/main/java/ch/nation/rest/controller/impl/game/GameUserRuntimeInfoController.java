@@ -2,12 +2,15 @@ package ch.nation.rest.controller.impl.game;
 
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
+import ch.nation.core.model.position.Vector3Int;
 import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
 import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
 import ch.nation.rest.services.impl.AbstractNamedEntityService;
 import ch.nation.rest.services.impl.games.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -55,6 +58,8 @@ public class GameUserRuntimeInfoController extends AbstractResourceGameLogicCont
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
     }
+
+
 
 
 

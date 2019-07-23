@@ -89,7 +89,7 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
     }
 
     @Override
-    public Optional<Collection<GameDto>> GetGamesByUserAndStatus(String userUuid, GameStatus status, QueryProjection projection) {
+    public Optional<Collection<GameDto>> getGamesByUserAndStatus(String userUuid, GameStatus status, QueryProjection projection) {
         LOGGER.info(String.format("START | Get Game by player and state | User  %s | Status two %s", userUuid,status));
         Resources<GameDto>  dto= ((DBGameRestClient)getDefaultClient()).GetGameByUserAndGameStatus(userUuid,status,QueryProjection.max);
         if(dto==null) {
@@ -101,17 +101,17 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
     }
 
     @Override
-    public Optional<Collection<GameDto>> GetGamesByUserAndStatus(String userUuid, GameStatus status) {
-        return GetGamesByUserAndStatus(userUuid,status,QueryProjection.def);
+    public Optional<Collection<GameDto>> getGamesByUserAndStatus(String userUuid, GameStatus status) {
+        return getGamesByUserAndStatus(userUuid,status,QueryProjection.def);
     }
 
     @Override
-    public Optional<Collection<GameDto>> GetGamesByUserAndStatus(UserDto user, GameStatus status, QueryProjection projection) {
-        return GetGamesByUserAndStatus(user.getId(),status,projection);
+    public Optional<Collection<GameDto>> getGamesByUserAndStatus(UserDto user, GameStatus status, QueryProjection projection) {
+        return getGamesByUserAndStatus(user.getId(),status,projection);
     }
 
     @Override
-    public Optional<Collection<GameDto>> GetGamesByUserAndStatus(UserDto user, GameStatus status) {
-        return GetGamesByUserAndStatus(user,status,QueryProjection.def);
+    public Optional<Collection<GameDto>> getGamesByUserAndStatus(UserDto user, GameStatus status) {
+        return getGamesByUserAndStatus(user,status,QueryProjection.def);
     }
 }

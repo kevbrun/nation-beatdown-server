@@ -76,16 +76,19 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
 
             if(projection==null){
 
-                response =((GameResourceServiceImpl)service).GetGamesByUserAndStatus(userUuid,status);
+                response =((GameResourceServiceImpl)service).getGamesByUserAndStatus(userUuid,status);
 
             }else{
-              response=  ((GameResourceServiceImpl)service).GetGamesByUserAndStatus(userUuid,status,projection);
+              response=  ((GameResourceServiceImpl)service).getGamesByUserAndStatus(userUuid,status,projection);
             }
             if(!response.isPresent()) return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
             return new ResponseEntity<>(response.get(),HttpStatus.OK);
 
 
     }
+
+
+
 
 
     @Override

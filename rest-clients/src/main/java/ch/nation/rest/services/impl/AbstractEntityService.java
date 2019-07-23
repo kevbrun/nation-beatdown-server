@@ -353,6 +353,28 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
            return true;
        }
 
+       public boolean existsById(String uuid, QueryProjection projection){
+
+            LOGGER.info(String.format("START | Exists by id| uuid: %s",uuid));
+           if (!validateUuid(uuid))
+               throw new IllegalArgumentException("Uuid or resource type is null!");
+
+            //Resource<Boolean> resource = getDefaultClient().existsById(uuid,projection);
+
+           Resource<TResult> resource = getDefaultClient().findById(uuid,projection.min);
+
+           if(resource!=null && resource.getContent()!=null) return  true;
+
+        //   LOGGER.debug("Resulit "+resource.getContent().toString());
+           LOGGER.info(String.format("STOP | Exists by id| uuid: %s",uuid));
+        //    return resource.getContent();
+           return false;
+        }
+
+        public boolean existsById(String uuid){
+            return existsById(uuid,QueryProjection.def);
+        }
+
     protected DBRestServiceBaseInterface<TResult, TInput> getBindedClient(AbstractDto object) {
           return getBindedClient(object.getClass().getName());
        }

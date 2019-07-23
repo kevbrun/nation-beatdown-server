@@ -2,6 +2,9 @@ package ch.nation.core.model.dto.game;
 
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
+import ch.nation.core.model.position.IVector3;
+import ch.nation.core.model.position.Vector3;
+import ch.nation.core.model.position.Vector3Int;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class GameUserRuntimeInfoDto extends AbstractDto {
 
     @JsonProperty("player_uuid")
     private String playerUuid;
+
+    @JsonProperty("fow")
+    private List<Vector3Int> uncoveredFogOfWar;
 
     public GameUserRuntimeInfoDto() {
     }
@@ -39,6 +45,14 @@ public class GameUserRuntimeInfoDto extends AbstractDto {
     }
 
 
+    public List<Vector3Int> getUncoveredFogOfWar() {
+        return uncoveredFogOfWar;
+    }
+
+    public void setUncoveredFogOfWar(List<Vector3Int> uncoveredFogOfWar) {
+        this.uncoveredFogOfWar = uncoveredFogOfWar;
+    }
+
     public List<AbstractPlayerMoveDto> getActions() {
         return actions;
     }
@@ -60,4 +74,13 @@ public class GameUserRuntimeInfoDto extends AbstractDto {
     public String ResourceCollectionName() {
         return "user-runtimes";
     }
+
+
+
+    public void addFogOfWarTilePositon(IVector3 position){
+        if(!uncoveredFogOfWar.contains(position)){
+            uncoveredFogOfWar.add((Vector3Int) position);
+        }
+    }
+
 }

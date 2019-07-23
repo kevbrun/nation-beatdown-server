@@ -129,7 +129,15 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
     if (!result.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     return new ResponseEntity(result.get(), HttpStatus.OK);
 
-}
+    }
+
+    public ResponseEntity<Boolean> entityExists(String uuid,QueryProjection projection){
+        if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        boolean result = service.existsById(uuid,projection);
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
 
     @Override
 public ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection) {

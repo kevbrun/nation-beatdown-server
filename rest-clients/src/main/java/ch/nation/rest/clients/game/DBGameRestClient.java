@@ -32,4 +32,6 @@ public interface DBGameRestClient extends DBRestServiceBaseInterface<GameDto,Gam
     Resources<GameDto> GetGameByUserAndGameStatus(@RequestParam("uuid") String userUuid,@RequestParam("status") GameStatus status, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
+
+
 }

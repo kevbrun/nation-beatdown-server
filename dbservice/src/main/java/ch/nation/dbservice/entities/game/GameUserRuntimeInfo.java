@@ -1,8 +1,12 @@
 package ch.nation.dbservice.entities.game;
 
+import ch.nation.core.model.position.IVector3;
+import ch.nation.core.model.position.Vector3;
+import ch.nation.core.model.position.Vector3Int;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
+import ch.nation.dbservice.entities.vectors.EmbeddableVector3Int;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -10,6 +14,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity(name="USER_RUNTIME_INFO")
 @Table(name="USER_RUNTIME_INFO")
@@ -25,8 +30,9 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     )
     @RestResource(path = "moves", rel="moves",exported = true)
     @JsonProperty("moves")
+   // @OrderBy("creationTimestamp")
     //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<BasePlayerMove> moves = new ArrayList<>();
+    private List<BasePlayerMove> moves;
 
     @JsonProperty("player_uuid")
     private String playerUuid;
@@ -39,7 +45,15 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     @JsonIgnore
     private Game game;
 
+
+    @JsonProperty("fow")
+    @ElementCollection(targetClass = EmbeddableVector3Int.class)
+    @Column(name="fow")
+    private List<EmbeddableVector3Int> uncoveredFogOfWar;
+
     public GameUserRuntimeInfo() {
+        uncoveredFogOfWar = new ArrayList<>();
+        moves = new ArrayList<>();
     }
 
 
@@ -68,7 +82,13 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
         this.considerationTime = considerationTime;
     }
 
+    public List<EmbeddableVector3Int> getUncoveredFogOfWar() {
+        return uncoveredFogOfWar;
+    }
 
+    public void setUncoveredFogOfWar(List<EmbeddableVector3Int> uncoveredFogOfWar) {
+        this.uncoveredFogOfWar = uncoveredFogOfWar;
+    }
 
     public List<BasePlayerMove> getMoves(){
         LOGGER.info("Execute custom getter");
@@ -93,6 +113,11 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     }
 
 
+    public void AddFogOfWarTilePositions(IVector3 vector){
+        if(!uncoveredFogOfWar.contains(vector)){
+            uncoveredFogOfWar.add((EmbeddableVector3Int) vector);
+        }
+    }
 
     @PrePersist
     @PreUpdate

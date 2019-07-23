@@ -1,7 +1,9 @@
 package ch.nation.rest.logic.controller;
 
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
+import ch.nation.core.model.position.Vector3Int;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +32,19 @@ public class GameLogicController {
         return gameLogicService.addMove(gameUuid,playerUuid,move);
     }
 
+    @RequestMapping(method = RequestMethod.PUT,consumes ="application/json", path = "/{gameUuid}/{playerUuid}")
+    public ResponseEntity updateFogOfWar(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @RequestBody List<Vector3Int> uncoveredFogOfWar) throws Exception {
+        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+        return gameLogicService.updateFogOfWarByPlayerAndGame(gameUuid,playerUuid,uncoveredFogOfWar);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
+    public ResponseEntity<List<BasePlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+
+        return gameLogicService.getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid,playerUuid,casterUuid,round,projection);
+
+        }
 
 
-
-
-
-}
+    }

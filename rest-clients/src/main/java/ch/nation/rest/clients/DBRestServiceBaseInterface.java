@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import zipkin2.internal.Trace;
 
 
-
+import javax.management.Query;
 import java.util.List;
 
 
@@ -84,6 +84,9 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
     Resources<AbstractDto> getChildrenEntities(@PathVariable("parent_uuid")String uuid, @PathVariable("resource") String resource, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
+
+    @RequestMapping(method = RequestMethod.GET,path="/search/existsById")
+    Resource<Boolean> existsById(@RequestParam("id") String id, @RequestParam(value="projection",required = false)QueryProjection projection);
 
 
     //  @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
