@@ -20,8 +20,7 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     private UserDto user;
     @JsonProperty("caster")
     private UnitDto caster;
-    @JsonProperty("target")
-    private UnitDto target;
+
     @JsonProperty("skill")
     private SkillDto skillDto;
     @JsonProperty("effect_values")
@@ -62,13 +61,7 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
         this.caster = caster;
     }
 
-    public UnitDto getTarget() {
-        return target;
-    }
 
-    public void setTarget(UnitDto target) {
-        this.target = target;
-    }
 
     public SkillDto getSkillDto() {
         return skillDto;
@@ -98,7 +91,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
                 ", round=" + round +
                 ", user=" + user +
                 ", caster=" + caster +
-                ", target=" + target +
                 ", skillDto=" + skillDto +
                 ", effectValues=" + effectValues +
                 ", id='" + id + '\'' +

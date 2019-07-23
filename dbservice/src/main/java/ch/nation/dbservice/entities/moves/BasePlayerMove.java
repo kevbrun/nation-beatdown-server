@@ -49,12 +49,7 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
  //  @JsonBackReference(value = "unit-caster")
     private Unit caster;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "target_id")
-    @RestResource(path = "target", rel="target",exported = true)
-   // @JsonBackReference(value = "unit-target")
-    @JsonProperty("target")
-    private Unit target;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="skill_id")
@@ -151,36 +146,7 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     }
 
-    public Unit getTarget() {
-        return target;
-    }
 
-    public void setTarget(Unit target) {
-
-        LOGGER.info("Custom set Method called");
-
-     /**   if(target!=null) {
-
-
-            if (this.target != null) {
-                this.target.removeCasterMovement(this);
-
-
-                this.target = caster;
-                target.addCasterMovement(this);
-            } else {
-                this.target = caster;
-                target.addCasterMovement(this);
-            }
-
-        }   else if(target!=null && this.target.getTarget()!=null){
-            this.target.removeCasterMovement(this);
-            this.target=null;
-        }**/
-     this.target = target;
-
-
-    }
 
     public Skill getSkill() {
         return skill;

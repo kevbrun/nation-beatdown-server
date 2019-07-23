@@ -4,6 +4,7 @@ import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -70,7 +71,7 @@ public class Unit extends NamedEntityBase {
     @JsonProperty("target")
  //   @JsonManagedReference(value = "unit-target")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<BasePlayerMove> target = new ArrayList<>();
+    private List<BasePlayerMoveValue> target = new ArrayList<>();
 
 
     @ManyToOne
@@ -82,17 +83,6 @@ public class Unit extends NamedEntityBase {
         super();
 
 
-    }
-
-    public Unit(String name, String description, CharacterClass characterClass, UnitState state, boolean isUnitDead, EmeddableVector3 position, UnitAssets unitAssets, List<BasePlayerMove> source, List<BasePlayerMove> target) {
-        super(name, description);
-        this.characterClass = characterClass;
-        this.state = state;
-        this.UnitIsDead = isUnitDead;
-        this.position = position;
-        this.unitAssets = unitAssets;
-        this.caster = source;
-        this.target = target;
     }
 
 
@@ -174,13 +164,13 @@ public class Unit extends NamedEntityBase {
 
     }
 
-    public List<BasePlayerMove> getTarget() {
+    public List<BasePlayerMoveValue> getTarget() {
 
         if(target==null) target = new ArrayList<>();
         return target;
     }
 
-    public void setTarget(List<BasePlayerMove> target) {
+    public void setTarget(List<BasePlayerMoveValue> target) {
 
         if (this.target == null) {
             this.target = target;
@@ -240,14 +230,6 @@ public class Unit extends NamedEntityBase {
             }
     }
 
-    public void addTargetMovement(BasePlayerMove action){
-        if(!getTarget().add(action)){
-            getTarget().add(action);
-            action.setTarget(this);
-        }
-    }
-
-
     public void removeCasterMovement(BasePlayerMove action){
         if(getCaster().contains(action)){
             getCaster().remove(action);
@@ -255,14 +237,24 @@ public class Unit extends NamedEntityBase {
         }
     }
 
-    public void removeTargetMovement(BasePlayerMove action){
+
+
+  /**  public void addTargetMovement(BasePlayerMoveValue action){
+        if(!getTarget().add(action)){
+            getTarget().add(action);
+            action.setTarget(this);
+        }
+    }
+
+
+    public void removeTargetMovement(BasePlayerMoveValue action){
         if(getTarget().contains(action)){
             getTarget().remove(action);
             action.setTarget(null);
         }
     }
 
-
+**/
 
 
 }

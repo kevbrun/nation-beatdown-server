@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class MoveSkillEffectPlayerMoveSkillValueDto extends AbstractMoveSkillEffectValueDto {
+public class MoveSkillEffectPlayerMoveSkillValueDto extends BasePlayerMoveValueDto {
 
 
-    @JsonProperty("source")
+    @JsonProperty("source_pos")
     private Vector3Float sourcePosition;
 
-    @JsonProperty("target")
+    @JsonProperty("target_pos")
     private Vector3Float targetPosition;
 
 
@@ -46,6 +46,7 @@ public class MoveSkillEffectPlayerMoveSkillValueDto extends AbstractMoveSkillEff
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MoveSkillEffectPlayerMoveSkillValueDto)) return false;
+        if (!super.equals(o)) return false;
         MoveSkillEffectPlayerMoveSkillValueDto that = (MoveSkillEffectPlayerMoveSkillValueDto) o;
         return Objects.equals(sourcePosition, that.sourcePosition) &&
                 Objects.equals(targetPosition, that.targetPosition);
@@ -53,7 +54,6 @@ public class MoveSkillEffectPlayerMoveSkillValueDto extends AbstractMoveSkillEff
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(sourcePosition, targetPosition);
+        return Objects.hash(super.hashCode(), sourcePosition, targetPosition);
     }
 }

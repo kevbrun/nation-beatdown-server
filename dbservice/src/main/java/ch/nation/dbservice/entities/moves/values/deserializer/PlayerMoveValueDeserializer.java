@@ -4,6 +4,7 @@ import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.moves.values.MoveSkillPlayerMoveValue;
 import ch.nation.dbservice.entities.moves.values.StatPlayerMoveValue;
 import ch.nation.dbservice.entities.units.EmeddableVector3;
+import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -21,6 +22,11 @@ public class PlayerMoveValueDeserializer extends JsonDeserializer<BasePlayerMove
     private final String TYPE_FIELD="type";
     private final String MOVE_SKILL_PLAYER_MOVE_VALUE_TYPE="MoveSkillPlayerMoveValue";
     private final String STAT_SKILL_PLAYER_MOVE_VALUE_TYPE="StatPlayerMoveValue";
+    private final String SOURCE_POS="source_pos";
+    private final String TARGET_POS="target_pos";
+    private final String X="x";
+    private final String Y="y";
+    private final String Z="z";
 
 
     @Override
@@ -33,7 +39,6 @@ public class PlayerMoveValueDeserializer extends JsonDeserializer<BasePlayerMove
             ObjectMapper mapper =null;
 
 
-            //TODO ADD INSTANCE OF CHECK
 
             if(p.getCodec() instanceof  ObjectMapper) {
                 try {
@@ -55,10 +60,10 @@ public class PlayerMoveValueDeserializer extends JsonDeserializer<BasePlayerMove
                         EmeddableVector3 sourcePosition = new EmeddableVector3();
 
 
-                        JsonNode source = node.get("source");
-                        float sourceX = source.get("x").floatValue();
-                        float sourceY = source.get("y").floatValue();
-                        float sourceZ = source.get("z").floatValue();
+                        JsonNode source = node.get(SOURCE_POS);
+                        float sourceX = source.get(X).floatValue();
+                        float sourceY = source.get(Y).floatValue();
+                        float sourceZ = source.get(Z).floatValue();
                         sourcePosition.setX(sourceX);
                         sourcePosition.setY(sourceY);
                         sourcePosition.setZ(sourceZ);
@@ -66,10 +71,10 @@ public class PlayerMoveValueDeserializer extends JsonDeserializer<BasePlayerMove
 
                         EmeddableVector3 targetPosition = new EmeddableVector3();
 
-                        JsonNode target = node.get("target");
-                        float targetX = target.get("x").floatValue();
-                        float targetY = target.get("y").floatValue();
-                        float targetZ = target.get("z").floatValue();
+                        JsonNode target = node.get(TARGET_POS);
+                        float targetX = target.get(X).floatValue();
+                        float targetY = target.get(Y).floatValue();
+                        float targetZ = target.get(Z).floatValue();
                         targetPosition.setX(targetX);
                         targetPosition.setY(targetY);
                         targetPosition.setZ(targetZ);
@@ -94,6 +99,11 @@ public class PlayerMoveValueDeserializer extends JsonDeserializer<BasePlayerMove
                 }
             }
             }
+
+
+
+
+
         }
 
         return new BasePlayerMoveValue();

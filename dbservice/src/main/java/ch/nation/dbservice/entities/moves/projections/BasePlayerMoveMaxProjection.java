@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 
-@Projection(name = "max",types = {BasePlayerMove.class})
+//@Projection(name = "max",types = {BasePlayerMove.class})
 public interface BasePlayerMoveMaxProjection extends MinimizedEntityResponseProjection {
     @JsonProperty("user")
     User getUser();
@@ -20,8 +20,7 @@ public interface BasePlayerMoveMaxProjection extends MinimizedEntityResponseProj
     Unit getCaster();
     @JsonProperty("round")
     int getRound();
-    @JsonProperty("target")
-    Unit getTarget();
+
     @JsonProperty("skill")
     Skill getSkill();
     @JsonProperty("effect_values")

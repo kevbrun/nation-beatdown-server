@@ -66,30 +66,6 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
     }
 
 
-    @Test
-    @Transactional
-    public void test_adding_target(){
-
-        LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
-        Unit dummy = new Unit();
-        dummy.setName("123 Polizei");
-        dummy = unitRepository.save(dummy);
-
-
-        BasePlayerMove action = repo.save(entityToTest);
-
-        action.setTarget(dummy);
-
-
-        action  = repo.save(action);
-
-
-        Assert.assertEquals("123 Polizei",action.getTarget().getName());
-        Assert.assertTrue(action.getTarget().equals(dummy));
-
-
-
-    }
 
     @Test
     @Transactional

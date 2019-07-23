@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity(name="PLAYER_MOVE_SKILL_VALUE")
 public class MoveSkillPlayerMoveValue extends BasePlayerMoveValue implements IDiscrimantorValue {
 
-    @JsonProperty("source")
+    @JsonProperty("source_pos")
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "x", column = @Column(name = "source_x")),
@@ -20,7 +20,7 @@ public class MoveSkillPlayerMoveValue extends BasePlayerMoveValue implements IDi
     })
     private EmeddableVector3 sourcePosition;
 
-    @JsonProperty("target")
+    @JsonProperty("target_pos")
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "x", column = @Column(name = "target_x")),

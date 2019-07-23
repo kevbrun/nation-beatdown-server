@@ -88,7 +88,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info(String.format("START | Find By Id | uuid : %s", uuid));
         if (!validateUuid(uuid))
             throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", uuid));
-        TResult response = (TResult) GetBaseClient().findById(uuid, queryProjection).getContent();
+        Resource response =  GetBaseClient().findById(uuid, queryProjection);
 
         if (response == null) {
 
@@ -98,7 +98,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info("Found entry: %s", response.toString());
         LOGGER.info(String.format("FINISH | Find By Id | uuid : %s", uuid));
 
-        return Optional.of(response);
+        return (Optional<TResult>) Optional.of(response.getContent());
     }
 
     @Override
@@ -112,14 +112,16 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
 
         //TODO WHY binded client?
-       TResult result = (TResult) getBindedClient(object).create(object, projection).getContent();
+
+        Resource<?> result = getBindedClient(object).create(object,projection);
+      // TResult result = (TResult) getBindedClient(object).create(object, projection).getContent();
     //    TResult result = (TResult) getDefaultClient().create(object, projection).getContent();
 //
         if (result == null) {
             LOGGER.info(String.format("Could not create | payload: %s!", object.toString()));
             throw new Exception("Internal error");
         }
-        return Optional.of(result);
+        return (Optional<TResult>) Optional.of(result.getContent());
 
     }
 

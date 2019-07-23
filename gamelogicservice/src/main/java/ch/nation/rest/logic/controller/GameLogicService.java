@@ -5,14 +5,19 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
+import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
+import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
+import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.core.model.position.Vector3Int;
 import ch.nation.rest.services.impl.games.GameResourceServiceImpl;
-import ch.nation.rest.services.impl.games.GameUserRuntimeInfoService;
 import ch.nation.rest.services.impl.games.GameUserRuntimeInfoServiceImpl;
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
+import ch.nation.rest.services.impl.playerMoves.values.MoveMoveValueResourceServiceImpl;
+import ch.nation.rest.services.impl.playerMoves.values.PlayerMoveValueResourceServiceImpl;
+import ch.nation.rest.services.impl.playerMoves.values.StatPlayerMoveValueResourceServiceImpl;
 import ch.nation.rest.services.impl.skills.SkillResourceServiceImpl;
 import ch.nation.rest.services.impl.units.UnitResourceServiceImpl;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
@@ -20,7 +25,6 @@ import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,16 +46,23 @@ public class GameLogicService {
     private final UnitResourceServiceImpl unitResourceService;
     private final GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService;
     private final SkillResourceServiceImpl skillResourceService;
+    private final PlayerMoveValueResourceServiceImpl valueResourceService;
+    private final MoveMoveValueResourceServiceImpl moveMoveValueResourceService;
+    private final StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService;
+
 
 
     @Autowired
-    public GameLogicService(final GameResourceServiceImpl gameService, final PlayerMoveResourceServiceImpl playerMoveEntityService, final UserResourceServiceImpl userResourceService, UnitResourceServiceImpl unitResourceService, GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService, SkillResourceServiceImpl skillResourceService) {
+    public GameLogicService(final GameResourceServiceImpl gameService, final PlayerMoveResourceServiceImpl playerMoveEntityService, final UserResourceServiceImpl userResourceService, UnitResourceServiceImpl unitResourceService, GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService, SkillResourceServiceImpl skillResourceService, PlayerMoveValueResourceServiceImpl valueResourceService, MoveMoveValueResourceServiceImpl moveMoveValueResourceService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService) {
         this.gameService = gameService;
         this.playerMoveEntityService = playerMoveEntityService;
         this.userResourceService = userResourceService;
         this.unitResourceService = unitResourceService;
         this.gameUserRuntimeInfoService = gameUserRuntimeInfoService;
         this.skillResourceService = skillResourceService;
+        this.valueResourceService = valueResourceService;
+        this.moveMoveValueResourceService = moveMoveValueResourceService;
+        this.statPlayerMoveValueResourceService = statPlayerMoveValueResourceService;
     }
 
 
@@ -79,21 +90,49 @@ public class GameLogicService {
 
 
         Optional<UnitDto> caster = unitResourceService.findById(move.getCaster().getId(), QueryProjection.def);
-        Optional<UnitDto> target = unitResourceService.findById(move.getTarget().getId(), QueryProjection.def);
+
         Optional<SkillDto> skill = skillResourceService.findById(move.getSkillDto().getId(), QueryProjection.def);
         playerMoveEntityService.createAssociation(savedMove.getId(), caster.get(), "caster", QueryProjection.min);
-        playerMoveEntityService.createAssociation(savedMove.getId(), target.get(), "target", QueryProjection.min);
         playerMoveEntityService.createAssociation(savedMove.getId(), skill.get(), "skill", QueryProjection.min);
-        List<AbstractDto> values = new ArrayList<>(move.getEffectValues());
-        playerMoveEntityService.createChildrenAndAddToParent((BasePlayerMoveDto) savedMove, values, QueryProjection.max);
+
+        final List<AbstractDto> childrensList = new ArrayList<>();
+
+        for (AbstractMoveSkillEffectValueDto value:
+                move.getEffectValues()) {
 
 
-        Optional<?> updatedParent = gameUserRuntimeInfoService.addChildrenToParent(info, (List<AbstractDto>) children.get(), QueryProjection.max);
+            if(value instanceof StatSkillPlayerMoveSkillValueDto){
+                Optional<StatSkillPlayerMoveSkillValueDto>     createdValue =  statPlayerMoveValueResourceService.create( (StatSkillPlayerMoveSkillValueDto)value);
+                Optional<UnitDto> target = unitResourceService.findById(value.getTarget().getId(), QueryProjection.def);
+                statPlayerMoveValueResourceService.createAssociation(createdValue.get().getId(), target.get(), "target", QueryProjection.min);
+                childrensList.add(createdValue.get());
+            }else if(value instanceof MoveSkillEffectPlayerMoveSkillValueDto){
+
+                Optional<MoveSkillEffectPlayerMoveSkillValueDto>     createdValue =  moveMoveValueResourceService.create( (MoveSkillEffectPlayerMoveSkillValueDto)value);
+                Optional<UnitDto> target = unitResourceService.findById(value.getTarget().getId(), QueryProjection.def);
+                moveMoveValueResourceService.createAssociation(createdValue.get().getId(), target.get(), "target", QueryProjection.min);
+                childrensList.add(createdValue.get());
+
+            }
+
+
+
+
+
+
+
+            playerMoveEntityService.createAssociation(savedMove.getId() ,childrensList);
+            childrensList.clear();
+        }
+
+
+//ADD move to user-runtime!
+      Optional<?> updatedParent = gameUserRuntimeInfoService.addChildrenToParent(info, (List<AbstractDto>) children.get(), QueryProjection.max);
 
 
         Optional<BasePlayerMoveDto> moveDto = playerMoveEntityService.findById(savedMove.getId(), QueryProjection.max);
 
-        if (!updatedParent.isPresent()) throw new Exception("Could not create entry!");
+        if (!moveDto.isPresent()) throw new Exception("Could not create entry!");
 
         LOGGER.info(String.format("FINISH | Adding unit move By Name | game : %s | player: %s", gameUuid, playerUuid));
 

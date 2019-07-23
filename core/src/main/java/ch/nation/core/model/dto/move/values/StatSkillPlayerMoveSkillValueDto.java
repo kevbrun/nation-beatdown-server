@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class StatSkillPlayerMoveSkillValueDto extends AbstractMoveSkillEffectValueDto {
+public class StatSkillPlayerMoveSkillValueDto extends BasePlayerMoveValueDto {
 
     @JsonProperty("value")
     private float value;

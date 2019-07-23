@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/classes")
-public class CharacterClassRessourceControllerNamed extends AbstractNamedResourceGameLogicController<CharacterClassDto,CharacterClassDto> {
+public class CharacterClassRessourceController extends AbstractNamedResourceGameLogicController<CharacterClassDto,CharacterClassDto> {
 
     @Autowired
-    public CharacterClassRessourceControllerNamed(CharacterClazzResourceServiceImpl service) {
+    public CharacterClassRessourceController(CharacterClazzResourceServiceImpl service) {
         super(service);
     }
 
