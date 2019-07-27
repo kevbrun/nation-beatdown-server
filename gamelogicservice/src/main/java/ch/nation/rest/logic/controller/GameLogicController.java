@@ -1,6 +1,7 @@
 package ch.nation.rest.logic.controller;
 
 import ch.nation.core.model.Enums.QueryProjection;
+import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.position.Vector3Int;
@@ -40,11 +41,21 @@ public class GameLogicController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
-    public ResponseEntity<List<BasePlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+    public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
 
         return gameLogicService.getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid,playerUuid,casterUuid,round,projection);
 
-        }
-
-
     }
+
+
+
+
+    @RequestMapping(method = RequestMethod.PUT,path="/{gameUuid}")
+    public ResponseEntity<?> endTurn(@PathVariable("gameUuid") String gameUuid, @RequestBody GameUserRuntimeInfoDto currentPlayerRuntimeInfo) throws Exception {
+        return gameLogicService.endTurn(gameUuid,currentPlayerRuntimeInfo);
+    }
+
+
+
+
+}

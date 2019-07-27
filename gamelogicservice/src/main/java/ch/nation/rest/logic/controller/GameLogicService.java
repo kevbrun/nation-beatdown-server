@@ -4,8 +4,10 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
+import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
+import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
 import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.skills.SkillDto;
@@ -13,6 +15,7 @@ import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.core.model.position.Vector3Int;
 import ch.nation.rest.services.impl.games.GameResourceServiceImpl;
+import ch.nation.rest.services.impl.games.GameUserRuntimeInfoService;
 import ch.nation.rest.services.impl.games.GameUserRuntimeInfoServiceImpl;
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
 import ch.nation.rest.services.impl.playerMoves.values.MoveMoveValueResourceServiceImpl;
@@ -25,10 +28,12 @@ import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +68,56 @@ public class GameLogicService {
         this.valueResourceService = valueResourceService;
         this.moveMoveValueResourceService = moveMoveValueResourceService;
         this.statPlayerMoveValueResourceService = statPlayerMoveValueResourceService;
+    }
+
+
+
+
+
+    public ResponseEntity<?> endTurn(String gameUuid, GameUserRuntimeInfoDto currentPlayerGameRuntimeInfo) throws Exception {
+        LOGGER.info(String.format("START | END Player Move | game : %s ", gameUuid));
+        final Optional<GameDto> gameInstanceOptional = gameService.findById(gameUuid);
+        if(!gameInstanceOptional.isPresent()) throw new Exception("Error could find game by uuid "+gameUuid);
+        GameDto gameInstance = gameInstanceOptional.get();
+          Optional<GameUserRuntimeInfoDto> runtime= gameUserRuntimeInfoService.findById(currentPlayerGameRuntimeInfo.getId());
+       if(!runtime.isPresent()) throw new Exception("Error could find runtime by player uuid "+gameInstance.getCurrentPlayerUuid());
+
+
+        //Start updating GameState
+
+        GameUserRuntimeInfoDto runtimeInfoDto  = runtime.get();
+        runtimeInfoDto.setConsiderationTime(currentPlayerGameRuntimeInfo.getConsiderationTime());
+        gameUserRuntimeInfoService.update(runtimeInfoDto);
+
+
+        String currentPlayerUuid = gameInstance.getCurrentPlayerUuid();
+        String nextPlayerUuid = gameInstance.getNextPlayerUuid();
+        int round = gameInstance.getRound();
+
+        gameInstance.setNextPlayerUuid(currentPlayerUuid);
+        gameInstance.setCurrentPlayerUuid(nextPlayerUuid);
+
+        if(nextPlayerUuid.equals(gameInstance.getFirstPlayerUuid())) {
+            gameInstance.setRound((round + 1));
+        }
+
+       Optional<GameDto> updatedState= gameService.update(gameInstance);
+
+
+
+
+
+
+
+
+
+
+
+
+
+        LOGGER.info(String.format("STOP | END Player Move | game : %s ", gameUuid));
+        return new ResponseEntity<>(Boolean.valueOf(true),HttpStatus.OK);
+
     }
 
 
@@ -172,12 +227,12 @@ public class GameLogicService {
     }
 
 
-    public ResponseEntity<List<BasePlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String casterUuid, int round) throws Exception {
+    public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String casterUuid, int round) throws Exception {
         return getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid, playerUuid,casterUuid, round,QueryProjection.def);
     }
 
-    public ResponseEntity<List<BasePlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String unitUuid, int round, QueryProjection projection) throws Exception {
-        final List<BasePlayerMoveDto> response = new ArrayList<>();
+    public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String unitUuid, int round, QueryProjection projection) throws Exception {
+        final List<AbstractPlayerMoveDto> response = new ArrayList<>();
         if (!gameService.existsById(gameUuid)) {
             LOGGER.info(String.format("Game with uuid %s does not exist", gameUuid));
 
@@ -195,9 +250,12 @@ public class GameLogicService {
             if (infos.isPresent()) {
 
 
-                Resources<BasePlayerMoveDto> moves = (Resources<BasePlayerMoveDto>) gameUserRuntimeInfoService.getChildren(infos.get().getId(), "moves", QueryProjection.max);
+                Resources<AbstractPlayerMoveDto> moves = (Resources<AbstractPlayerMoveDto>) gameUserRuntimeInfoService.getChildren(infos.get().getId(), "moves", QueryProjection.max);
 
-                List<BasePlayerMoveDto> found=moves.getContent().stream().filter((x) -> x.getRound() == round && x.getCaster().getId().equals(unitUuid)).collect(Collectors.toUnmodifiableList());
+                List<AbstractPlayerMoveDto> found=moves.getContent().stream().filter((x) -> x.getRound() == round && x.getCaster().getId().equals(unitUuid)).collect(Collectors.toList());
+            //
+                //
+                found.stream().forEach((x)-> fetchTargetUnitByMove(x));
                 response.addAll(found);
 
                 LOGGER.debug("Found " + response.size());
@@ -212,4 +270,22 @@ public class GameLogicService {
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
+
+    private void fetchTargetUnitByMove(AbstractPlayerMoveDto moveDto){
+        for (AbstractMoveSkillEffectValueDto moveValueDto:
+              moveDto.getEffectValues()) {
+
+
+            Resource<UnitDto> target = (Resource<UnitDto>) valueResourceService.getChild(moveValueDto.getId(),"target",QueryProjection.def);
+
+            if(target.getContent()!=null) {
+                moveValueDto.setTarget((UnitDto) target.getContent());
+            }
+
+        }
+    }
+
+
+
 }

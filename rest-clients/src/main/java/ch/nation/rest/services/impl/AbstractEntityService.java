@@ -344,6 +344,22 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
     }
 
 
+    public Resource<?> getChild(String uuid, String resource,QueryProjection projection){
+        Resource<?> results = null;
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+        if (!validateUuid(uuid) && resource == null && resource.isEmpty())
+            throw new IllegalArgumentException("Uuid or resource type is null!");
+
+        results = getDefaultClient().getChildEntity(uuid, resource, projection);
+
+
+        LOGGER.info(String.valueOf("Found entry: " + results.getContent()!=null));
+
+        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+        return results;
+    }
+
+
 
            protected boolean validateUuid(String uuid) {
            try {

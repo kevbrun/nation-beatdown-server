@@ -34,7 +34,10 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
     @JsonIgnore
     private BasePlayerMove move;
 
+
+    //LAZY Will cause Buddy Exception
     @ManyToOne(fetch = FetchType.EAGER)
+
     @JoinColumn(name = "target_id")
     @RestResource(path = "target", rel="target",exported = true)
     // @JsonBackReference(value = "unit-target")

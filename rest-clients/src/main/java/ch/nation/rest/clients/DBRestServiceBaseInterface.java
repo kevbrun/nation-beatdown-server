@@ -83,6 +83,8 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
     Resources<AbstractDto> getChildrenEntities(@PathVariable("parent_uuid")String uuid, @PathVariable("resource") String resource, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
+    Resource<AbstractDto> getChildEntity(@PathVariable("parent_uuid")String uuid, @PathVariable("resource") String resource, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.GET,path="/search/existsById")

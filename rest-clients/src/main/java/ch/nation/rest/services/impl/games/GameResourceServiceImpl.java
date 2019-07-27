@@ -12,6 +12,7 @@ import ch.nation.rest.clients.game.DBGameRestClient;
 import ch.nation.rest.services.impl.AbstractNamedEntityService;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 
+import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,6 +87,16 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
     public ResponseEntity create(String playerOneUuid, String playerTwoUuid) throws Exception {
         return create(playerOneUuid,playerTwoUuid, QueryProjection.def);
 
+    }
+
+
+    public Resources<GameUserRuntimeInfoDto> getUserRuntimeInfos(String gameUuid){
+        return (Resources<GameUserRuntimeInfoDto>) getChildren(gameUuid,"user-runtimes",QueryProjection.max);
+    }
+
+
+    public Resource<GameUserRuntimeInfoDto> getUserRuntimeInfoByPlayer(String gameUuid,String playerUuid){
+        return (Resource<GameUserRuntimeInfoDto>) getUserRuntimeInfos(gameUuid).getContent().stream().filter((x)-> x.getPlayerUuid().equals(playerUuid));
     }
 
     @Override
