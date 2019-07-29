@@ -20,10 +20,10 @@ public abstract class AbstractNamedEntityTest<TEntity extends NamedEntityBase,TR
     @Test
     public  void update_entities_test(){
         TEntity savedObject = repo.save(entityToTest);
-        savedObject.setName("After update");
+        savedObject.setName("After updatePut");
         savedObject = repo.save(savedObject);
 
-        Assert.assertTrue(savedObject.getName().equals("After update"));
+        Assert.assertTrue(savedObject.getName().equals("After updatePut"));
 
     }
 

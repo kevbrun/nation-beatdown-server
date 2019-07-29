@@ -60,10 +60,13 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
 
     @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
-    Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload,@RequestParam(value = "projection",required = false) QueryProjection projection);
+    Resource<TResult> updatePatch(@PathVariable("uuid") String uuid, @RequestBody TInput payload, @RequestParam(value = "projection",required = false) QueryProjection projection);
+
+    @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
+    Resource<TResult> updatePut(@PathVariable("uuid") String uuid, @RequestBody TInput payload, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
  //   @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
- //   Resource<TResult> update(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
+ //   Resource<TResult> updatePatch(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
 
 
   //  @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")

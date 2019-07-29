@@ -2,7 +2,6 @@ package ch.nation.rest.services.impl;
 
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.clients.factory.DBMassRestClientFactory;
@@ -126,22 +125,51 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
     }
 
     @Override
-    public Optional<TResult> update(TInput object) {
-        return update(object, QueryProjection.def);
+    public Optional<TResult> updatePatch(TInput object) {
+        return updatePatch(object, QueryProjection.def);
     }
 
-    public Optional<TResult> update(TInput object, QueryProjection projection) {
+    @Override
+    public Optional<TResult> updatePut(TInput object) {
+        return updatePut(object,QueryProjection.def);
+    }
+
+
+
+    public Optional<TResult> updatePut(TInput object, QueryProjection projection) {
         LOGGER.info(String.format("START | Updating entity in db | Payload: %s", object.toString()));
         if (!validateUpdateParameter(object))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
-        TResult result = (TResult) getBindedClient(object).update(object.getId(), object, projection).getContent();
+        TResult result = (TResult) getBindedClient(object).updatePut(object.getId(), object, projection).getContent();
         if (result == null) {
-            LOGGER.info(String.format("Could not update % entity", object.toString()));
+            LOGGER.info(String.format("Could not updatePatch % entity", object.toString()));
             return Optional.empty();
         }
         LOGGER.info(String.format("FINISH | Updating entity | Payload %s", object.toString()));
         return Optional.of(result);
     }
+
+
+
+    public Optional<TResult> updatePatch(TInput object, QueryProjection projection) {
+        LOGGER.info(String.format("START | Updating entity in db | Payload: %s", object.toString()));
+        if (!validateUpdateParameter(object))
+            throw new IllegalArgumentException(String.format("Payload %s is not valid", object.toString()));
+        TResult result = (TResult) getBindedClient(object).updatePatch(object.getId(), object, projection).getContent();
+        if (result == null) {
+            LOGGER.info(String.format("Could not updatePatch % entity", object.toString()));
+            return Optional.empty();
+        }
+        LOGGER.info(String.format("FINISH | Updating entity | Payload %s", object.toString()));
+        return Optional.of(result);
+    }
+
+
+
+
+
+
+
 
     public Optional<Boolean> delete(String uuid, QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Deleting entity | Payload: %s", uuid));
@@ -346,7 +374,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
     public Resource<?> getChild(String uuid, String resource,QueryProjection projection){
         Resource<?> results = null;
-        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+        LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
         if (!validateUuid(uuid) && resource == null && resource.isEmpty())
             throw new IllegalArgumentException("Uuid or resource type is null!");
 
@@ -355,7 +383,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
         LOGGER.info(String.valueOf("Found entry: " + results.getContent()!=null));
 
-        LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
+        LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
         return results;
     }
 

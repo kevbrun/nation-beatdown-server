@@ -46,7 +46,8 @@ public class GamesDummyGenerator extends AbstractDummyGenerator {
         game.setNextPlayerUuid(user.getId().toString());
         game.setCurrentPlayerUuid(user.getId().toString());
         game.setGameStatus(GameStatus.Finished);
-
+        game.setUsers(new ArrayList<>());
+        game.setUserRuntimeInfos(new ArrayList<>());
         game= gameRepository.save(game);
 
 

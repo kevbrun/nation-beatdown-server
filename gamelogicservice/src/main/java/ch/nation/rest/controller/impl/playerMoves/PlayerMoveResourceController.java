@@ -4,6 +4,7 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
+import ch.nation.rest.services.impl.playerMoves.values.PlayerMoveValueResourceServiceImpl;
 import feign.RequestLine;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,8 +61,8 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
 
     }
-/**
-    @RequestMapping(method = RequestMethod.GET,path="/search/{uuid}/{caster-uuid}/{round}")
+
+    @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}/{caster-uuid}/{round}")
     public ResponseEntity getAllMovesOfPlayerByGameRuntimeUUIDAndPlayerUuidAndRound(@PathVariable("uuid")String gameRuntimeUuid, @PathVariable("caster-uuid") String casterUuid, @PathVariable("round") int round, @RequestParam(value = "projection",required = false)QueryProjection projection)
     {
 
@@ -70,7 +71,21 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
         return new ResponseEntity<>(result.get(), HttpStatus.OK);
 
-    }**/
+    }
 
 
-}
+    @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}")
+    public ResponseEntity getAllMovesOfPlayerByGameRuntimeUUID(@PathVariable("uuid")String gameRuntimeUuid, @RequestParam(value = "unit",required = false)String unitUuid, @RequestParam(value = "projection",required = false)QueryProjection projection){
+        Optional<?> result = null;
+        if(unitUuid!=null && !unitUuid.isEmpty()) {
+            result = ((PlayerMoveResourceServiceImpl) service).getMovesByGameRuntimeInfoAndUnit(gameRuntimeUuid, unitUuid, projection);
+
+        }else{
+
+             result =  ((PlayerMoveResourceServiceImpl)service).getMovesByGameRuntimeInfo(gameRuntimeUuid,projection);
+        }
+        return new ResponseEntity<>(result.get(),HttpStatus.OK);
+    }
+
+
+    }

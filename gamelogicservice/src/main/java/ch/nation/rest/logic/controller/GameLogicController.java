@@ -40,12 +40,12 @@ public class GameLogicController {
         return gameLogicService.updateFogOfWarByPlayerAndGame(gameUuid,playerUuid,uncoveredFogOfWar);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
+   /** @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
     public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
 
         return gameLogicService.getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid,playerUuid,casterUuid,round,projection);
 
-    }
+    }**/
 
 
 

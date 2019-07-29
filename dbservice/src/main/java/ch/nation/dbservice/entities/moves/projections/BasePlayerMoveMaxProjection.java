@@ -22,7 +22,8 @@ public interface BasePlayerMoveMaxProjection extends MinimizedEntityResponseProj
     Unit getCaster();
     @JsonProperty("round")
     int getRound();
-
+    @JsonProperty("caster_skill_cost")
+    int getSkillCost();
     @JsonProperty("skill")
     Skill getSkill();
     @JsonProperty("effect_values")

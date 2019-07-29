@@ -36,10 +36,14 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     @JsonProperty("round")
     private int round;
 
+    @Column(name="caster_skill_cost")
+    @JsonProperty("caster_skill_cost")
+    private int skillCost;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     @JsonProperty("user")
-    @RestResource(path = "users", rel="users",exported = true)
+    @RestResource(path = "user", rel="user",exported = true)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -89,6 +93,14 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     }
 
+
+    public int getSkillCost() {
+        return skillCost;
+    }
+
+    public void setSkillCost(int skillCost) {
+        this.skillCost = skillCost;
+    }
 
     public GameUserRuntimeInfo getGameInfo() {
         return gameInfo;

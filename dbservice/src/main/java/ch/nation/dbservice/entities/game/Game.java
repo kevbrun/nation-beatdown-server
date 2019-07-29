@@ -26,7 +26,7 @@ public class Game extends AbstractNationEntityBase {
     @Column(name="users")
     @JsonProperty("users")
     @RestResource(path = "users", rel="users")
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
     @JsonProperty("round")
     @Column(name = "round")
@@ -57,7 +57,7 @@ public class Game extends AbstractNationEntityBase {
     )
     @RestResource(path = "user-runtimes", rel="user-runtimes",exported = true)
     @JsonProperty("runtimes")
-    private List<GameUserRuntimeInfo> userRuntimeInfos = new ArrayList<>();
+    private List<GameUserRuntimeInfo> userRuntimeInfos;
 
 
     public Game() {

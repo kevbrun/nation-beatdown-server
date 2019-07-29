@@ -46,7 +46,7 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
     public ResponseEntity update(TInput payload, QueryProjection projection) {
         if (payload == null) throw new IllegalArgumentException("Request Body was null!");
         if (payload.getId() == null) throw new IllegalArgumentException("Uuid was null!");
-        Optional<TResult> response = service.update(payload, projection);
+        Optional<TResult> response = service.updatePatch(payload, projection);
         if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

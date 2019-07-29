@@ -47,6 +47,8 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         game.setCurrentPlayerUuid(player.getId().toString());
         game.setNextPlayerUuid(player.getId().toString());
         game.setFirstPlayerUuid(player.getId().toString());
+        game.setUserRuntimeInfos(new ArrayList<>());
+        game.setUsers(new ArrayList<>());
 
         List<GameUserRuntimeInfo> infos =new ArrayList<>();
         GameUserRuntimeInfo info = new GameUserRuntimeInfo();
@@ -65,7 +67,8 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
 
         value.setTargetPosition(new EmeddableVector3(0.4f,0.0f,-100f));
         value.setSourcePosition(new EmeddableVector3(0.4f,0.0f,-160f));
-
+        move.setSkillCost(2323);
+        move.setRound(5);
         ArrayList<BasePlayerMoveValue> values =new ArrayList<>();
 
         values.add(value);

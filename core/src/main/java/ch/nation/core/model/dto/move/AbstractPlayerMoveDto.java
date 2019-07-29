@@ -26,7 +26,19 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     @JsonProperty("effect_values")
     private List<AbstractMoveSkillEffectValueDto> effectValues;
 
+    @JsonProperty("caster_skill_cost")
+    private int skillCost;
+
     public AbstractPlayerMoveDto() {
+    }
+
+
+    public int getSkillCost() {
+        return skillCost;
+    }
+
+    public void setSkillCost(int skillCost) {
+        this.skillCost = skillCost;
     }
 
     public GameDto getGameDto() {

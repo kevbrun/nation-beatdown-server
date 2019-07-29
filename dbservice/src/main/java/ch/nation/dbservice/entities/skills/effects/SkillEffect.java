@@ -5,6 +5,7 @@ import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
+import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,13 +48,18 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
     private List<Skill> skills;
 
 
-    @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    private List<BasePlayerMove> playerMoves;
+  /**  @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<BasePlayerMove> playerMoves;**/
 
+
+    @OneToMany(mappedBy = "skillEffect",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @RestResource(path="moves",rel="moves")
+    private List<BasePlayerMoveValue> moveValues;
 
 
     public SkillEffect() {
         super();
+        moveValues = new ArrayList<>();
     }
 
 
@@ -65,9 +71,19 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
         this.skills = skills;
     }
 
+
+    public List<BasePlayerMoveValue> getMoveValues() {
+        return moveValues;
+    }
+
+    public void setMoveValues(List<BasePlayerMoveValue> moveValues) {
+        this.moveValues = moveValues;
+    }
+
     public SkillEffectTarget getEffectTarget() {
         return effectTarget;
     }
+
 
     public void setEffectTarget(SkillEffectTarget effectTarget) {
         this.effectTarget = effectTarget;
@@ -110,13 +126,13 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
     }
 
 
-    public List<BasePlayerMove> getPlayerMoves() {
+ /**   public List<BasePlayerMove> getPlayerMoves() {
         return playerMoves;
     }
 
     public void setPlayerMoves(List<BasePlayerMove> playerMoves) {
         this.playerMoves = playerMoves;
-    }
+    }**/
 
     @Override
     public String toString() {

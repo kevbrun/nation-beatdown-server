@@ -28,7 +28,7 @@ public abstract class AbstractMassNamedResourceGameLogicController<TResult exten
         if (payload.size() == 0) return ResponseEntity.notFound().build();
         if (payload.size() == 1) return update(payload.get(0));
 
-        LOGGER.info("More than one item found. Start mass update");
+        LOGGER.info("More than one item found. Start mass updatePatch");
         Optional<List<TResult>> response = ((AbstractMassNamedEntityService) service).batchUpdate(payload, projection);
         if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,7 +56,7 @@ public abstract class AbstractMassNamedResourceGameLogicController<TResult exten
         List<TInput> inputList = new ArrayList<>(payload.getContent());
         if (payload.getContent().size() == 1) return update(inputList.get(0));
 
-        LOGGER.info("More than one item found. Start mass update");
+        LOGGER.info("More than one item found. Start mass updatePatch");
         Optional<Resource<Boolean>> response = ((AbstractMassNamedEntityService) service).batchDeletion(inputList);
         if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
