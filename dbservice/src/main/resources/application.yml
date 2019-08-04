@@ -1,4 +1,6 @@
 spring:
+  flyway:
+    baselineOnMigrate: true
   application:
     name: nation-database-service
   h2:
@@ -12,10 +14,21 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+ #     ddl-auto: create-drop
     show-sql: true
+    jdbc:
+      time_zone: UTC+2
   data:
     rest:
       #defaultMediaType: application/json+hal
+  logging:
+    level:
+      org.springframework.web: DEBUG
+      guru.springframework.controllers: DEBUG
+      org.hibernate: DEBUG
+      org.springframework.orm.jpa: INFO
+      org.springframework.transaction: DEBUG
+      org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 
 server:
   #port: 0
