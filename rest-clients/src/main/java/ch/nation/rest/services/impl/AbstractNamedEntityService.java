@@ -50,7 +50,15 @@ public abstract class AbstractNamedEntityService<TResult, TInput extends NamedOb
         return findByName(name, QueryProjection.def);
     }
 
-
+    public Optional<Boolean> existsByName(String name){
+        LOGGER.info(String.format("START | Exists By Name | name : %s", name));
+        if (name == null || name.isBlank())
+            return Optional.of(false);
+        boolean response = (boolean) GetBaseClient().existsByName(name);
+         LOGGER.info("Entity exists: ", Boolean.valueOf(response));
+        LOGGER.info(String.format("STOP | Exists By Name | name : %s", name));
+        return Optional.of(response);
+    }
 
 
 }

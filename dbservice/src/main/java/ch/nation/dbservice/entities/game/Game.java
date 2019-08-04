@@ -50,6 +50,10 @@ public class Game extends AbstractNationEntityBase {
     @Column(name="next_player",nullable = false)
     private String nextPlayerUuid;
 
+    @JsonProperty("winner_player")
+    @Column(name="winner_player")
+    private String winner;
+
     @OneToMany(
             mappedBy = "game",
             fetch = FetchType.LAZY,
@@ -80,6 +84,14 @@ public class Game extends AbstractNationEntityBase {
         return users;
     }
 
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
 
     public int getRound() {
         return round;

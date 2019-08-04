@@ -47,6 +47,12 @@ public class GameLogicController {
 
     }**/
 
+   @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
+   public ResponseEntity<Boolean> endGame(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) throws Exception {
+       if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+       if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+       return gameLogicService.endGame(gameUuid,playerUuid);
+   }
 
 
 

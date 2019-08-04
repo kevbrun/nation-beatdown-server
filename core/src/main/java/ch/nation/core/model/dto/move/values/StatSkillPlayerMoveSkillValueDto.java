@@ -1,10 +1,15 @@
 package ch.nation.core.model.dto.move.values;
 
+import ch.nation.core.model.Enums.StatType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
 public class StatSkillPlayerMoveSkillValueDto extends BasePlayerMoveValueDto {
+
+
+    @JsonProperty("applied_on_stat")
+    private StatType appliedOn;
 
     @JsonProperty("value")
     private float value;
@@ -17,6 +22,14 @@ public class StatSkillPlayerMoveSkillValueDto extends BasePlayerMoveValueDto {
         this.value = value;
     }
 
+
+    public StatType getAppliedOn() {
+        return appliedOn;
+    }
+
+    public void setAppliedOn(StatType appliedOn) {
+        this.appliedOn = appliedOn;
+    }
 
     @Override
     public String toString() {

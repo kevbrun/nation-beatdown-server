@@ -1,5 +1,6 @@
 package ch.nation.dbservice.dummyImporter.data.units;
 
+import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.units.EmeddableVector3;
@@ -37,7 +38,10 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unitAssets.setHead("Basic/Head");
         unitAssets.setWeaponType("Melee1H");
         unitAssets.setHelmet("Samurai/NinjaHelm2 [Paint]");
+        unitAssets.setArmor("Basic/BanditLightArmor [Paint]");
         unit.setUnitAssets(unitAssets);
+        unit.setState(UnitState.IDLE);
+
 
         unit = unitRepository.save(unit);
 
@@ -61,8 +65,10 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Samurai/NinjaHelm2 [Paint]");
+        unitAssets.setArmor("SpellMasters/NecromancerArmor");
         unit.setUnitAssets(unitAssets);
         unitAssets.setWeaponType("Melee1H");
+        unit.setState(UnitState.IDLE);
 
 
         unit = unitRepository.save(unit);
@@ -88,6 +94,9 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("SpellMasters/InquisitorHat1 [Paint]");
         unitAssets.setWeaponType("Melee1H");
+        unitAssets.setArmor("AbandonedWorkshop/WhiteGuardian");
+        unit.setState(UnitState.IDLE);
+
 
         unit.setUnitAssets(unitAssets);
         unit = unitRepository.save(unit);
@@ -109,7 +118,9 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Basic/HawkHelm");
         unitAssets.setWeaponType("Melee1H");
+        unitAssets.setArmor("AbandonedWorkshop/OzeriasRobe");
         unit.setUnitAssets(unitAssets);
+        unit.setState(UnitState.IDLE);
         unit = unitRepository.save(unit);
 
         CharacterClass characterClass = characterClassRepository.findByName("Zeitjäger");

@@ -1,5 +1,6 @@
 package ch.nation.rest.logic.controller;
 
+import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
@@ -71,8 +72,33 @@ public class GameLogicService {
 
 
 
+    public ResponseEntity<Boolean> endGame(final String gameUuid, final String uuidWinner) throws Exception {
+        LOGGER.info(String.format("START | Finish Game | game : %s | Winner:", gameUuid),uuidWinner);
+        boolean wasOk = false;
+        Optional<GameDto> currentGameOptional = gameService.findById(gameUuid,QueryProjection.def);
+        Optional<UserDto> winnerPlayer = userResourceService.findById(uuidWinner);
+        if(!currentGameOptional.isPresent()) throw new Exception(String.format("Could not end game! Game [&s] does not exist!",gameUuid));
+        if(!winnerPlayer.isPresent()) throw new Exception(String.format("Could not end game! User [&s] does not exist!",gameUuid));
+        GameDto game = currentGameOptional.get();
+        game.setStatus(GameStatus.Finished);
+        game.setWinner(uuidWinner);
 
-    public ResponseEntity<?> endTurn(String gameUuid, GameUserRuntimeInfoDto currentPlayerGameRuntimeInfo) throws Exception {
+        Optional<GameDto> updatedGame= gameService.updatePut(game);
+
+        //TODO DELETE UserRuntimes
+
+        //TODO Update Stats of Units and Player
+        if(updatedGame.isPresent()) wasOk = true;
+
+
+
+        LOGGER.info(String.format("STOP | Finish Game | game : %s | Winner:", gameUuid),uuidWinner);
+        return new ResponseEntity<>(wasOk,HttpStatus.OK);
+    }
+
+
+
+    public ResponseEntity<?> endTurn(final String gameUuid, final GameUserRuntimeInfoDto currentPlayerGameRuntimeInfo) throws Exception {
         LOGGER.info(String.format("START | END Player Move | game : %s ", gameUuid));
         final Optional<GameDto> gameInstanceOptional = gameService.findById(gameUuid);
         if(!gameInstanceOptional.isPresent()) throw new Exception("Error could find game by uuid "+gameUuid);
@@ -194,7 +220,7 @@ public class GameLogicService {
     }
 
 
-    public ResponseEntity<Boolean> updateFogOfWarByPlayerAndGame(String gameUuid, String playerUuid, List<Vector3Int> uncoveredTilePositions) throws Exception {
+    public ResponseEntity<Boolean> updateFogOfWarByPlayerAndGame(final String gameUuid, final String playerUuid, final List<Vector3Int> uncoveredTilePositions) throws Exception {
         if (!gameService.existsById(gameUuid))
             throw new Exception(String.format("Game with uuid %s does not exist", gameUuid));
         if (!userResourceService.existsById(playerUuid))
@@ -224,121 +250,6 @@ public class GameLogicService {
 
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
-
-
-  /**  public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String casterUuid, int round) throws Exception {
-        return getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid, playerUuid,casterUuid, round,QueryProjection.def);
-    }
-
-    public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(String gameUuid, String playerUuid, String unitUuid, int round, QueryProjection projection) throws Exception {
-        final List<AbstractPlayerMoveDto> response = new ArrayList<>();
-        if (!gameService.existsById(gameUuid)) {
-            LOGGER.info(String.format("Game with uuid %s does not exist", gameUuid));
-
-        } else if (!userResourceService.existsById(playerUuid)) {
-            LOGGER.info(String.format("User with uuid %s does not exist", playerUuid));
-
-        } else if (!unitResourceService.existsById(unitUuid)) {
-            LOGGER.info(String.format("Unit with uuid %s does not exist", unitUuid));
-
-        } else {
-
-
-            Optional<GameUserRuntimeInfoDto> infos = gameUserRuntimeInfoService.getUserRuntimeInfoByGameUuidAndByPlayerUuid(gameUuid, playerUuid);
-
-            if (infos.isPresent()) {
-
-
-                Resources<AbstractPlayerMoveDto> moves = (Resources<AbstractPlayerMoveDto>) gameUserRuntimeInfoService.getChildren(infos.get().getId(), "moves", QueryProjection.max);
-
-                List<AbstractPlayerMoveDto> found=moves.getContent().stream().filter((x) -> x.getRound() == round && x.getCaster().getId().equals(unitUuid)).collect(Collectors.toList());
-            //
-                //
-               found.stream().forEach((x)-> fetchTargetUnitByMove(x));
-                response.addAll(found);
-
-                LOGGER.debug("Found " + response.size());
-
-
-            } else {
-                LOGGER.debug("Did not found any moves!");
-            }
-
-
-        }
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
-
-
-    public ResponseEntity<List<AbstractPlayerMoveDto>> getPlayerMovesByPlayerAndGame(final String gameUuid, final String playerUuid, final QueryProjection projection){
-
-        LOGGER.info("START | Get moves by runtime");
-
-        final List<AbstractPlayerMoveDto> response = new ArrayList<>();
-        if (!gameService.existsById(gameUuid)) {
-            LOGGER.info(String.format("Game with uuid %s does not exist", gameUuid));
-
-        } else if (!userResourceService.existsById(playerUuid)) {
-            LOGGER.info(String.format("User with uuid %s does not exist", playerUuid));
-
-        } else {
-
-
-           Resource<GameUserRuntimeInfoDto> userRuntimeInfoDto=    gameService.getUserRuntimeInfoByPlayer(gameUuid,playerUuid);
-
-
-           if(userRuntimeInfoDto!=null &&userRuntimeInfoDto.getContent()!=null){
-
-
-
-               Optional<List<AbstractPlayerMoveDto>>  movements = playerMoveEntityService.getMovesByGameRuntimeInfo(userRuntimeInfoDto.getContent().getId(),QueryProjection.max);
-
-
-               if(movements.isPresent()){
-                   LOGGER.info("Found Items count: "+movements.get().size());
-
-
-                   response.addAll(movements.get());
-
-
-               }
-
-
-           }
-
-
-
-
-
-
-
-
-        }
-
-
-        LOGGER.info("STOP | Get moves by runtime");
-
-        return new ResponseEntity<>(response,HttpStatus.OK);
-    }
-
-
-    private void fetchTargetUnitByMove(AbstractPlayerMoveDto moveDto){
-        for (AbstractMoveSkillEffectValueDto moveValueDto:
-              moveDto.getEffectValues()) {
-
-
-
-           Optional<BasePlayerMoveValueDto> tesT = valueResourceService.findById(moveValueDto.getId());
-            Resource<UnitDto> target = (Resource<UnitDto>) valueResourceService.getChild(tesT.get().getId(),"target",QueryProjection.def);
-
-            if(target.getContent()!=null) {
-                moveValueDto.setTarget((UnitDto) target.getContent());
-            }
-
-        }
-    }**/
-
 
 
 }

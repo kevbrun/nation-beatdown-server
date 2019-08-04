@@ -6,4 +6,5 @@ public interface INamedObjectDao<T extends NamedEntityBase>  {
 
 
     T findByName(String name);
+    boolean existsByName(String name);
 }

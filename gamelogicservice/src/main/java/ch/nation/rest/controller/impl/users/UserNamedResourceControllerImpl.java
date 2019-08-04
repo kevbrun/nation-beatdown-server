@@ -104,4 +104,13 @@ public class UserNamedResourceControllerImpl extends AbstractMassNamedResourceGa
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection, projection);
     }
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/exists/{name}")
+    public ResponseEntity<Boolean> existsByName(@PathVariable("name") String name) {
+        return super.existsByName(name);
+    }
+
+
+
 }

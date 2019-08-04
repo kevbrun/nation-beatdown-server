@@ -1,11 +1,12 @@
 package ch.nation.dbservice.entities.moves.values;
 
 
+import ch.nation.core.model.Enums.StatModTarget;
+import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 
 @DiscriminatorValue("STAT")
@@ -13,8 +14,19 @@ import java.util.Objects;
 public class StatPlayerMoveValue extends BasePlayerMoveValue implements IDiscrimantorValue {
 
 
+    @JsonProperty("applied_on_stat")
+    @Enumerated(EnumType.STRING)
+    private StatType appliedOn;
+
+
     @JsonProperty("value")
     private float value;
+
+
+    public StatPlayerMoveValue(){
+        super();
+        appliedOn = StatType.NONE;
+    }
 
     public float getValue() {
         return value;
@@ -24,6 +36,14 @@ public class StatPlayerMoveValue extends BasePlayerMoveValue implements IDiscrim
         this.value = value;
     }
 
+
+    public StatType getAppliedOn() {
+        return appliedOn;
+    }
+
+    public void setAppliedOn(StatType appliedOn) {
+        this.appliedOn = appliedOn;
+    }
 
     @Override
     public boolean equals(Object o) {

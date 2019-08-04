@@ -29,34 +29,29 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.GET,path = "")
     Resources<TResult> getAll(@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-  //  Resources<TResult> getAll();
 
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     Resource<TResult> create(TInput object,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-    //@RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    //Resource<TResult> create(TInput object);
+
 
     @RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
     Resource<TResult> findById(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-    //@RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
-    //Resource<TResult> findById(@PathVariable("uuid")String uuid);
+
 
     @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
     ResponseEntity<?> delete(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-   // @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
-   // ResponseEntity<?> delete(@PathVariable("uuid")String uuid);
+
 
     @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
     Resource<TResult> findByName(@RequestParam("name")String name,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
-  //  @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
-   // Resource<TResult> findByName(@RequestParam("name")String name);
+
 
 
     @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
@@ -65,12 +60,6 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")
     Resource<TResult> updatePut(@PathVariable("uuid") String uuid, @RequestBody TInput payload, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
- //   @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
- //   Resource<TResult> updatePatch(@PathVariable("uuid") String uuid, @RequestBody TInput payload);
-
-
-  //  @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
-  //  ResponseEntity<Resource<TResult>> createAssocations(@PathVariable("parent_uuid")String uuid, @PathVariable("resource")String resource, @RequestBody String links);
 
     //TODO PUT PATCH OR POST?
     @RequestMapping(method = RequestMethod.PATCH,path = "/{parent_uuid}/{resource}",consumes = "text/uri-list")
@@ -92,6 +81,11 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
     @RequestMapping(method = RequestMethod.GET,path="/search/existsById")
     Resource<Boolean> existsById(@RequestParam("id") String id, @RequestParam(value="projection",required = false)QueryProjection projection);
+
+
+    @RequestMapping(method = RequestMethod.GET,path="/search/existsByName")
+    Boolean existsByName(@RequestParam("name") String name);
+
 
 
     //  @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")

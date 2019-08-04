@@ -1,9 +1,6 @@
 package ch.nation.dbservice.config;
 
 import ch.nation.dbservice.utils.SpringUtility;
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.callback.Callback;
-import org.flywaydb.core.api.callback.FlywayCallback;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.flyway.*;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -17,7 +14,7 @@ import javax.sql.DataSource;
 //https://stackoverflow.com/questions/48214783/flyway-spring-boot-autowired-beans-with-jpa-dependency
 
 @Configuration
-public class DBFlywayConfiguration extends FlywayAutoConfiguration.FlywayConfiguration {
+public class DBFlywayConfiguration {/**extends  FlywayAutoConfiguration.FlywayConfiguration {
 
     private final SpringUtility utility;
 
@@ -44,6 +41,6 @@ public class DBFlywayConfiguration extends FlywayAutoConfiguration.FlywayConfigu
     @DependsOn("entityManagerFactory")
     FlywayMigrationInitializer delayedFlywayInitializer(Flyway flyway) {
         return new FlywayMigrationInitializer(flyway, null);
-    }
+    }**/
 
 }

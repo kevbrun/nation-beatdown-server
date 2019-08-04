@@ -34,7 +34,7 @@ public abstract class AbstractNamedResourceGameLogicController<TResult extends N
     }
 
     public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection",required = false)QueryProjection projection){
-        if (name == null | name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
 
         Optional<TResult> response;
         try {
@@ -50,5 +50,12 @@ public abstract class AbstractNamedResourceGameLogicController<TResult extends N
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
 
+
+    public ResponseEntity<Boolean> existsByName(@RequestParam("name") String name){
+        if(name==null || name.isEmpty()) return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+       Optional<Boolean> response = ((AbstractNamedEntityService)service).existsByName(name);
+       return new ResponseEntity<>(response.get(),HttpStatus.OK);
+
+    }
 
 }

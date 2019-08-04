@@ -38,6 +38,8 @@ public class GameDto extends NamedObjectAbstractDto {
     @JsonProperty("runtimes")
     private List<GameUserRuntimeInfoDto> userGameUserRuntimeInfo;
 
+    @JsonProperty("winner_player")
+    private String winner;
 
     public GameDto() {
         super();
@@ -53,6 +55,13 @@ public class GameDto extends NamedObjectAbstractDto {
     }
 
 
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
 
     public List<UserDto> getUsers() {
         return users;

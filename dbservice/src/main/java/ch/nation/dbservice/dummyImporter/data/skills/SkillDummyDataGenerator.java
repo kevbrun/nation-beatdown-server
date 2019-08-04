@@ -34,6 +34,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createMoveOtherSkill();
         createFernkampfSkill();
         createTimeTravelSkill();
+        createResetAPSkill();
+        createResetHPSkill();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -167,5 +169,48 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
     }
 
+
+    private void createResetAPSkill(){
+        Skill skill = new Skill();
+        skill.setName("Reset AP");
+        skill.setDescription("Setze AP auf Max Wert");
+        skill.setCost(0);
+        skill.setCurrentCooldownTimer(0);
+        skill.setCooldown(0);
+        skill.setSkillBarOrder(9999);
+        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+        skill.setTarget(Target.SELF);
+        skill.setActionArea(actionArea);
+
+
+        skill= skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByName("Reset AP");
+
+        skill.addSkillEffect(effect);
+
+        skillRepository.save(skill);
+    }
+
+
+    private void createResetHPSkill(){
+        Skill skill = new Skill();
+        skill.setName("Reset HP");
+        skill.setDescription("Setze HP auf Max Wert");
+        skill.setCost(0);
+        skill.setCurrentCooldownTimer(0);
+        skill.setCooldown(0);
+        skill.setSkillBarOrder(9999);
+        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+        skill.setTarget(Target.SELF);
+        skill.setActionArea(actionArea);
+
+
+        skill= skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByName("Reset HP");
+
+        skill.addSkillEffect(effect);
+
+        skillRepository.save(skill);
+    }
 
 }

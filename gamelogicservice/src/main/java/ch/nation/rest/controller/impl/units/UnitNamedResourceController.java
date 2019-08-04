@@ -79,4 +79,11 @@ public class UnitNamedResourceController extends AbstractMassNamedResourceGameLo
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
     }
+
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/exists/{name}")
+    public ResponseEntity<Boolean> existsByName(@PathVariable("name") String name) {
+        return super.existsByName(name);
+    }
 }

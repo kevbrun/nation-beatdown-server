@@ -37,7 +37,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
    createMoveEffect();
     createTimeReversalSkill();
         createCompleteRoundSkillEffect();
-
+        createResetAPSkillEffect();
+        createResetHPSkillEffect();
 
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
     }
@@ -125,6 +126,28 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
         skillEffectRepository.save(timeReversalSkillEffect);
 
+    }
+
+    private void createResetAPSkillEffect(){
+        StatSkillEffect skillEffect = new StatSkillEffect();
+        skillEffect.setName("Reset AP");
+        skillEffect.setDescription("Resets AP to max value");
+        skillEffect.setApplyCalculationOnStat(StatType.ACTION_POINTS);
+        skillEffect.setResultIsNegative(false);
+        skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
+        skillEffect.setTypeUsedForCalculation(StatType.AGILITY);
+        skillEffectRepository.save(skillEffect);
+    }
+
+    private void createResetHPSkillEffect(){
+        StatSkillEffect skillEffect = new StatSkillEffect();
+        skillEffect.setName("Reset HP");
+        skillEffect.setDescription("Resets HP to max value");
+        skillEffect.setApplyCalculationOnStat(StatType.ACTION_POINTS);
+        skillEffect.setResultIsNegative(false);
+        skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
+        skillEffect.setTypeUsedForCalculation(StatType.AGILITY);
+        skillEffectRepository.save(skillEffect);
     }
 
 }

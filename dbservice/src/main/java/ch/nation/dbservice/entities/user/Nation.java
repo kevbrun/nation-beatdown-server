@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @Entity(name="NATION")
 @Table(name="NATION")
+@AttributeOverride(name = "name", column = @Column(name = "name",unique = false,nullable = false))
 public class Nation extends NamedEntityBase implements Serializable {
 
     @OneToOne(mappedBy = "nation")
