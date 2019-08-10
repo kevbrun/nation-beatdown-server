@@ -71,7 +71,7 @@ public class StatBonusDeltaDto {
 
 
 
-    @JsonProperty("strBonusPerc")
+    @JsonProperty("vitBonusPerc")
     private FloatBonus vitPercentageBonus;
 
 

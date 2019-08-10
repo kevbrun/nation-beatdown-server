@@ -36,6 +36,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createTimeTravelSkill();
         createResetAPSkill();
         createResetHPSkill();
+        createSelfExplosion();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -212,5 +213,32 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         skillRepository.save(skill);
     }
+
+      private void createSelfExplosion(){
+         Skill skill = new Skill();
+         skill.setName("Explosion!");
+         skill.setDescription("Einheit explodiert vor Wut!");
+         skill.setCost(0);
+         skill.setCooldown(10000);
+          skill.setSkillBarOrder(9999);
+          ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+          skill.setTarget(Target.SELF);
+          skill.setActionArea(actionArea);
+
+
+          skill= skillRepository.save(skill);
+
+          SkillEffect effect = skillEffectRepository.findByName("Selbstschadenseffekt");
+          skill.addSkillEffect(effect);
+
+
+          effect = skillEffectRepository.findByName("Schadenseffekt (Str)");
+
+          skill.addSkillEffect(effect);
+          skill = skillRepository.save(skill);
+
+
+
+      }
 
 }

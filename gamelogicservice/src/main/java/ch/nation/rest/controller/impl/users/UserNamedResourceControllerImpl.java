@@ -70,6 +70,7 @@ public class UserNamedResourceControllerImpl extends AbstractMassNamedResourceGa
     }
 
 
+
         @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
     public ResponseEntity delete( @PathVariable("uuid") String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {

@@ -1,5 +1,6 @@
 package ch.nation.core.model.dto;
 
+import ch.nation.core.model.dto.characteristics.BaseCharacteristicDto;
 import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
 import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
@@ -29,6 +30,7 @@ import java.io.Serializable;
         //BASE
         @JsonSubTypes.Type(value = SkillCharacteristicsDto.class, name = "SkillCharacteristic"),
         @JsonSubTypes.Type(value = StatCharacteristicsDto.class, name = "StatCharacteristic"),
+        @JsonSubTypes.Type(value = BaseCharacteristicDto.class, name = "BaseCharacteristic"),
         @JsonSubTypes.Type(value = CharacterClassDto.class, name = "CharacterClass"),
         @JsonSubTypes.Type(value = GameDto.class, name = "Game"),
 
@@ -42,6 +44,8 @@ import java.io.Serializable;
 
         //PREJUDICES
         @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice"),
+
+
 
 
         //TRIGGERS

@@ -1,6 +1,6 @@
 package ch.nation.dbservice.entities.prejudices.triggers;
 
-import ch.nation.dbservice.entities.characteristics.Characteristic;
+import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -21,24 +21,24 @@ public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
     @JsonProperty("characteristics")
     @ManyToMany
     @RestResource(path = "characteristics", rel="characteristics")
-    private List<Characteristic> characteristics;
+    private List<BaseCharacteristic> characteristics;
 
     public CharacteristicPrejudiceTrigger() {
 
     }
 
-    public CharacteristicPrejudiceTrigger(List<Characteristic> characteristics) {
+    public CharacteristicPrejudiceTrigger(List<BaseCharacteristic> characteristics) {
         this.characteristics = characteristics;
     }
 
-    public List<Characteristic> getCharacteristics() {
+    public List<BaseCharacteristic> getCharacteristics() {
 
-        if( characteristics==null)  characteristics = new ArrayList<>();
+        if( characteristics ==null)  characteristics = new ArrayList<>();
 
         return characteristics;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
+    public void setCharacteristics(List<BaseCharacteristic> characteristics) {
         this.characteristics = characteristics;
     }
 
@@ -68,20 +68,20 @@ public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
 
     //CONNECTORS
 
-    public void addCharacteristic(Characteristic characteristic){
-        if(!getCharacteristics().contains(characteristic)){
-            getCharacteristics().add(characteristic);
-            characteristic.addTrigger(this);
+   /** public void addCharacteristic(BaseCharacteristic baseCharacteristic){
+        if(!getCharacteristics().contains(baseCharacteristic)){
+            getCharacteristics().add(baseCharacteristic);
+            baseCharacteristic.addTrigger(this);
 
         }
     }
 
-    public void removeCharacteristic(Characteristic characteristic){
-        if(getCharacteristics().contains(characteristic)){
-            getCharacteristics().remove(characteristic);
-            characteristic.removeTrigger(this);
+    public void removeCharacteristic(BaseCharacteristic baseCharacteristic){
+        if(getCharacteristics().contains(baseCharacteristic)){
+            getCharacteristics().remove(baseCharacteristic);
+            baseCharacteristic.removeTrigger(this);
 
         }
-    }
+    }**/
 
 }

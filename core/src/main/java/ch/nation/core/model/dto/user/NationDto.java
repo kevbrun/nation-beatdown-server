@@ -1,15 +1,22 @@
 package ch.nation.core.model.dto.user;
 
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class NationDto extends NamedObjectAbstractDto implements Serializable {
 
 
     @JsonProperty("user")
     private UserDto user;
+
+
+
+    @JsonProperty("characteristics")
+    private List<AbstractCharacteristicsDto> characteristics;
 
 
     public NationDto(UserDto user) {
@@ -33,6 +40,14 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
         this.user = user;
     }
 
+
+    public List<AbstractCharacteristicsDto> getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(List<AbstractCharacteristicsDto> characteristics) {
+        this.characteristics = characteristics;
+    }
 
     @Override
     public String toString() {

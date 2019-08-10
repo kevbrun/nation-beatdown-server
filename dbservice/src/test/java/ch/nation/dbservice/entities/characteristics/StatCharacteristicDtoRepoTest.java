@@ -8,7 +8,7 @@ import ch.nation.dbservice.repositories.characteristics.StatCharacteristicReposi
 import org.junit.Assert;
 import org.junit.Test;
 
-public class StatCharacteristicRepoTest extends AbstractNamedEntityTest<StatCharacteristic,StatCharacteristicRepository> implements IHasDiscriminatorValue {
+public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatCharacteristic,StatCharacteristicRepository> implements IHasDiscriminatorValue {
 
 
     @Override

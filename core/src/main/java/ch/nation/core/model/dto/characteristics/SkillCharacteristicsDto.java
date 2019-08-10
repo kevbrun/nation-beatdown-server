@@ -1,19 +1,17 @@
 package ch.nation.core.model.dto.characteristics;
 
 import ch.nation.core.model.dto.skills.SkillDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SkillCharacteristicsDto extends AbstractCharacteristicsDto {
 
 
+    @JsonProperty("skill")
     private SkillDto  skill;
 
 
-    public SkillCharacteristicsDto(SkillDto skill) {
-        this.skill = skill;
-    }
-
-
     public SkillCharacteristicsDto() {
+        super();
     }
 
     public SkillDto getSkill() {

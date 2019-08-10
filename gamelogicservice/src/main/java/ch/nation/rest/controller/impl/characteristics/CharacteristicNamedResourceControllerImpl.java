@@ -4,7 +4,7 @@ package ch.nation.rest.controller.impl.characteristics;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
 import ch.nation.rest.controller.interfaces.CharacteristicResourceController;
-import ch.nation.rest.services.impl.characteristics.CharacteristicResourceServiceImpl;
+import ch.nation.rest.services.impl.characteristics.BaseCharacteristicResourceServiceImpl;
 import ch.nation.rest.services.impl.characteristics.CharacteristicResourceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ public class CharacteristicNamedResourceControllerImpl extends AbstractNamedReso
     private final CharacteristicResourceService service;
 
 
-    public CharacteristicNamedResourceControllerImpl(CharacteristicResourceServiceImpl service) {
+    public CharacteristicNamedResourceControllerImpl(BaseCharacteristicResourceServiceImpl service) {
         super(service);
         this.service =service;
     }
