@@ -7,6 +7,7 @@ import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
+import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
 import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.prejudices.StatPrejudiceDto;
@@ -39,6 +40,7 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = StatSkillPlayerMoveSkillValueDto.class, name = "StatPlayerMoveValue"),
         @JsonSubTypes.Type(value = MoveSkillEffectPlayerMoveSkillValueDto.class, name = "MoveSkillPlayerMoveValue"),
         @JsonSubTypes.Type(value = BasePlayerMoveDto.class, name = "BasePlayerMove"),
+        @JsonSubTypes.Type(value = SkillPlayerMoveDto.class, name = "SkillPlayerMove"),
         @JsonSubTypes.Type(value = GameUserRuntimeInfoDto.class, name = "GameUserRuntimeInfo"),
 
 

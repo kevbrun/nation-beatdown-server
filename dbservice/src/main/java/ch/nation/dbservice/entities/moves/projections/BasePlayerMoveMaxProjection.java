@@ -1,9 +1,7 @@
 package ch.nation.dbservice.entities.moves.projections;
 
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
-import ch.nation.dbservice.entities.moves.BasePlayerMove;
-import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
+import ch.nation.dbservice.entities.moves.SkillPlayerMove;
 import ch.nation.dbservice.entities.projection.users.MinimizedEntityResponseProjection;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
@@ -14,7 +12,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 
-@Projection(name = "max",types = {BasePlayerMove.class})
+@Projection(name = "max",types = {SkillPlayerMove.class})
 public interface BasePlayerMoveMaxProjection extends MinimizedEntityResponseProjection {
     @JsonProperty("user")
     User getUser();
