@@ -2,7 +2,7 @@ package ch.nation.core.model.dto.characteristics;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class StatCharacteristicsDto extends AbstractCharacteristicsDto {
+public class StatCharacteristicsDto extends BaseCharacteristicDto {
 
 
     @JsonProperty("delta")

@@ -3,7 +3,7 @@ package ch.nation.core.model.dto.characteristics;
 import ch.nation.core.model.dto.skills.SkillDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SkillCharacteristicsDto extends AbstractCharacteristicsDto {
+public class SkillCharacteristicsDto extends BaseCharacteristicDto {
 
 
     @JsonProperty("skill")

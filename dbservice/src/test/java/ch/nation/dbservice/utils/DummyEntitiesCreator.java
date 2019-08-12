@@ -3,6 +3,7 @@ package ch.nation.dbservice.utils;
 import ch.nation.core.model.Enums.StatGrowthType;
 import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
+import ch.nation.dbservice.entities.characteristics.StatCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.clazzes.Stat;
 import ch.nation.dbservice.entities.skills.Skill;
@@ -82,7 +83,7 @@ public final class DummyEntitiesCreator {
 
 
     public static BaseCharacteristic getBaseCharacteristics(){
-        BaseCharacteristic chara = new BaseCharacteristic();
+        BaseCharacteristic chara = new StatCharacteristic();
         chara.setName("Super grosse Leute!");
         return chara;
 

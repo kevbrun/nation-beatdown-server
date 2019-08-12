@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum StatModTarget implements IEnumFromValue<StatModTarget> {
-    MIN_VALUE("MinValue"),MAX_VALUE("MaxValue"),VALUE("Value"),ALL("ALL");
+    MIN_VALUE("MinValue"),MAX_VALUE("MaxValue"),VALUE("Value"),ALL("All"),NONE("None");
 
     private String str;
 

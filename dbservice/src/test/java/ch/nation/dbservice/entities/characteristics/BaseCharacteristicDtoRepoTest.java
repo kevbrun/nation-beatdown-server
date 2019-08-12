@@ -5,7 +5,7 @@ import ch.nation.dbservice.repositories.characteristics.CharacteristicsRepositor
 
 public class BaseCharacteristicDtoRepoTest extends AbstractNamedEntityTest<BaseCharacteristic,CharacteristicsRepository> {
 
-    @Override
+  /**  @Override
     public void setUp() {
         super.setUp();
         entityToTest = new BaseCharacteristic();
@@ -19,7 +19,7 @@ public class BaseCharacteristicDtoRepoTest extends AbstractNamedEntityTest<BaseC
         listOfEntities.add(baseCharacteristic);
 
 
-    }
+    }**/
 
 
 

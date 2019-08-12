@@ -99,9 +99,9 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
             trigger.removeCharacteristic(this);
         }
 
-    }**/
+    }
 
-
+**/
 
 
 }

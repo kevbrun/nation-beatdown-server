@@ -38,7 +38,7 @@ public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTes
         Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("CharacteristicPrejudiceTrigger"));
     }
 
-
+/**
     @Test
     @Transactional
     public void add_characteristic_to_prejudice_trigger(){
@@ -129,7 +129,7 @@ public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTes
 
     }
 
-
+**/
     @Override
     public void cleanUp() {
         super.cleanUp();
