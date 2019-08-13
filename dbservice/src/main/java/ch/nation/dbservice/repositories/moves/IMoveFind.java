@@ -17,4 +17,6 @@ public interface IMoveFind<T> {
     Iterable<T> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid);
 
 
+
+
 }

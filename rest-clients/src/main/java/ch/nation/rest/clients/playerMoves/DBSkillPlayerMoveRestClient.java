@@ -33,5 +33,11 @@ public interface DBSkillPlayerMoveRestClient extends DBRestServiceBaseInterface<
                                                                @RequestParam(name = "projection",required=false)
                                                                       QueryProjection projection);
 
+    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_IdAndCooldownCounterGreaterThan")
+    Resources<SkillPlayerMoveDto> getAllMovesByCounterGreaterThan(@RequestParam("runtime")String gameRuntimeUuid,
+                                                                  @RequestParam("counter") int counter,
+                                                                  @RequestParam(name = "projection",required=false)
+                                                                          QueryProjection projection);
+
 
 }

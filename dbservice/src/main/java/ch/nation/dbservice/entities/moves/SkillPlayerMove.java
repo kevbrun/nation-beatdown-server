@@ -7,6 +7,7 @@ import ch.nation.dbservice.entities.units.Unit;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -23,6 +24,9 @@ public class SkillPlayerMove extends BasePlayerMove {
     @JsonProperty("caster_skill_cost")
     private int skillCost;
 
+    @Column(name="cnt_cooldown")
+    @JsonProperty("cnt_cooldown")
+    private int cooldownCounter;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty("effect_values")
@@ -33,11 +37,17 @@ public class SkillPlayerMove extends BasePlayerMove {
 
     public SkillPlayerMove() {
         super();
-
+        cooldownCounter = 0;
     }
 
 
+    public int getCooldownCounter() {
+        return cooldownCounter;
+    }
 
+    public void setCooldownCounter(int cooldownCounter) {
+        this.cooldownCounter = cooldownCounter;
+    }
 
     public List<BasePlayerMoveValue> getAppliedEffects() {
         return appliedEffects;

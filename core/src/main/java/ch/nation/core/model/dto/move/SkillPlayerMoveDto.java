@@ -10,6 +10,8 @@ public class SkillPlayerMoveDto extends BasePlayerMoveDto
     @JsonProperty("effect_values")
     private List<AbstractMoveSkillEffectValueDto> effectValues;
 
+    @JsonProperty("cnt_cooldown")
+    private int cooldownCounter;
 
     @JsonProperty("caster_skill_cost")
     private int skillCost;
@@ -28,6 +30,14 @@ public class SkillPlayerMoveDto extends BasePlayerMoveDto
         this.effectValues = effectValues;
     }
 
+
+    public int getCooldownCounter() {
+        return cooldownCounter;
+    }
+
+    public void setCooldownCounter(int cooldownCounter) {
+        this.cooldownCounter = cooldownCounter;
+    }
 
     public int getSkillCost() {
         return skillCost;

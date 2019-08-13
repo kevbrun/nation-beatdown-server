@@ -5,6 +5,7 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
+import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
 import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
@@ -50,6 +51,7 @@ public class GameLogicService {
     private final GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService;
     private final SkillResourceServiceImpl skillResourceService;
     private final PlayerMoveValueResourceServiceImpl valueResourceService;
+    private final SkillPlayerMoveResourceServiceImpl skillPlayerMoveResourceService;
     private final MoveMoveValueResourceServiceImpl moveMoveValueResourceService;
     private final StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService;
     private final SkillEffectsResourceServiceImpl skillEffectsResourceService;
@@ -58,7 +60,7 @@ public class GameLogicService {
 
 
     @Autowired
-    public GameLogicService(final GameResourceServiceImpl gameService, final PlayerMoveResourceServiceImpl playerMoveEntityService, final UserResourceServiceImpl userResourceService, UnitResourceServiceImpl unitResourceService, GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService, SkillResourceServiceImpl skillResourceService, PlayerMoveValueResourceServiceImpl valueResourceService, MoveMoveValueResourceServiceImpl moveMoveValueResourceService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService, SkillEffectsResourceServiceImpl skillEffectsResourceService, SkillPlayerMoveResourceServiceImpl playerMoveResourceService) {
+    public GameLogicService(final GameResourceServiceImpl gameService, final PlayerMoveResourceServiceImpl playerMoveEntityService, final UserResourceServiceImpl userResourceService, UnitResourceServiceImpl unitResourceService, GameUserRuntimeInfoServiceImpl gameUserRuntimeInfoService, SkillResourceServiceImpl skillResourceService, PlayerMoveValueResourceServiceImpl valueResourceService, SkillPlayerMoveResourceServiceImpl skillPlayerMoveResourceService, MoveMoveValueResourceServiceImpl moveMoveValueResourceService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService, SkillEffectsResourceServiceImpl skillEffectsResourceService, SkillPlayerMoveResourceServiceImpl playerMoveResourceService) {
         this.gameService = gameService;
         this.playerMoveEntityService = playerMoveEntityService;
         this.userResourceService = userResourceService;
@@ -66,6 +68,7 @@ public class GameLogicService {
         this.gameUserRuntimeInfoService = gameUserRuntimeInfoService;
         this.skillResourceService = skillResourceService;
         this.valueResourceService = valueResourceService;
+        this.skillPlayerMoveResourceService = skillPlayerMoveResourceService;
         this.moveMoveValueResourceService = moveMoveValueResourceService;
         this.statPlayerMoveValueResourceService = statPlayerMoveValueResourceService;
         this.skillEffectsResourceService = skillEffectsResourceService;
@@ -112,6 +115,19 @@ public class GameLogicService {
 
         //Start updating GameState
 
+        updateGameState(currentPlayerGameRuntimeInfo, gameInstance, runtime);
+
+
+        // Update Skill of player
+        updateSkillCooldownCounter(runtime);
+
+
+        LOGGER.info(String.format("STOP | END Player Move | game : %s ", gameUuid));
+        return new ResponseEntity<>(Boolean.valueOf(true),HttpStatus.OK);
+
+    }
+
+    private void updateGameState(final GameUserRuntimeInfoDto currentPlayerGameRuntimeInfo, final GameDto gameInstance, final Optional<GameUserRuntimeInfoDto> runtime) {
         GameUserRuntimeInfoDto runtimeInfoDto  = runtime.get();
         runtimeInfoDto.setConsiderationTime(currentPlayerGameRuntimeInfo.getConsiderationTime());
         gameUserRuntimeInfoService.updatePatch(runtimeInfoDto);
@@ -123,22 +139,34 @@ public class GameLogicService {
 
         gameInstance.setNextPlayerUuid(currentPlayerUuid);
         gameInstance.setCurrentPlayerUuid(nextPlayerUuid);
-
+        LOGGER.info("Next Player is: "+nextPlayerUuid);
         if(nextPlayerUuid.equals(gameInstance.getFirstPlayerUuid())) {
             gameInstance.setRound((round + 1));
+            LOGGER.info("Updated Round Counter to"+(round+1));
         }
+        Optional<GameDto> updatedState= gameService.updatePut(gameInstance);
+        LOGGER.debug("State was updated");
+    }
+
+    private void updateSkillCooldownCounter(final Optional<GameUserRuntimeInfoDto> runtime) {
+        LOGGER.debug("Try to get all moves with skill count greater than 0");
+        Optional<List<AbstractPlayerMoveDto>> movesToUpdate = skillPlayerMoveResourceService.getMovesByGameRuntimeAndCooldownCounterGraterThan(runtime.get().getId(),0, QueryProjection.def);
 
 
-       Optional<GameDto> updatedState= gameService.updatePut(gameInstance);
+        for (AbstractPlayerMoveDto move:
+             movesToUpdate.get()) {
 
 
-        LOGGER.info(String.format("STOP | END Player Move | game : %s ", gameUuid));
-        return new ResponseEntity<>(Boolean.valueOf(true),HttpStatus.OK);
-
+           int currentCooldownCounter= ((SkillPlayerMoveDto)move).getCooldownCounter();
+           int newCounter = currentCooldownCounter-1;
+            ((SkillPlayerMoveDto)move).setCooldownCounter(newCounter);
+           skillPlayerMoveResourceService.updatePut((SkillPlayerMoveDto) move);
+            LOGGER.debug("Updated counter");
+        }
     }
 
 
-    public ResponseEntity<?> addMove(String gameUuid, String playerUuid, BasePlayerMoveDto move) throws Exception {
+    public ResponseEntity<?> addMove(final String gameUuid, final String playerUuid, final BasePlayerMoveDto move) throws Exception {
         LOGGER.info(String.format("START | Adding unit move By Name | game : %s | player: %s", gameUuid, playerUuid));
 
 
@@ -167,8 +195,9 @@ public class GameLogicService {
 
             AbstractDto savedMove = ((ArrayList<AbstractDto>) children.get()).get(0);
             //TODO Check why it is not possible to set skill cost during creation???
+       //     ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
-            ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
+            ((SkillPlayerMoveDto) savedMove).setCooldownCounter(((SkillPlayerMoveDto)move).getSkillDto().getCooldown());
             playerMoveResourceService.updatePut((SkillPlayerMoveDto) savedMove);
 
             //Fetch Association targets

@@ -10,6 +10,7 @@ import ch.nation.rest.clients.playerMoves.DBPlayerMovesRestClient;
 import ch.nation.rest.clients.playerMoves.DBSkillPlayerMoveRestClient;
 import ch.nation.rest.services.impl.AbstractEntityService;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -67,6 +68,18 @@ public class SkillPlayerMoveResourceServiceImpl extends AbstractEntityService<Sk
 
         return Optional.of(response);
 
+
+    }
+
+
+    public Optional<List<AbstractPlayerMoveDto>> getMovesByGameRuntimeAndCooldownCounterGraterThan(String gameRuntimeUUId, int counter, QueryProjection projection){
+        LOGGER.info("START | Query all moves with skill cooldown greater zero");
+        List<AbstractPlayerMoveDto> foundObjects = new ArrayList<>();
+        Resources<SkillPlayerMoveDto> moves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesByCounterGreaterThan(gameRuntimeUUId,counter,projection);
+        foundObjects.addAll(moves.getContent());
+        LOGGER.info("Result Item count "+foundObjects.size());
+        LOGGER.info("START | Query all moves with skill cooldown greater zero");
+        return Optional.of(foundObjects);
 
     }
 }

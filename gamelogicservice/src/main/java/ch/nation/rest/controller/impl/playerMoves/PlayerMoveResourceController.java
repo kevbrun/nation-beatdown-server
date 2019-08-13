@@ -4,8 +4,7 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
-import ch.nation.rest.services.impl.playerMoves.values.PlayerMoveValueResourceServiceImpl;
-import feign.RequestLine;
+import ch.nation.rest.services.impl.playerMoves.SkillPlayerMoveResourceServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +16,13 @@ import java.util.Optional;
 @RequestMapping("/moves")
 public class PlayerMoveResourceController extends AbstractResourceGameLogicController<AbstractPlayerMoveDto,AbstractPlayerMoveDto> {
 
+    private final SkillPlayerMoveResourceServiceImpl skillService;
 
 
-    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service) {
+
+    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service, SkillPlayerMoveResourceServiceImpl skillService) {
         super(service);
+        this.skillService = skillService;
     }
 
 
@@ -87,5 +89,17 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
         return new ResponseEntity<>(result.get(),HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}/round")
+    public ResponseEntity getMovesByGameRuntimeAndCooldownCounterGraterThan(@PathVariable("uuid")String gameRuntimeUuid, @RequestParam(value = "counter",required = false,defaultValue = "0") int counter, @RequestParam(value = "projection",required = false)QueryProjection projection){
+
+
+        Optional<?> foundObjects= skillService.getMovesByGameRuntimeAndCooldownCounterGraterThan(gameRuntimeUuid,counter,projection);
+
+
+        return new ResponseEntity<>(foundObjects.get(),HttpStatus.OK);
 
     }
+
+
+
+}
