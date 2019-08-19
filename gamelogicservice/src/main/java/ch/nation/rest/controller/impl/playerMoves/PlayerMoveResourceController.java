@@ -28,39 +28,39 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll() {
-        return super.getAll();
+    public ResponseEntity getAll(@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody AbstractPlayerMoveDto payload) {
-        return super.update(payload);
+    public ResponseEntity update(@RequestBody AbstractPlayerMoveDto payload,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.update(payload,projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity create(@RequestBody AbstractPlayerMoveDto object) throws Exception {
-        return super.create(object);
+    public ResponseEntity create(@RequestBody AbstractPlayerMoveDto object,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.create(object,projection);
     }
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
-    public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
-        return super.delete(uuid);
+    public ResponseEntity delete( @PathVariable("uuid") String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.delete(uuid,projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
-    public ResponseEntity findById(@PathVariable("uuid")String uuid) {
-        return super.findById(uuid);
+    public ResponseEntity findById(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findById(uuid,projection);
     }
 
 
 
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
-    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
-        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection,projection);
 
     }
 

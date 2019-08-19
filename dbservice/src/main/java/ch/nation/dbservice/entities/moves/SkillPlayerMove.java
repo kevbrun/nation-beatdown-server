@@ -30,7 +30,7 @@ public class SkillPlayerMove extends BasePlayerMove {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty("effect_values")
-    @RestResource(path = "values",rel = "values",exported = true)
+    @RestResource(path = "values",rel = "values")
     private List<BasePlayerMoveValue> appliedEffects = new ArrayList<>();
 
 

@@ -233,9 +233,13 @@ public class GameLogicService {
                 }
 
 
-                playerMoveResourceService.createAssociation(savedMove.getId(), childrensList);
-                childrensList.clear();
             }
+
+
+
+                playerMoveResourceService.createAssociation(savedMove.getId(), childrensList);
+
+            childrensList.clear();
 
 
 //ADD move to user-runtime!

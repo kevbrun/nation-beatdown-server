@@ -222,7 +222,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
          skill.setCooldown(10000);
           skill.setSkillBarOrder(9999);
           ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
-          skill.setTarget(Target.SELF);
+          skill.setTarget(Target.AREA_ENEMY);
           skill.setActionArea(actionArea);
 
 
