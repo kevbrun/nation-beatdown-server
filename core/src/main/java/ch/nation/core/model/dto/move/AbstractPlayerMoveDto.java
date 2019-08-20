@@ -23,23 +23,13 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
     @JsonProperty("skill")
     private SkillDto skillDto;
-    @JsonProperty("effect_values")
-    private List<AbstractMoveSkillEffectValueDto> effectValues;
 
-    @JsonProperty("caster_skill_cost")
-    private int skillCost;
+
 
     public AbstractPlayerMoveDto() {
     }
 
 
-    public int getSkillCost() {
-        return skillCost;
-    }
-
-    public void setSkillCost(int skillCost) {
-        this.skillCost = skillCost;
-    }
 
     public GameDto getGameDto() {
         return gameDto;
@@ -83,13 +73,7 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
         this.skillDto = skillDto;
     }
 
-    public List<AbstractMoveSkillEffectValueDto> getEffectValues() {
-        return effectValues;
-    }
 
-    public void setEffectValues(List<AbstractMoveSkillEffectValueDto> effectValues) {
-        this.effectValues = effectValues;
-    }
 
     @Override
     public String ResourceCollectionName() {
@@ -104,7 +88,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
                 ", user=" + user +
                 ", caster=" + caster +
                 ", skillDto=" + skillDto +
-                ", effectValues=" + effectValues +
                 ", id='" + id + '\'' +
                 "} " + super.toString();
     }

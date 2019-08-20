@@ -12,15 +12,9 @@ import java.util.UUID;
 
 @Transactional
 @RepositoryRestResource(collectionResourceRel = "moves",path = "moves")
-public interface PlayerMoveRepository extends IPageableDao<BasePlayerMove> {
+public interface PlayerMoveRepository extends IPageableDao<BasePlayerMove>, IMoveFind<BasePlayerMove> {
 
-    Iterable<BasePlayerMove> findAllByGameInfo_IdAndCaster_IdAndRound(@Param("runtime")UUID runtimeUuid,@Param("caster")UUID casterUuid, @Param("round") int round);
 
-    Iterable<BasePlayerMove> findAllByCaster_Id(@Param("caster") UUID caster);
-
-    Iterable<BasePlayerMove> findAllByRound(@Param("round") int round);
-
-    Iterable<BasePlayerMove> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid);
 
 
 

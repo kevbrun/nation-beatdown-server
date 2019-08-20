@@ -1,15 +1,14 @@
 package ch.nation.dbservice.entities.characteristics;
 
 import ch.nation.dbservice.entities.bonus.StatBonusDelta;
-import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name="STAT_CHARACTERISTICS")
-@DiscriminatorValue("CHARACTERISTICS_STAT")
-public class StatCharacteristic extends Characteristic {
+@DiscriminatorValue("STAT")
+public class StatCharacteristic extends BaseCharacteristic  implements IDiscrimantorValue {
 
 
     @Embedded

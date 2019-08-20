@@ -1,11 +1,10 @@
 package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.position.IVector3;
-import ch.nation.core.model.position.Vector3;
-import ch.nation.core.model.position.Vector3Int;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
+import ch.nation.dbservice.entities.moves.SkillPlayerMove;
 import ch.nation.dbservice.entities.vectors.EmbeddableVector3Int;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +13,6 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity(name="USER_RUNTIME_INFO")
 @Table(name="USER_RUNTIME_INFO")

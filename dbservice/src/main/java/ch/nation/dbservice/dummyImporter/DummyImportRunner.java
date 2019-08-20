@@ -1,5 +1,6 @@
 package ch.nation.dbservice.dummyImporter;
 
+import ch.nation.dbservice.dummyImporter.data.characteristics.CharacteristicsDummyImporter;
 import ch.nation.dbservice.dummyImporter.data.clazzes.CharacterClassDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.games.GamesDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.moves.MoveDummyGenerator;
@@ -8,6 +9,7 @@ import ch.nation.dbservice.dummyImporter.data.skills.SkillDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillEffectDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.units.UnitsClassDummyGenerator;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
+import ch.nation.dbservice.repositories.characteristics.CharacteristicsRepository;
 import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
 import ch.nation.dbservice.repositories.game.GameRepository;
 import ch.nation.dbservice.repositories.game.GameUserRuntimeRepository;
@@ -36,9 +38,10 @@ public class DummyImportRunner  implements ApplicationRunner {
     private final PlayerMoveRepository playerMoveRepository;
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private final GameUserRuntimeRepository gameUserRuntimeRepository;
+    private final CharacteristicsRepository characteristicsRepository;
 
     @Autowired
-    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository) {
+    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository) {
         this.unitRepository = unitRepository;
         this.characterClassRepository = characterClassRepository;
         this.skillEffectRepository = skillEffectRepository;
@@ -47,20 +50,21 @@ public class DummyImportRunner  implements ApplicationRunner {
         this.gameRepository = gameRepository;
         this.playerMoveRepository = playerMoveRepository;
         this.gameUserRuntimeRepository = gameUserRuntimeRepository;
+        this.characteristicsRepository = characteristicsRepository;
     }
 
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         LOGGER.info("START MIGRATION OF DUMMY DATA!");
-        SkillEffectDummyDataGenerator skillEffectDummyData = new SkillEffectDummyDataGenerator(skillEffectRepository);
-    SkillDummyDataGenerator skillDummyDataGenerator = new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
-        CharacterClassDummyGenerator characterClassDummyGenerator = new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
-        UnitsClassDummyGenerator unitsClassDummyGenerator = new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
-        PlayerClassDummyGenerator playerClassDummyGenerator = new PlayerClassDummyGenerator(userRepository,unitRepository);
-        MoveDummyGenerator moveDummyGenerator = new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository, gameUserRuntimeRepository);
+       new SkillEffectDummyDataGenerator(skillEffectRepository);
+     new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
+        new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
+       new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
+        new PlayerClassDummyGenerator(userRepository,unitRepository);
+        new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository, gameUserRuntimeRepository);
         new GamesDummyGenerator(gameRepository,userRepository,gameUserRuntimeRepository);
-
+        new CharacteristicsDummyImporter(characteristicsRepository,skillRepository);
 
         LOGGER.info("FINISH MIGRATING DATA");
     }

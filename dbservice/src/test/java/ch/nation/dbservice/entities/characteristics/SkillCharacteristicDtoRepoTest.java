@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SkillCharacteristicRepoTest extends AbstractNamedEntityTest<SkillCharacteristic,SkillCharacteristicsRepository> implements IHasDiscriminatorValue {
+public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<SkillCharacteristic,SkillCharacteristicsRepository> implements IHasDiscriminatorValue {
 
 
     @Autowired

@@ -8,5 +8,6 @@ public class FloatBonus extends AbstractBonus<Float> {
     }
 
     public FloatBonus() {
+
     }
 }

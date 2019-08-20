@@ -23,6 +23,8 @@ public class EmbeddableFloatBonus implements IBonus<Float> {
 
 
     public EmbeddableFloatBonus() {
+        this.bonus = 0.0f;
+        this.statTarget = StatModTarget.NONE;
     }
 
     @Override

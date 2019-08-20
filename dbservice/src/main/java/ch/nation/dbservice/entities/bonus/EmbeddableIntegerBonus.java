@@ -27,6 +27,8 @@ public class EmbeddableIntegerBonus implements IBonus<Integer> {
     }
 
     public EmbeddableIntegerBonus() {
+        this.bonus = 0;
+        this.statTarget = StatModTarget.NONE;
     }
 
     public Integer getBonus() {

@@ -59,6 +59,7 @@ public class StatBonusDelta  {
     private EmbeddableIntegerBonus vitBonus;
 
 
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "bonus", column = @Column(name = "agi_bonus")),
@@ -226,7 +227,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getAgiBonus() {
-        if(agiBonus==null) apBonus = new EmbeddableIntegerBonus();
+        if(agiBonus==null) agiBonus = new EmbeddableIntegerBonus();
 
         return agiBonus;
     }

@@ -39,7 +39,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         createCompleteRoundSkillEffect();
         createResetAPSkillEffect();
         createResetHPSkillEffect();
-
+        createSelfDamageEffect();
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
     }
 
@@ -148,6 +148,19 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
         skillEffect.setTypeUsedForCalculation(StatType.AGILITY);
         skillEffectRepository.save(skillEffect);
+    }
+
+    private void createSelfDamageEffect(){
+        StatSkillEffect skillEffect = new StatSkillEffect();
+        skillEffect.setName("Selbstschadenseffekt");
+        skillEffect.setDescription("Schadet einem selber");
+        skillEffect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
+        skillEffect.setResultIsNegative(true);
+        skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
+        skillEffect.setTypeUsedForCalculation(StatType.HEALTH_POINTS);
+        skillEffectRepository.save(skillEffect);
+
+
     }
 
 }

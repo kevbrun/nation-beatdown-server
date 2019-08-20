@@ -1,20 +1,24 @@
 package ch.nation.dbservice.entities.characteristics;
 
 
-import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.skills.Skill;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name="SKILL_CHARACTERISTICS")
-@DiscriminatorValue("CHARACTERISTICS_SKILL")
-public class SkillCharacteristic extends Characteristic {
+@DiscriminatorValue("SKILL")
+public class SkillCharacteristic extends BaseCharacteristic implements IDiscrimantorValue {
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_id")
+    @JsonProperty("skill")
+    @RestResource(exported = false)
     private Skill skill;
 
 

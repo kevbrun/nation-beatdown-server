@@ -76,9 +76,10 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     @JsonProperty("effects")
     private List<SkillEffect> skillEffects;
 
-    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
     @JsonIgnore
-    private List<SkillCharacteristic> skillCharacteristic = new ArrayList<>();
+    @RestResource(exported = false)
+    private List<SkillCharacteristic> skillCharacteristic;
 
 
 

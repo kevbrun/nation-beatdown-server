@@ -4,8 +4,7 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
-import ch.nation.rest.services.impl.playerMoves.values.PlayerMoveValueResourceServiceImpl;
-import feign.RequestLine;
+import ch.nation.rest.services.impl.playerMoves.SkillPlayerMoveResourceServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,48 +16,51 @@ import java.util.Optional;
 @RequestMapping("/moves")
 public class PlayerMoveResourceController extends AbstractResourceGameLogicController<AbstractPlayerMoveDto,AbstractPlayerMoveDto> {
 
+    private final SkillPlayerMoveResourceServiceImpl skillService;
 
 
-    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service) {
+
+    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service, SkillPlayerMoveResourceServiceImpl skillService) {
         super(service);
+        this.skillService = skillService;
     }
 
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll() {
-        return super.getAll();
+    public ResponseEntity getAll(@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody AbstractPlayerMoveDto payload) {
-        return super.update(payload);
+    public ResponseEntity update(@RequestBody AbstractPlayerMoveDto payload,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.update(payload,projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity create(@RequestBody AbstractPlayerMoveDto object) throws Exception {
-        return super.create(object);
+    public ResponseEntity create(@RequestBody AbstractPlayerMoveDto object,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.create(object,projection);
     }
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
-    public ResponseEntity delete( @PathVariable("uuid") String uuid) throws Exception {
-        return super.delete(uuid);
+    public ResponseEntity delete( @PathVariable("uuid") String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.delete(uuid,projection);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
-    public ResponseEntity findById(@PathVariable("uuid")String uuid) {
-        return super.findById(uuid);
+    public ResponseEntity findById(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findById(uuid,projection);
     }
 
 
 
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
-    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
-        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection,projection);
 
     }
 
@@ -87,5 +89,17 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
         return new ResponseEntity<>(result.get(),HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}/round")
+    public ResponseEntity getMovesByGameRuntimeAndCooldownCounterGraterThan(@PathVariable("uuid")String gameRuntimeUuid, @RequestParam(value = "counter",required = false,defaultValue = "0") int counter, @RequestParam(value = "projection",required = false)QueryProjection projection){
+
+
+        Optional<?> foundObjects= skillService.getMovesByGameRuntimeAndCooldownCounterGraterThan(gameRuntimeUuid,counter,projection);
+
+
+        return new ResponseEntity<>(foundObjects.get(),HttpStatus.OK);
 
     }
+
+
+
+}
