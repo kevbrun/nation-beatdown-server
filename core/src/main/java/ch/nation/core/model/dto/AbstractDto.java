@@ -10,8 +10,11 @@ import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
 import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
+import ch.nation.core.model.dto.prejudices.BasePrejudiceDto;
+import ch.nation.core.model.dto.prejudices.SkillPrejudiceDto;
 import ch.nation.core.model.dto.prejudices.StatPrejudiceDto;
 import ch.nation.core.model.dto.prejudices.triggers.CharacteristicPrejudiceTriggerDto;
+import ch.nation.core.model.dto.prejudices.triggers.StatPrejudiceTriggerDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
 import ch.nation.core.model.dto.skills.effects.StatSkillEffectDto;
@@ -46,13 +49,15 @@ import java.io.Serializable;
 
         //PREJUDICES
         @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice"),
+        @JsonSubTypes.Type(value = SkillPrejudiceDto.class, name = "SkillPrejudice"),
+        @JsonSubTypes.Type(value = BasePrejudiceDto.class, name = "BasePrejudice"),
 
 
 
 
         //TRIGGERS
         @JsonSubTypes.Type(value = CharacteristicPrejudiceTriggerDto.class, name = "CharacteristicPrejudiceTrigger"),
-        @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice"),
+        @JsonSubTypes.Type(value = StatPrejudiceTriggerDto.class, name = "StatPrejudiceTrigger"),
 
 
         //SKILL

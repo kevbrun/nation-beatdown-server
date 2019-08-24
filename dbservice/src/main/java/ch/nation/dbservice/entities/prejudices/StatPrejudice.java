@@ -2,8 +2,8 @@ package ch.nation.dbservice.entities.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.dbservice.entities.bonus.StatBonusDelta;
-import ch.nation.dbservice.entities.prejudices.Prejudice;
-import ch.nation.dbservice.entities.prejudices.triggers.PrejudiceTrigger;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
+import ch.nation.dbservice.entities.prejudices.triggers.BasePrejudiceTrigger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Entity(name="STAT_PREJUDICE")
 @DiscriminatorValue("STAT")
-public class StatPrejudice extends Prejudice {
+public class StatPrejudice extends BasePrejudice   implements IDiscrimantorValue {
 
 
     @Embedded
@@ -25,23 +25,12 @@ public class StatPrejudice extends Prejudice {
 
 
     public StatPrejudice() {
+        super();
+        delta = new StatBonusDelta();
 
     }
 
-    public StatPrejudice(List<PrejudiceTrigger> prejudiceTriggers, PrejudiceOperator triggerOperation, StatBonusDelta delta) {
-        super(prejudiceTriggers, triggerOperation);
-        this.delta = delta;
-    }
 
-    public StatPrejudice(String name, String description, List<PrejudiceTrigger> prejudiceTriggers, PrejudiceOperator triggerOperation, StatBonusDelta delta) {
-        super(name, description, prejudiceTriggers, triggerOperation);
-        this.delta = delta;
-    }
-
-    public StatPrejudice(String name, String description, StatBonusDelta delta) {
-        super(name, description);
-        this.delta = delta;
-    }
 
     public StatPrejudice(StatBonusDelta delta) {
         this.delta = delta;
@@ -59,13 +48,6 @@ public class StatPrejudice extends Prejudice {
 
 
     @Override
-    public String toString() {
-        return "StatPrejudice{" +
-                "delta=" + delta +
-                "} " + super.toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof StatPrejudice)) return false;
@@ -78,5 +60,12 @@ public class StatPrejudice extends Prejudice {
     public int hashCode() {
 
         return Objects.hash(super.hashCode(), delta);
+    }
+
+    @Override
+    public String toString() {
+        return "StatPrejudice{" +
+                "delta=" + delta +
+                '}';
     }
 }

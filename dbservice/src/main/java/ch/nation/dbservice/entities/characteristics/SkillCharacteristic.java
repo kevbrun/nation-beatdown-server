@@ -22,12 +22,6 @@ public class SkillCharacteristic extends BaseCharacteristic implements IDiscrima
     private Skill skill;
 
 
-    public SkillCharacteristic(Skill skill) {
-        this.skill = skill;
-    }
-
-
-
     public SkillCharacteristic() {
         super();
     }
@@ -44,12 +38,6 @@ public class SkillCharacteristic extends BaseCharacteristic implements IDiscrima
 
 
 
-    @Override
-    public String toString() {
-        return "SkillCharacteristic{" +
-                "skill=" + skill +
-                "} " + super.toString();
-    }
 
     @Override
     public boolean equals(Object o) {

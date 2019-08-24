@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.user;
 
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
+import ch.nation.dbservice.entities.prejudices.BasePrejudice;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -28,6 +29,13 @@ public class Nation extends NamedEntityBase implements Serializable {
     @JsonProperty("characteristics")
     private List<BaseCharacteristic> characteristics;
 
+
+    @ManyToMany
+    @RestResource(path = "prejudices",rel = "prejudices",exported = false)
+    @JsonProperty("prejudices")
+    private List<BasePrejudice> prejudices;
+
+
     public Nation(){
         super();
     }
@@ -40,6 +48,13 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
+    public List<BasePrejudice> getPrejudices() {
+        return prejudices;
+    }
+
+    public void setPrejudices(List<BasePrejudice> prejudices) {
+        this.prejudices = prejudices;
+    }
     public List<BaseCharacteristic> getCharacteristics() {
         return characteristics;
     }

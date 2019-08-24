@@ -1,50 +1,41 @@
 package ch.nation.core.model.dto.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
+import ch.nation.core.model.dto.characteristics.StatBonusDeltaDto;
 import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 
-public class StatPrejudiceDto extends AbstractPrejudiceDto {
+public class StatPrejudiceDto extends BasePrejudiceDto {
 
 
-    @JsonProperty("triggers")
-    private List<AbstractPrejudiceTriggerDto> prejudiceTriggers;
 
-    @JsonProperty("operation")
-    private PrejudiceOperator triggerOperation;
 
-    public StatPrejudiceDto(List<AbstractPrejudiceTriggerDto> prejudiceTriggers, PrejudiceOperator triggerOperation) {
-        this.prejudiceTriggers = prejudiceTriggers;
-        this.triggerOperation = triggerOperation;
-    }
+
+    @JsonProperty("delta")
+    private StatBonusDeltaDto deltaDto;
+
 
     public StatPrejudiceDto() {
+    super();
+
     }
 
-    public List<AbstractPrejudiceTriggerDto> getPrejudiceTriggers() {
-        return prejudiceTriggers;
+    public StatBonusDeltaDto getDeltaDto() {
+        return deltaDto;
     }
 
-    public void setPrejudiceTriggers(List<AbstractPrejudiceTriggerDto> prejudiceTriggers) {
-        this.prejudiceTriggers = prejudiceTriggers;
+    public void setDeltaDto(StatBonusDeltaDto deltaDto) {
+        this.deltaDto = deltaDto;
     }
 
-    public PrejudiceOperator getTriggerOperation() {
-        return triggerOperation;
-    }
-
-    public void setTriggerOperation(PrejudiceOperator triggerOperation) {
-        this.triggerOperation = triggerOperation;
-    }
 
     @Override
     public String toString() {
         return "StatPrejudiceDto{" +
-                "prejudiceTriggers=" + prejudiceTriggers +
-                ", triggerOperation=" + triggerOperation +
-                "} " + super.toString();
+                ", deltaDto=" + deltaDto +
+                '}';
     }
 }

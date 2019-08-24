@@ -2,20 +2,20 @@ package ch.nation.core.model.dto.prejudices.triggers;
 
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class CharacteristicPrejudiceTriggerDto extends NamedObjectAbstractDto {
+public class CharacteristicPrejudiceTriggerDto extends AbstractPrejudiceTriggerDto {
 
+
+    @JsonProperty("characteristics")
     private List<AbstractCharacteristicsDto> characteristics;
 
 
     public CharacteristicPrejudiceTriggerDto() {
     }
 
-    public CharacteristicPrejudiceTriggerDto(List<AbstractCharacteristicsDto> characteristics) {
-        this.characteristics = characteristics;
-    }
 
     public List<AbstractCharacteristicsDto> getCharacteristics() {
         return characteristics;
@@ -33,8 +33,5 @@ public class CharacteristicPrejudiceTriggerDto extends NamedObjectAbstractDto {
     }
 
 
-    @Override
-    public String ResourceCollectionName() {
-        return "prejudices";
-    }
+
 }

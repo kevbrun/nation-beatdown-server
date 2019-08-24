@@ -5,6 +5,8 @@ import ch.nation.dbservice.dummyImporter.data.clazzes.CharacterClassDummyGenerat
 import ch.nation.dbservice.dummyImporter.data.games.GamesDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.moves.MoveDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.players.PlayerClassDummyGenerator;
+import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceDummyImporter;
+import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceTriggerDummyImporter;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillEffectDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.units.UnitsClassDummyGenerator;
@@ -14,6 +16,12 @@ import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
 import ch.nation.dbservice.repositories.game.GameRepository;
 import ch.nation.dbservice.repositories.game.GameUserRuntimeRepository;
 import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
+import ch.nation.dbservice.repositories.prejudices.PrejudiceRepository;
+import ch.nation.dbservice.repositories.prejudices.SkillPrejudiceRepository;
+import ch.nation.dbservice.repositories.prejudices.StatPrejudiceRepository;
+import ch.nation.dbservice.repositories.prejudices.triggers.CharacteristicPrejudiceTriggerRepository;
+import ch.nation.dbservice.repositories.prejudices.triggers.PrejudiceTriggerRepository;
+import ch.nation.dbservice.repositories.prejudices.triggers.StatPrejudiceTriggerRepository;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 import ch.nation.dbservice.repositories.units.UnitRepository;
@@ -39,9 +47,16 @@ public class DummyImportRunner  implements ApplicationRunner {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private final GameUserRuntimeRepository gameUserRuntimeRepository;
     private final CharacteristicsRepository characteristicsRepository;
+    private final CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository;
+    private final StatPrejudiceTriggerRepository statPrejudiceTriggerRepository;
+    private final SkillPrejudiceRepository skillPrejudiceRepository;
+    private final StatPrejudiceRepository statPrejudiceRepository;
+    private final PrejudiceRepository prej;
+    private final PrejudiceTriggerRepository prejudiceTriggerRepository;
+
 
     @Autowired
-    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository) {
+    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository, CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository, StatPrejudiceTriggerRepository statPrejudiceTriggerRepository, SkillPrejudiceRepository skillPrejudiceRepository, StatPrejudiceRepository statPrejudiceRepository, PrejudiceRepository prej, PrejudiceTriggerRepository prejudiceTriggerRepository) {
         this.unitRepository = unitRepository;
         this.characterClassRepository = characterClassRepository;
         this.skillEffectRepository = skillEffectRepository;
@@ -51,6 +66,12 @@ public class DummyImportRunner  implements ApplicationRunner {
         this.playerMoveRepository = playerMoveRepository;
         this.gameUserRuntimeRepository = gameUserRuntimeRepository;
         this.characteristicsRepository = characteristicsRepository;
+        this.characteristicPrejudiceTriggerRepository = characteristicPrejudiceTriggerRepository;
+        this.statPrejudiceTriggerRepository = statPrejudiceTriggerRepository;
+        this.skillPrejudiceRepository = skillPrejudiceRepository;
+        this.statPrejudiceRepository = statPrejudiceRepository;
+        this.prej = prej;
+        this.prejudiceTriggerRepository = prejudiceTriggerRepository;
     }
 
 
@@ -65,7 +86,8 @@ public class DummyImportRunner  implements ApplicationRunner {
         new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository, gameUserRuntimeRepository);
         new GamesDummyGenerator(gameRepository,userRepository,gameUserRuntimeRepository);
         new CharacteristicsDummyImporter(characteristicsRepository,skillRepository);
-
+        new PrejudiceTriggerDummyImporter(characteristicPrejudiceTriggerRepository,characteristicsRepository,statPrejudiceTriggerRepository);
+        new PrejudiceDummyImporter(prejudiceTriggerRepository,skillPrejudiceRepository,skillRepository,statPrejudiceTriggerRepository,statPrejudiceRepository,characteristicPrejudiceTriggerRepository);
         LOGGER.info("FINISH MIGRATING DATA");
     }
 

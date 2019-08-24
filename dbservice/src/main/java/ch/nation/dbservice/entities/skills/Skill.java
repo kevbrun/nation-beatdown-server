@@ -7,6 +7,7 @@ import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
+import ch.nation.dbservice.entities.prejudices.SkillPrejudice;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
@@ -82,6 +83,10 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     private List<SkillCharacteristic> skillCharacteristic;
 
 
+    @OneToMany(mappedBy = "skill",fetch = FetchType.LAZY)
+    @JsonProperty("prejudices")
+    private List<SkillPrejudice> skillPrejudices;
+
 
     @OneToMany(
             mappedBy = "skill",
@@ -107,6 +112,15 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
     public void setSkillCharacteristic(List<SkillCharacteristic> skillCharacteristic) {
         this.skillCharacteristic = skillCharacteristic;
+    }
+
+    public List<SkillPrejudice> getSkillPrejudices() {
+        return skillPrejudices;
+    }
+
+    public void setSkillPrejudices(List<SkillPrejudice> skillPrejudices) {
+        if(skillPrejudices==null) skillPrejudices = new ArrayList<>();
+        this.skillPrejudices = skillPrejudices;
     }
 
     public int getCost() {
