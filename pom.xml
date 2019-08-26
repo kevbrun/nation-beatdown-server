@@ -114,6 +114,8 @@
 				<module>core-services</module>
 				<module>dbservice</module>
 				<module>characteristics-service</module>
+				<module>units-service</module>
+				<module>clazz-service</module>
 				<module>gamelogicservice</module>
 			</modules>
 		</profile>

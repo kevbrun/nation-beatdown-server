@@ -60,16 +60,16 @@ zuul:
       #serviceId: nation-cloud-game-logic-service
     game-resource-units-service-path:
       path: /units/**
-      url: http://localhost:8082/units
-      #serviceId: nation-cloud-game-logic-service
+      #url: http://localhost:8082/units
+      serviceId: nation-cloud-units-service
     game-resource-game-service-path:
       path: /games/**
       url: http://localhost:8082/games
       #serviceId: nation-cloud-game-logic-service
     game-resource-classes-service-path:
       path: /classes/**
-      url: http://localhost:8082/classes
-      #serviceId: nation-cloud-game-logic-service
+      #url: http://localhost:8082/classes
+      serviceId: nation-cloud-clazz-service
 
 
 server:

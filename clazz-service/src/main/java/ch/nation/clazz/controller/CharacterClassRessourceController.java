@@ -1,15 +1,15 @@
-package ch.nation.rest.controller.impl.clazzes;
+package ch.nation.clazz.controller;
 
+import ch.nation.clazz.service.CharacterClazzResourceServiceImpl;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
-import ch.nation.core.services.impl.clazzes.CharacterClazzResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/classes")
+//@RequestMapping("/classes")
 public class CharacterClassRessourceController extends AbstractNamedResourceGameLogicController<CharacterClassDto,CharacterClassDto> {
 
     @Autowired

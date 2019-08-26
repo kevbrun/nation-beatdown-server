@@ -1,4 +1,4 @@
-package ch.nation.core.services.impl.clazzes;
+package ch.nation.clazz.service;
 
 public interface CharacterClazzResourceService {
 }

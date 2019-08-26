@@ -1,4 +1,4 @@
-package ch.nation.core.services.impl.units;
+package ch.nation.units.services;
 
 import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;

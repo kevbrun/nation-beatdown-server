@@ -1,0 +1,30 @@
+eureka:
+  client:
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "${EUREKA_URI:http://localhost:8761/eureka}"
+  instance:
+    preferIpAddress: true
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: FULL
+logging:
+  level:
+    ch:
+      nation:
+        rest:
+          clients: DEBUG
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+server:
+  port: 0
+spring:
+  application:
+    name: nation-cloud-units-service

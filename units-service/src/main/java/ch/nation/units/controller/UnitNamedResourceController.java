@@ -1,10 +1,10 @@
-package ch.nation.rest.controller.impl.units;
+package ch.nation.units.controller;
 
 import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
 import ch.nation.core.model.dto.unit.UnitDto;
 
 
-import ch.nation.core.services.impl.units.UnitResourceServiceImpl;
+import ch.nation.units.services.UnitResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/units")
-
+//@RequestMapping("/units")
 public class UnitNamedResourceController extends AbstractMassNamedResourceGameLogicController<UnitDto,UnitDto> {
 
 
