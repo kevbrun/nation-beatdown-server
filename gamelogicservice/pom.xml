@@ -66,6 +66,13 @@
 	</dependency>
 
 		<dependency>
+			<groupId>ch.nation</groupId>
+			<artifactId>controller-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+
+		</dependency>
+
+		<dependency>
 			<groupId>ch.nation.rest</groupId>
 			<artifactId>rest-clients</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

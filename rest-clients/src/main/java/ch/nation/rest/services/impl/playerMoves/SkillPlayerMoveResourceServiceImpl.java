@@ -2,15 +2,13 @@ package ch.nation.rest.services.impl.playerMoves;
 
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
-import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
-import ch.nation.rest.clients.factory.DBMassRestClientFactory;
-import ch.nation.rest.clients.factory.DBRestClientFactory;
-import ch.nation.rest.clients.playerMoves.DBPlayerMovesRestClient;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.services.AbstractEntityService;
 import ch.nation.rest.clients.playerMoves.DBSkillPlayerMoveRestClient;
-import ch.nation.rest.services.impl.AbstractEntityService;
+
 import org.springframework.hateoas.Resources;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

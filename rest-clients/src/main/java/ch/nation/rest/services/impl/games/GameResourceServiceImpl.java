@@ -6,10 +6,10 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.rest.clients.factory.DBMassRestClientFactory;
-import ch.nation.rest.clients.factory.DBRestClientFactory;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.services.AbstractNamedEntityService;
 import ch.nation.rest.clients.game.DBGameRestClient;
-import ch.nation.rest.services.impl.AbstractNamedEntityService;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 
 import org.springframework.hateoas.Resource;

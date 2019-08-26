@@ -59,7 +59,18 @@
 			<artifactId>core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+		<groupId>ch.nation</groupId>
+		<artifactId>core-clients</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
 
+
+		<dependency>
+			<groupId>ch.nation</groupId>
+			<artifactId>core-services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<!-- Required NationDto use PATCH -->
 			<groupId>io.github.openfeign</groupId>

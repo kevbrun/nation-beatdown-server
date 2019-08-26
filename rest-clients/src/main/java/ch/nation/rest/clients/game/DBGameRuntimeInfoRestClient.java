@@ -5,7 +5,6 @@ import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

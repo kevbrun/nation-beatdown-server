@@ -1,10 +1,10 @@
 package ch.nation.rest.controller.impl.game;
 
+import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
 import ch.nation.rest.services.impl.games.GameResourceServiceImpl;
 import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
 import org.springframework.http.HttpStatus;

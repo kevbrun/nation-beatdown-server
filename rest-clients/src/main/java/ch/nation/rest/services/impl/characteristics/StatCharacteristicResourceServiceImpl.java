@@ -1,9 +1,9 @@
 package ch.nation.rest.services.impl.characteristics;
 
 import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
-import ch.nation.rest.clients.factory.DBMassRestClientFactory;
-import ch.nation.rest.clients.factory.DBRestClientFactory;
-import ch.nation.rest.services.impl.AbstractNamedEntityService;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.services.AbstractNamedEntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

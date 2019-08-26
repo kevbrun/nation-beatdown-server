@@ -1,7 +1,5 @@
 package ch.nation.rest.clients.playerMoves.values;
 
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
-import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.config.FeignClientConfig;

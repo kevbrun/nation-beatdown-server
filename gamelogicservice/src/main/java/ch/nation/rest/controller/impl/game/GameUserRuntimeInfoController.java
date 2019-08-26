@@ -1,16 +1,12 @@
 package ch.nation.rest.controller.impl.game;
 
-import ch.nation.core.model.dto.game.GameDto;
+import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
-import ch.nation.core.model.position.Vector3Int;
-import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
-import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
-import ch.nation.rest.services.impl.AbstractNamedEntityService;
+import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
+
 import ch.nation.rest.services.impl.games.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController

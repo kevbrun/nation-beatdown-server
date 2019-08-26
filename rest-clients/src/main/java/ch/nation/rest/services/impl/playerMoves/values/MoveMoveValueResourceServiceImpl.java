@@ -1,9 +1,9 @@
 package ch.nation.rest.services.impl.playerMoves.values;
 
 import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
-import ch.nation.rest.clients.factory.DBMassRestClientFactory;
-import ch.nation.rest.clients.factory.DBRestClientFactory;
-import ch.nation.rest.services.impl.AbstractEntityService;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.services.AbstractEntityService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,6 +1,5 @@
 package ch.nation.rest.clients.skills.effects;
 
-import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.config.FeignClientConfig;

@@ -1,6 +1,5 @@
 package ch.nation.rest.clients.prejudices;
 
-import ch.nation.core.model.dto.prejudices.AbstractPrejudiceDto;
 import ch.nation.core.model.dto.prejudices.SkillPrejudiceDto;
 import ch.nation.rest.clients.DBRestServiceBaseInterface;
 import ch.nation.rest.config.FeignClientConfig;

@@ -108,6 +108,11 @@
 			</activation>
 			<modules>
 				<module>core</module>
+				<module>eurekaserver</module>
+				<module>zuul</module>
+				<module>core-clients</module>
+				<module>core-services</module>
+				<module>core-controller</module>
 				<module>rest-clients</module>
 				<module>dbservice</module>
 				<module>gamelogicservice</module>

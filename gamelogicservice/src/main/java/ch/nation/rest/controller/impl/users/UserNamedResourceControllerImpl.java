@@ -1,12 +1,12 @@
 package ch.nation.rest.controller.impl.users;
 
 
+        import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
         import ch.nation.core.model.Enums.QueryProjection;
         import ch.nation.core.model.dto.AbstractDto;
         import ch.nation.core.model.dto.user.UserDto;
-        import ch.nation.rest.controller.impl.AbstractMassNamedResourceGameLogicController;
-        import ch.nation.rest.controller.interfaces.UserResourceController;
-        import ch.nation.rest.clients.factory.DBRestClientFactory;
+        import ch.nation.core.controller.interfaces.UserResourceController;
+        import ch.nation.core.clients.db.factory.DBRestClientFactory;
         import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
         import org.slf4j.Logger;
         import org.slf4j.LoggerFactory;

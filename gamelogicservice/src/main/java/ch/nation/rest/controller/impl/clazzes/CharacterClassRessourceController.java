@@ -1,7 +1,7 @@
 package ch.nation.rest.controller.impl.clazzes;
 
+import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
-import ch.nation.rest.controller.impl.AbstractNamedResourceGameLogicController;
 import ch.nation.rest.services.impl.clazzes.CharacterClazzResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

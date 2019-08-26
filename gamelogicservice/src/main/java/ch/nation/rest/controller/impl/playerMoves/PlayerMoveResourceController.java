@@ -1,8 +1,9 @@
 package ch.nation.rest.controller.impl.playerMoves;
 
+import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
-import ch.nation.rest.controller.impl.AbstractResourceGameLogicController;
+
 import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
 import ch.nation.rest.services.impl.playerMoves.SkillPlayerMoveResourceServiceImpl;
 import org.springframework.http.HttpStatus;

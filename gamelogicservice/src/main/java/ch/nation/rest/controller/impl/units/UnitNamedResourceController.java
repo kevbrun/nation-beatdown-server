@@ -1,7 +1,8 @@
 package ch.nation.rest.controller.impl.units;
 
+import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
 import ch.nation.core.model.dto.unit.UnitDto;
-import ch.nation.rest.controller.impl.AbstractMassNamedResourceGameLogicController;
+
 
 import ch.nation.rest.services.impl.units.UnitResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
