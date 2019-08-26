@@ -4,16 +4,13 @@ import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.List;
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value =CharacteristicPrejudiceTriggerDto.class, name = "CHAR"),
-        @JsonSubTypes.Type(value = StatPrejudiceTriggerDto.class, name = "STAT"),
-})
+
 public abstract class AbstractPrejudiceTriggerDto extends NamedObjectAbstractDto {
+
+
+
 
     public AbstractPrejudiceTriggerDto() {
     }

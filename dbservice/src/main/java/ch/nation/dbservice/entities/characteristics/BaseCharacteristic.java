@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,14 +31,13 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = BaseCharacteristic.class, name = "BaseCharacteristic")
 })
 
-
 public  abstract class BaseCharacteristic extends NamedEntityBase implements IDiscrimantorValue {
 
 
-  /**  @ManyToMany(mappedBy = "characteristics")
+    @ManyToMany(mappedBy = "characteristics",fetch =  FetchType.EAGER)
     @JsonIgnore
     @RestResource(path = "triggers", rel="triggers")
-    private List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers;**/
+    private List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers;
 
 
 
@@ -48,9 +48,15 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
     private List<Nation> nations;
 
 
+    public BaseCharacteristic() {
+        super();
+        if(characteristicPrejudiceTriggers==null) characteristicPrejudiceTriggers = new ArrayList<>();
+        if(nations==null) nations = new ArrayList<>();
+
+
+    }
 
     public List<Nation> getNations() {
-        if(nations==null) nations = new ArrayList<>();
         return nations;
     }
 
@@ -58,13 +64,21 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
         this.nations = nations;
     }
 
- /**   public List<CharacteristicPrejudiceTrigger> getCharacteristicPrejudiceTriggers() {
-        if(characteristicPrejudiceTriggers==null) characteristicPrejudiceTriggers = new ArrayList<>();
+  public List<CharacteristicPrejudiceTrigger> getCharacteristicPrejudiceTriggers() {
         return characteristicPrejudiceTriggers;
     }
 
     public void setCharacteristicPrejudiceTriggers(List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers) {
-        this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
+        LOGGER.info("Execute custom setter");
+        if (this.characteristicPrejudiceTriggers == null) {
+            this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
+        } else if(this.characteristicPrejudiceTriggers != characteristicPrejudiceTriggers) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.characteristicPrejudiceTriggers.clear();
+            if(characteristicPrejudiceTriggers != null){
+                this.characteristicPrejudiceTriggers.addAll(characteristicPrejudiceTriggers);
+            }
+        }
+
     }
 
     @Override
@@ -83,6 +97,7 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
     }
 
     //Manuel
+    @Transactional
     public void addTrigger(CharacteristicPrejudiceTrigger trigger){
         if(!getCharacteristicPrejudiceTriggers().contains(trigger)){
             getCharacteristicPrejudiceTriggers().add(trigger);
@@ -93,6 +108,7 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
 
 
     //Manuel
+    @Transactional
     public void removeTrigger(CharacteristicPrejudiceTrigger trigger){
         if(getCharacteristicPrejudiceTriggers().contains(trigger)){
             getCharacteristicPrejudiceTriggers().remove(trigger);
@@ -101,7 +117,7 @@ public  abstract class BaseCharacteristic extends NamedEntityBase implements IDi
 
     }
 
-**/
+
 
 
 }

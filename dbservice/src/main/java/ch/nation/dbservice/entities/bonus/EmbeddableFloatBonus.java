@@ -22,6 +22,11 @@ public class EmbeddableFloatBonus implements IBonus<Float> {
     private StatModTarget statTarget;
 
 
+    public EmbeddableFloatBonus(Float bonus, StatModTarget statTarget) {
+        this.bonus = bonus;
+        this.statTarget = statTarget;
+    }
+
     public EmbeddableFloatBonus() {
         this.bonus = 0.0f;
         this.statTarget = StatModTarget.NONE;

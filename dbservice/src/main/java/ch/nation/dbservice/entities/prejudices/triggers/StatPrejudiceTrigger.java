@@ -3,16 +3,15 @@ package ch.nation.dbservice.entities.prejudices.triggers;
 
 import ch.nation.core.model.Enums.ConditionComparer;
 import ch.nation.core.model.Enums.StatType;
-import ch.nation.dbservice.entities.prejudices.Prejudice;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "STAT_PREJUDICE_TRIGGER")
 @DiscriminatorValue("STAT")
-public class StatPrejudiceTrigger extends PrejudiceTrigger {
+public class StatPrejudiceTrigger extends BasePrejudiceTrigger implements IDiscrimantorValue {
 
     @JsonProperty("threshold")
     @Column(name="threshold")
@@ -30,20 +29,13 @@ public class StatPrejudiceTrigger extends PrejudiceTrigger {
 
 
     public StatPrejudiceTrigger() {
+        super();
+        threshold = 0;
+        statType  =  StatType.NONE;
+        comparer = ConditionComparer.EQUALS;
     }
 
-    public StatPrejudiceTrigger(float threshold, StatType statType, ConditionComparer comparer) {
-        this.threshold = threshold;
-        this.statType = statType;
-        this.comparer = comparer;
-    }
 
-    public StatPrejudiceTrigger(List<Prejudice> prejudices, float threshold, StatType statType, ConditionComparer comparer) {
-        super(prejudices);
-        this.threshold = threshold;
-        this.statType = statType;
-        this.comparer = comparer;
-    }
 
     public float getThreshold() {
         return threshold;

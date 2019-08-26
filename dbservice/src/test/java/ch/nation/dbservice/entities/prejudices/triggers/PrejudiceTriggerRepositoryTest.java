@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class PrejudiceTriggerRepositoryTest extends AbstractEntityTest<PrejudiceTrigger,PrejudiceTriggerRepository> {
+public class PrejudiceTriggerRepositoryTest extends AbstractEntityTest<BasePrejudiceTrigger,PrejudiceTriggerRepository> {
 
 
     @Autowired
@@ -21,11 +21,11 @@ public class PrejudiceTriggerRepositoryTest extends AbstractEntityTest<Prejudice
     @Override
     public void setUp() {
         super.setUp();
-        entityToTest  = new PrejudiceTrigger();
+        entityToTest  = new StatPrejudiceTrigger();
         listOfEntities.add(entityToTest);
 
 
-        PrejudiceTrigger second = new PrejudiceTrigger();
+        BasePrejudiceTrigger second = new StatPrejudiceTrigger();
         listOfEntities.add(second);
 
     }

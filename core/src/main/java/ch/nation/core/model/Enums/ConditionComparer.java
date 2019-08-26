@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum ConditionComparer implements IEnumFromValue<ConditionComparer> {
-    EQUALS("Equals"),SMALLER_THAN("SmallerThan"),BIGGER_THAN("BiggerThan");
+    EQUALS("Equals"),SMALLER_THAN("SmallerThan"),BIGGER_THAN("BiggerThan"),NONE("None");
 
     private String str;
 

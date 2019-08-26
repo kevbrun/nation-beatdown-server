@@ -2,6 +2,7 @@ package ch.nation.core.model.dto.user;
 
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
+import ch.nation.core.model.dto.prejudices.AbstractPrejudiceDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -17,6 +18,10 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
 
     @JsonProperty("characteristics")
     private List<AbstractCharacteristicsDto> characteristics;
+
+
+    @JsonProperty("prejudices")
+    private List<AbstractPrejudiceDto> prejudices;
 
 
     public NationDto(UserDto user) {
@@ -47,6 +52,14 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
 
     public void setCharacteristics(List<AbstractCharacteristicsDto> characteristics) {
         this.characteristics = characteristics;
+    }
+
+    public List<AbstractPrejudiceDto> getPrejudices() {
+        return prejudices;
+    }
+
+    public void setPrejudices(List<AbstractPrejudiceDto> prejudices) {
+        this.prejudices = prejudices;
     }
 
     @Override
