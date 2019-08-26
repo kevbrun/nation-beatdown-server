@@ -4,7 +4,7 @@ import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
 import ch.nation.core.model.dto.unit.UnitDto;
 
 
-import ch.nation.rest.services.impl.units.UnitResourceServiceImpl;
+import ch.nation.core.services.impl.units.UnitResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;

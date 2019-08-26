@@ -36,8 +36,8 @@ zuul:
       #serviceId: nation-cloud-game-logic-service
     game-resource-characteristics-service-path:
       path: /characteristics/**
-      url: http://localhost:8082/characteristics
-      #serviceId: nation-cloud-game-logic-service
+     # url: http://localhost:8082/characteristics
+      serviceId: nation-cloud-characteristics-service
     game-resource-user-runtimes-service-path:
       path: /user-runtimes/**
       url: http://localhost:8082/user-runtimes

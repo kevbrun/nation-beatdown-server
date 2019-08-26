@@ -91,8 +91,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>core</module>
-				<module>rest-clients</module>
+				<module>core-model</module>
 				<module>eurekaserver</module>
 				<module>zuul</module>
 				<module>dbservice</module>
@@ -107,14 +106,14 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
-				<module>core</module>
+				<module>core-model</module>
 				<module>eurekaserver</module>
 				<module>zuul</module>
 				<module>core-clients</module>
-				<module>core-services</module>
 				<module>core-controller</module>
-				<module>rest-clients</module>
+				<module>core-services</module>
 				<module>dbservice</module>
+				<module>characteristics-service</module>
 				<module>gamelogicservice</module>
 			</modules>
 		</profile>
@@ -122,8 +121,8 @@
 		<profile>
 			<id>gamelogic</id>
 			<modules>
-				<module>core</module>
-				<module>rest-clients</module>
+				<module>core-model</module>
+
 				<module>gamelogicservice</module>
 
 			</modules>
@@ -140,15 +139,6 @@
 
 		</profile>
 
-
-		<profile>
-			<id>rest-client</id>
-			<modules>
-				<module>core</module>
-				<module>rest-clients</module>
-			</modules>
-
-		</profile>
 
 	</profiles>
 	<repositories>

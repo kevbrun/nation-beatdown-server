@@ -1,6 +1,7 @@
 package ch.nation.core.clients.db.factory;
 
-import ch.nation.rest.clients.DBRestServiceBaseInterface;
+
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @Service
 public class DBRestClientFactory {

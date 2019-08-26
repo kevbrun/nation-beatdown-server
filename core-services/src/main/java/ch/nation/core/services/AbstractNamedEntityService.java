@@ -1,10 +1,11 @@
 package ch.nation.core.services;
 
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
+
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericFindByNameService;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
 
 
 import java.util.*;

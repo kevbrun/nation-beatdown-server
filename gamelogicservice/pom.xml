@@ -60,23 +60,22 @@
 
 	<dependency>
 			<groupId>ch.nation</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>core-model</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 
 	</dependency>
 
 		<dependency>
 			<groupId>ch.nation</groupId>
-			<artifactId>controller-core</artifactId>
+			<artifactId>core-controller</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 
 		</dependency>
 
 		<dependency>
-			<groupId>ch.nation.rest</groupId>
-			<artifactId>rest-clients</artifactId>
+			<groupId>ch.nation</groupId>
+			<artifactId>core-services</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-
 		</dependency>
 	</dependencies>
 

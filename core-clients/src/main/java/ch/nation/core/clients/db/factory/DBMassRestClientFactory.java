@@ -1,6 +1,8 @@
 package ch.nation.core.clients.db.factory;
 
-import ch.nation.rest.clients.DBRestMassServiceBaseInterface;
+
+
+import ch.nation.core.clients.db.DBRestMassServiceBaseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

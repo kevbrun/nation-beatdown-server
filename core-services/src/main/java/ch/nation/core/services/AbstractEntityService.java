@@ -1,12 +1,14 @@
 package ch.nation.core.services;
 
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
-import ch.nation.rest.clients.DBRestServiceBaseInterface;
+
+
+import ch.nation.core.clients.db.utils.MessageUtils;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
 import ch.nation.core.clients.db.factory.DBRestClientFactory;
-import ch.nation.core.clients.db.utils.MessageUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;

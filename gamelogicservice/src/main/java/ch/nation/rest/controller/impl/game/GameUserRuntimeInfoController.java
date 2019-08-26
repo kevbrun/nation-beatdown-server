@@ -2,9 +2,8 @@ package ch.nation.rest.controller.impl.game;
 
 import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
-import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
 
-import ch.nation.rest.services.impl.games.GameUserRuntimeInfoServiceImpl;
+import ch.nation.core.services.impl.games.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

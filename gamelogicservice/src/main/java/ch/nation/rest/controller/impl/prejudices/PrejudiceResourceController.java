@@ -3,7 +3,7 @@ package ch.nation.rest.controller.impl.prejudices;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.prejudices.AbstractPrejudiceDto;
-import ch.nation.rest.services.impl.prejudices.PrejudiceResourceServiceImpl;
+import ch.nation.core.services.impl.prejudices.PrejudiceResourceServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

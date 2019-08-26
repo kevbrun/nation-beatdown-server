@@ -1,4 +1,4 @@
-package ch.nation.rest.clients;
+package ch.nation.core.clients.db;
 
 import ch.nation.core.model.Enums.QueryProjection;
 import org.springframework.hateoas.Resource;

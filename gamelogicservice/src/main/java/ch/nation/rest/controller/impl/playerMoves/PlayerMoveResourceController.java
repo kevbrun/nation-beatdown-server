@@ -4,8 +4,8 @@ import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 
-import ch.nation.rest.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
-import ch.nation.rest.services.impl.playerMoves.SkillPlayerMoveResourceServiceImpl;
+import ch.nation.core.services.impl.playerMoves.PlayerMoveResourceServiceImpl;
+import ch.nation.core.services.impl.playerMoves.SkillPlayerMoveResourceServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

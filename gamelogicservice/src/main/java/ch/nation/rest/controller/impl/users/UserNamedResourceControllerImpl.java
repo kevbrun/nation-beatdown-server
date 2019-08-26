@@ -7,7 +7,7 @@ package ch.nation.rest.controller.impl.users;
         import ch.nation.core.model.dto.user.UserDto;
         import ch.nation.core.controller.interfaces.UserResourceController;
         import ch.nation.core.clients.db.factory.DBRestClientFactory;
-        import ch.nation.rest.services.impl.users.UserResourceServiceImpl;
+        import ch.nation.core.services.impl.users.UserResourceServiceImpl;
         import org.slf4j.Logger;
         import org.slf4j.LoggerFactory;
         import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package ch.nation.rest.controller.impl.skills;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.dto.skills.SkillDto;
 
-import ch.nation.rest.services.impl.skills.SkillResourceServiceImpl;
+import ch.nation.core.services.impl.skills.SkillResourceServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
