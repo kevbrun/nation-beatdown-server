@@ -15,7 +15,7 @@ public class RestControllerSettings {
     private int port;
 
 
-    @Bean
+ /**   @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>
     webServerFactoryCustomizer() {
 
@@ -26,7 +26,7 @@ public class RestControllerSettings {
             factory.setContextPath("/rest/api/v1");
             factory.setPort(port);
             };
-    }
+    }**/
 
 
 

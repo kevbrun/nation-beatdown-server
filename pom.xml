@@ -94,6 +94,7 @@
 				<module>core</module>
 				<module>rest-clients</module>
 				<module>eurekaserver</module>
+				<module>zuul</module>
 				<module>dbservice</module>
 				<module>gamelogicservice</module>
 			</modules>

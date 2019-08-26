@@ -1,0 +1,79 @@
+eureka:
+  client:
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "${EUREKA_URI:http://localhost:8761/eureka}"
+    registerWithEureka: true
+  instance:
+    preferIpAddress: true
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: FULL
+logging:
+  level:
+    ch:
+      nation:
+        rest:
+          clients: DEBUG
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
+
+
+zuul:
+  prefix: /api/rest/v1
+  routes:
+    game-logic-service-path:
+      path: /logic/**
+      url: http://localhost:8082/logic
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-characteristics-service-path:
+      path: /characteristics/**
+      url: http://localhost:8082/characteristics
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-user-runtimes-service-path:
+      path: /user-runtimes/**
+      url: http://localhost:8082/user-runtimes
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-users-service-path:
+      path: /users/**
+      url: http://localhost:8082/users
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-moves-service-path:
+      path: /moves/**
+      url: http://localhost:8082/moves
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-prejudices-service-path:
+      path: /prejudices/**
+      url: http://localhost:8082/prejudices
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-skills-service-path:
+      path: /skills/**
+      url: http://localhost:8082/skills
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-units-service-path:
+      path: /units/**
+      url: http://localhost:8082/units
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-game-service-path:
+      path: /games/**
+      url: http://localhost:8082/games
+      #serviceId: nation-cloud-game-logic-service
+    game-resource-classes-service-path:
+      path: /classes/**
+      url: http://localhost:8082/classes
+      #serviceId: nation-cloud-game-logic-service
+
+
+server:
+  port: 8080
+spring:
+  application:
+    name: nation-cloud-zuul-service
