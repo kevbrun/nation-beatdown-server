@@ -26,7 +26,7 @@ public abstract class AbstractMassNamedResourceGameLogicController<TResult exten
     ResponseEntity update(@RequestBody List<TInput> payload, QueryProjection projection) {
 
         if (payload.size() == 0) return ResponseEntity.notFound().build();
-        if (payload.size() == 1) return update(payload.get(0));
+        if (payload.size() == 1) return updatePatch(payload.get(0));
 
         LOGGER.info("More than one item found. Start mass updatePatch");
         Optional<List<TResult>> response = ((AbstractMassNamedEntityService) service).batchUpdate(payload, projection);
@@ -54,7 +54,7 @@ public abstract class AbstractMassNamedResourceGameLogicController<TResult exten
         if (payload.getContent().size() == 0) return ResponseEntity.notFound().build();
 
         List<TInput> inputList = new ArrayList<>(payload.getContent());
-        if (payload.getContent().size() == 1) return update(inputList.get(0));
+        if (payload.getContent().size() == 1) return updatePatch(inputList.get(0));
 
         LOGGER.info("More than one item found. Start mass updatePatch");
         Optional<Resource<Boolean>> response = ((AbstractMassNamedEntityService) service).batchDeletion(inputList);

@@ -270,51 +270,6 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         return Optional.empty();
     }
 
-    /**  public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
-        ResponseEntity<Resource<TResult>> resultEntity = null;
-        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
-        if (!validateDeleteParameter(uuid))
-            throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
-
-        Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
-
-        Resources<AbstractDto> fetchedChildren = (Resources<AbstractDto>) getChildren(uuid,children.get(0).ResourceCollectionName(),QueryProjection.min);
-        StringBuilder builder = new StringBuilder();
-
-        for (AbstractDto child:
-                children) {
-
-            Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
-            if(childObject!=null) builder.append(childObject.getLink(Link.REL_SELF).getHref()).append("\n");
-
-        }
-
-
-        if(fetchedChildren.getContent()==null){
-
-
-            LOGGER.debug("New relation must be created!");
-            resultEntity =   getBindedClient((AbstractDto) parent.getContent()).createAssocationsPost(uuid,children.get(0).ResourceCollectionName(),builder.toString(),QueryProjection.max);
-
-
-
-        }else if(fetchedChildren.getContent()!=null && fetchedChildren.getContent() instanceof List ){
-
-
-
-        }
-            else {
-            resultEntity = getBindedClient((AbstractDto) parent.getContent()).createAssocationsPut(uuid,children.get(0).ResourceCollectionName(),builder.toString(),QueryProjection.max);
-        }
-
-
-
-
-        LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
-
-        return Optional.of(resultEntity.getBody().getContent());
-    }**/
-
 
 
 
@@ -322,9 +277,6 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
             return    createAssociation((parent).getId(),createChildren(children,QueryProjection.def).get(),projection);
         }
 
-        public Optional<?> addChildrenToParent(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
-            return createAssociation(parent.getId(),children,projection);
-        }
 
 
         public Optional<List<AbstractDto>> createChildren(List<AbstractDto> children, QueryProjection projection) throws Exception {
@@ -349,16 +301,13 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
             return createChildrenAndAddToParent((TInput) parentResult.get(),children,projection);
     }
 
-    public Optional<?> getChildrenEntites(String uuid, String resource) {
-      return getChildrenEntites(uuid,resource,QueryProjection.def);
-    }
 
     public Optional<?> getChildrenEntites(String uuid, String resource, QueryProjection queryProjection) {
 
-        return Optional.of(getChildren(uuid,resource,queryProjection).getContent());
+        return getChildren(uuid,resource,queryProjection);
     }
 
-    public Resources<?> getChildren(String uuid, String resource, QueryProjection projection){
+    public Optional<Resources<?>> getChildren(String uuid, String resource, QueryProjection projection){
         Resources<?> results = null;
         LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
         if (!validateUuid(uuid) && resource == null && resource.isEmpty())
@@ -370,11 +319,11 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info("Found entries: " + results.getContent().size());
 
         LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
-       return results;
+       return Optional.of(results);
     }
 
 
-    public Resource<?> getChild(String uuid, String resource,QueryProjection projection){
+    public Optional<Resource<?>> getChild(String uuid, String resource,QueryProjection projection){
         Resource<?> results = null;
         LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
         if (!validateUuid(uuid) && resource == null && resource.isEmpty())
@@ -386,7 +335,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info(String.valueOf("Found entry: " + results.getContent()!=null));
 
         LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
-        return results;
+        return Optional.of(results);
     }
 
 

@@ -114,8 +114,14 @@
 				<module>core-services</module>
 				<module>dbservice</module>
 				<module>characteristics-service</module>
+				<module>moves-service</module>
 				<module>units-service</module>
 				<module>clazz-service</module>
+				<module>prejudice-service</module>
+				<module>skill-service</module>
+				<module>user-service</module>
+				<module>user-runtime-service</module>
+				<module>game-service</module>
 				<module>gamelogicservice</module>
 			</modules>
 		</profile>

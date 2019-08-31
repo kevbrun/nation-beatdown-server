@@ -32,43 +32,33 @@ zuul:
   routes:
     game-logic-service-path:
       path: /logic/**
-      url: http://localhost:8082/logic
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-game-logic-service
     game-resource-characteristics-service-path:
       path: /characteristics/**
-     # url: http://localhost:8082/characteristics
       serviceId: nation-cloud-characteristics-service
     game-resource-user-runtimes-service-path:
       path: /user-runtimes/**
-      url: http://localhost:8082/user-runtimes
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-user-runtime-service
     game-resource-users-service-path:
       path: /users/**
-      url: http://localhost:8082/users
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-user-service
     game-resource-moves-service-path:
       path: /moves/**
-      url: http://localhost:8082/moves
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-moves-service
     game-resource-prejudices-service-path:
       path: /prejudices/**
-      url: http://localhost:8082/prejudices
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-prejudice-service
     game-resource-skills-service-path:
       path: /skills/**
-      url: http://localhost:8082/skills
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-skills-service
     game-resource-units-service-path:
       path: /units/**
-      #url: http://localhost:8082/units
       serviceId: nation-cloud-units-service
     game-resource-game-service-path:
       path: /games/**
-      url: http://localhost:8082/games
-      #serviceId: nation-cloud-game-logic-service
+      serviceId: nation-cloud-game-service
     game-resource-classes-service-path:
       path: /classes/**
-      #url: http://localhost:8082/classes
       serviceId: nation-cloud-clazz-service
 
 

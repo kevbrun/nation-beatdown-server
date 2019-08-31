@@ -14,6 +14,7 @@ public interface RestCRUDDao<TInput> {
     ResponseEntity findById(String uuid);
     ResponseEntity create(TInput object) throws Exception;
     ResponseEntity delete(String uuid) throws Exception;
-    ResponseEntity update(TInput payload);
+    ResponseEntity updatePut(TInput payload);
+    ResponseEntity updatePatch(TInput payload);
 
 }

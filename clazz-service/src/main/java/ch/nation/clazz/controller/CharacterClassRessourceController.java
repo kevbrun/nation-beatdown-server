@@ -25,8 +25,8 @@ public class CharacterClassRessourceController extends AbstractNamedResourceGame
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody CharacterClassDto payload) {
-        return super.update(payload);
+    public ResponseEntity updatePatch(@RequestBody CharacterClassDto payload) {
+        return super.updatePatch(payload);
     }
 
     @Override

@@ -42,11 +42,14 @@ public abstract class AbstractNamedResourceGameLogicController<TResult extends N
     }
 
 
-    public ResponseEntity<Boolean> existsByName(@RequestParam("name") String name){
-        if(name==null || name.isEmpty()) return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
-       Optional<Boolean> response = ((AbstractNamedEntityService)service).existsByName(name);
-       return new ResponseEntity<>(response.get(),HttpStatus.OK);
+    public ResponseEntity<Boolean> existsByName(@RequestParam("name") String name) {
+        if (name == null || name.isEmpty()) return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        Optional<Boolean> response = ((AbstractNamedEntityService) service).existsByName(name);
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
+
 
     }
+
+
 
 }

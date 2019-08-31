@@ -13,10 +13,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AbstractResourceGameLogicController<TResult extends AbstractDto, TInput extends AbstractDto> implements RestCRUDDao<TInput>,ChildrenNodeDao {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
@@ -38,24 +35,53 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
     }
 
-    @Override
-    public ResponseEntity update(TInput payload) {
-        return update(payload, QueryProjection.def);
+    public ResponseEntity updatePatch(TInput payload) {
+        return updatePatch(payload, QueryProjection.def);
 
     }
 
-    public ResponseEntity update(TInput payload, QueryProjection projection) {
+    public ResponseEntity updatePatch(TInput payload, QueryProjection projection) {
         if (payload == null) throw new IllegalArgumentException("Request Body was null!");
         if (payload.getId() == null) throw new IllegalArgumentException("Uuid was null!");
         Optional<TResult> response = service.updatePatch(payload, projection);
         if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @Override
+    public ResponseEntity updatePut(TInput payload) {
+        return updatePut(payload,QueryProjection.def);
+    }
+
+    public ResponseEntity updatePut(TInput payload, QueryProjection projection){
+        if (payload == null) throw new IllegalArgumentException("Request Body was null!");
+        if (payload.getId() == null) throw new IllegalArgumentException("Uuid was null!");
+        Optional<TResult> response = service.updatePut(payload, projection);
+        if (response.isPresent()) return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     @Override
     public ResponseEntity create(TInput object) throws Exception {
         return create(object, QueryProjection.def);
     }
+
+
+    public ResponseEntity create(List<TInput> object, QueryProjection projection) throws Exception {
+
+        final List<TInput> createdEntities = new ArrayList<>(object.size());
+
+        for(int i =0; i < object.size();i++){
+            ResponseEntity<TInput> entity= create(object.get(i),projection);
+            if(entity.getBody()!=null) createdEntities.add(entity.getBody());
+        }
+
+        if(createdEntities.size()==0) new ResponseEntity<>(createdEntities,HttpStatus.OK);
+
+        return new ResponseEntity<>(createdEntities,HttpStatus.CREATED);
+    }
+
+
 
     public ResponseEntity create(TInput object, QueryProjection projection) throws Exception {
         if (object == null) throw new IllegalArgumentException("Request Body was null!");
@@ -78,14 +104,24 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
 
 
+    }
 
 
+    public ResponseEntity createChildren(List<AbstractDto> children,QueryProjection projection) throws Exception {
+        ArrayList<AbstractDto> response = new ArrayList<>(children.size());
+        if(children==null || children.size() ==0) return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+        Optional<List<AbstractDto>> createdChildren = service.createChildren(children,projection);
+        if(!createdChildren.isPresent()) return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+        response.addAll(createdChildren.get());
+       return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity delete(String uuid) throws Exception {
         return delete(uuid, QueryProjection.def);
     }
+
+
 
     public ResponseEntity delete(String uuid, QueryProjection projection) throws Exception {
         if (uuid == null) throw new IllegalArgumentException("Request Body was null!");
@@ -118,6 +154,16 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
         return new ResponseEntity<>(result.get(), HttpStatus.OK);
     }
 
+
+    public ResponseEntity createAssociation(String uuid, AbstractDto child, QueryProjection projection) throws Exception {
+        if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        if(child ==null)  throw new IllegalArgumentException("Child is null or empty!");
+        List<AbstractDto> children = new ArrayList<>(1);
+        children.add(child);
+        Optional<TResult> result = service.createAssociation(uuid,children,projection);
+        return new ResponseEntity<>(result.get(),HttpStatus.OK);
+    }
+
     public ResponseEntity createAssociation(String uuid, List<AbstractDto> children) throws Exception {
     return  createAssociation(uuid,children,QueryProjection.def);
 }
@@ -140,8 +186,17 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
     }
 
 
-    @Override
-public ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection) {
-    return getChildrenNodesByResourceCollection(uuid,resourceCollection,QueryProjection.def);
-}
+        @Override
+    public ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection) {
+        return getChildrenNodesByResourceCollection(uuid,resourceCollection,QueryProjection.def);
+    }
+
+    protected AbstractEntityService GetServiceByBody(AbstractDto dto){
+           return GetDefaultServiceBody();
+    }
+
+    protected AbstractEntityService GetDefaultServiceBody(){
+        return service;
+    }
+
 }

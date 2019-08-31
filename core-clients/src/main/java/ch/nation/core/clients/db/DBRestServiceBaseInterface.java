@@ -26,8 +26,6 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     Resources<TResult> getAll(@RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
-
-
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     Resource<TResult> create(TInput object,@RequestParam(value = "projection",required = false) QueryProjection projection);
 

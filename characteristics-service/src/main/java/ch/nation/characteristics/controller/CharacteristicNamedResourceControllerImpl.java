@@ -31,8 +31,8 @@ public class CharacteristicNamedResourceControllerImpl extends AbstractNamedReso
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody AbstractCharacteristicsDto payload) {
-        return super.update(payload);
+    public ResponseEntity updatePatch(@RequestBody AbstractCharacteristicsDto payload) {
+        return super.updatePatch(payload);
     }
 
     @Override

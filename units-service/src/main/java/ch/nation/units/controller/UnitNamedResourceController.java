@@ -32,8 +32,8 @@ public class UnitNamedResourceController extends AbstractMassNamedResourceGameLo
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody UnitDto payload) {
-        return super.update(payload);
+    public ResponseEntity updatePatch(@RequestBody UnitDto payload) {
+        return super.updatePatch(payload);
     }
 
     @Override
