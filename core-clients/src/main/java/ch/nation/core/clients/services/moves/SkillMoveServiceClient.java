@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@FeignClient(contextId = "skill-move-resource-service",value="nation-cloud-move-service",decode404 = true, configuration = FeignClientConfig.class)
+@FeignClient(contextId = "skill-move-resource-service",value="nation-cloud-moves-service",decode404 = true, configuration = FeignClientConfig.class)
 public interface SkillMoveServiceClient extends BaseServiceRestClientInterface<SkillPlayerMoveDto,SkillPlayerMoveDto> {
 
 }

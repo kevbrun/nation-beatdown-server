@@ -25,14 +25,14 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     ResponseEntity<TResult> getAll(@RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "create-multiple")
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     ResponseEntity<TResult> create(TInput object, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     ResponseEntity create(List<TInput> objects, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    ResponseEntity createChildren(List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/children")
+    ResponseEntity<List<AbstractDto>> createChildren(List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
     ResponseEntity createAssociation(@PathVariable("uuid") String uuid, AbstractDto child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
@@ -45,7 +45,7 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.PUT,consumes = "application/json")
     public ResponseEntity updatePut(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
-    @RequestMapping(method = RequestMethod.PATCH,consumes = "application/json")
+    @RequestMapping(method = RequestMethod.PATCH,consumes = "application/json",headers = {"X-HTTP-Method-Override=PATCH"})
     public ResponseEntity updatePatch(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
         @RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
@@ -63,8 +63,11 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
 
 
 
-    @RequestMapping(method = RequestMethod.GET,path = "/search")
+    @RequestMapping(method = RequestMethod.GET,path = "/search/exists")
         ResponseEntity<Boolean> existsById(@RequestParam("uuid") String uuid);
+
+    @RequestMapping(method = RequestMethod.GET,path = "/search/exists")
+    ResponseEntity<Boolean> existsByName(@RequestParam("name") String name);
 
 
 

@@ -10,6 +10,7 @@ import ch.nation.core.services.AbstractEntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -178,9 +179,9 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
     }
 
-    public ResponseEntity<Boolean> entityExists(String uuid,QueryProjection projection){
+    public ResponseEntity<Boolean> entityExists(String uuid){
         if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
-        boolean result = service.existsById(uuid,projection);
+        boolean result = service.existsById(uuid,QueryProjection.def);
 
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
@@ -189,6 +190,23 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
         @Override
     public ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection) {
         return getChildrenNodesByResourceCollection(uuid,resourceCollection,QueryProjection.def);
+    }
+
+    public ResponseEntity getChildrenNodesByResourceCollectionUnwrapped(String uuid,String resourceCollection,QueryProjection projection){
+        ResponseEntity<?> resource = getChildrenNodesByResourceCollection(uuid,resourceCollection,projection);
+        if(resource.getBody()instanceof Resource){
+           Resource<?> results = (Resource<?>) resource.getBody();
+           return new ResponseEntity<>(results.getContent(),HttpStatus.OK);
+
+        }
+
+        if(resource.getBody()instanceof Resources){
+            Resources<?> results = (Resources<?>) resource.getBody();
+            return new ResponseEntity<>(results.getContent(),HttpStatus.OK);
+
+        }
+
+        return resource;
     }
 
     protected AbstractEntityService GetServiceByBody(AbstractDto dto){

@@ -48,7 +48,7 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
 
 
-    @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}")
+    @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}",headers = {"X-HTTP-Method-Override=PATCH"})
     Resource<TResult> updatePatch(@PathVariable("uuid") String uuid, @RequestBody TInput payload, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.PUT,path="/{uuid}")

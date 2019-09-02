@@ -2,9 +2,7 @@ package ch.nation.rest.logic.controller;
 
 import ch.nation.core.clients.services.games.GameServiceClient;
 import ch.nation.core.clients.services.moves.MoveServiceClient;
-import ch.nation.core.clients.services.moves.SkillMoveServiceClient;
 import ch.nation.core.clients.services.moves.values.MoveValueServiceClient;
-import ch.nation.core.clients.services.moves.values.StatMoveValueServiceClient;
 import ch.nation.core.clients.services.skills.SkillEffectServiceClient;
 import ch.nation.core.clients.services.skills.SkillServiceClient;
 import ch.nation.core.clients.services.units.UnitServiceClient;
@@ -20,8 +18,6 @@ import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
 import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
-import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
-import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
 import ch.nation.core.model.dto.unit.UnitDto;
@@ -32,7 +28,6 @@ import ch.nation.core.model.position.Vector3Int;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -55,22 +50,20 @@ public class GameLogicService {
     private final MoveValueServiceClient moveMoveValueResourceService;
     private final SkillEffectServiceClient skillEffectsResourceService;
 
-
-
     @Autowired
-    public GameLogicService(final GameServiceClient gameService, final MoveServiceClient playerMoveEntityService, final UserServiceClient userResourceService, final UnitServiceClient unitResourceService,
-                            final UserGameRuntimeServiceClient gameUserRuntimeInfoService, final SkillServiceClient skillResourceService,
-                           final MoveValueServiceClient valueResourceService, MoveValueServiceClient skillPlayerMoveResourceService, SkillMoveServiceClient moveMoveValueResourceService, StatMoveValueServiceClient statPlayerMoveValueResourceService, SkillEffectServiceClient skillEffectsResourceService, SkillMoveServiceClient playerMoveResourceService) {
+    public GameLogicService(GameServiceClient gameService, MoveServiceClient playerMoveEntityService, UserServiceClient userResourceService, UnitServiceClient unitResourceService, UserGameRuntimeServiceClient gameUserRuntimeInfoService, SkillServiceClient skillResourceService, MoveValueServiceClient moveMoveValueResourceService, SkillEffectServiceClient skillEffectsResourceService) {
         this.gameService = gameService;
         this.playerMoveEntityService = playerMoveEntityService;
         this.userResourceService = userResourceService;
         this.unitResourceService = unitResourceService;
         this.gameUserRuntimeInfoService = gameUserRuntimeInfoService;
         this.skillResourceService = skillResourceService;
-        this.moveMoveValueResourceService = valueResourceService;
+        this.moveMoveValueResourceService = moveMoveValueResourceService;
         this.skillEffectsResourceService = skillEffectsResourceService;
-
     }
+
+
+
 
 
 
@@ -196,8 +189,8 @@ public class GameLogicService {
             //     ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setCooldownCounter(((SkillPlayerMoveDto)move).getSkillDto().getCooldown());
-            playerMoveEntityService.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
-
+           // playerMoveEntityService.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
+            playerMoveEntityService.updatePatch((BasePlayerMoveDto)savedMove,QueryProjection.def);
             //Fetch Association targets
             ResponseEntity<UnitDto> caster = unitResourceService.findById(move.getCaster().getId(), QueryProjection.def);
             ResponseEntity<SkillDto> skill = skillResourceService.findById(move.getSkillDto().getId(), QueryProjection.def);
@@ -231,7 +224,7 @@ public class GameLogicService {
                 }**/
 
 
-            ResponseEntity<BasePlayerMoveValueDto> createdValue=    moveMoveValueResourceService.create((BasePlayerMoveValueDto)value,QueryProjection.def);
+            ResponseEntity<AbstractMoveSkillEffectValueDto> createdValue=    moveMoveValueResourceService.create(value,QueryProjection.def);
 
             childrensList.add(createdValue.getBody());
 

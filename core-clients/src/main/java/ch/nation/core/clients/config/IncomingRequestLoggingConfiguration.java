@@ -1,4 +1,4 @@
-package ch.nation.gamelogicservice.config;
+package ch.nation.core.clients.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

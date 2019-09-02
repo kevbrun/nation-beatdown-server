@@ -6,6 +6,7 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
+import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.services.AbstractEntityService;
 import ch.nation.moves.service.PlayerMoveResourceServiceImpl;
 import ch.nation.moves.service.SkillPlayerMoveResourceServiceImpl;
@@ -57,12 +58,12 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
-    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, List<AbstractDto> children,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody List<AbstractDto> children,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
         return super.createAssociation(uuid, children, projection);
     }
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
         return super.createAssociation(uuid, child, projection);
     }
 
@@ -131,4 +132,13 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
         if(dto instanceof SkillPlayerMoveDto) return skillService;
         return service;
     }
+
+
+
+
+
+
+
+
+
 }

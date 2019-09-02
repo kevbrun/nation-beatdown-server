@@ -7,6 +7,7 @@ import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.units.services.UnitResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,9 +82,10 @@ public class UnitNamedResourceController extends AbstractMassNamedResourceGameLo
     }
 
 
-    @Override
-    @RequestMapping(method = RequestMethod.GET,path="/search/exists/{name}")
-    public ResponseEntity<Boolean> existsByName(@PathVariable("name") String name) {
-        return super.existsByName(name);
+    @RequestMapping(method = RequestMethod.GET,path="/search/exists")
+    public ResponseEntity<Boolean> exists(@RequestParam(value = "name",required = false)String name,@RequestParam(value = "uuid",required = false)String uuid){
+        if(uuid!=null && !uuid.isBlank()) return super.entityExists(uuid);
+        if(name!=null && !name.isBlank()) return super.existsByName(name);
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 }

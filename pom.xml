@@ -141,7 +141,7 @@
 		<profile>
 			<id>db</id>
 			<modules>
-				<module>core</module>
+				<module>core-model</module>
 				<module>dbservice</module>
 			</modules>
 

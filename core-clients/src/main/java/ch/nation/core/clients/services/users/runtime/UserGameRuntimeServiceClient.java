@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Component
-@FeignClient(contextId = "user-runtime-resource-service",value="nation-cloud-user-runtime-service",decode404 = true, configuration = FeignClientConfig.class)
+@FeignClient(contextId = "user-runtime-resource-service",value="nation-cloud-user-runtimes-service",decode404 = true, configuration = FeignClientConfig.class)
 public interface UserGameRuntimeServiceClient extends BaseServiceRestClientInterface<GameUserRuntimeInfoDto,GameUserRuntimeInfoDto> {
 
 

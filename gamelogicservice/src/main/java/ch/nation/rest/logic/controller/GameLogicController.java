@@ -14,7 +14,6 @@ import java.util.Base64;
 import java.util.List;
 
 @RestController
-@RequestMapping("/logic")
 public class GameLogicController {
 
     private final GameLogicService gameLogicService;

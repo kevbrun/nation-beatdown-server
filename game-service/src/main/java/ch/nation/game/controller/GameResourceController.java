@@ -21,7 +21,7 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
 
         private final UserServiceClient userService;
 
-        public GameResourceController(final GameResourceServiceImpl service, UserServiceClient userService) {
+        public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userService) {
         super(service);
             this.userService = userService;
         }
@@ -112,13 +112,14 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
 
 
 
-    @RequestMapping(method = RequestMethod.GET,path="/search")
-    public ResponseEntity<Boolean> entityExists(@RequestParam("uuid") String uuid, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.entityExists(uuid, projection.get());
+    @RequestMapping(method = RequestMethod.GET,path="/search/exists")
+    public ResponseEntity<Boolean> entityExists(@RequestParam("uuid") String uuid) {
+        return super.entityExists(uuid);
     }
 
-    @Override
-    @RequestMapping(method = RequestMethod.GET,path="/search")
+    //@Override
+  @RequestMapping(method = RequestMethod.GET,path="/search")
+    //NOT USED
     public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
         return super.findByName(name,projection.get());
     }
@@ -127,7 +128,7 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
+        return super.getChildrenNodesByResourceCollectionUnwrapped(uuid, resourceCollection,projection.get());
     }
 
 

@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
-@FeignClient(contextId = "game-resource-service",value="nation-cloud-game-service",decode404 = true, configuration = FeignClientConfig.class)
+@FeignClient(contextId = "game-resource-service",value="nation-cloud-games-service",decode404 = true, configuration = FeignClientConfig.class)
 public interface GameServiceClient extends BaseServiceRestClientInterface<GameDto,GameDto> {
 
 

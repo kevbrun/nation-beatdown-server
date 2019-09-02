@@ -16,8 +16,7 @@ logging:
   level:
     ch:
       nation:
-        rest:
-          clients: DEBUG
+        core: DEBUG
     org:
       springframework:
         web:
