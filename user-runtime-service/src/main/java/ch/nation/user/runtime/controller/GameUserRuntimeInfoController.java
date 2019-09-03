@@ -30,7 +30,7 @@ public class GameUserRuntimeInfoController extends AbstractResourceGameLogicCont
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity updatePatch(@RequestBody GameUserRuntimeInfoDto payload, QueryProjection projection) {
+    public ResponseEntity updatePatch(@RequestBody GameUserRuntimeInfoDto payload, @RequestParam(value = "projection",required = false) QueryProjection projection) {
         return super.updatePatch(payload,projection);
     }
 
@@ -55,21 +55,21 @@ public class GameUserRuntimeInfoController extends AbstractResourceGameLogicCont
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/batch")
-    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @RequestBody List<AbstractDto> children,@RequestParam(value = "projection") QueryProjection projection  ) throws Exception {
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @RequestBody List<AbstractDto> children,@RequestParam(value = "projection",required = false) QueryProjection projection  ) throws Exception {
         return super.createAssociation(uuid, children, projection);
     }
 
 
     @Override
     @RequestMapping(method = RequestMethod.POST,path="/{uuid}/{resourceCollection}")
-    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody AbstractDto child,@RequestParam(value = "projection") QueryProjection projection ) throws Exception {
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody AbstractDto child,@RequestParam(value = "projection",required = false) QueryProjection projection ) throws Exception {
         return super.createAssociation(uuid, resourceCollection, child, projection);
     }
 
 
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
-    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody List<AbstractDto> children, @RequestParam(value = "projection") QueryProjection projection ) {
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection ) {
         return super.createAssociation(uuid, resourceCollection, children, projection);
     }
 
