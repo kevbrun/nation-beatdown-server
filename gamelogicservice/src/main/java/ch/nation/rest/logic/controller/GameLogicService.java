@@ -190,7 +190,7 @@ public class GameLogicService {
             ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setCooldownCounter(((SkillPlayerMoveDto)move).getSkillDto().getCooldown());
            // playerMoveEntityService.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
-            playerMoveEntityService.updatePatch((BasePlayerMoveDto)savedMove,QueryProjection.def);
+            playerMoveEntityService.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
             //Fetch Association targets
             ResponseEntity<UnitDto> caster = unitResourceService.findById(move.getCaster().getId(), QueryProjection.def);
             ResponseEntity<SkillDto> skill = skillResourceService.findById(move.getSkillDto().getId(), QueryProjection.def);
@@ -210,18 +210,6 @@ public class GameLogicService {
                 ResponseEntity<SkillEffectDto> effectDto = skillEffectsResourceService.findById(value.getEffectDto().getId(), QueryProjection.def);
                 value.setEffectDto(effectDto.getBody());
 
-       /**         if (value instanceof StatSkillPlayerMoveSkillValueDto) {
-
-
-                    Optional<StatSkillPlayerMoveSkillValueDto> createdValue = statPlayerMoveValueResourceService.create(value);
-                    childrensList.add(createdValue.get());
-                } else if (value instanceof MoveSkillEffectPlayerMoveSkillValueDto) {
-
-
-                    Optional<MoveSkillEffectPlayerMoveSkillValueDto> createdValue = moveMoveValueResourceService.create((MoveSkillEffectPlayerMoveSkillValueDto) value);
-                    childrensList.add(createdValue.get());
-
-                }**/
 
 
             ResponseEntity<AbstractMoveSkillEffectValueDto> createdValue=    moveMoveValueResourceService.create(value,QueryProjection.def);
@@ -229,29 +217,29 @@ public class GameLogicService {
             childrensList.add(createdValue.getBody());
 
             }
-/**
 
 
-            playerMoveResourceService.createAssociation(savedMove.getId(), childrensList);
+
+            playerMoveEntityService.createAssociation(savedMove.getId(), childrensList,"values",QueryProjection.def);
 
             childrensList.clear();
 
 
 //ADD move to user-runtime!
-            Optional<?> updatedParent = gameUserRuntimeInfoService.addChildrenToParent(info, (List<AbstractDto>) children.get(), QueryProjection.max);
+            ResponseEntity updatedParent = gameUserRuntimeInfoService.createAssociation(info.getId(), (List<AbstractDto>) children.getBody(), "moves",QueryProjection.max);
 
 
-            Optional<SkillPlayerMoveDto> moveDto = playerMoveResourceService.findById(savedMove.getId(), QueryProjection.max);
+            ResponseEntity<BasePlayerMoveDto> moveDto = playerMoveEntityService.findById(savedMove.getId(), QueryProjection.max);
 
-            if (!moveDto.isPresent()) throw new Exception("Could not create entry!");
-            return new ResponseEntity<>(moveDto, HttpStatus.OK);
+            if (moveDto.getBody()==null) throw new Exception("Could not create entry!");
+            return new ResponseEntity<>(moveDto.getBody(), HttpStatus.OK);
         }
         LOGGER.info(String.format("FINISH | Adding unit move By Name | game : %s | player: %s", gameUuid, playerUuid));
 
-**/
 
 
-    }
+
+
         return new ResponseEntity<>(Optional.empty(),HttpStatus.OK);
     }
 
@@ -267,7 +255,7 @@ public class GameLogicService {
 
             ResponseEntity<GameUserRuntimeInfoDto> info = gameUserRuntimeInfoService.getUserRuntimeInfoByGameUuidAndByPlayerUuid(gameUuid, playerUuid, QueryProjection.min);
 
-            if (info.getBody()!=null) return new ResponseEntity<>(false, HttpStatus.OK);
+            if (info.getBody()==null) return new ResponseEntity<>(false, HttpStatus.OK);
 
 
             GameUserRuntimeInfoDto infoDto = info.getBody();

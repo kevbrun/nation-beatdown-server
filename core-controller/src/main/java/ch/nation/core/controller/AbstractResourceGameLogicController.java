@@ -13,6 +13,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -143,11 +145,25 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
         if (!response.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
+    }
 
+
+    public ResponseEntity createAssociation(String uuid, String resourceCollection, AbstractDto child, QueryProjection projection) throws Exception {
+        if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        Optional<TResult> result = service.createAssociation(uuid, child,resourceCollection,projection);
+        return new ResponseEntity<>(result.get(),HttpStatus.OK);
 
     }
 
-    public ResponseEntity createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
+    public ResponseEntity createAssociation(String uuid, String resourceCollection,List<AbstractDto> children, QueryProjection projection) {
+        if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
+        if (children.size() == 0) return new ResponseEntity(HttpStatus.NO_CONTENT);
+        Optional<TResult> result = service.createAssociation(uuid, children,resourceCollection,projection);
+        return new ResponseEntity<>(result.get(), HttpStatus.OK);
+    }
+
+
+        public ResponseEntity createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
 
         if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
         if (children.size() == 0) return new ResponseEntity(HttpStatus.NO_CONTENT);

@@ -44,6 +44,12 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
     }
 
     @Override
+    @RequestMapping(method = RequestMethod.PUT,consumes ="application/json")
+    public ResponseEntity updatePut(@RequestBody AbstractPlayerMoveDto payload, @RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.updatePut(payload, projection);
+    }
+
+    @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity create(@RequestBody AbstractPlayerMoveDto object,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
         return super.create(object,projection);
@@ -57,17 +63,27 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/batch")
     public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody List<AbstractDto> children,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
         return super.createAssociation(uuid, children, projection);
     }
+   /** @Override
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid,String  @RequestBody AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.createAssociation(uuid, child, projection);
+    }**/
+
+   @Override
+   @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
+   public ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@PathVariable("resourceCollection") String resourceCollection,  @RequestBody List<AbstractDto> child, @RequestParam(value = "projection",required = false) QueryProjection projection)   {
+       return super.createAssociation(uuid, resourceCollection, child, projection);
+   }
+
+
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
-        return super.createAssociation(uuid, child, projection);
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@PathVariable("resourceCollection") String resourceCollection,  @RequestBody AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+        return super.createAssociation(uuid, resourceCollection, child, projection);
     }
-
-
 
     @Override
     @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")

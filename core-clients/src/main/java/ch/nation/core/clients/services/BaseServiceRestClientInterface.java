@@ -35,12 +35,11 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     ResponseEntity<List<AbstractDto>> createChildren(List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    ResponseEntity createAssociation(@PathVariable("uuid") String uuid, AbstractDto child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
-    ResponseEntity createAssociation(@PathVariable("uuid") String uuid, List<AbstractDto> child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
-
+    ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@RequestBody List<AbstractDto> child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.PUT,consumes = "application/json")
     public ResponseEntity updatePut(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);

@@ -58,14 +58,16 @@ public class PlayerMoveValueResourceController extends AbstractResourceGameLogic
         return super.create(objects,projection);
     }
 
+
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
-    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
-        return super.createAssociation(uuid, children, projection);
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, @RequestBody List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.createAssociation(uuid, resourceCollection, children, projection);
     }
+
     @Override
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+    public ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, AbstractDto child, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
         return super.createAssociation(uuid, child, projection);
     }
 

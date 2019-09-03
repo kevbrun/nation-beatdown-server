@@ -204,26 +204,29 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
     }
 
-    public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children) throws Exception {
-        return createAssociation(uuid, children, QueryProjection.def);
-    }
+
 
     public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children, QueryProjection projection) throws Exception {
 
+        return createAssociation(uuid,children,children.get(0).ResourceCollectionName(),projection);
+
+    }
+
+    public Optional<TResult> createAssociation(String uuid, List<AbstractDto> children,String collectionName, QueryProjection projection) {
         Resource<TResult> resultEntity = null;
         LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
         if (!validateDeleteParameter(uuid))
             throw new IllegalArgumentException(String.format("Payload %s is not valid", uuid));
 
-          Resource<TResult> parent = GetBaseClient().findById(uuid, QueryProjection.max);
+        Resource<AbstractDto> parent = GetBaseClient().findById(uuid, QueryProjection.max);
 
 
 
-         StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
 
         for (AbstractDto child:
-             children) {
+                children) {
 
             Resource<AbstractDto> childObject = (Resource<AbstractDto>) getBindedClient(child).findById(child.getId(), QueryProjection.min);
             if(childObject!=null) builder.append(childObject.getLink(Link.REL_SELF).getHref()).append("\n");
@@ -232,10 +235,10 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
         String listOfUris = builder.toString();
 
-       ResponseEntity<?> responseEntity= GetBaseClient().createAssocationsPut(uuid,children.get(0).ResourceCollectionName(),listOfUris,projection);
+     //   ResponseEntity<?> responseEntity= GetBaseClient().createAssocationsPut(uuid,collectionName,listOfUris,projection);
+        ResponseEntity<?> responseEntity= getBindedClient(parent.getContent()).createAssocationsPut(uuid,collectionName,listOfUris,projection);
 
-
-       LOGGER.info(""+responseEntity.getStatusCode());
+        LOGGER.info(""+responseEntity.getStatusCode());
 
 
         resultEntity = GetBaseClient().findById(uuid, projection);
@@ -243,8 +246,11 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info(String.format("START | Creating assocation | Payload: %s | Child Type: %s", uuid, children.getClass().getName()));
 
         return Optional.of(resultEntity.getContent());
+    }
 
 
+        public Optional<?> addChildrenToParent(TInput parent, List<AbstractDto> children, QueryProjection projection) throws Exception {
+        return createAssociation(parent.getId(),children,projection);
     }
 
     public Optional<TResult> createAssociation(String uuid, AbstractDto child, String resourceName,QueryProjection projection){
@@ -269,6 +275,8 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info(String.format("FINISH | Creating assocation | Payload: %s | Child Type: %s", uuid, child.getClass().getName()));
         return Optional.empty();
     }
+
+
 
 
 

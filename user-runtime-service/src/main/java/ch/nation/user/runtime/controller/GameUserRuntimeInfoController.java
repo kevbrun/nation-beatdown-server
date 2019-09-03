@@ -54,6 +54,26 @@ public class GameUserRuntimeInfoController extends AbstractResourceGameLogicCont
 
 
     @Override
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/batch")
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @RequestBody List<AbstractDto> children,@RequestParam(value = "projection") QueryProjection projection  ) throws Exception {
+        return super.createAssociation(uuid, children, projection);
+    }
+
+
+    @Override
+    @RequestMapping(method = RequestMethod.POST,path="/{uuid}/{resourceCollection}")
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody AbstractDto child,@RequestParam(value = "projection") QueryProjection projection ) throws Exception {
+        return super.createAssociation(uuid, resourceCollection, child, projection);
+    }
+
+
+    @Override
+    @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
+    public ResponseEntity createAssociation(@PathVariable("uuid")String uuid, @PathVariable("resourceCollection")String resourceCollection, @RequestBody List<AbstractDto> children, @RequestParam(value = "projection") QueryProjection projection ) {
+        return super.createAssociation(uuid, resourceCollection, children, projection);
+    }
+
+    @Override
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
