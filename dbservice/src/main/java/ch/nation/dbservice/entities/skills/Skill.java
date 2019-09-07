@@ -7,7 +7,9 @@ import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
+import ch.nation.dbservice.entities.prejudices.SkillPrejudice;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
+import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -76,16 +78,21 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     @JsonProperty("effects")
     private List<SkillEffect> skillEffects;
 
-    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
     @JsonIgnore
-    private List<SkillCharacteristic> skillCharacteristic = new ArrayList<>();
+    @RestResource(exported = false)
+    private List<SkillCharacteristic> skillCharacteristic;
 
+
+    @OneToMany(mappedBy = "skill",fetch = FetchType.LAZY)
+    @JsonProperty("prejudices")
+    private List<SkillPrejudice> skillPrejudices;
 
 
     @OneToMany(
             mappedBy = "skill",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
+            orphanRemoval = false,
             fetch = FetchType.LAZY
     )
     @JsonIgnore
@@ -106,6 +113,15 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
     public void setSkillCharacteristic(List<SkillCharacteristic> skillCharacteristic) {
         this.skillCharacteristic = skillCharacteristic;
+    }
+
+    public List<SkillPrejudice> getSkillPrejudices() {
+        return skillPrejudices;
+    }
+
+    public void setSkillPrejudices(List<SkillPrejudice> skillPrejudices) {
+        if(skillPrejudices==null) skillPrejudices = new ArrayList<>();
+        this.skillPrejudices = skillPrejudices;
     }
 
     public int getCost() {
@@ -269,6 +285,13 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
             getSkillCharacteristic().remove(characteristic);
             characteristic.setSkill(null);
         }
+    }
+
+    public void removeMove(BasePlayerMove move){
+       if(getActions().contains(move)){
+           getActions().remove(move);
+           move.setSkill(null);
+       }
     }
 
 }

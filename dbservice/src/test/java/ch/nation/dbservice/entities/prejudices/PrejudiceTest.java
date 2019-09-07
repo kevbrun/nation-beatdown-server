@@ -4,7 +4,7 @@ import ch.nation.core.model.Enums.ConditionComparer;
 import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.AbstractNamedEntityTest;
-import ch.nation.dbservice.entities.prejudices.triggers.PrejudiceTrigger;
+import ch.nation.dbservice.entities.prejudices.triggers.BasePrejudiceTrigger;
 import ch.nation.dbservice.entities.prejudices.triggers.StatPrejudiceTrigger;
 import ch.nation.dbservice.repositories.prejudices.PrejudiceRepository;
 import ch.nation.dbservice.repositories.prejudices.triggers.PrejudiceTriggerRepository;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class PrejudiceTest extends AbstractNamedEntityTest<Prejudice,PrejudiceRepository> {
+public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,PrejudiceRepository> {
 
     @Autowired
     private PrejudiceTriggerRepository prejudiceTriggerRepository;
@@ -27,14 +27,14 @@ public class PrejudiceTest extends AbstractNamedEntityTest<Prejudice,PrejudiceRe
     @Override
     public void setUp() {
         super.setUp();
-        entityToTest = new Prejudice();
+        entityToTest = new StatPrejudice();
         entityToTest.setName("Alle Menschen stinken!");
         entityToTest.setTriggerOperation(PrejudiceOperator.AND);
 
         listOfEntities.add(entityToTest);
 
 
-        entityToTest = new Prejudice();
+        entityToTest = new StatPrejudice();
         entityToTest.setName("So gutmütig");
         listOfEntities.add(entityToTest);
     }
@@ -48,7 +48,7 @@ public class PrejudiceTest extends AbstractNamedEntityTest<Prejudice,PrejudiceRe
         entityToTest = repo.save(entityToTest);
 
 
-        PrejudiceTrigger trigger = new PrejudiceTrigger();
+        BasePrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger=prejudiceTriggerRepository.save(trigger);
 
         entityToTest.addTrigger(trigger);
@@ -88,7 +88,7 @@ public class PrejudiceTest extends AbstractNamedEntityTest<Prejudice,PrejudiceRe
         entityToTest = repo.save(entityToTest);
 
 
-        PrejudiceTrigger trigger = new PrejudiceTrigger();
+        BasePrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger=prejudiceTriggerRepository.save(trigger);
 
         entityToTest.addTrigger(trigger);

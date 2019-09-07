@@ -1,53 +1,45 @@
 package ch.nation.dbservice.entities.prejudices.triggers;
 
-import ch.nation.dbservice.entities.characteristics.Characteristic;
+import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
+import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity(name="CHARACTERISTIC_PREJUDICE_TRIGGER")
 @DiscriminatorValue("CHAR")
-public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
+public class CharacteristicPrejudiceTrigger extends BasePrejudiceTrigger  implements IDiscrimantorValue {
 
+
+    //TODO Set back to exported = true, check why it is not deserialized with max proj
 
     @Column(name="characteristics")
     @JsonProperty("characteristics")
-    @ManyToMany
-    @RestResource(path = "characteristics", rel="characteristics")
-    private List<Characteristic> characteristics;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @RestResource(path = "characteristics", rel="characteristics",exported = false)
+    private List<BaseCharacteristic> characteristics;
 
     public CharacteristicPrejudiceTrigger() {
-
+        super();
+       characteristics = new ArrayList<>();
     }
 
-    public CharacteristicPrejudiceTrigger(List<Characteristic> characteristics) {
-        this.characteristics = characteristics;
-    }
 
-    public List<Characteristic> getCharacteristics() {
-
-        if( characteristics==null)  characteristics = new ArrayList<>();
-
+    public List<BaseCharacteristic> getCharacteristics() {
         return characteristics;
     }
 
-    public void setCharacteristics(List<Characteristic> characteristics) {
+    public void setCharacteristics(List<BaseCharacteristic> characteristics) {
         this.characteristics = characteristics;
     }
 
-    @Override
-    public String toString() {
-        return "CharacteristicPrejudiceTrigger{" +
-                "characteristics=" + characteristics +
-                "} " + super.toString();
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -67,21 +59,24 @@ public class CharacteristicPrejudiceTrigger extends PrejudiceTrigger{
 
 
     //CONNECTORS
+    @Transactional
+    public void addCharacteristic(BaseCharacteristic baseCharacteristic){
+        if(!getCharacteristics().contains(baseCharacteristic)){
+            getCharacteristics().add(baseCharacteristic);
+            baseCharacteristic.addTrigger(this);
 
-    public void addCharacteristic(Characteristic characteristic){
-        if(!getCharacteristics().contains(characteristic)){
-            getCharacteristics().add(characteristic);
-            characteristic.addTrigger(this);
+        }
+    }
+
+    @Transactional
+    public void removeCharacteristic(BaseCharacteristic baseCharacteristic){
+        if(getCharacteristics().contains(baseCharacteristic)){
+            getCharacteristics().remove(baseCharacteristic);
+            baseCharacteristic.removeTrigger(this);
 
         }
     }
 
-    public void removeCharacteristic(Characteristic characteristic){
-        if(getCharacteristics().contains(characteristic)){
-            getCharacteristics().remove(characteristic);
-            characteristic.removeTrigger(this);
 
-        }
-    }
 
 }

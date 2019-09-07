@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "nations",path = "nations",exported = false, excerptProjection = NationMaxResponseProjection.class)
+@RepositoryRestResource(collectionResourceRel = "nations",path = "nations",exported = false /**, excerptProjection = NationMaxResponseProjection.class**/)
 @Transactional
 public interface NationRepository extends IPageableDao<Nation>, INamedObjectDao<Nation> {
 

@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.moves;
 import ch.nation.dbservice.entities.AbstractEntityTest;
 import ch.nation.dbservice.entities.IHasDiscriminatorValue;
 import ch.nation.dbservice.entities.units.Unit;
+import ch.nation.dbservice.repositories.moves.IMoveFind;
 import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
 import ch.nation.dbservice.repositories.units.UnitRepository;
 import ch.nation.dbservice.repositories.user.UserRepository;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,PlayerMoveRepository> implements IHasDiscriminatorValue {
+public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove, PlayerMoveRepository> implements IHasDiscriminatorValue {
 
 
     @Autowired
@@ -26,11 +27,11 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
     public void setUp() {
         super.setUp();
 
-        entityToTest = new BasePlayerMove();
+        entityToTest = new SkillPlayerMove();
         listOfEntities.add(entityToTest);
 
 
-        BasePlayerMove second = new BasePlayerMove();
+        BasePlayerMove second = new SkillPlayerMove();
         listOfEntities.add(second);
 
     }

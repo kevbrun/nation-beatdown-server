@@ -160,6 +160,13 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
         }
     }
 
+    public void removeMoveValue(BasePlayerMoveValue value){
+        if(getMoveValues().contains(value)){
+            getMoveValues().remove(value);
+            value.setSkillEffect(null);
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

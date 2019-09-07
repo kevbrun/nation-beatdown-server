@@ -13,9 +13,6 @@ import java.util.List;
 @Projection(name = "max", types = {Skill.class, MoveSkill.class})
 public interface SkillWithEffectsProjection extends TimestampProjection,NamedClassesProjection {
 
-    public List<SkillCharacteristic> getSkillCharacteristic();
-
-    public void setSkillCharacteristic(List<SkillCharacteristic> skillCharacteristic);
 
     @JsonProperty("cost")
     public int getCost();

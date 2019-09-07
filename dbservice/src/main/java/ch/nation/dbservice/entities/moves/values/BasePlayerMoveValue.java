@@ -1,19 +1,12 @@
 package ch.nation.dbservice.entities.moves.values;
 
-import ch.nation.core.model.dto.move.BasePlayerMoveDto;
-import ch.nation.core.model.dto.move.values.MoveSkillEffectPlayerMoveSkillValueDto;
-import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
-import ch.nation.dbservice.entities.moves.values.deserializer.PlayerMoveValueDeserializer;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -104,6 +97,34 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
     }
 
 
+    public void removeTarget(){
+        if(target!=null){
+            target.removeMovementValue(this);
+            target =null;
+            LOGGER.info("Remove associations with Target");
+
+        }
+    }
+
+    public void removeSkillEffect(){
+        if(skillEffect!=null){
+            skillEffect.removeMoveValue(this);
+            skillEffect=null;
+            LOGGER.info("Remove associations with SkillEffect");
+
+        }
+
+    }
+
+
+    @PreRemove
+    public void preRemoveEntity(){
+        LOGGER.info("Start to remove associations between objects:");
+        removeTarget();
+        removeSkillEffect();
+
+
+    }
 
 
 }

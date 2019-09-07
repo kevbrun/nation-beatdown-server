@@ -4,6 +4,7 @@ import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.game.GameUserRuntimeInfo;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
+import ch.nation.dbservice.entities.moves.SkillPlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.moves.values.MoveSkillPlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
@@ -62,7 +63,7 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
 
 
 
-       BasePlayerMove move = new BasePlayerMove();
+       SkillPlayerMove move = new SkillPlayerMove();
         MoveSkillPlayerMoveValue value = new MoveSkillPlayerMoveValue();
 
         value.setTargetPosition(new EmeddableVector3(0.4f,0.0f,-100f));

@@ -4,10 +4,10 @@ import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.moves.SkillPlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -237,6 +237,15 @@ public class Unit extends NamedEntityBase {
         }
     }
 
+
+    public void removeMovementValue(BasePlayerMoveValue value){
+        if(getTarget().contains(value)){
+            getTarget().remove(value);
+            value.setTarget(null);
+        }
+
+
+    }
 
 
   /**  public void addTargetMovement(BasePlayerMoveValue action){
