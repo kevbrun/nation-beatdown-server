@@ -195,6 +195,13 @@ public class User extends NamedEntityBase implements Serializable {
         }
     }
 
+    public void removePlayerMove(BasePlayerMove move){
+        if(getPlayerMoves().contains(move)){
+            getPlayerMoves().remove(move);
+            move.removeUser();
+        }
+    }
+
     @PrePersist
     @PreUpdate
     public void updateAddressAssociation(){

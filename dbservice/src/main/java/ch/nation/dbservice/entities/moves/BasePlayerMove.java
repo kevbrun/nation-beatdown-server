@@ -116,6 +116,52 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
 
+    public void removeSkill(){
+        if(getSkill()!=null){
+            getSkill().removeMove(this);
+            setSkill(null);
+            LOGGER.info("Removed skill association");
+        }
+    }
+
+    public void removeUserRuntime(){
+        if(getGameInfo()!=null){
+            getGameInfo().removeMove(this);
+            setGameInfo(null);
+            LOGGER.info("Removed UserRuntime association");
+
+        }
+    }
+
+    public void removeUser(){
+        if(getUser()!=null){
+            getUser().removePlayerMove(this);
+            setUser(null);
+            LOGGER.info("Removed User association");
+
+        }
+    }
+
+    public void removeCaster(){
+        if(getCaster()!=null){
+            getCaster().removeCasterMovement(this);
+            setCaster(null);
+            LOGGER.info("Removed Caster association");
+
+        }
+    }
+
+    @PreRemove
+    public void preRemoveEntity(){
+        LOGGER.info("Start to remove associations between objects:");
+        removeSkill();
+        removeUserRuntime();
+        removeUser();
+        removeCaster();
+
+
+
+    }
 
 
 

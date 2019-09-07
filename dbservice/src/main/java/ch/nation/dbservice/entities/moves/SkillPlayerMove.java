@@ -79,6 +79,10 @@ public class SkillPlayerMove extends BasePlayerMove {
 
 
 
+
+
+
+
     //JPA FUNC
     @PrePersist
     @PreUpdate

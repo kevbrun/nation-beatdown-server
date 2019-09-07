@@ -9,6 +9,7 @@ import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.prejudices.SkillPrejudice;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
+import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -91,7 +92,7 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
     @OneToMany(
             mappedBy = "skill",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
+            orphanRemoval = false,
             fetch = FetchType.LAZY
     )
     @JsonIgnore
@@ -284,6 +285,13 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
             getSkillCharacteristic().remove(characteristic);
             characteristic.setSkill(null);
         }
+    }
+
+    public void removeMove(BasePlayerMove move){
+       if(getActions().contains(move)){
+           getActions().remove(move);
+           move.setSkill(null);
+       }
     }
 
 }
