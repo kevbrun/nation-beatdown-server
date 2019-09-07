@@ -43,7 +43,7 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = StatSkillPlayerMoveSkillValueDto.class, name = "StatPlayerMoveValue"),
         @JsonSubTypes.Type(value = MoveSkillEffectPlayerMoveSkillValueDto.class, name = "MoveSkillPlayerMoveValue"),
         @JsonSubTypes.Type(value = BasePlayerMoveDto.class, name = "BasePlayerMove"),
-        @JsonSubTypes.Type(value = SkillPlayerMoveDto.class, name = "SkillPlayerMove"),
+        @JsonSubTypes.Type(value = SkillPlayerMoveDto.class, name = SkillPlayerMoveDto.TYPE_IDENTIFER_SKILL),
         @JsonSubTypes.Type(value = GameUserRuntimeInfoDto.class, name = "GameUserRuntimeInfo"),
 
 

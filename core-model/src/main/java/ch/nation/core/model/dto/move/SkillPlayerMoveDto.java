@@ -18,8 +18,16 @@ public class SkillPlayerMoveDto extends BasePlayerMoveDto
     private int skillCost;
 
 
+    public final static String TYPE_IDENTIFER_SKILL="SkillPlayerMove";
+
+
     public SkillPlayerMoveDto() {
      super();
+    }
+
+    public SkillPlayerMoveDto(String type){
+        super();
+        this.setType(type);
     }
 
     public List<BasePlayerMoveValueDto> getEffectValues() {

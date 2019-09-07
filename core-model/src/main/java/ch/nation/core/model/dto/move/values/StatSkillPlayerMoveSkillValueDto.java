@@ -14,6 +14,17 @@ public class StatSkillPlayerMoveSkillValueDto extends BasePlayerMoveValueDto {
     @JsonProperty("value")
     private float value;
 
+    public final static String TYPE_IDENTIFIER= "StatSkillPlayerMoveSkillValueDto";
+
+    public StatSkillPlayerMoveSkillValueDto(String type){
+        super();
+        this.setType(type);
+    }
+
+    public StatSkillPlayerMoveSkillValueDto(){
+        super();
+    }
+
     public float getValue() {
         return value;
     }

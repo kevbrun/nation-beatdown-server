@@ -101,10 +101,10 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
 
 
 
-
+//TODO Check why sometimes it works to unwrap without doing somehting
 
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}",produces = "application/json")
-    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection, @RequestParam(value="hal",required = false) boolean returnAsHal) {
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection, @RequestParam(value="hal",required = false,defaultValue = "false") boolean returnAsHal) {
         if(returnAsHal) {
             return super.getChildrenNodesByResourceCollection(uuid, resourceCollection, projection);
 

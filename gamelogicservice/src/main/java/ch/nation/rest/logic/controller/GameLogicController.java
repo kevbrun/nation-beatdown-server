@@ -49,10 +49,16 @@ public class GameLogicController {
    @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
    public ResponseEntity<Boolean> endGame(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) throws Exception {
        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-       if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+       if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("playerUuid is null or empty!");
        return gameLogicService.endGame(gameUuid,playerUuid);
    }
 
+        @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/is-current-player")
+    public ResponseEntity<Boolean> isPlayerCurrentPlayer(@PathVariable("gameUuid")String gameUuid, @PathVariable("playerUuid") String playerUuid){
+        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
+        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("playerUuid is null or empty!");
+        return gameLogicService.isUserCurrentUserInGame(gameUuid,playerUuid);
+   }
 
 
     @RequestMapping(method = RequestMethod.PUT,path="/{gameUuid}")

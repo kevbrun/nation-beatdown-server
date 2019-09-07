@@ -117,6 +117,13 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
         }
     }
 
+    public void removeMove(BasePlayerMove move){
+        if(getMoves().contains(move)){
+            getMoves().remove(move);
+            move.setGameInfo(null);
+        }
+    }
+
     @PrePersist
     @PreUpdate
     public void PreUpdate(){

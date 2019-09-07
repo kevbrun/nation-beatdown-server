@@ -222,7 +222,7 @@ public class Unit extends NamedEntityBase {
 
     //JPA
 
-    public void addCasterMovement(SkillPlayerMove action){
+    public void addCasterMovement(BasePlayerMove action){
         if(!getCaster().add(action)){
             getCaster().add(action);
             action.setCaster(this);
@@ -230,13 +230,22 @@ public class Unit extends NamedEntityBase {
             }
     }
 
-    public void removeCasterMovement(SkillPlayerMove action){
+    public void removeCasterMovement(BasePlayerMove action){
         if(getCaster().contains(action)){
             getCaster().remove(action);
             action.setCaster(null);
         }
     }
 
+
+    public void removeMovementValue(BasePlayerMoveValue value){
+        if(getTarget().contains(value)){
+            getTarget().remove(value);
+            value.setTarget(null);
+        }
+
+
+    }
 
 
   /**  public void addTargetMovement(BasePlayerMoveValue action){

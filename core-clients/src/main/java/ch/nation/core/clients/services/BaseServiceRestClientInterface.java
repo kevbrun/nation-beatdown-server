@@ -41,6 +41,9 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
     ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@RequestBody List<AbstractDto> child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
+    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
+    ResponseEntity<List<AbstractDto>> getChildrenByResourceType(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
+
     @RequestMapping(method = RequestMethod.PUT,consumes = "application/json")
     public ResponseEntity updatePut(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
