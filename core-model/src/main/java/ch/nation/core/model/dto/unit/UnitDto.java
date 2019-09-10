@@ -19,7 +19,7 @@ public class UnitDto extends NamedObjectAbstractDto {
     @JsonProperty("dead")
     private Boolean isDead;
 
-    // @Column(name="position")
+
     @JsonProperty("pos")
 
     private Vector3Float position;
@@ -27,6 +27,33 @@ public class UnitDto extends NamedObjectAbstractDto {
     @JsonProperty("assets")
     private UnitAssetsDto unitAssets = new UnitAssetsDto();
 
+
+    @JsonProperty("hp")
+    private int healthPoints;
+
+
+    @JsonProperty("ap")
+    private int actionPoints;
+
+
+    @JsonProperty("str")
+    private int strength;
+
+
+    @JsonProperty("vit")
+    private int vitality;
+
+
+    @JsonProperty("int")
+    private int intelligence;
+
+
+    @JsonProperty("dex")
+    private int dexterity;
+
+
+    @JsonProperty("agi")
+    private int agility;
 
     public UnitDto() {
     }
@@ -55,6 +82,66 @@ public class UnitDto extends NamedObjectAbstractDto {
 
     public UnitState getState() {
         return state;
+    }
+
+    public Boolean getDead() {
+        return isDead;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public int getActionPoints() {
+        return actionPoints;
+    }
+
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public void setVitality(int vitality) {
+        this.vitality = vitality;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
     public void setState(UnitState state) {

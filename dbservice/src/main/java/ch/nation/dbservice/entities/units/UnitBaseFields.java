@@ -12,12 +12,38 @@ public interface UnitBaseFields {
 
     @JsonProperty("class")
     CharacterClass getCharacterClass();
+
     @JsonProperty("state")
     UnitState getState();
+
     @JsonProperty("pos")
     EmeddableVector3 getPosition();
+
     @JsonProperty("assets")
     UnitAssets getUnitAssets();
-    @Column(name="is_dead")
-    public boolean isUnitIsDead();
+
+    @JsonProperty("is_dead")
+    boolean isUnitIsDead();
+
+    @JsonProperty("hp")
+    int getHealthPoints();
+
+    @JsonProperty("ap")
+    int getActionPoints();
+
+    @JsonProperty("str")
+    public int getStrength();
+
+    @JsonProperty("vit")
+    public int getVitality();
+    @JsonProperty("int")
+    public int getIntelligence();
+
+    @JsonProperty("dex")
+    public int getDexterity();
+
+    @JsonProperty("agi")
+    public int getAgility();
+
 }
+
