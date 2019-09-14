@@ -210,10 +210,7 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
         return getChildrenNodesByResourceCollection(uuid,resourceCollection,QueryProjection.def);
     }
 
-    public ResponseEntity getChildrenNodesByResourceCollectionUnwrapped(String uuid,String resourceCollection,QueryProjection projection){
-        ResponseEntity<SimpleResourceDto> resource = getChildrenNodesByResourceCollection(uuid,resourceCollection,projection);
-        return resource;
-    }
+
 
     protected AbstractEntityService GetServiceByBody(AbstractDto dto){
            return GetDefaultServiceBody();

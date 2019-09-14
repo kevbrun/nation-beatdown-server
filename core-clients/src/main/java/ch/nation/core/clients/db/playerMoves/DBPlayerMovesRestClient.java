@@ -29,7 +29,8 @@ public interface DBPlayerMovesRestClient  extends DBRestServiceBaseInterface<Bas
                                                                                 QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_Id")
-    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,
+    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,@RequestParam(value = "page",required = false,defaultValue = "0") long page,
+                                                                   @RequestParam(value = "size",required = false, defaultValue = "20") long size,
                                                                                    @RequestParam(name = "projection",required=false)
                                                                                            QueryProjection projection);
 }

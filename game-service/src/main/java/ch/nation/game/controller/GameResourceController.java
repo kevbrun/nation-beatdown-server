@@ -17,13 +17,13 @@ import java.util.Optional;
 
 
 @RestController
-public class GameResourceController extends AbstractNamedResourceGameLogicController<GameDto,GameDto> implements IDaoQueryProjectionable {
+public class GameResourceController extends AbstractNamedResourceGameLogicController<GameDto,GameDto> {
 
         private final UserServiceClient userService;
 
-        public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userService) {
-        super(service);
-            this.userService = userService;
+        public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userServiceClient) {
+            super(service);
+            this.userService = userServiceClient;
         }
 
 
@@ -32,47 +32,47 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll(@RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-
-            if(projection.isPresent()) return super.getAll(projection.get());
-        return super.getAll(QueryProjection.def);
+    public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
+            ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(page,size,projection);
     }
 
 
-    @Override
+
+
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity update(@RequestBody GameDto payload, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.updatePatch(payload,projection.get());
+    public ResponseEntity update(@RequestBody GameDto payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.updatePatch(payload,projection);
     }
 
 
 
     @RequestMapping(method = RequestMethod.PUT,consumes ="application/json")
-    public ResponseEntity updatePut(@RequestBody GameDto payload, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.updatePut(payload, projection.get());
+    public ResponseEntity updatePut(@RequestBody GameDto payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.updatePut(payload, projection);
     }
 
-    @Override
+
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity create(@RequestBody GameDto object, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) throws Exception {
-        return super.create(object,projection.get());
+    public ResponseEntity create(@RequestBody GameDto object, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+        return super.create(object,projection);
     }
 
-    @Override
-    @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
-    public ResponseEntity create(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid", required = false) Optional<String> playerTwoUuid, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) throws Exception {
 
-            if(playerTwoUuid.isPresent())       return ((GameResourceServiceImpl)service).create(playerUuid,playerTwoUuid.get(),projection.get());
+    @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
+    public ResponseEntity create(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid", required = false) Optional<String> playerTwoUuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+
+            if(playerTwoUuid.isPresent())       return ((GameResourceServiceImpl)service).create(playerUuid,playerTwoUuid.get(),projection);
 
             ResponseEntity<UserDto> dummyPlayer =  userService.findByName("DummyPlayer",QueryProjection.min);
 
             if(dummyPlayer.getBody()==null) throw new Exception("Could not find Dummy Player in DB!");
-            return ((GameResourceServiceImpl)service).create(playerUuid,dummyPlayer.getBody().getId(),projection.get());
+            return ((GameResourceServiceImpl)service).create(playerUuid,dummyPlayer.getBody().getId(),projection);
 
     }
 
 
-    @Override
+
     @RequestMapping(method = RequestMethod.GET,path = {"/search/{userUuid}"})
     public ResponseEntity  getGamesByUserAndGameStatus(@PathVariable("userUuid") String userUuid, @RequestParam("status") GameStatus status, @RequestParam(value = "projection", required = false) QueryProjection projection){
             if(userUuid==null) return ResponseEntity.notFound().build();
@@ -104,10 +104,10 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     }
 
 
-    @Override
+
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
-    public ResponseEntity findById(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.findById(uuid,projection.get());
+    public ResponseEntity findById(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.findById(uuid,projection);
     }
 
 
@@ -120,15 +120,15 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     //@Override
   @RequestMapping(method = RequestMethod.GET,path="/search")
     //NOT USED
-    public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.findByName(name,projection.get());
+    public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.findByName(name,projection);
     }
 
 
-    @Override
+
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}")
-    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, @RequestParam(value = "projection", required = false) Optional<QueryProjection> projection) {
-        return super.getChildrenNodesByResourceCollectionUnwrapped(uuid, resourceCollection,projection.get());
+    public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.getChildrenNodesByResourceCollection(uuid, resourceCollection,projection);
     }
 
 

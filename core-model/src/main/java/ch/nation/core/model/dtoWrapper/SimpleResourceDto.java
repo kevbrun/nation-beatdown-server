@@ -1,6 +1,7 @@
 package ch.nation.core.model.dtoWrapper;
 
 import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.PagedResources;
 
@@ -22,6 +23,8 @@ public class SimpleResourceDto implements Serializable {
         this.elements = elements;
     }
 
+
+
     public SimpleResourceDto(PagedResources resource){
         this(resource.getMetadata().getSize()
                 ,resource.getMetadata().getTotalElements()
@@ -34,7 +37,6 @@ public class SimpleResourceDto implements Serializable {
 
     public SimpleResourceDto() {
     }
-
 
 
     public SimpleResourcePageDto getPageInfo() {
