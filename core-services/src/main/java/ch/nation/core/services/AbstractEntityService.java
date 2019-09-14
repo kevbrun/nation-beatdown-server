@@ -3,6 +3,7 @@ package ch.nation.core.services;
 import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
+import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
 
 
@@ -12,6 +13,7 @@ import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
@@ -58,21 +60,22 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
     }
 
     @Override
-    public Optional<Collection<TResult>> getAll() {
+    public Optional<SimpleResourceDto> getAll() {
 
-        return getAll(QueryProjection.def);
+        return getAll(0,20,QueryProjection.def);
 
     }
 
-    public Optional<Collection<TResult>> getAll(QueryProjection queryProjection) {
+    public Optional<SimpleResourceDto> getAll(long page,long size,final QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Get ALL | Used client %s", GetBaseClient().getClass().getName()));
 
-        Collection<TResult> resultsFromDB = GetBaseClient().getAll(queryProjection).getContent();
-        ArrayList<TResult> responseList = new ArrayList<>(resultsFromDB);
+        final PagedResources<TResult> resultsFromDB = GetBaseClient().getAll(page,size,queryProjection);
 
-        if (responseList.size() > 0) {
-            LOGGER.info(String.format("Found %d entries", responseList.size()));
-            return Optional.of(responseList);
+        if (resultsFromDB!=null && resultsFromDB.getContent().size() > 0) {
+            LOGGER.info(String.format("Found %d entries", resultsFromDB.getContent().size()));
+            //int size, int totalElements, int totalPages, int number
+            final SimpleResourceDto resourceDto = new SimpleResourceDto(resultsFromDB);
+            return Optional.of(resourceDto);
         }
         LOGGER.info(String.format("FINISH | Getting ALL entities | Used client %s", GetBaseClient().getClass().getName()));
 
@@ -315,7 +318,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         return getChildren(uuid,resource,queryProjection);
     }
 
-    public Optional<Resources<?>> getChildren(String uuid, String resource, QueryProjection projection){
+    public Optional<?> getChildren(String uuid, String resource, QueryProjection projection){
         Resources<?> results = null;
         LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
         if (!validateUuid(uuid) && resource == null && resource.isEmpty())
@@ -327,24 +330,10 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
         LOGGER.info("Found entries: " + results.getContent().size());
 
         LOGGER.info(String.format("START | Try to find all children | Parent: %s | Child Resource Type: %s", uuid, resource));
-       return Optional.of(results);
+       return Optional.of(results.getContent());
     }
 
 
-    public Optional<Resource<?>> getChild(String uuid, String resource,QueryProjection projection){
-        Resource<?> results = null;
-        LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
-        if (!validateUuid(uuid) && resource == null && resource.isEmpty())
-            throw new IllegalArgumentException("Uuid or resource type is null!");
-
-        results = getDefaultClient().getChildEntity(uuid, resource, projection);
-
-
-        LOGGER.info(String.valueOf("Found entry: " + results.getContent()!=null));
-
-        LOGGER.info(String.format("START | Try to find a child | Parent: %s | Child Resource Type: %s", uuid, resource));
-        return Optional.of(results);
-    }
 
 
 

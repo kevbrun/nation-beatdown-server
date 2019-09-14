@@ -33,9 +33,12 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll(@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.getAll(projection);
+    public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
+            ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(page,size,projection);
     }
+
+
 
     @Override
     @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
@@ -119,14 +122,15 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
 
     @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}")
-    public ResponseEntity getAllMovesOfPlayerByGameRuntimeUUID(@PathVariable("uuid")String gameRuntimeUuid, @RequestParam(value = "unit",required = false)String unitUuid, @RequestParam(value = "projection",required = false)QueryProjection projection){
+    public ResponseEntity getAllMovesOfPlayerByGameRuntimeUUID(@PathVariable("uuid")String gameRuntimeUuid, @RequestParam(value = "unit",required = false)String unitUuid, @RequestParam(value = "page",required = false,defaultValue = "0") long page,
+                                                               @RequestParam(value="size",required = false,defaultValue = "20") long size,@RequestParam(value = "projection",required = false)QueryProjection projection){
         Optional<?> result = null;
         if(unitUuid!=null && !unitUuid.isEmpty()) {
-            result = ((PlayerMoveResourceServiceImpl) service).getMovesByGameRuntimeInfoAndUnit(gameRuntimeUuid, unitUuid, projection);
+            result = ((PlayerMoveResourceServiceImpl) service).getMovesByGameRuntimeInfoAndUnit(gameRuntimeUuid, unitUuid,page,size, projection);
 
         }else{
 
-             result =  ((PlayerMoveResourceServiceImpl)service).getMovesByGameRuntimeInfo(gameRuntimeUuid,projection);
+             result =  ((PlayerMoveResourceServiceImpl)service).getMovesByGameRuntimeInfo(gameRuntimeUuid,page,size,projection);
         }
         return new ResponseEntity<>(result.get(),HttpStatus.OK);
     }

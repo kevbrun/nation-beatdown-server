@@ -1,12 +1,13 @@
 package ch.nation.core.model.interf.services;
 
-import java.util.Collection;
+import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
+
 import java.util.Optional;
 
 
 public interface GenericCRUDDao<TResultSingle,TInput> {
 
-    Optional<Collection<TResultSingle>> getAll();
+    Optional<SimpleResourceDto> getAll();
     Optional<TResultSingle> findById(String uuid);
     Optional<TResultSingle> create(TInput object) throws Exception;
     Optional<Boolean> delete(String uuid);

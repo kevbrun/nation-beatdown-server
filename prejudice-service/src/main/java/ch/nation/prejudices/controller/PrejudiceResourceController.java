@@ -18,8 +18,9 @@ public class PrejudiceResourceController extends AbstractNamedResourceGameLogicC
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll(@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.getAll(projection);
+    public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
+            ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(page,size,projection);
     }
 
     @Override

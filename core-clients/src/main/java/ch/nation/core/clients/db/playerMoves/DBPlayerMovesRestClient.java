@@ -5,6 +5,7 @@ import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,14 +22,15 @@ public interface DBPlayerMovesRestClient  extends DBRestServiceBaseInterface<Bas
 
 
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_IdAndCaster_IdAndRound")
-    Resources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(@RequestParam("runtime")String gameRuntimeUuid,
-                                                                                   @RequestParam("caster") String casterUuid,
-                                                                                   @RequestParam("round") int round,
-                                                                                   @RequestParam(name = "projection",required=false)
+    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(@RequestParam("runtime")String gameRuntimeUuid,
+                                                                                        @RequestParam("caster") String casterUuid,
+                                                                                        @RequestParam("round") int round,
+                                                                                        @RequestParam(name = "projection",required=false)
                                                                                 QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_Id")
-    Resources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,
+    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,@RequestParam(value = "page",required = false,defaultValue = "0") long page,
+                                                                   @RequestParam(value = "size",required = false, defaultValue = "20") long size,
                                                                                    @RequestParam(name = "projection",required=false)
                                                                                            QueryProjection projection);
 }

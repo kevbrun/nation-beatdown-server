@@ -11,7 +11,6 @@ import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -24,29 +23,29 @@ public class AbstractMassNamedEntityService<TResult,TInput extends NamedObjectAb
     }
 
     @Override
-    public Optional<Collection<TResult>> batchUpdate(Collection<TInput> object) {
+    public Optional<Resources<TResult>> batchUpdate(Collection<TInput> object) {
         return  batchUpdate(object,QueryProjection.def);
     }
 
-    public Optional<Collection<TResult>> batchUpdate(Collection<TInput> object, QueryProjection projection){
+    public Optional<Resources<TResult>> batchUpdate(Collection<TInput> object, QueryProjection projection){
 
-        ArrayList results = new ArrayList(object.size());
+
         LOGGER.info(String.format("START | Batch Update | Used client %s", GetMassClient().getClass().getName()));
-
+        Resources<TResult>   response =null;
         if(object.size()>0){
 
 
-            Resources<TResult>   response =   GetMassClient().updateBatch(object, projection);
+            response =   GetMassClient().updateBatch(object, projection);
 
             LOGGER.info("Items received: "+response.getContent().size());
-            results.add(response.getContent());
+
 
 
 
         }
         LOGGER.info(String.format("STOP | Batch Update | Used client %s", GetMassClient().getClass().getName()));
 
-        return Optional.of(results);
+        return Optional.of(response);
     }
 
     public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object, QueryProjection projection){
