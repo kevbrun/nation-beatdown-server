@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.units;
 
 import ch.nation.core.model.Enums.UnitState;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
+import ch.nation.dbservice.entities.clazzes.Stat;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.moves.SkillPlayerMove;
@@ -79,6 +80,42 @@ public class Unit extends NamedEntityBase {
     private User user;
 
 
+
+    @Column(name="hp")
+    @JsonProperty("hp")
+    private int healthPoints;
+
+
+    @Column(name="ap")
+    @JsonProperty("ap")
+    private int actionPoints;
+
+
+    @Column(name="str")
+    @JsonProperty("str")
+    private int strength;
+
+
+    @Column(name="vit")
+    @JsonProperty("vit")
+    private int vitality;
+
+    @Column(name="int")
+    @JsonProperty("int")
+    private int intelligence;
+
+
+    @Column(name="dex")
+    @JsonProperty("dex")
+    private int dexterity;
+
+
+    @Column(name="agi")
+    @JsonProperty("agi")
+    private int agility;
+
+
+
     public Unit() {
         super();
 
@@ -94,6 +131,62 @@ public class Unit extends NamedEntityBase {
         this.user = user;
     }
 
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public int getActionPoints() {
+        return actionPoints;
+    }
+
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public void setVitality(int vitality) {
+        this.vitality = vitality;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
+    }
 
     public CharacterClass getCharacterClass() {
         return characterClass;
