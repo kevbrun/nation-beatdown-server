@@ -3,6 +3,8 @@ package ch.nation.core.controller;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
+import ch.nation.core.model.dtoWrapper.SimpleResourcePageDto;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.core.controller.interfaces.ChildrenNodeDao;
 
@@ -28,11 +30,11 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
     @Override
     public ResponseEntity getAll() {
-        return getAll(QueryProjection.def);
+        return getAll(0,20,QueryProjection.def);
     }
 
-    public ResponseEntity getAll(QueryProjection projection) {
-        Optional<ArrayList<TResult>> resp = service.getAll(projection);
+    public ResponseEntity getAll(long page,long size,QueryProjection projection) {
+        Optional<SimpleResourceDto> resp = service.getAll(page,size,projection);
         if (resp.isPresent()) return new ResponseEntity<>(resp.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -189,7 +191,7 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
     if (uuid == null || uuid.isBlank()) throw new IllegalArgumentException("Uuid is null or empty!");
     if (resourceCollection == null || resourceCollection.isBlank())
         throw new IllegalArgumentException("resourceCollection is null or empty!");
-    Optional<?> result = service.getChildrenEntites(uuid, resourceCollection,projection);
+        Optional<?> result = service.getChildrenEntites(uuid, resourceCollection,projection);
     if (!result.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     return new ResponseEntity(result.get(), HttpStatus.OK);
 
@@ -209,19 +211,7 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
     }
 
     public ResponseEntity getChildrenNodesByResourceCollectionUnwrapped(String uuid,String resourceCollection,QueryProjection projection){
-        ResponseEntity<?> resource = getChildrenNodesByResourceCollection(uuid,resourceCollection,projection);
-        if(resource.getBody()instanceof Resource){
-           Resource<?> results = (Resource<?>) resource.getBody();
-           return new ResponseEntity<>(results.getContent(),HttpStatus.OK);
-
-        }
-
-        if(resource.getBody()instanceof Resources){
-            Resources<?> results = (Resources<?>) resource.getBody();
-            return new ResponseEntity<>(results.getContent(),HttpStatus.OK);
-
-        }
-
+        ResponseEntity<SimpleResourceDto> resource = getChildrenNodesByResourceCollection(uuid,resourceCollection,projection);
         return resource;
     }
 

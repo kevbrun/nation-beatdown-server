@@ -4,6 +4,7 @@ package ch.nation.core.clients.db;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 
+import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,8 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "")
-    Resources<TResult> getAll(@RequestParam(value = "projection",required = false) QueryProjection projection);
+    PagedResources<TResult> getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page,@RequestParam(value = "size",required = false,defaultValue = "20") long size,
+                                   @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
@@ -67,6 +69,7 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
 
 
+    //Does not work for children resources
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")
     Resources<AbstractDto> getChildrenEntities(@PathVariable("parent_uuid")String uuid, @PathVariable("resource") String resource, @RequestParam(value = "projection",required = false) QueryProjection projection);
     @RequestMapping(method = RequestMethod.GET,path="/{parent_uuid}/{resource}")

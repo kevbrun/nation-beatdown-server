@@ -5,8 +5,11 @@ import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
 import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
+import ch.nation.core.model.dtoWrapper.SimpleResourcePageDto;
 import ch.nation.core.services.AbstractEntityService;
 import ch.nation.core.clients.db.playerMoves.DBPlayerMovesRestClient;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +27,17 @@ public class PlayerMoveResourceServiceImpl extends AbstractEntityService<BasePla
     }
 
 
-     public Optional<List<BasePlayerMoveDto>> getMovesByGameRuntimeUuidAndCasterUuidAndRound(String gameRuntimeUuid,
-                                                                                          String casterUuid,
-                                                                                          int round,
-                                                                                          QueryProjection projection){
+     public Optional<SimpleResourceDto> getMovesByGameRuntimeUuidAndCasterUuidAndRound(String gameRuntimeUuid,
+                                                                                       String casterUuid,
+                                                                                       int round,
+                                                                                       QueryProjection projection){
 
         LOGGER.info("START | Querying moves by runtime round and caster");
-        final List<BasePlayerMoveDto> response = new ArrayList<>();
-      Resources<BasePlayerMoveDto>  movesInRoundOfCaster = ((DBPlayerMovesRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(gameRuntimeUuid,casterUuid,round,projection);
-      if(movesInRoundOfCaster.getContent()==null)  return Optional.of(response);
+
+      PagedResources<BasePlayerMoveDto> movesInRoundOfCaster = ((DBPlayerMovesRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(gameRuntimeUuid,casterUuid,round,projection);
+      if(movesInRoundOfCaster.getContent()==null)  return Optional.of(new SimpleResourceDto());
         LOGGER.info("STOP | Querying moves by runtime round and caster");
-        response.addAll(movesInRoundOfCaster.getContent());
-        return Optional.of(response);
+        return Optional.of(new SimpleResourceDto(movesInRoundOfCaster));
     }
 
 

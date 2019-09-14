@@ -34,8 +34,9 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll(@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.getAll(projection);
+    public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
+                                 ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.getAll(page,size,projection);
     }
 
     @Override
@@ -105,12 +106,9 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
 
     @RequestMapping(method = RequestMethod.GET,path="/{uuid}/{resourceCollection}",produces = "application/json")
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,@RequestParam(value = "projection",required = false) QueryProjection projection, @RequestParam(value="hal",required = false,defaultValue = "false") boolean returnAsHal) {
-        if(returnAsHal) {
+
             return super.getChildrenNodesByResourceCollection(uuid, resourceCollection, projection);
 
-        }else{
-            return super.getChildrenNodesByResourceCollectionUnwrapped(uuid,resourceCollection,projection);
-        }
         }
 
 
