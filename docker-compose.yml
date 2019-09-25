@@ -1,0 +1,17 @@
+version: '3'
+services:
+  game-service:
+    container_name: game-service
+    build:
+      context: .
+      dockerfile: game-service/Dockerfile
+    image:  game-service:latest
+    expose:
+      - 8888
+    networks:
+      - spring-cloud-network
+    logging:
+      driver: json-file
+networks:
+  spring-cloud-network:
+    driver: bridge
