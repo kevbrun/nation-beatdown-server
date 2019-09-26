@@ -1,17 +1,37 @@
 version: '3'
 services:
+  eureka-service:
+    container_name: eureka-service
+    build:
+       context: eurekaserver
+       dockerfile: Dockerfile
+    image:  euraka-service:latest
+    expose:
+     - "8761:8761"
+    networks:
+     - spring-cloud-network
+    environment:
+      SERVER_PORT: 8761
+    logging:
+      driver: json-file
   game-service:
     container_name: game-service
     build:
-      context: .
-      dockerfile: game-service/Dockerfile
+      context: game-service
+      dockerfile: Dockerfile
     image:  game-service:latest
     expose:
       - 8888
     networks:
       - spring-cloud-network
+    environment:
+      DEFAULT_ZONE_URL: http://eureka-service:8761/eureka
+      SERVER_PORT: 8888
+      SPRING_PROFILES_ACTIVE: docker
     logging:
       driver: json-file
+    depends_on:
+      - eureka-service
 networks:
   spring-cloud-network:
     driver: bridge
