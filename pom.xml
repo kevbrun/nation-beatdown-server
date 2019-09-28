@@ -95,7 +95,7 @@
 				<module>eurekaserver</module>
 				<module>zuul</module>
 				<module>db-service</module>
-				<module>gamelogicservice</module>
+				<module>game-logic-service</module>
 			</modules>
 		</profile>
 
@@ -122,7 +122,7 @@
 				<module>user-service</module>
 				<module>user-runtime-service</module>
 				<module>game-service</module>
-				<module>gamelogicservice</module>
+				<module>game-logic-service</module>
 			</modules>
 		</profile>
 
@@ -131,7 +131,7 @@
 			<modules>
 				<module>core-model</module>
 
-				<module>gamelogicservice</module>
+				<module>game-logic-service</module>
 
 			</modules>
 

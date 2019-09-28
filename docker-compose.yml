@@ -14,6 +14,8 @@ services:
       SERVER_PORT: 8761
     logging:
       driver: json-file
+
+
   zuul-service:
     container_name: zuul-proxy-service
     build:
@@ -31,24 +33,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-  game-service:
-    container_name: nation-cloud-games-service
-    build:
-      context: game-service
-      dockerfile: Dockerfile
-    image:  nation-cloud-games-service:latest
-    ports:
-      - "8888:8888"
-    networks:
-      - spring-cloud-network
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
-      SERVER_PORT: 8888
-    logging:
-      driver: json-file
-    depends_on:
-      - eureka-service
-      - zuul-service
+
   db:
     container_name: nation-db
     image: mariadb:10.4.8-bionic
@@ -75,7 +60,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8889
-      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/nation?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_URL: jdbc:mariadb://nation-db:3306/nation?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: nation
       SPRING_DATASOURCE_PASSWORD: nation
       SPRING_PROFILES_ACTIVE: mariadb-test
@@ -86,6 +71,209 @@ services:
       - db
       - zuul-service
 
+# SERVICES
+  game-service:
+    container_name: nation-cloud-games-service
+    build:
+      context: game-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-games-service:latest
+    ports:
+      - "8888:8888"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8888
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  characteristics-service:
+    container_name: nation-cloud-characteristics-service
+    build:
+      context: characteristics-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-characteristics-service:latest
+    ports:
+      - "8879:8879"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8879
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  clazz-service:
+    container_name: nation-cloud-classes-service
+    build:
+      context: clazz-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-classes-service:latest
+    ports:
+      - "8880:8880"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8880
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  game-logic-service:
+    container_name: nation-cloud-game-logics-service
+    build:
+      context: game-logic-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-game-logics-service:latest
+    ports:
+      - "8881:8881"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8881
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  moves-service:
+    container_name: nation-cloud-moves-service
+    build:
+      context: moves-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-moves-service:latest
+    ports:
+      - "8882:8882"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8882
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  prejudices-service:
+    container_name: nation-cloud-prejudices-service
+    build:
+      context: prejudice-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-prejudices-service:latest
+    ports:
+      - "8883:8883"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8883
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  skill-service:
+    container_name: nation-cloud-skills-service
+    build:
+      context: skill-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-skills-service:latest
+    ports:
+      - "8884:8884"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8884
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  user-runtime-service:
+    container_name: nation-cloud-user-runtimes-service
+    build:
+      context: user-runtime-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-user-runtimes-service:latest
+    ports:
+      - "8885:8885"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8885
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  units-service:
+    container_name: nation-cloud-units-service
+    build:
+      context: units-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-units-service:latest
+    ports:
+      - "8875:8875"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8875
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+  user-service:
+    container_name: nation-cloud-users-service
+    build:
+      context: user-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-users-service:latest
+    ports:
+      - "8886:8886"
+    networks:
+      - spring-cloud-network
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 8886
+    logging:
+      driver: json-file
+    depends_on:
+      - eureka-service
+      - zuul-service
+      - db-service
+
+
+#NETWORK
 networks:
   spring-cloud-network:
     driver: bridge
