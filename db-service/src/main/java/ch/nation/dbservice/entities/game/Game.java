@@ -23,7 +23,7 @@ public class Game extends AbstractNationEntityBase {
             joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "users_id",
                     referencedColumnName = "id"))
-    @Column(name="users")
+    @Column(name="players")
     @JsonProperty("users")
     @RestResource(path = "users", rel="users")
     private List<User> users;

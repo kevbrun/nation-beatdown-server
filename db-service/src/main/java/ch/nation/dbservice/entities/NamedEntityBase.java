@@ -13,7 +13,7 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     @Column(name = "name",unique = true,nullable = false)
     @JsonProperty("name")
     private String name;
-    @Column(name="desc")
+    @Column(name="description")
     @JsonProperty("desc")
     private String description;
 

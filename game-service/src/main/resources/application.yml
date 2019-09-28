@@ -7,9 +7,6 @@ spring:
 ---
 server:
   port: 0
-spring:
-  profiles:
-    local
 eureka:
   client:
     fetchRegistry: true
@@ -34,32 +31,3 @@ logging:
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
----
-spring:
-  profiles:
-    docker
-eureka:
-  client:
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${DEFAULT_ZONE_URL}
-  instance:
-    preferIpAddress: true
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 50000
-        readTimeout: 50000
-        loggerLevel: FULL
-logging:
-  level:
-    ch:
-      nation:
-        core: DEBUG
-    org:
-      springframework:
-        web:
-          filter:
-            CommonsRequestLoggingFilter: DEBUG
----

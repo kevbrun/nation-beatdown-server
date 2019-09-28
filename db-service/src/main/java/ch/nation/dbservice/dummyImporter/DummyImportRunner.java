@@ -77,7 +77,7 @@ public class DummyImportRunner  implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        LOGGER.info("START MIGRATION OF DUMMY DATA!");
+     LOGGER.info("START MIGRATION OF DUMMY DATA!");
        new SkillEffectDummyDataGenerator(skillEffectRepository);
      new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
         new CharacterClassDummyGenerator(characterClassRepository,skillRepository);

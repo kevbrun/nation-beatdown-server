@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="SKILL_PLAYER_MOVES")
-@Table(name="SKILL_PLAYER_MOVES")
+//@Table(name="SKILL_PLAYER_MOVES")
 @DiscriminatorValue("SKILL")
 public class SkillPlayerMove extends BasePlayerMove {
 

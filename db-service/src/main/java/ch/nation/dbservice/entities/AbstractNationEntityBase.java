@@ -23,7 +23,7 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @JsonProperty("uuid")
-    @Column(name="id")
+    @Column(name="id",columnDefinition = "BINARY(16)")
     private UUID id;
     @Basic
     @Temporal(TemporalType.TIMESTAMP)

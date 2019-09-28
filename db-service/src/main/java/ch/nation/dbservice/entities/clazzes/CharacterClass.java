@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="CLASSES")
-@Table(name="CLASSES")
+@Entity(name="CLAZZES")
+@Table(name="CLAZZES")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class CharacterClass extends NamedEntityBase {
@@ -37,7 +37,7 @@ public class CharacterClass extends NamedEntityBase {
     @Fetch(FetchMode.SELECT)
   //  @Column(name="skills")
 
-    @JoinTable(name="CLASS_TO_SKILL",
+    @JoinTable(name="CLAZZ_TO_SKILL",
             joinColumns={@JoinColumn(name="CLASS_ID", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="SKILL_ID", referencedColumnName="id")})
     @RestResource(path="skill",rel = "skill",exported = false)

@@ -31,7 +31,7 @@ public class Unit extends NamedEntityBase {
     private CharacterClass characterClass;
 
     @JsonProperty("state")
-    @Column(name="state")
+    @Column(name="unit_state")
     @Enumerated(EnumType.STRING)
     private UnitState state = UnitState.INIT_OBJECT;
 
@@ -100,7 +100,7 @@ public class Unit extends NamedEntityBase {
     @JsonProperty("vit")
     private int vitality;
 
-    @Column(name="int")
+    @Column(name="intelligence")
     @JsonProperty("int")
     private int intelligence;
 
