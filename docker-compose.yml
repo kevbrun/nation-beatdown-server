@@ -33,6 +33,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
+      - nginx
 
   db:
     container_name: nation-db
@@ -271,6 +272,19 @@ services:
       - eureka-service
       - zuul-service
       - db-service
+
+  nginx:
+    container_name: nation-cloud-nginx
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    image:  nation-cloud-nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - spring-cloud-network
+    logging:
+      driver: json-file
 
 
 #NETWORK
