@@ -17,7 +17,7 @@ services:
 
 
   zuul-service:
-    container_name: zuul-proxy-service
+    container_name: zuul-service
     build:
       context: zuul
       dockerfile: Dockerfile
