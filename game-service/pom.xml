@@ -8,6 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<groupId>ch.nation</groupId>
 	</parent>
+
+
+
 	<groupId>ch.nation</groupId>
 	<artifactId>game-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -17,6 +20,8 @@
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<start-class>ch.nation.gameservice.GameServiceApplication</start-class>
+		<packaging>jar</packaging>
 	</properties>
 
 	<dependencies>

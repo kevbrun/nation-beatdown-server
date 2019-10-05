@@ -94,8 +94,8 @@
 				<module>core-model</module>
 				<module>eurekaserver</module>
 				<module>zuul</module>
-				<module>dbservice</module>
-				<module>gamelogicservice</module>
+				<module>db-service</module>
+				<module>game-logic-service</module>
 			</modules>
 		</profile>
 
@@ -112,7 +112,7 @@
 				<module>core-clients</module>
 				<module>core-controller</module>
 				<module>core-services</module>
-				<module>dbservice</module>
+				<module>db-service</module>
 				<module>characteristics-service</module>
 				<module>moves-service</module>
 				<module>units-service</module>
@@ -122,7 +122,7 @@
 				<module>user-service</module>
 				<module>user-runtime-service</module>
 				<module>game-service</module>
-				<module>gamelogicservice</module>
+				<module>game-logic-service</module>
 			</modules>
 		</profile>
 
@@ -131,7 +131,7 @@
 			<modules>
 				<module>core-model</module>
 
-				<module>gamelogicservice</module>
+				<module>game-logic-service</module>
 
 			</modules>
 
@@ -142,7 +142,7 @@
 			<id>db</id>
 			<modules>
 				<module>core-model</module>
-				<module>dbservice</module>
+				<module>db-service</module>
 			</modules>
 
 		</profile>

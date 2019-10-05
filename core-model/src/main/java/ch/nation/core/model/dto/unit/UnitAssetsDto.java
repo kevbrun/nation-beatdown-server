@@ -81,7 +81,6 @@ public class UnitAssetsDto extends AbstractAssetsDto{
     @JsonProperty("PrimaryMeleeWeapon")
     private String primaryMeleeWeapon;
 
-
     @JsonProperty("SecondaryMeleeWeapon")
     private String secondaryMeleeWeapon;
 
