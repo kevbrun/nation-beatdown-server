@@ -281,6 +281,8 @@ services:
     image:  nation-cloud-nginx:latest
     ports:
       - "80:80"
+    volumes:
+      - ../downloads:/usr/share/nginx/html/downloads
     networks:
       - spring-cloud-network
     logging:
