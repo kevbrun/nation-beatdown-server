@@ -65,6 +65,41 @@ spring:
     database-platform: org.hibernate.dialect.MariaDB103Dialect
     #database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+
+        show_sql: true
+        format_sql: false
+        temp:
+          use_jdbc_metadata_defaults: false
+
+    generate-ddl: true
+  datasource:
+    platform:  org.hibernate.dialect.MariaDB103Dialect
+    driver-class-name: org.mariadb.jdbc.Driver
+---
+
+spring:
+  profiles: mariadb-install
+  application:
+    name: nation-database-service
+
+  data:
+    rest:
+    #defaultMediaType: application/json+hal
+  logging:
+    level:
+      org.springframework.web: DEBUG
+      guru.springframework.controllers: DEBUG
+      org.hibernate: DEBUG
+      org.springframework.orm.jpa: INFO
+      org.springframework.transaction: DEBUG
+      org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
       ddl-auto: create
     properties:
       hibernate:

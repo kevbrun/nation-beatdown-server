@@ -2,6 +2,7 @@ package ch.nation.clazz.controller;
 
 import ch.nation.clazz.service.CharacterClazzResourceServiceImpl;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -58,5 +59,9 @@ public class CharacterClassRessourceController extends AbstractNamedResourceGame
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
     }
-
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findByIdentifier(identfier, projection);
+    }
 }

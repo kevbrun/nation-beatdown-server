@@ -63,6 +63,8 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.GET,path="/search")
         ResponseEntity<TResult> findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
+    @RequestMapping(method = RequestMethod.GET,path="/search")
+    ResponseEntity<TResult> findByIdentifier(@RequestParam("identifier") String identifier, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.GET,path = "/search/exists")

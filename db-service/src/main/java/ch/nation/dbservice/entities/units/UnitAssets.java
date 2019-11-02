@@ -2,7 +2,9 @@ package ch.nation.dbservice.entities.units;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Embeddable
@@ -10,88 +12,116 @@ public class UnitAssets {
 
 
     @JsonProperty("Beard")
+    @Column(length=100)
     private String beard;
 
     @JsonProperty("Shield")
+    @Column(length=100)
     private String shield;
 
     @JsonProperty("Expression.Default.Mouth")
+    @Column(length=100)
     private String expressionDefaultMouth;
 
     @JsonProperty("Expression.Default.Eyebrows")
+    @Column(length=100)
     private String expressionDefaultEyebrows;
 
     @JsonProperty("Expression.Dead.Eyes")
+    @Column(length=100)
     private String expressionDeadEyes;
 
     @JsonProperty("Expression.Default.Eyes")
+    @Column(length=100)
     private String expressionDefaultEyes;
 
     @JsonProperty("Helmet")
+    @Column(length=100)
     private String helmet;
 
     @JsonProperty("Armor")
+    @Column(length=100)
     private String armor;
 
     @JsonProperty("Back")
+    @Column(length=100)
     private String back;
 
     @JsonProperty("Expression.Angry.Eyebrows")
+    @Column(length=100)
     private String expressionAngryEyebrows;
 
     @JsonProperty("Body")
+    @Column(length=100)
     private String body;
 
     @JsonProperty("Ears")
+    @Column(length=100)
     private String ears;
 
     @JsonProperty("Hair")
+    @Column(length=100)
     private String hair;
 
     @JsonProperty("FirearmParams")
+    @Column(length=100)
     private String firearmParams;
 
     @JsonProperty("Head")
+    @Column(length=100)
     private String head;
 
     @JsonProperty("Expression.Angry.Mouth")
+    @Column(length=100)
     private String expressionAngryMouth;
 
     @JsonProperty("Mask")
+    @Column(length=100)
     private String mask;
 
     @JsonProperty("Bow")
+    @Column(length=100)
     private String bow;
 
     @JsonProperty("Firearms")
+    @Column(length=100)
     private String firearms;
 
     @JsonProperty("Cape")
+    @Column(length=100)
     private String cape;
 
     @JsonProperty("Expression.Dead.Mouth")
+    @Column(length=100)
     private String expressionDeadMouth;
 
     @JsonProperty("Expression")
+    @Column(length=100)
     private String expression;
 
     @JsonProperty("WeaponType")
+    @Column(length=100)
     private String weaponType;
 
     @JsonProperty("Glasses")
+    @Column(length=100)
     private String glasses;
 
     @JsonProperty("PrimaryMeleeWeapon")
+    @Column(length=100)
     private String primaryMeleeWeapon;
 
 
     @JsonProperty("SecondaryMeleeWeapon")
+    @Column(length=100)
     private String secondaryMeleeWeapon;
 
     @JsonProperty("Expression.Angry.Eyes")
+    @Column(length=100)
     private String expressionAngryEyes;
 
     @JsonProperty("Expression.Dead.Eyebrows")
+    @Column(length=100)
     private String expressionDeadEyebrows;
 
 

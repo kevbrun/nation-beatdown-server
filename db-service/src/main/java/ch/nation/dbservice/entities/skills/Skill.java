@@ -103,6 +103,7 @@ public class Skill extends NamedEntityBase implements IDiscrimantorValue {
 
     public Skill() {
         super();
+
     }
 
 

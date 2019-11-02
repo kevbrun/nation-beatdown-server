@@ -33,7 +33,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - nginx
 
   db:
     container_name: nation-db
@@ -59,15 +58,19 @@ services:
     image:  nation-cloud-database-service:latest
     ports:
       - "8889:8889"
+      - "9999:9999"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9999
+      MAIN_CLASS_NAME: ch.nation.dbservice.DBServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8889
       SPRING_DATASOURCE_URL: jdbc:mariadb://nation-db:3306/nation?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: nation
       SPRING_DATASOURCE_PASSWORD: nation
       SPRING_PROFILES_ACTIVE: mariadb-test
+      #SPRING_PROFILES_ACTIVE: mariadb-install
     logging:
       driver: json-file
     depends_on:
@@ -84,9 +87,12 @@ services:
     image:  nation-cloud-games-service:latest
     ports:
       - "8888:8888"
+      - "9888:9888"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9888
+      MAIN_CLASS_NAME: ch.nation.gameservice.GameServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8888
     logging:
@@ -104,9 +110,12 @@ services:
     image:  nation-cloud-characteristics-service:latest
     ports:
       - "8879:8879"
+      - "9879:9879"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9879
+      MAIN_CLASS_NAME: ch.nation.characteristicsservice.CharacteristicsServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8879
     logging:
@@ -124,9 +133,12 @@ services:
     image:  nation-cloud-classes-service:latest
     ports:
       - "8880:8880"
+      - "9880:9880"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9880
+      MAIN_CLASS_NAME: ch.nation.clazzservice.ClazzServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8880
     logging:
@@ -144,9 +156,12 @@ services:
     image:  nation-cloud-game-logics-service:latest
     ports:
       - "8881:8881"
+      - "9881:9881"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9881
+      MAIN_CLASS_NAME: ch.nation.gamelogicservice.GamelogicserviceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8881
     logging:
@@ -164,9 +179,12 @@ services:
     image:  nation-cloud-moves-service:latest
     ports:
       - "8882:8882"
+      - "9882:9882"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9882
+      MAIN_CLASS_NAME: ch.nation.movesservice.MovesServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8882
     logging:
@@ -184,9 +202,12 @@ services:
     image:  nation-cloud-prejudices-service:latest
     ports:
       - "8883:8883"
+      - "9883:9883"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9883
+      MAIN_CLASS_NAME: ch.nation.prejudiceservice.PrejudiceServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8883
     logging:
@@ -204,9 +225,12 @@ services:
     image:  nation-cloud-skills-service:latest
     ports:
       - "8884:8884"
+      - "9884:9884"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9884
+      MAIN_CLASS_NAME: ch.nation.skillservice.SkillServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8884
     logging:
@@ -224,9 +248,12 @@ services:
     image:  nation-cloud-user-runtimes-service:latest
     ports:
       - "8885:8885"
+      - "9885:9885"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9885
+      MAIN_CLASS_NAME: ch.nation.userruntimeservice.UserRuntimeServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8885
     logging:
@@ -244,9 +271,12 @@ services:
     image:  nation-cloud-units-service:latest
     ports:
       - "8875:8875"
+      - "9875:9875"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9875
+      MAIN_CLASS_NAME: ch.nation.unitsservice.UnitsServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8875
     logging:
@@ -264,9 +294,12 @@ services:
     image:  nation-cloud-users-service:latest
     ports:
       - "8886:8886"
+      - "9886:9886"
     networks:
       - spring-cloud-network
     environment:
+      DEBUG_PORT: 9886
+      MAIN_CLASS_NAME: ch.nation.userservice.UserServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8886
     logging:
@@ -290,6 +323,8 @@ services:
       - spring-cloud-network
     logging:
       driver: json-file
+    depends_on:
+      - zuul-service
 
 
 #NETWORK

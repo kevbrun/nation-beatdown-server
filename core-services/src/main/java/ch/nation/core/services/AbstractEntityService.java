@@ -83,6 +83,8 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
 
     }
 
+
+
     @Override
     public Optional<TResult> findById(String uuid) {
         return findById(uuid, QueryProjection.def);

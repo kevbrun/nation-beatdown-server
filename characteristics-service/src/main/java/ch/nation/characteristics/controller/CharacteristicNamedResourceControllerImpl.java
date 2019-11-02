@@ -4,6 +4,7 @@ package ch.nation.characteristics.controller;
 
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.controller.interfaces.CharacteristicResourceController;
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import ch.nation.characteristics.services.BaseCharacteristicResourceServiceImpl;
 import ch.nation.characteristics.services.CharacteristicResourceService;
@@ -54,5 +55,11 @@ public class CharacteristicNamedResourceControllerImpl extends AbstractNamedReso
         return super.findById(uuid);
     }
 
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findByIdentifier(identfier, projection);
+    }
 
 }

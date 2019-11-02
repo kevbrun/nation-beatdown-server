@@ -47,10 +47,18 @@ public class PrejudiceResourceController extends AbstractNamedResourceGameLogicC
     }
 
 
+
+
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/search")
     public ResponseEntity findByName(@RequestParam("name") String name,@RequestParam(value = "projection",required = false) QueryProjection projection) {
         return super.findByName(name,projection);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findByIdentifier(identfier, projection);
     }
 }
 
