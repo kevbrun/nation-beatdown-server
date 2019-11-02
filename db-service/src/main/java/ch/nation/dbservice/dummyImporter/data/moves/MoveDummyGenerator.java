@@ -82,7 +82,7 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         move.setCaster(player.getUnits().get(0));
         move.setCaster(player.getUnits().get(0));
 
-        Skill skill = skillRepository.findByName("Bewegung Schweinebacke!");
+        Skill skill = skillRepository.findByName("mv_self");
 
         move.setSkill(skill);
 

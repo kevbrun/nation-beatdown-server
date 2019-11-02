@@ -44,6 +44,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createSelfMoveSkill() throws Exception {
         Skill skill =  new SelfMoveSkill();
         skill.setName("Bewegung Schweinebacke!");
+        skill.setIdentifier("mv_self");
         skill.setDescription("Setzt eigene Einheit in Bewegung");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
@@ -54,7 +55,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setActionArea(actionArea);
        skill= skillRepository.save(skill);
 
-       SkillEffect effect= skillEffectRepository.findByName("Selbstbewegungseffekt!");
+       SkillEffect effect= skillEffectRepository.findByIdentifier("mv_self");
 
 
 
@@ -69,28 +70,30 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
 
     private void createTimeTravelSkill() throws Exception {
-        Skill timeTravelSkill = new Skill();
-        timeTravelSkill.setName("Zurückgesetzt");
-        timeTravelSkill.setDescription("Setze die Figur um einen Zug zurück");
-        timeTravelSkill.setCost(30);
-        timeTravelSkill.setCooldown(5);
-        timeTravelSkill.setSkillBarOrder(1);
-        timeTravelSkill.setTarget(Target.ANY_SINGLE);
+        Skill skill = new Skill();
+        skill.setName("Zurückgesetzt");
+        skill.setIdentifier("rev_any_round");
+
+        skill.setDescription("Setze die Figur um einen Zug zurück");
+        skill.setCost(30);
+        skill.setCooldown(5);
+        skill.setSkillBarOrder(1);
+        skill.setTarget(Target.ANY_SINGLE);
         ActionArea actionArea = new ActionArea();
         actionArea.setSizeInXAxis(4);
         actionArea.setSizeInXAxis(4);
         actionArea.setShape(ActionShape.CIRCLE);
-        timeTravelSkill.setActionArea(actionArea);
+        skill.setActionArea(actionArea);
 
 
-      timeTravelSkill=  skillRepository.save(timeTravelSkill);
+      skill=  skillRepository.save(skill);
 
-       SkillEffect effect= skillEffectRepository.findByName("Runde zurücksetzen");
+       SkillEffect effect= skillEffectRepository.findByIdentifier("rev_target_round");
         if(effect==null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
 
-        timeTravelSkill.addSkillEffect(effect);
+        skill.addSkillEffect(effect);
 
-        skillRepository.save(timeTravelSkill);
+        skillRepository.save(skill);
 
 
     }
@@ -98,6 +101,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createMoveOtherSkill() throws Exception {
         Skill skill =  new MoveSkill();
         skill.setName("Bewegung du Sack!");
+        skill.setIdentifier("mv_target");
+
         skill.setDescription("Bewege gegnerisch Einheit!");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
@@ -108,7 +113,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setActionArea(actionArea);
         skill= skillRepository.save(skill);
 
-        SkillEffect effect= skillEffectRepository.findByName("Bewegungseffekt!");
+        SkillEffect effect= skillEffectRepository.findByIdentifier("mv_target");
 
 
 
@@ -124,6 +129,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createNahkampfSkill() throws Exception {
         Skill skill = new Skill();
         skill.setName("Nahkampf!");
+        skill.setIdentifier("dmg_target_str");
         skill.setDescription("Deine eigene Einheit greift langweilig im Nahkampf an");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
@@ -136,7 +142,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         skill = skillRepository.save(skill);
 
-        SkillEffect effect = skillEffectRepository.findByName("Schadenseffekt (Str)");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_target_str");
 
         if (effect == null) throw new Exception("Could not find. Skill Effect with name: Schadenseffekt (Str)!");
 
@@ -149,6 +155,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createFernkampfSkill() throws Exception {
         Skill skill = new Skill();
         skill.setName("Fernkampf!");
+        skill.setIdentifier("dmg-range_target_str");
+
         skill.setDescription("Deine eigene Einheit greift langweilig im Fernkampf an");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
@@ -160,7 +168,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         skill = skillRepository.save(skill);
 
-        SkillEffect effect = skillEffectRepository.findByName("Schadenseffekt (Dex)");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_target_dex");
 
         if (effect == null) throw new Exception("Could not find. Skill Effect with name: Schadenseffekt (Dex)!");
 
@@ -174,6 +182,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createResetAPSkill(){
         Skill skill = new Skill();
         skill.setName("Reset AP");
+        skill.setIdentifier("reset_caster_ap");
+
         skill.setDescription("Setze AP auf Max Wert");
         skill.setCost(0);
         skill.setCurrentCooldownTimer(0);
@@ -185,7 +195,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
 
         skill= skillRepository.save(skill);
-        SkillEffect effect = skillEffectRepository.findByName("Reset AP");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("reset_caster_ap");
 
         skill.addSkillEffect(effect);
 
@@ -196,6 +206,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     private void createResetHPSkill(){
         Skill skill = new Skill();
         skill.setName("Reset HP");
+        skill.setIdentifier("reset_caster_hp");
+
         skill.setDescription("Setze HP auf Max Wert");
         skill.setCost(0);
         skill.setCurrentCooldownTimer(0);
@@ -207,7 +219,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
 
         skill= skillRepository.save(skill);
-        SkillEffect effect = skillEffectRepository.findByName("Reset HP");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("reset_caster_hp");
 
         skill.addSkillEffect(effect);
 
@@ -217,6 +229,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
       private void createSelfExplosion(){
          Skill skill = new Skill();
          skill.setName("Explosion!");
+          skill.setIdentifier("dmg_expl_target_hp");
          skill.setDescription("Einheit explodiert vor Wut!");
          skill.setCost(0);
          skill.setCooldown(10000);
@@ -228,11 +241,11 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
           skill= skillRepository.save(skill);
 
-          SkillEffect effect = skillEffectRepository.findByName("Selbstschadenseffekt");
+          SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_caster_hp");
           skill.addSkillEffect(effect);
 
 
-          effect = skillEffectRepository.findByName("Schadenseffekt (Str)");
+          effect = skillEffectRepository.findByIdentifier("dmg_target_str");
 
           skill.addSkillEffect(effect);
           skill = skillRepository.save(skill);

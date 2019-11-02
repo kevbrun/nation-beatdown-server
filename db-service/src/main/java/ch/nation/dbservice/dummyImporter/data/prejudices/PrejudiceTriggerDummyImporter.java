@@ -36,37 +36,41 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
     }
 
     private void createAgainstExplosivPeople(){
-        CharacteristicPrejudiceTrigger characteristicPrejudiceTrigger = new CharacteristicPrejudiceTrigger();
-        characteristicPrejudiceTrigger.setName("Explisiver Character Trigger");
-        characteristicPrejudiceTrigger.setDescription("Wird durch die Characteristic Explosiver Character getriggered");
+        CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
+        trigger.setName("Explisiver Character Trigger");
+        trigger.setIdentifier("char_expl");
+        trigger.setDescription("Wird durch die Characteristic Explosiver Character getriggered");
 
-        characteristicPrejudiceTrigger=   characteristicPrejudiceTriggerRepository.save(characteristicPrejudiceTrigger);
+        trigger=   characteristicPrejudiceTriggerRepository.save(trigger);
         BaseCharacteristic characteristic= characteristicsRepository.findByName("Explosiver Character");
-        characteristicPrejudiceTrigger.addCharacteristic(characteristic);
-        characteristicPrejudiceTriggerRepository.save(characteristicPrejudiceTrigger);
+        trigger.addCharacteristic(characteristic);
+        characteristicPrejudiceTriggerRepository.save(trigger);
     }
 
 
 
 
     private void createWeakStatPrejudiceTrigger(){
-        StatPrejudiceTrigger statPrejudiceTrigger  = new StatPrejudiceTrigger();
-        statPrejudiceTrigger.setName("Schwächer als 10 trigger");
-        statPrejudiceTrigger.setDescription("Wird durch schwächere Nationen wie 10 getriggered");
-        statPrejudiceTrigger.setComparer(ConditionComparer.SMALLER_THAN);
-        statPrejudiceTrigger.setThreshold(10);
-        statPrejudiceTrigger.setStatType(StatType.STRENGTH);
-        statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
+        StatPrejudiceTrigger trigger  = new StatPrejudiceTrigger();
+        trigger.setName("Schwächer als 10 trigger");
+        trigger.setIdentifier("less_str_10");
+
+        trigger.setDescription("Wird durch schwächere Nationen wie 10 getriggered");
+        trigger.setComparer(ConditionComparer.SMALLER_THAN);
+        trigger.setThreshold(10);
+        trigger.setStatType(StatType.STRENGTH);
+        statPrejudiceTriggerRepository.save(trigger);
     }
 
     private void createHighIntelligencePrejudiceTrigger(){
-        StatPrejudiceTrigger statPrejudiceTrigger  = new StatPrejudiceTrigger();
-        statPrejudiceTrigger.setName("Gescheitere als 20 trigger");
-        statPrejudiceTrigger.setDescription("Wird durch klügere Nationen wie 20 getriggered");
-        statPrejudiceTrigger.setComparer(ConditionComparer.BIGGER_THAN);
-        statPrejudiceTrigger.setThreshold(20);
-        statPrejudiceTrigger.setStatType(StatType.INTELIGENCE);
-        statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
+        StatPrejudiceTrigger trigger  = new StatPrejudiceTrigger();
+        trigger.setName("Gescheitere als 20 trigger");
+        trigger.setIdentifier("more_int_20");
+        trigger.setDescription("Wird durch klügere Nationen wie 20 getriggered");
+        trigger.setComparer(ConditionComparer.BIGGER_THAN);
+        trigger.setThreshold(20);
+        trigger.setStatType(StatType.INTELIGENCE);
+        statPrejudiceTriggerRepository.save(trigger);
     }
 
 }

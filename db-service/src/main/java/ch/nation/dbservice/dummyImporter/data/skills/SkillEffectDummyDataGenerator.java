@@ -47,6 +47,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         SkillEffect effect;
         effect =  new StatSkillEffect();
         effect.setName("Schadenseffekt (Dex)");
+        effect.setIdentifier("dmg_target_dex");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");
         effect.setResultIsNegative(true);
@@ -60,6 +61,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createSchadenStrEffekt() {
         SkillEffect effect = new StatSkillEffect();
         effect.setName("Schadenseffekt (Str)");
+        effect.setIdentifier("dmg_target_str");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");
         effect.setResultIsNegative(true);
@@ -75,6 +77,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createSelfMoveEffect(){
         SelfMoveEffect effect =new SelfMoveEffect();
         effect.setName("Selbstbewegungseffekt!");
+        effect.setIdentifier("mv_self");
+
         effect.setDescription("Deine Figure bewegt sich");
         effect.setResultIsNegative(false);
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
@@ -91,11 +95,12 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createMoveEffect(){
         SkillEffect effect =new SkillEffect();
         effect.setName("Bewegungseffekt!");
+        effect.setIdentifier("mv_target");
         effect.setDescription("Etwas bewegt sich");
         effect.setResultIsNegative(false);
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
         effect.setApplyCalculationOnStat(StatType.NONE);
-        effect.setEffectTarget(SkillEffectTarget.CASTER);
+        effect.setEffectTarget(SkillEffectTarget.TARGET);
 
         skillEffectRepository.save(effect);
 
@@ -105,6 +110,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createTimeReversalSkill(){
         TimeReversalSkillEffect reversalSkillEffect = new TimeReversalSkillEffect();
         reversalSkillEffect.setName("Einen Schritt zurück!");
+        reversalSkillEffect.setIdentifier("rev_target_step");
         reversalSkillEffect.setDefinition(TimeReversakSkillEffectRoundDefinition.STEP);
         reversalSkillEffect.setCountOfSkillEffectToReverse(1);
         reversalSkillEffect.setTypeUsedForCalculation(StatType.NONE);
@@ -118,6 +124,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createCompleteRoundSkillEffect(){
         TimeReversalSkillEffect timeReversalSkillEffect = new TimeReversalSkillEffect();
         timeReversalSkillEffect.setName("Runde zurücksetzen");
+        timeReversalSkillEffect.setIdentifier("rev_target_round");
+
         timeReversalSkillEffect.setDefinition(TimeReversakSkillEffectRoundDefinition.COMPLETE_ROUND);
         timeReversalSkillEffect.setCountOfSkillEffectToReverse(1);
         timeReversalSkillEffect.setEffectTarget(SkillEffectTarget.TARGET);
@@ -131,6 +139,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createResetAPSkillEffect(){
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Reset AP");
+        skillEffect.setIdentifier("reset_caster_ap");
+
         skillEffect.setDescription("Resets AP to max value");
         skillEffect.setApplyCalculationOnStat(StatType.ACTION_POINTS);
         skillEffect.setResultIsNegative(false);
@@ -142,6 +152,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createResetHPSkillEffect(){
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Reset HP");
+        skillEffect.setIdentifier("reset_caster_hp");
+
         skillEffect.setDescription("Resets HP to max value");
         skillEffect.setApplyCalculationOnStat(StatType.ACTION_POINTS);
         skillEffect.setResultIsNegative(false);
@@ -153,6 +165,8 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createSelfDamageEffect(){
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Selbstschadenseffekt");
+        skillEffect.setIdentifier("dmg_caster_hp");
+
         skillEffect.setDescription("Schadet einem selber");
         skillEffect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         skillEffect.setResultIsNegative(true);

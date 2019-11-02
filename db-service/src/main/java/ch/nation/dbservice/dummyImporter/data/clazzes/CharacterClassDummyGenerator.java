@@ -34,6 +34,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
     private void createWarriorClazz() throws Exception {
         CharacterClass characterClass = new CharacterClass();
         characterClass.setName("Krieger");
+        characterClass.setIdentifier("warrior");
         characterClass.setDescription("Ein tapferer Krieger!");
         characterClass.setLevel(1);
         characterClass.setExp(0);
@@ -49,13 +50,13 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClassRepository.save(characterClass);
 
-        Skill skill = skillRepository.findByName("Nahkampf!");
+        Skill skill = skillRepository.findByIdentifier("dmg_target_str");
 
         if(skill==null) throw new Exception("Could not found Nahkampf!");
 
         characterClass.addSkill(skill);
 
-        Skill moveSkill = skillRepository.findByName("Bewegung Schweinebacke!");
+        Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
         if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
@@ -70,6 +71,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
     private void createBarbarClazz() throws Exception {
         CharacterClass characterClass = new CharacterClass();
         characterClass.setName("Barbar");
+        characterClass.setIdentifier("barbar");
         characterClass.setDescription("Ein möchtegern Conan!");
         characterClass.setLevel(1);
         characterClass.setExp(0);
@@ -85,13 +87,13 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClassRepository.save(characterClass);
 
-        Skill skill = skillRepository.findByName("Nahkampf!");
+        Skill skill = skillRepository.findByIdentifier("dmg_target_str");
 
         if(skill==null) throw new Exception("Could not found Nahkampf!");
 
         characterClass.addSkill(skill);
 
-        Skill moveSkill = skillRepository.findByName("Bewegung Schweinebacke!");
+        Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
         if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
@@ -107,6 +109,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
     private void createTimeHunterClazz() throws Exception {
         CharacterClass characterClass = new CharacterClass();
         characterClass.setName("Zeitjäger");
+        characterClass.setIdentifier("time_hunter");
         characterClass.setDescription("Ein Jäger, welcher durch die Zeit reist.");
         characterClass.setLevel(1);
         characterClass.setExp(0);
@@ -122,21 +125,21 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClassRepository.save(characterClass);
 
-        Skill skill = skillRepository.findByName("Fernkampf!");
+        Skill skill = skillRepository.findByIdentifier("dmg-range_target_str");
 
         if(skill==null) throw new Exception("Could not found Fernkampf!");
 
         characterClass.addSkill(skill);
 
 
-        Skill timeTravelCompleteRoundSkill = skillRepository.findByName("Zurückgesetzt");
+        Skill timeTravelCompleteRoundSkill = skillRepository.findByIdentifier("rev_any_round");
 
         if(timeTravelCompleteRoundSkill==null) throw new Exception("Could not found Zurückgesetzt!");
 
 
         characterClass.addSkill(timeTravelCompleteRoundSkill);
 
-        Skill moveSkill = skillRepository.findByName("Bewegung Schweinebacke!");
+        Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
         if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 

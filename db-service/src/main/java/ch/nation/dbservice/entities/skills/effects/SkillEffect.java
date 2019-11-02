@@ -60,6 +60,7 @@ public class SkillEffect extends NamedEntityBase implements IDiscrimantorValue {
     public SkillEffect() {
         super();
         moveValues = new ArrayList<>();
+
     }
 
 

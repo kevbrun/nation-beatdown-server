@@ -1,6 +1,7 @@
 package ch.nation.dbservice.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -17,9 +18,10 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     @JsonProperty("desc")
     private String description;
 
-    @Column(name="identifier",unique = false,nullable = true,length = 50)
+    @Column(name="identifier",unique = true,nullable = true,length = 50)
     @JsonProperty("ident")
     private String identifier;
+
 
     public NamedEntityBase() {
     }
@@ -50,8 +52,11 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     }
 
     public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+
+      this.identifier = identifier;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

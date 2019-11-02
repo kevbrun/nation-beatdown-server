@@ -46,7 +46,7 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit = unitRepository.save(unit);
 
 
-        CharacterClass characterClass = characterClassRepository.findByName("Krieger");
+        CharacterClass characterClass = characterClassRepository.findByIdentifier("warrior");
 
         unit.setCharacterClass(characterClass);
 
@@ -74,7 +74,7 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit = unitRepository.save(unit);
 
 
-        CharacterClass characterClass = characterClassRepository.findByName("Krieger");
+        CharacterClass characterClass = characterClassRepository.findByIdentifier("warrior");
 
         unit.setCharacterClass(characterClass);
 
@@ -101,7 +101,7 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit.setUnitAssets(unitAssets);
         unit = unitRepository.save(unit);
 
-        CharacterClass characterClass = characterClassRepository.findByName("Barbar");
+        CharacterClass characterClass = characterClassRepository.findByIdentifier("barbar");
 
         unit.setCharacterClass(characterClass);
 
@@ -123,7 +123,7 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit.setState(UnitState.IDLE);
         unit = unitRepository.save(unit);
 
-        CharacterClass characterClass = characterClassRepository.findByName("Zeitjäger");
+        CharacterClass characterClass = characterClassRepository.findByIdentifier("time_hunter");
 
         unit.setCharacterClass(characterClass);
 
