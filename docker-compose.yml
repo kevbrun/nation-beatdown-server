@@ -38,6 +38,9 @@ services:
   db:
     container_name: nation-db
     image: mariadb:10.4.8-bionic
+    build:
+      context: mariadb
+      dockerfile: Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: nation
       MYSQL_DATABASE: nation
