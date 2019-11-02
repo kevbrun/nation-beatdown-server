@@ -37,6 +37,8 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
     @JsonProperty("updated")
     private Calendar updateTimemstamp;
 
+
+
     public UUID getId() {
         return id;
     }
