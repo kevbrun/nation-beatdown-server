@@ -33,7 +33,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - nginx
 
   db:
     container_name: nation-db
@@ -324,6 +323,8 @@ services:
       - spring-cloud-network
     logging:
       driver: json-file
+    depends_on:
+      - zuul-service
 
 
 #NETWORK
