@@ -46,8 +46,8 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
     @RequestMapping(method = RequestMethod.GET,path="/search/findByName")
     Resource<TResult> findByName(@RequestParam("name")String name,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
-
-
+    @RequestMapping(method = RequestMethod.GET,path="/search/findByIdentifier")
+    Resource<TResult> findByIdentifier(@RequestParam("identifier")String identifier,@RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.PATCH,path="/{uuid}",headers = {"X-HTTP-Method-Override=PATCH"})
@@ -82,6 +82,8 @@ public interface DBRestServiceBaseInterface<TResult,TInput>  {
 
     @RequestMapping(method = RequestMethod.GET,path="/search/existsByName")
     Boolean existsByName(@RequestParam("name") String name);
+
+
 
 
 

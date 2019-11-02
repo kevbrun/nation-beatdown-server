@@ -24,6 +24,26 @@ public abstract class AbstractNamedResourceGameLogicController<TResult extends N
 
     }
 
+    public ResponseEntity findByIdentifier(@RequestParam("identifier") String identfier){
+        return findByIdentifier(identfier);
+    }
+
+    public ResponseEntity findByIdentifier(@RequestParam("identifier") String identfier,@RequestParam(value = "projection",required = false)QueryProjection projection ){
+        if(identfier==null ||identfier.isBlank()) throw new IllegalArgumentException("Parameter identifier is null or empty!");
+        Optional<TResult> response;
+        try {
+            response = ((AbstractNamedEntityService)service).findByIdentifier(identfier,projection);
+
+        } catch (NullPointerException ex) {
+            LOGGER.error(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (!response.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
+    }
+
     public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection",required = false)QueryProjection projection){
         if (name == null || name.isBlank()) throw new IllegalArgumentException("Name is null or empty!");
 

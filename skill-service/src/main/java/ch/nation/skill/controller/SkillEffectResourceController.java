@@ -1,6 +1,7 @@
 package ch.nation.skill.controller;
 
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
+import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
 import ch.nation.core.services.AbstractNamedEntityService;
 import ch.nation.skill.service.effects.SkillEffectsResourceServiceImpl;
@@ -59,6 +60,10 @@ public class SkillEffectResourceController extends AbstractNamedResourceGameLogi
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection);
     }
-
+    @Override
+    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        return super.findByIdentifier(identfier, projection);
+    }
 
 }

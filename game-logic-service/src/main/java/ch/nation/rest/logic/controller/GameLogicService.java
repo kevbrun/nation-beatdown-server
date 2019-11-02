@@ -50,7 +50,7 @@ public class GameLogicService {
     private final SkillServiceClient skillResourceService;
     private final MoveValueServiceClient moveMoveValueResourceService;
     private final SkillEffectServiceClient skillEffectsResourceService;
-    private final static String AP_RESET_SKILL_NAME="Reset AP";
+    private final static String AP_RESET_SKILL_IDENTIFIER="Reset AP";
 
 
     @Autowired
@@ -174,7 +174,7 @@ public class GameLogicService {
 
     private void resetAP(final String gameUuid,GameDto game, final String playerUuid) throws Exception {
         LOGGER.info(String.format("START | Resetting AP By Player | game : %s | player: %s", gameUuid, playerUuid));
-        final ResponseEntity<SkillDto> skillDto = skillResourceService.findByName(AP_RESET_SKILL_NAME,QueryProjection.max);
+        final ResponseEntity<SkillDto> skillDto = skillResourceService.findByName(AP_RESET_SKILL_IDENTIFIER,QueryProjection.max);
         if(skillDto==null && skillDto.getBody()==null) throw new Exception("Could not find AP_RESET SKILL!");
         final SkillDto resetAP = skillDto.getBody();
         final ResponseEntity<UserDto> user = userResourceService.findById(playerUuid,QueryProjection.max);

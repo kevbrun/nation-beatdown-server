@@ -3,9 +3,13 @@ package ch.nation.core.services;
 
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
 import ch.nation.core.model.interf.services.GenericFindByNameService;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
 import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.hateoas.Resource;
+import org.springframework.http.ResponseEntity;
 
 
 import java.util.*;
@@ -49,6 +53,28 @@ public abstract class AbstractNamedEntityService<TResult, TInput extends NamedOb
          LOGGER.info("Entity exists: ", Boolean.valueOf(response));
         LOGGER.info(String.format("STOP | Exists By Name | name : %s", name));
         return Optional.of(response);
+    }
+
+
+    public Optional<TResult> findByIdentifier(final String identifier, final QueryProjection queryProjection ){
+        LOGGER.info(String.format("START | Find by Identifier | Used client %s", GetBaseClient().getClass().getName()));
+        if (identifier == null || identifier.isBlank())
+            throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", identifier));
+        TResult response = (TResult) GetBaseClient().findByIdentifier(identifier, queryProjection).getContent();
+
+        if (response == null) {
+
+            LOGGER.info(String.format("Nothing found | name: %s!", identifier));
+            return Optional.empty();
+        }
+
+
+        LOGGER.info("Found entry: %s", response.toString());
+        LOGGER.info(String.format("STOP | Find by Identifier | Used client %s", GetBaseClient().getClass().getName()));
+
+        return Optional.of(response);
+
+
     }
 
 
