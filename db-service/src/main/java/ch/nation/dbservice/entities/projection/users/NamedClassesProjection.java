@@ -8,4 +8,7 @@ public interface NamedClassesProjection {
 
     @JsonProperty("name")
     public String getName();
+
+    @JsonProperty("ident")
+    public String getIdentifier();
 }
