@@ -14,4 +14,9 @@ public interface DBRestUnitRestClient extends DBRestServiceBaseInterface<UnitDto
     default String getType() {
         return UnitDto.class.getName();
     }
+
+
+
+
+
 }

@@ -1,35 +1,21 @@
-package ch.nation.dbservice.entities.names;
+package ch.nation.core.model.dto.names;
 
 import ch.nation.core.model.Enums.Sex;
-import ch.nation.dbservice.entities.SimpleIdEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
-import java.util.Objects;
+public class UnitFirstNameDto {
 
-
-@Entity
-public class UnitFirstName  {
-
-    @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="first_name",unique = true,nullable = false)
     @JsonProperty("first_name")
     private String firstName;
 
-
-    @Column(name="sex")
     @JsonProperty("sex")
-    @Enumerated(EnumType.STRING)
     private Sex sex;
 
-
-    public UnitFirstName() {
+    public UnitFirstNameDto() {
     }
-
 
     public Long getId() {
         return id;
@@ -39,15 +25,6 @@ public class UnitFirstName  {
         this.id = id;
     }
 
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-
     public String getFirstName() {
         return firstName;
     }
@@ -56,6 +33,11 @@ public class UnitFirstName  {
         this.firstName = firstName;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
 
-
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
 }

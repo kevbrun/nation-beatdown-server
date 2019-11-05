@@ -3,6 +3,7 @@ package ch.nation.dbservice.dummyImporter.data.names;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.SimpleIdEntity;
 import ch.nation.dbservice.entities.names.UnitFirstName;
+import ch.nation.dbservice.entities.names.UnitLastName;
 import ch.nation.dbservice.repositories.names.UnitFirstNameRepository;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractNamesImporter<T extends SimpleIdEntity> extends AbstractDummyGenerator<T>  {
+public abstract class AbstractNamesImporter<T> extends AbstractDummyGenerator<T>  {
 
 
     public AbstractNamesImporter() throws Exception {
@@ -28,7 +29,17 @@ public abstract class AbstractNamesImporter<T extends SimpleIdEntity> extends Ab
 
     public void removeIdFromList(List<T> list ){
 
-       list.forEach((x)->x.setId(null));
+       for(int idx=0; idx < list.size();idx++){
+           T item = list.get(idx);
+
+           if(item instanceof UnitFirstName){
+               ((UnitFirstName)item).setId(null);
+           }
+
+           if(item instanceof UnitLastName){
+               ((UnitLastName)item).setId(null);
+           }
+       }
 
 
     }

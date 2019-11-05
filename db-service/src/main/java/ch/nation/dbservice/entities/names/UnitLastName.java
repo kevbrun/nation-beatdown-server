@@ -7,9 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name="UNIT_LAST_NAMES")
-public class UnitLastName extends SimpleIdEntity {
+@Entity
+public class UnitLastName  {
 
+    @Id
+    @JsonProperty("id")
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
     @JsonProperty("last_name")
     @Column(name="last_name",unique = true,nullable = false)
@@ -21,7 +25,13 @@ public class UnitLastName extends SimpleIdEntity {
     }
 
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getSecondName() {
         return secondName;
@@ -31,17 +41,19 @@ public class UnitLastName extends SimpleIdEntity {
         this.secondName = secondName;
     }
 
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (!(o instanceof UnitLastName)) return false;
-        if (!super.equals(o)) return false;
         UnitLastName that = (UnitLastName) o;
-        return Objects.equals(secondName, that.secondName);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(secondName, that.secondName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), secondName);
+        return Objects.hash(id, secondName);
     }
 }

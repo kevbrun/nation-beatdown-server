@@ -75,7 +75,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - db
       - zuul-service
 
 # SERVICES
