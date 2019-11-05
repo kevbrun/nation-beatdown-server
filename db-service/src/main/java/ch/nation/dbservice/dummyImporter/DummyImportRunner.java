@@ -4,6 +4,7 @@ import ch.nation.dbservice.dummyImporter.data.characteristics.CharacteristicsDum
 import ch.nation.dbservice.dummyImporter.data.clazzes.CharacterClassDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.games.GamesDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.moves.MoveDummyGenerator;
+import ch.nation.dbservice.dummyImporter.data.names.NameImporter;
 import ch.nation.dbservice.dummyImporter.data.players.PlayerClassDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceDummyImporter;
 import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceTriggerDummyImporter;
@@ -16,6 +17,8 @@ import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
 import ch.nation.dbservice.repositories.game.GameRepository;
 import ch.nation.dbservice.repositories.game.GameUserRuntimeRepository;
 import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
+import ch.nation.dbservice.repositories.names.UnitFirstNameRepository;
+import ch.nation.dbservice.repositories.names.UnitLastNameRepository;
 import ch.nation.dbservice.repositories.prejudices.PrejudiceRepository;
 import ch.nation.dbservice.repositories.prejudices.SkillPrejudiceRepository;
 import ch.nation.dbservice.repositories.prejudices.StatPrejudiceRepository;
@@ -53,10 +56,12 @@ public class DummyImportRunner  implements ApplicationRunner {
     private final StatPrejudiceRepository statPrejudiceRepository;
     private final PrejudiceRepository prej;
     private final PrejudiceTriggerRepository prejudiceTriggerRepository;
+    private final UnitFirstNameRepository firstNameRepository;
+    private final UnitLastNameRepository lastNameRepository;
 
 
     @Autowired
-    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository, CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository, StatPrejudiceTriggerRepository statPrejudiceTriggerRepository, SkillPrejudiceRepository skillPrejudiceRepository, StatPrejudiceRepository statPrejudiceRepository, PrejudiceRepository prej, PrejudiceTriggerRepository prejudiceTriggerRepository) {
+    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository, CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository, StatPrejudiceTriggerRepository statPrejudiceTriggerRepository, SkillPrejudiceRepository skillPrejudiceRepository, StatPrejudiceRepository statPrejudiceRepository, PrejudiceRepository prej, PrejudiceTriggerRepository prejudiceTriggerRepository, UnitFirstNameRepository firstNameRepository, UnitLastNameRepository lastNameRepository) {
         this.unitRepository = unitRepository;
         this.characterClassRepository = characterClassRepository;
         this.skillEffectRepository = skillEffectRepository;
@@ -72,12 +77,16 @@ public class DummyImportRunner  implements ApplicationRunner {
         this.statPrejudiceRepository = statPrejudiceRepository;
         this.prej = prej;
         this.prejudiceTriggerRepository = prejudiceTriggerRepository;
+        this.firstNameRepository = firstNameRepository;
+        this.lastNameRepository = lastNameRepository;
     }
 
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
      LOGGER.info("START MIGRATION OF DUMMY DATA!");
+
+        new NameImporter(firstNameRepository, lastNameRepository);
        new SkillEffectDummyDataGenerator(skillEffectRepository);
      new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
         new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
