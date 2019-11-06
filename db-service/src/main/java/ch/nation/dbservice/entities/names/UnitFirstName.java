@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.names;
 import ch.nation.core.model.Enums.Sex;
 import ch.nation.dbservice.entities.SimpleIdEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -13,7 +14,9 @@ public class UnitFirstName  {
 
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY,generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(name="first_name",unique = true,nullable = false)
