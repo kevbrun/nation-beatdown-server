@@ -1,6 +1,9 @@
 package ch.nation.units.controller;
 
 import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
+import ch.nation.core.model.dto.names.UnitCompleteNameDto;
+import ch.nation.core.model.dto.names.UnitFirstNameDto;
+import ch.nation.core.model.dto.names.UnitLastNameDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 
 
@@ -66,7 +69,21 @@ public class UnitNamedResourceController extends AbstractMassNamedResourceGameLo
         return super.findById(uuid);
     }
 
+    @RequestMapping(path = "/first-name/random",method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity<UnitFirstNameDto> getRandomFirstName() {
+        return ((UnitResourceServiceImpl)service).getRandomFirstName();
+    }
 
+
+    @RequestMapping(path = "/last-name/random",method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity<UnitLastNameDto> getRandomLastName(){
+        return ((UnitResourceServiceImpl)service).getRandomLastName();
+    }
+
+    @RequestMapping(path = "/full-name/random",method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity<List<UnitCompleteNameDto>> getRandomFullName(@RequestParam(value = "count",required = false,defaultValue = "1") int count){
+        return ((UnitResourceServiceImpl)service).getRandomFullNames(count);
+    }
 
     @Override
     @RequestMapping(method = RequestMethod.GET,path="/search")
