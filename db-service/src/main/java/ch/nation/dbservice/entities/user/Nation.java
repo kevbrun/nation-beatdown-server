@@ -48,6 +48,8 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
+
+
     public List<BasePrejudice> getPrejudices() {
         return prejudices;
     }
@@ -90,4 +92,7 @@ public class Nation extends NamedEntityBase implements Serializable {
                 ", characteristics=" + characteristics +
                 '}';
     }
+
+
+
 }

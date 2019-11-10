@@ -1,6 +1,7 @@
 package ch.nation.dbservice.entities.characteristics;
 
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
 import ch.nation.dbservice.entities.user.Nation;
@@ -31,7 +32,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = BaseCharacteristic.class, name = "BaseCharacteristic")
 })
 
-public  abstract class BaseCharacteristic extends NamedEntityBase implements IDiscrimantorValue {
+public  abstract class BaseCharacteristic extends NationRessource implements IDiscrimantorValue {
 
 
     @ManyToMany(mappedBy = "characteristics",fetch =  FetchType.EAGER)

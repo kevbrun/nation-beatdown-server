@@ -3,6 +3,7 @@ package ch.nation.dbservice.entities.clazzes;
 
 import ch.nation.core.model.Enums.StatGrowthType;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,7 +21,7 @@ import java.util.Objects;
 @Table(name="CLAZZES")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
-public class CharacterClass extends NamedEntityBase {
+public class CharacterClass extends NationRessource {
     @Column(name="lvl")
     @JsonProperty("lvl")
     private int level;
@@ -181,8 +182,8 @@ public class CharacterClass extends NamedEntityBase {
         if(agility==null) agility = new Stat();
     }
 
-    public CharacterClass(String name, String description, int level, int exp, int expToLevelUp, List<Skill> skills, List<Unit> units, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
-        super(name, description);
+    public CharacterClass(String name, String description, String identifier, int level, int exp, int expToLevelUp, List<Skill> skills, List<Unit> units, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
+        super(name, description, identifier);
         this.level = level;
         this.exp = exp;
         this.expToLevelUp = expToLevelUp;
@@ -197,7 +198,6 @@ public class CharacterClass extends NamedEntityBase {
         this.dexterity = dexterity;
         this.agility = agility;
     }
-
 
     public List<Unit> getUnits() {
 

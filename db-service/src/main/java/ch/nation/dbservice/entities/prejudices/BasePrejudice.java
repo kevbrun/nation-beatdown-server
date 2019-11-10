@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.characteristics.StatCharacteristic;
@@ -39,7 +40,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = StatPrejudice.class, name = "BasePrejudice"),
 
 })**/
-public   class BasePrejudice extends NamedEntityBase implements IDiscrimantorValue {
+public   class BasePrejudice extends NationRessource implements IDiscrimantorValue {
 
     @JsonProperty("triggers")
     @ManyToMany(fetch = FetchType.LAZY)

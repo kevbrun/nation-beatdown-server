@@ -14,6 +14,10 @@ public class UnitLastNameDto {
     public UnitLastNameDto() {
     }
 
+    public UnitLastNameDto(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Long getId() {
         return id;
     }

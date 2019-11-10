@@ -17,6 +17,11 @@ public class UnitFirstNameDto {
     public UnitFirstNameDto() {
     }
 
+    public UnitFirstNameDto(String firstName, Sex sex) {
+        this.firstName = firstName;
+        this.sex = sex;
+    }
+
     public Long getId() {
         return id;
     }

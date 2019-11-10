@@ -1,5 +1,6 @@
 package ch.nation.core.model.dto.names;
 
+import ch.nation.core.model.Enums.Sex;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UnitCompleteNameDto {
@@ -10,7 +11,31 @@ public class UnitCompleteNameDto {
     @JsonProperty("last_name")
     private String lastName;
 
+    @JsonProperty("sex")
+    private Sex sex;
+
     public UnitCompleteNameDto() {
+    }
+
+
+    public UnitCompleteNameDto(String firstName, String lastName, Sex sex) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+    }
+
+    public UnitCompleteNameDto(UnitFirstNameDto firstNameDto, UnitLastNameDto lastNameDto){
+        this.firstName = firstNameDto.getFirstName();
+        this.lastName = lastNameDto.getLastName();
+        this.sex = firstNameDto.getSex();
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
     public String getFirstName() {
