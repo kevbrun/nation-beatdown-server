@@ -2,9 +2,7 @@ package ch.nation.dbservice.entities.units;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
@@ -124,9 +122,30 @@ public class UnitAssets {
     @Column(length=100)
     private String expressionDeadEyebrows;
 
+    @JsonProperty("skin.color")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="x",column=@Column(name="skin_color_r")),
+            @AttributeOverride(name="y",column=@Column(name="skin_color_g")),
+            @AttributeOverride(name="z",column=@Column(name="skin_color_b")),
+
+            })
+    private EmeddableVector3 skinColor;
+
+
+    @JsonProperty("height")
+    @Column(name = "height")
+    private float height;
+
+    @JsonProperty("width")
+    @Column(name = "width")
+    private float width;
 
     public UnitAssets() {
 
+        skinColor = new EmeddableVector3(255f,190f,120f);
+        width = 1.0f;
+        height = 0.1f;
     }
 
     public UnitAssets(String beard, String shield, String expressionDefaultMouth, String expressionDefaultEyebrows, String expressionDeadEyes, String expressionDefaultEyes, String helmet, String armor, String back, String expressionAngryEyebrows, String body, String ears, String hair, String firearmParams, String head, String expressionAngryMouth, String mask, String bow, String firearms, String cape, String expressionDeadMouth, String expression, String weaponType, String glasses, String primaryMeleeWeapon, String secondaryMeleeWeapon, String expressionAngryEyes, String expressionDeadEyebrows) {
@@ -385,6 +404,30 @@ public class UnitAssets {
         return expressionDeadEyebrows;
     }
 
+
+    public EmeddableVector3 getSkinColor() {
+        return skinColor;
+    }
+
+    public void setSkinColor(EmeddableVector3 skinColor) {
+        this.skinColor = skinColor;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
 
     @Override
     public String toString(){

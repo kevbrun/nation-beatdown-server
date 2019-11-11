@@ -47,6 +47,7 @@ public class Unit extends NamedEntityBase {
     @Embedded
     @JsonProperty("assets")
     @RestResource(path = "assets", rel="assets")
+
     private UnitAssets unitAssets;
 
 
