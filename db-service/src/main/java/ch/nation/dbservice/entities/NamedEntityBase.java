@@ -18,10 +18,6 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     @JsonProperty("desc")
     private String description;
 
-    @Column(name="identifier",unique = true,nullable = true,length = 50)
-    @JsonProperty("ident")
-    private String identifier;
-
 
     public NamedEntityBase() {
     }
@@ -47,14 +43,6 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
         this.description = description;
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-
-      this.identifier = identifier;
-    }
 
 
 
@@ -65,12 +53,11 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
         if (!super.equals(o)) return false;
         NamedEntityBase that = (NamedEntityBase) o;
         return Objects.equals(name, that.name) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(identifier, that.identifier);
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, description, identifier);
+        return Objects.hash(super.hashCode(), name, description);
     }
 }

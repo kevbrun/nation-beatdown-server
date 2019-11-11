@@ -33,6 +33,16 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
+      - db-service
+      - user-runtime-service
+      - user-service
+      - units-service
+      - prejudices-service
+      - characteristics-service
+      - skill-service
+      - clazz-service
+      - game-logic-service
+
 
   db:
     container_name: nation-db
@@ -75,8 +85,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - db
-      - zuul-service
 
 # SERVICES
   game-service:
@@ -99,8 +107,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
+
 
   characteristics-service:
     container_name: nation-cloud-characteristics-service
@@ -122,8 +129,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
+
 
   clazz-service:
     container_name: nation-cloud-classes-service
@@ -145,8 +151,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   game-logic-service:
     container_name: nation-cloud-game-logics-service
@@ -168,8 +172,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   moves-service:
     container_name: nation-cloud-moves-service
@@ -191,8 +193,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   prejudices-service:
     container_name: nation-cloud-prejudices-service
@@ -214,8 +214,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
+
 
   skill-service:
     container_name: nation-cloud-skills-service
@@ -237,8 +236,7 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
+
 
   user-runtime-service:
     container_name: nation-cloud-user-runtimes-service
@@ -260,8 +258,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   units-service:
     container_name: nation-cloud-units-service
@@ -283,8 +279,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   user-service:
     container_name: nation-cloud-users-service
@@ -306,8 +300,6 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
-      - zuul-service
-      - db-service
 
   nginx:
     container_name: nation-cloud-nginx

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan(basePackages = {"ch.nation.dbservice.entities","ch.nation.dbservice.repositories","ch.nation.dbservice.utils"
-,"ch.nation.dbservice.dummyImporter"})
+,"ch.nation.dbservice.dummyImporter","ch.nation.dbservice.controller"})
 @Import({DBFlywayConfiguration.class,SpringDataConfig.class, IncomingRequestLoggingConfiguration.class})
 public class DBServiceApplication {
 

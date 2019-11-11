@@ -49,12 +49,16 @@ public class User extends NamedEntityBase implements Serializable {
     @RestResource(path = "moves", rel="moves")
     private List<BasePlayerMove> playerMoves = new ArrayList<>();
 
+
+
+
     public User() {
 
 
         super();
         games = new ArrayList<>();
         units = new ArrayList<>();
+
 
     }
 
@@ -85,6 +89,9 @@ public class User extends NamedEntityBase implements Serializable {
 
 
     }
+
+
+
 
     public String getPassword() {
         return password;

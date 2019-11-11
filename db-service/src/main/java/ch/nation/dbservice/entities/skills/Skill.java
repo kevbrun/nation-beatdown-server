@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.skills;
 
 
 import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
@@ -27,7 +28,7 @@ import java.util.List;
 @DiscriminatorColumn(name="SKILL_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE_SKILL")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Skill extends NamedEntityBase implements IDiscrimantorValue {
+public class Skill extends NationRessource implements IDiscrimantorValue {
 
 
     @Column(name="cost")
