@@ -122,15 +122,19 @@ public class UnitAssets {
     @Column(length=100)
     private String expressionDeadEyebrows;
 
-    @JsonProperty("skin.color")
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name="x",column=@Column(name="skin_color_r")),
-            @AttributeOverride(name="y",column=@Column(name="skin_color_g")),
-            @AttributeOverride(name="z",column=@Column(name="skin_color_b")),
+    @JsonProperty("skin.color.r")
+    @Column(name = "skin_color_red")
+    private float skinColorRed;
+    @JsonProperty("skin.color.g")
+    @Column(name = "skin_color_green")
+    private float skinColorGreen;
+    @JsonProperty("skin.color.b")
+    @Column(name = "skin_color_blue")
+    private float skinColorBlue;
 
-            })
-    private EmeddableVector3 skinColor;
+    @JsonProperty("skin.color.a")
+    @Column(name = "skin_color_alpha")
+    private float skinColorAlpha;
 
 
     @JsonProperty("height")
@@ -143,7 +147,10 @@ public class UnitAssets {
 
     public UnitAssets() {
 
-        skinColor = new EmeddableVector3(255f,190f,120f);
+        skinColorRed = 255f;
+        skinColorGreen = 190f;
+        skinColorBlue = 120f;
+        skinColorAlpha =255f;
         width = 1.0f;
         height = 0.1f;
     }
@@ -405,12 +412,28 @@ public class UnitAssets {
     }
 
 
-    public EmeddableVector3 getSkinColor() {
-        return skinColor;
+    public float getSkinColorRed() {
+        return skinColorRed;
     }
 
-    public void setSkinColor(EmeddableVector3 skinColor) {
-        this.skinColor = skinColor;
+    public void setSkinColorRed(float skinColorRed) {
+        this.skinColorRed = skinColorRed;
+    }
+
+    public float getSkinColorGreen() {
+        return skinColorGreen;
+    }
+
+    public void setSkinColorGreen(float skinColorGreen) {
+        this.skinColorGreen = skinColorGreen;
+    }
+
+    public float getSkinColorBlue() {
+        return skinColorBlue;
+    }
+
+    public void setSkinColorBlue(float skinColorBlue) {
+        this.skinColorBlue = skinColorBlue;
     }
 
     public float getHeight() {
