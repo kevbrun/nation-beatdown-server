@@ -12,7 +12,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name="USER_RUNTIME_INFO")
 @Table(name="USER_RUNTIME_INFO")
@@ -45,12 +47,14 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
 
 
     @JsonProperty("fow")
-    @ElementCollection(targetClass = EmbeddableVector3Int.class)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "fog_id")
     @Column(name="fow")
-    private List<EmbeddableVector3Int> uncoveredFogOfWar;
+    @RestResource(path="fow",rel="fow",exported = false)
+    private Set<FogOfWar> uncoveredFogOfWar;
 
     public GameUserRuntimeInfo() {
-        uncoveredFogOfWar = new ArrayList<>();
+        uncoveredFogOfWar = new HashSet<>();
         moves = new ArrayList<>();
     }
 
@@ -80,12 +84,20 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
         this.considerationTime = considerationTime;
     }
 
-    public List<EmbeddableVector3Int> getUncoveredFogOfWar() {
+    public Set<FogOfWar> getUncoveredFogOfWar() {
         return uncoveredFogOfWar;
     }
 
-    public void setUncoveredFogOfWar(List<EmbeddableVector3Int> uncoveredFogOfWar) {
-        this.uncoveredFogOfWar = uncoveredFogOfWar;
+    public void setUncoveredFogOfWar(Set<FogOfWar> uncoveredFogOfWar) {
+        LOGGER.info("Execute custom setter");
+
+
+        if (this.uncoveredFogOfWar == null) {
+            this.uncoveredFogOfWar = uncoveredFogOfWar;
+        } else {
+            this.uncoveredFogOfWar.retainAll(uncoveredFogOfWar);
+            this.uncoveredFogOfWar.addAll(uncoveredFogOfWar);
+        }
     }
 
     public List<BasePlayerMove> getMoves(){
@@ -113,7 +125,7 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
 
     public void AddFogOfWarTilePositions(IVector3 vector){
         if(!uncoveredFogOfWar.contains(vector)){
-            uncoveredFogOfWar.add((EmbeddableVector3Int) vector);
+            uncoveredFogOfWar.add((FogOfWar) vector);
         }
     }
 
