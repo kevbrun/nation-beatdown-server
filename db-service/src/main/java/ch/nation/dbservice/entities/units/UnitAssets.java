@@ -2,9 +2,7 @@ package ch.nation.dbservice.entities.units;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
@@ -124,9 +122,37 @@ public class UnitAssets {
     @Column(length=100)
     private String expressionDeadEyebrows;
 
+    @JsonProperty("skin.color.r")
+    @Column(name = "skin_color_red")
+    private float skinColorRed;
+    @JsonProperty("skin.color.g")
+    @Column(name = "skin_color_green")
+    private float skinColorGreen;
+    @JsonProperty("skin.color.b")
+    @Column(name = "skin_color_blue")
+    private float skinColorBlue;
+
+    @JsonProperty("skin.color.a")
+    @Column(name = "skin_color_alpha")
+    private float skinColorAlpha;
+
+
+    @JsonProperty("height")
+    @Column(name = "height")
+    private float height;
+
+    @JsonProperty("width")
+    @Column(name = "width")
+    private float width;
 
     public UnitAssets() {
 
+        skinColorRed = 255f;
+        skinColorGreen = 190f;
+        skinColorBlue = 120f;
+        skinColorAlpha =255f;
+        width = 1.0f;
+        height = 0.1f;
     }
 
     public UnitAssets(String beard, String shield, String expressionDefaultMouth, String expressionDefaultEyebrows, String expressionDeadEyes, String expressionDefaultEyes, String helmet, String armor, String back, String expressionAngryEyebrows, String body, String ears, String hair, String firearmParams, String head, String expressionAngryMouth, String mask, String bow, String firearms, String cape, String expressionDeadMouth, String expression, String weaponType, String glasses, String primaryMeleeWeapon, String secondaryMeleeWeapon, String expressionAngryEyes, String expressionDeadEyebrows) {
@@ -385,6 +411,46 @@ public class UnitAssets {
         return expressionDeadEyebrows;
     }
 
+
+    public float getSkinColorRed() {
+        return skinColorRed;
+    }
+
+    public void setSkinColorRed(float skinColorRed) {
+        this.skinColorRed = skinColorRed;
+    }
+
+    public float getSkinColorGreen() {
+        return skinColorGreen;
+    }
+
+    public void setSkinColorGreen(float skinColorGreen) {
+        this.skinColorGreen = skinColorGreen;
+    }
+
+    public float getSkinColorBlue() {
+        return skinColorBlue;
+    }
+
+    public void setSkinColorBlue(float skinColorBlue) {
+        this.skinColorBlue = skinColorBlue;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
 
     @Override
     public String toString(){
