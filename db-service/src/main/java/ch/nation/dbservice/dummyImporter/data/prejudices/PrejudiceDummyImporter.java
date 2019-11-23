@@ -45,7 +45,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     protected void handleCration() throws Exception {
         createHandleWeakNationPrejudice();
         createHandleHighIntelligencPrejduice();
-        createHateAgainstExplosivPeople();
+      createHateAgainstExplosivPeople();
     }
 
 
@@ -60,7 +60,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         BasePrejudiceTrigger prejudiceTrigger = prejudiceTriggerRepository.findByIdentifier("less_str_10");
         prejudice.addTrigger(prejudiceTrigger);
         prejudice = skillPrejudiceRepository.save(prejudice);
-        Skill skill = skillRepository.findByIdentifier("char_expl");
+        Skill skill = skillRepository.findByIdentifier("dmg_expl_target_hp");
         prejudice.setSkill(skill);
         skillPrejudiceRepository.save(prejudice);
     }
