@@ -20,6 +20,7 @@ public interface SkillWithEffectsProjection extends TimestampProjection,NamedCla
 
     @JsonProperty("base_value")
     public int getBaseValue();
+
     @JsonProperty("cooldown")
     public int getCooldown();
 
@@ -35,8 +36,9 @@ public interface SkillWithEffectsProjection extends TimestampProjection,NamedCla
     @JsonProperty("skill_target")
     public Target getTarget();
 
-    @JsonProperty("skill_effects")
+    @JsonProperty("effects")
     public List<SkillEffect> getSkillEffects();
+
 
 
 
