@@ -3,6 +3,7 @@ package ch.nation.dbservice.repositories.moves;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 
 import java.util.UUID;
@@ -16,7 +17,7 @@ public interface IMoveFind<T> {
 
     Iterable<T> findAllByRound(@Param("round") int round);
 
-    Page<T> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid,Pageable pageable);
+    Page<T> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid, Pageable pageable);
 
 
 
