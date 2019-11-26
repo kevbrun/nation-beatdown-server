@@ -103,6 +103,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.gameservice.GameServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8888
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -125,6 +126,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.characteristicsservice.CharacteristicsServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8879
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -147,6 +149,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.clazzservice.ClazzServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8880
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -168,6 +171,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.gamelogicservice.GamelogicserviceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8881
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -189,6 +193,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.movesservice.MovesServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8882
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -210,6 +215,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.prejudiceservice.PrejudiceServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8883
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -232,6 +238,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.skillservice.SkillServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8884
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -254,6 +261,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.userruntimeservice.UserRuntimeServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8885
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -275,6 +283,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.unitsservice.UnitsServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8875
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
@@ -296,6 +305,7 @@ services:
       MAIN_CLASS_NAME: ch.nation.userservice.UserServiceApplication
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8886
+      SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
     depends_on:
