@@ -42,7 +42,7 @@ public class SkillPlayerMoveResourceServiceImpl extends AbstractEntityService<Sk
     public Optional<List<AbstractPlayerMoveDto>> getMovesByGameRuntimeInfo(String gameRuntimeUuid, QueryProjection projection){
         LOGGER.info("START | Querying moves by runtime");
         final List<AbstractPlayerMoveDto> response = new ArrayList<>();
-        Resources<SkillPlayerMoveDto> moves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuid(gameRuntimeUuid,projection);
+        Resources<SkillPlayerMoveDto> moves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuid(gameRuntimeUuid,projection,null);
         if(moves!=null && moves.getContent()!=null) response.addAll(moves.getContent());
         LOGGER.info("STOP | Querying moves by runtime");
         return Optional.of(response);
@@ -51,7 +51,7 @@ public class SkillPlayerMoveResourceServiceImpl extends AbstractEntityService<Sk
     public Optional<List<AbstractPlayerMoveDto>> getMovesByGameRuntimeInfoAndUnit(String gameRuntimeUuid,String unitUuid,QueryProjection projection){
         LOGGER.info(String.format("START | Querying moves by runtime and unit | Unit: %s",unitUuid));
         final List<AbstractPlayerMoveDto> response = new ArrayList<>();
-        Resources<SkillPlayerMoveDto> moves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuid(gameRuntimeUuid,projection);
+        Resources<SkillPlayerMoveDto> moves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesByGameRuntimeUuid(gameRuntimeUuid,projection,null);
         if(moves!=null && moves.getContent()!=null){
             response.addAll(moves.getContent().stream().filter((x)-> x.getCaster().getId().equals(unitUuid)).collect(Collectors.toUnmodifiableList()));
 

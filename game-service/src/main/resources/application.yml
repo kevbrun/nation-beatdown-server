@@ -3,8 +3,6 @@
 spring:
   application:
     name: nation-cloud-games-service
-
----
 server:
   port: 0
 eureka:
@@ -20,7 +18,33 @@ feign:
       default:
         connectTimeout: 50000
         readTimeout: 50000
-        loggerLevel: FULL
+
+
+
+
+---
+spring:
+  profiles: production
+logging:
+  level:
+    ch:
+      nation:
+        core: INFO
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: ERROR
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        #loggerLevel: FULL
+---
+spring:
+  profiles: debug
 logging:
   level:
     ch:
@@ -31,3 +55,10 @@ logging:
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: FULL

@@ -31,7 +31,8 @@ public interface DBSkillPlayerMoveRestClient extends DBRestServiceBaseInterface<
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_Id")
     Resources<SkillPlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,
                                                                @RequestParam(name = "projection",required=false)
-                                                                      QueryProjection projection,@RequestParam(value = "sort",required = false,defaultValue = "updated,desc")String sort);
+                                                                      QueryProjection projection, @RequestParam(value = "sort",required = false,defaultValue = "updated,desc")
+                                                                       String sort);
 
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_IdAndCooldownCounterGreaterThan")
     Resources<SkillPlayerMoveDto> getAllMovesByCounterGreaterThan(@RequestParam("runtime")String gameRuntimeUuid,
