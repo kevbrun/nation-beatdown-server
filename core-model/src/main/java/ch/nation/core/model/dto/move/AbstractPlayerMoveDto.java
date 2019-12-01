@@ -8,6 +8,7 @@ import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Calendar;
 import java.util.List;
 
 public abstract class AbstractPlayerMoveDto extends AbstractDto {
@@ -26,8 +27,17 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
 
 
+    @JsonProperty("created")
+    private Calendar creationTimestamp;
+    @JsonProperty("updated")
+    private Calendar updateTimemstamp;
+
+
+
     public AbstractPlayerMoveDto() {
     }
+
+
 
 
 
@@ -35,8 +45,27 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
         return gameDto;
     }
 
+
+
+
     public void setGameDto(GameDto gameDto) {
         this.gameDto = gameDto;
+    }
+
+    public Calendar getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(Calendar creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public Calendar getUpdateTimemstamp() {
+        return updateTimemstamp;
+    }
+
+    public void setUpdateTimemstamp(Calendar updateTimemstamp) {
+        this.updateTimemstamp = updateTimemstamp;
     }
 
     public int getRound() {

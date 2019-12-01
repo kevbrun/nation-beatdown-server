@@ -5,15 +5,21 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.skills.SkillDto;
 
 import ch.nation.skill.service.SkillResourceServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class SkillNamedResourceController extends AbstractNamedResourceGameLogicController<SkillDto,SkillDto> {
 
+    private final SkillEffectResourceController effectController;
 
-    public SkillNamedResourceController(SkillResourceServiceImpl service) {
+    public SkillNamedResourceController(SkillResourceServiceImpl service, SkillEffectResourceController effectController) {
         super(service);
+
+        this.effectController = effectController;
     }
 
 
@@ -65,5 +71,30 @@ public class SkillNamedResourceController extends AbstractNamedResourceGameLogic
     public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
         return super.findByIdentifier(identfier, projection);
     }
+
+
+    //Effects
+
+
+    @RequestMapping(method = RequestMethod.GET,path = "/effects")
+    public ResponseEntity getAllSkillEffects() {
+     return effectController.getAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,path="/effects/{uuid}")
+    public ResponseEntity findEffectById(@PathVariable("uuid")String uuid) {
+        return effectController.findById(uuid);
+    }
+
+
+
+
+    @RequestMapping(method = RequestMethod.GET,path="/effects/search")
+    public ResponseEntity findSkillEffectByName(@RequestParam("name") String name) {
+       return effectController.findByName(name);
+
+    }
+
+
 
 }

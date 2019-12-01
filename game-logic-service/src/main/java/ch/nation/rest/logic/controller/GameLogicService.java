@@ -9,6 +9,7 @@ import ch.nation.core.clients.services.units.UnitServiceClient;
 import ch.nation.core.clients.services.users.UserServiceClient;
 import ch.nation.core.clients.services.users.runtime.UserGameRuntimeServiceClient;
 import ch.nation.core.model.Enums.GameStatus;
+import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
@@ -32,6 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,15 +117,15 @@ public class GameLogicService {
         resetAP(gameUuid,gameInstance,currentPlayerGameRuntimeInfo.getPlayerUuid());
 
 
-        //Start updating GameState
 
-        updateGameState(currentPlayerGameRuntimeInfo, gameInstance, runtime.getBody());
+
 
 
         // Update Skill of player
         updateSkillCooldownCounter(runtime.getBody());
 
-
+        //Start updating GameState
+        updateGameState(currentPlayerGameRuntimeInfo, gameInstance, runtime.getBody());
 
         LOGGER.info(String.format("STOP | END Player Move | game : %s ", gameUuid));
         return new ResponseEntity<>(Boolean.valueOf(true),HttpStatus.OK);
@@ -237,6 +241,8 @@ public class GameLogicService {
         ResponseEntity children = userRuntimeServiceClient.createChildren(moves, QueryProjection.max);
 
 
+        //TODO Add Support for reversal skills
+
 
         if(move instanceof SkillPlayerMoveDto) {
 
@@ -300,6 +306,30 @@ public class GameLogicService {
 
         return new ResponseEntity<>(Optional.empty(),HttpStatus.OK);
     }
+
+    public ResponseEntity createNewGame(final String playerUuid, final  Optional<String> playerTwoUuid,  final QueryProjection projection) throws Exception {
+        LOGGER.info("*** START to create new Game ***");
+        ResponseEntity<GameDto> gameDtoResponseEntity =null;
+        gameDtoResponseEntity = gameServiceClient.createGame(playerUuid,playerTwoUuid.get(),projection);
+
+        if(gameDtoResponseEntity.getStatusCode() != HttpStatus.CREATED){
+        throw new Exception( "Could create game! Entity from game service was null!");
+        }
+
+        // Reset AP for All Units
+        final GameDto game = gameDtoResponseEntity.getBody();
+        LOGGER.info(String.format("Reset AP of Player %s",game.getCurrentPlayerUuid()));
+        resetAP(game.getId(),game,game.getCurrentPlayerUuid());
+        LOGGER.info(String.format("Reset AP of Player %s",game.getNextPlayerUuid()));
+        resetAP(game.getId(),game,game.getNextPlayerUuid());
+
+
+        LOGGER.info(String.format("Load updated data from DB | Game UUID: %s",game.getId()));
+        ResponseEntity<GameDto> updatedState = gameServiceClient.findById(game.getId(), projection);
+        LOGGER.info("*** FINISH to create new Game ***");
+        return updatedState;
+    }
+
 
 
     public ResponseEntity<Boolean> updateFogOfWarByPlayerAndGame(final String gameUuid, final String playerUuid, final List<Vector3Int> uncoveredTilePositions) throws Exception {

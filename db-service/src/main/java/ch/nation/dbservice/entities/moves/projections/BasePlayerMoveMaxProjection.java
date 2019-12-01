@@ -10,6 +10,7 @@ import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,5 +25,11 @@ public interface BasePlayerMoveMaxProjection   extends MinimizedEntityResponsePr
     int getRound();
     @JsonProperty("skill")
     Skill getSkill();
+
+    @JsonProperty("created")
+     Calendar getCreationTimestamp();
+    @JsonProperty("updated")
+     Calendar getUpdateTimemstamp();
+
 
 }
