@@ -33,4 +33,8 @@ public interface DBPlayerMovesRestClient  extends DBRestServiceBaseInterface<Bas
                                                                    @RequestParam(value = "size",required = false, defaultValue = "20") long size,
                                                                                    @RequestParam(name = "projection",required=false)
                                                                                            QueryProjection projection);
+
+
+    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/countAllByGameInfo_Id")
+    int getAllMovesPerPlayerByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid);
 }

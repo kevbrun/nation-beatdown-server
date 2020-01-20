@@ -59,7 +59,6 @@ public class PlayerMoveResourceServiceImpl extends AbstractEntityService<BasePla
 
         }
 
-        LOGGER.info("STOP | Querying moves by runtime");
 
         LOGGER.info(String.format("STOP | Querying moves by runtime and unit | Unit: %s",unitUuid));
 
@@ -67,5 +66,14 @@ public class PlayerMoveResourceServiceImpl extends AbstractEntityService<BasePla
         return Optional.of(new SimpleResourceDto(size,response.size(),1L,page,new ArrayList<AbstractDto>(response)));
 
 
+    }
+
+
+    public int getCountOfMovesPerPlayerByGameRuntime(final String gameRuntimeUuid){
+        LOGGER.info(String.format("START | Get count of moves by runtime  | Unit: %s",gameRuntimeUuid));
+        int countOfMoves = ((DBPlayerMovesRestClient) getDefaultClient()).getAllMovesPerPlayerByGameRuntimeUuid(gameRuntimeUuid);
+        LOGGER.debug(String.format("Count of moves | Game Runtime %s | Count: %d",gameRuntimeUuid,countOfMoves));
+        LOGGER.info(String.format("STOP | Get count of moves by runtime  | Unit: %s",gameRuntimeUuid));
+        return countOfMoves;
     }
 }

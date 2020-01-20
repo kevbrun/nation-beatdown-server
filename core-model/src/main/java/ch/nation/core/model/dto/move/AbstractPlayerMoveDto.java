@@ -17,6 +17,8 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     private GameDto gameDto;
     @JsonProperty("round")
     private int round;
+    @JsonProperty("seqId")
+    private int sequenceIdentifier;
     @JsonProperty("user")
     private UserDto user;
     @JsonProperty("caster")
@@ -24,7 +26,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
     @JsonProperty("skill")
     private SkillDto skillDto;
-
 
 
     @JsonProperty("created")
@@ -54,6 +55,14 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
     public Calendar getCreationTimestamp() {
         return creationTimestamp;
+    }
+
+    public int getSequenceIdentifier() {
+        return sequenceIdentifier;
+    }
+
+    public void setSequenceIdentifier(int sequenceIdentifier) {
+        this.sequenceIdentifier = sequenceIdentifier;
     }
 
     public void setCreationTimestamp(Calendar creationTimestamp) {

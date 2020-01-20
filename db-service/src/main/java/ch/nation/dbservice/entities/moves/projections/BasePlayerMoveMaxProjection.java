@@ -30,6 +30,7 @@ public interface BasePlayerMoveMaxProjection   extends MinimizedEntityResponsePr
      Calendar getCreationTimestamp();
     @JsonProperty("updated")
      Calendar getUpdateTimemstamp();
-
+    @JsonProperty("seqId")
+    int getSequenceIdentifier();
 
 }
