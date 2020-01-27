@@ -82,7 +82,7 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
         LOGGER.info(String.format("STOP | Create Game | User one %s | User two %s", playerOneUuid,playerTwoUuid));
 
 
-        return new ResponseEntity(resource.get(),HttpStatus.OK);
+        return new ResponseEntity(resource.get(),HttpStatus.CREATED);
 
 
     }

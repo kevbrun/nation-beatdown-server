@@ -9,6 +9,7 @@ import ch.nation.core.clients.services.units.UnitServiceClient;
 import ch.nation.core.clients.services.users.UserServiceClient;
 import ch.nation.core.clients.services.users.runtime.UserGameRuntimeServiceClient;
 import ch.nation.core.model.Enums.GameStatus;
+import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
@@ -32,6 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,18 +114,18 @@ public class GameLogicService {
 
 
         //RESET AP of current player
-        resetAP(gameUuid,gameInstance,currentPlayerGameRuntimeInfo.getPlayerUuid());
+        resetAP(gameUuid,gameInstance,currentPlayerGameRuntimeInfo);
 
 
-        //Start updating GameState
 
-        updateGameState(currentPlayerGameRuntimeInfo, gameInstance, runtime.getBody());
+
 
 
         // Update Skill of player
         updateSkillCooldownCounter(runtime.getBody());
 
-
+        //Start updating GameState
+        updateGameState(currentPlayerGameRuntimeInfo, gameInstance, runtime.getBody());
 
         LOGGER.info(String.format("STOP | END Player Move | game : %s ", gameUuid));
         return new ResponseEntity<>(Boolean.valueOf(true),HttpStatus.OK);
@@ -175,8 +179,10 @@ public class GameLogicService {
         }
     }
 
-    private void resetAP(final String gameUuid,GameDto game, final String playerUuid) throws Exception {
-        LOGGER.info(String.format("START | Resetting AP By Player | game : %s | player: %s", gameUuid, playerUuid));
+
+    private void resetAP(final String gameUuid,GameDto game, GameUserRuntimeInfoDto  userRuntimeInfoDto) throws Exception {
+        LOGGER.info(String.format("START | Resetting AP By Player | game : %s | player: %s", gameUuid, userRuntimeInfoDto.getPlayerUuid()));
+        final String playerUuid = userRuntimeInfoDto.getPlayerUuid();
         final ResponseEntity<SkillDto> skillDto = skillResourceService.findByIdentifier(AP_RESET_SKILL_IDENTIFIER,QueryProjection.max);
         if(skillDto==null && skillDto.getBody()==null) throw new Exception("Could not find AP_RESET SKILL!");
         final SkillDto resetAP = skillDto.getBody();
@@ -214,6 +220,7 @@ public class GameLogicService {
     }
 
 
+
     public ResponseEntity<?> addMove(final String gameUuid, final String playerUuid, final BasePlayerMoveDto move) throws Exception {
         LOGGER.info(String.format("START | Adding unit move By Name | game : %s | player: %s", gameUuid, playerUuid));
 
@@ -229,13 +236,18 @@ public class GameLogicService {
 
         GameDto dto = gameResponse.getBody();
         GameUserRuntimeInfoDto info = dto.getUserGameUserRuntimeInfo().stream().filter(x -> x.getPlayerUuid().equals(playerUuid)).findFirst().get();
+        int currentCountOfMovesOfPlayer = playerMoveServiceClient.getCountOfMovesOfGameByGameRuntimeUuid(info.getId());
+
         List<AbstractDto> moves = new ArrayList<>();
         move.setRound(dto.getRound());
+        move.setSequenceIdentifier(currentCountOfMovesOfPlayer+1);
         moves.add(move);
 
 
         ResponseEntity children = userRuntimeServiceClient.createChildren(moves, QueryProjection.max);
 
+
+        //TODO Add Support for reversal skills
 
 
         if(move instanceof SkillPlayerMoveDto) {
@@ -247,6 +259,7 @@ public class GameLogicService {
             //     ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setSkillCost(((SkillPlayerMoveDto)move).getSkillCost());
             ((SkillPlayerMoveDto) savedMove).setCooldownCounter(((SkillPlayerMoveDto)move).getSkillDto().getCooldown());
+            ((SkillPlayerMoveDto) savedMove).setSequenceIdentifier(move.getSequenceIdentifier());
            // playerMoveEntityService.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
             playerMoveServiceClient.updatePut((BasePlayerMoveDto)savedMove,QueryProjection.def);
             //Fetch Association targets
@@ -300,6 +313,43 @@ public class GameLogicService {
 
         return new ResponseEntity<>(Optional.empty(),HttpStatus.OK);
     }
+
+    public ResponseEntity createNewGame(final String playerUuid, final  String playerTwoUuid,  final QueryProjection projection) throws Exception {
+        LOGGER.info("*** START to create new Game ***");
+        ResponseEntity<GameDto> gameDtoResponseEntity =null;
+        gameDtoResponseEntity = gameServiceClient.createGame(playerUuid,playerTwoUuid,projection);
+
+        if(gameDtoResponseEntity.getStatusCode() != HttpStatus.CREATED){
+        throw new Exception( "Could create game! Entity from game service was null!");
+        }
+
+        // Reset AP for All Units
+        final GameDto game = gameDtoResponseEntity.getBody();
+
+        GameUserRuntimeInfoDto playerOne= null;
+        GameUserRuntimeInfoDto playerTwo =null;
+
+        for(int idx =0; idx < game.getUserGameUserRuntimeInfo().size();idx++){
+            if(game.getUserGameUserRuntimeInfo().get(idx).getPlayerUuid().equals(playerUuid)){
+                playerOne = game.getUserGameUserRuntimeInfo().get(idx);
+            }else if (game.getUserGameUserRuntimeInfo().get(idx).getPlayerUuid().equals(playerTwoUuid)){
+                playerTwo = game.getUserGameUserRuntimeInfo().get(idx);
+            }
+        }
+
+        LOGGER.info(String.format("Reset AP of Player %s",playerOne.getPlayerUuid()));
+
+        resetAP(game.getId(),game,playerOne);
+        LOGGER.info(String.format("Reset AP of Player %s",playerTwo.getPlayerUuid()));
+        resetAP(game.getId(),game,playerTwo);
+
+
+        LOGGER.info(String.format("Load updated data from DB | Game UUID: %s",game.getId()));
+        ResponseEntity<GameDto> updatedState = gameServiceClient.findById(game.getId(), projection);
+        LOGGER.info("*** FINISH to create new Game ***");
+        return updatedState;
+    }
+
 
 
     public ResponseEntity<Boolean> updateFogOfWarByPlayerAndGame(final String gameUuid, final String playerUuid, final List<Vector3Int> uncoveredTilePositions) throws Exception {

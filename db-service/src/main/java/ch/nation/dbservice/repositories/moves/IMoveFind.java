@@ -19,6 +19,7 @@ public interface IMoveFind<T> {
 
     Page<T> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid, Pageable pageable);
 
+    long countAllByGameInfo_Id(@Param("runtime") UUID runtimeUuid);
 
 
 

@@ -13,7 +13,8 @@ import org.springframework.data.rest.core.config.Projection;
 //@Projection(name="def",types = {BasePlayerMoveValue.class, MoveSkillPlayerMoveValue.class,StatMovePlayerValueProjection.class})
 public interface BasePlayerMoveValueProjection extends MinimizedEntityResponseProjection {
 
-
+    @JsonProperty("seqId")
+    int getSequenceIdentifier();
     @JsonProperty("target")
     Unit getTarget();
 }

@@ -19,4 +19,5 @@ public interface SkillPlayerMoveRepository extends IPageableDao<SkillPlayerMove>
     Iterable<SkillPlayerMove> findAllByGameInfo_IdAndCooldownCounterGreaterThan(@Param("runtime") UUID runtimeUuid, @Param("counter") int counter);
 
 
+
 }

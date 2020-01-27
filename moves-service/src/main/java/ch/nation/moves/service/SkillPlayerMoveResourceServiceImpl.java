@@ -1,5 +1,6 @@
 package ch.nation.moves.service;
 
+import ch.nation.core.clients.db.playerMoves.DBPlayerMovesRestClient;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
@@ -75,5 +76,14 @@ public class SkillPlayerMoveResourceServiceImpl extends AbstractEntityService<Sk
         LOGGER.info("START | Query all moves with skill cooldown greater zero");
         return Optional.of(foundObjects);
 
+    }
+
+
+    public int getCountOfMovesPerPlayerByGameRuntime(final String gameRuntimeUuid){
+        LOGGER.info(String.format("START | Get count of moves by runtime  | Unit: %s",gameRuntimeUuid));
+        int countOfMoves = ((DBSkillPlayerMoveRestClient) getDefaultClient()).getAllMovesPerPlayerByGameRuntimeUuid(gameRuntimeUuid);
+        LOGGER.debug(String.format("Count of moves | Game Runtime %s | Count: %d",gameRuntimeUuid,countOfMoves));
+        LOGGER.info(String.format("STOP | Get count of moves by runtime  | Unit: %s",gameRuntimeUuid));
+        return countOfMoves;
     }
 }

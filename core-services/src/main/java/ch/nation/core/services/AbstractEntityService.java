@@ -62,7 +62,7 @@ public class AbstractEntityService<TResult, TInput extends AbstractDto> implemen
     @Override
     public Optional<SimpleResourceDto> getAll() {
 
-        return getAll(0,20,QueryProjection.def);
+        return getAll(0,100,QueryProjection.def);
 
     }
 

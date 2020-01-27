@@ -30,6 +30,10 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     @Column(name="round")
     @JsonProperty("round")
     private int round;
+
+    @JsonProperty("seqId")
+    private int sequenceIdentifier;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     @JsonProperty("user")
@@ -48,6 +52,14 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Skill skill;
 
+
+    public int getSequenceIdentifier() {
+        return sequenceIdentifier;
+    }
+
+    public void setSequenceIdentifier(int sequenceIdentifier) {
+        this.sequenceIdentifier = sequenceIdentifier;
+    }
 
     public GameUserRuntimeInfo getGameInfo() {
         return gameInfo;

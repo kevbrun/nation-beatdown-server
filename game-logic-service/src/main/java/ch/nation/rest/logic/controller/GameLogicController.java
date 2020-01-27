@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class GameLogicController {
@@ -46,7 +47,15 @@ public class GameLogicController {
 
     }**/
 
-   @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
+   @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
+   public ResponseEntity createGame(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid") String playerTwoUuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+       if(playerUuid==null ||playerUuid.isBlank()) throw new IllegalArgumentException("Player One UUID must not be null or empty!");
+       if(playerTwoUuid==null ||playerTwoUuid.isBlank()) throw new IllegalArgumentException("Player Two UUID must not be null or empty!");
+       return gameLogicService.createNewGame(playerUuid,playerTwoUuid,projection);
+   }
+
+
+       @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
    public ResponseEntity<Boolean> endGame(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) throws Exception {
        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("playerUuid is null or empty!");

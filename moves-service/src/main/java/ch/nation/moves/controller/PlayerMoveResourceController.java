@@ -146,6 +146,13 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
     }
 
+    @RequestMapping(method = RequestMethod.GET,path="/search/runtime/{uuid}/count")
+    public ResponseEntity<Integer> getCountOfMovesOfPlayerPerGameByGameRuntime(@PathVariable("uuid")String gameRuntimeUuid){
+
+       final int countOfMoves = ((PlayerMoveResourceServiceImpl) service).getCountOfMovesPerPlayerByGameRuntime(gameRuntimeUuid);
+       return new ResponseEntity<>(countOfMoves,HttpStatus.OK);
+    }
+
 
     @Override
     protected AbstractEntityService GetServiceByBody(AbstractDto dto) {

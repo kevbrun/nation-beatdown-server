@@ -41,4 +41,7 @@ public interface DBSkillPlayerMoveRestClient extends DBRestServiceBaseInterface<
                                                                           QueryProjection projection);
 
 
+    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/countAllByGameInfo_Id")
+    int getAllMovesPerPlayerByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid);
+
 }
