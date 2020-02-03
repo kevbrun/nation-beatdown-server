@@ -41,7 +41,7 @@ security:
 
 zuul:
   prefix: /api/rest/v1
-  sensitiveHeaders: Cookie,Set-Cookie
+  sensitiveHeaders:
   routes:
     game-auth-service-path:
       path: /oauth/**

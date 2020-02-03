@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -58,8 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/oauth/**","/api/rest/v1/oauth/**","/**/oauth/**","/users/*")
+                .antMatchers("/oauth/**","/api/rest/v1/oauth/**","/**/oauth/**")
                 .permitAll()
+              //  .antMatchers(HttpMethod.POST,"/users").permitAll()
                 .antMatchers("/**")
                 .authenticated();
         // @formatter:on

@@ -140,7 +140,18 @@
 			</modules>
 
 		</profile>
+		<profile>
+			<id>user-service</id>
+			<modules>
+				<module>core-model</module>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
+				<module>user-service</module>
 
+			</modules>
+
+		</profile>
 
 		<profile>
 			<id>db-service</id>
