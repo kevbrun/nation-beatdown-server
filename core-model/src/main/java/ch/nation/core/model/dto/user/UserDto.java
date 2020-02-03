@@ -26,6 +26,9 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     @JsonProperty("units")
     private List<UnitDto> units;
 
+    @JsonProperty("role")
+    private String role;
+
 
     public UserDto(String password, boolean isAdmin, NationDto nation) {
         this.password = password;

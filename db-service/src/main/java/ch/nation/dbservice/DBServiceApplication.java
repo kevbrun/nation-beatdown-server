@@ -1,6 +1,7 @@
 package ch.nation.dbservice;
 
 import ch.nation.dbservice.config.DBFlywayConfiguration;
+import ch.nation.core.config.security.HashEncoderConfig;
 import ch.nation.dbservice.config.IncomingRequestLoggingConfiguration;
 import ch.nation.dbservice.config.SpringDataConfig;
 import org.springframework.boot.SpringApplication;
@@ -12,8 +13,9 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan(basePackages = {"ch.nation.dbservice.entities","ch.nation.dbservice.repositories","ch.nation.dbservice.utils"
-,"ch.nation.dbservice.dummyImporter","ch.nation.dbservice.controller"})
-@Import({DBFlywayConfiguration.class,SpringDataConfig.class, IncomingRequestLoggingConfiguration.class})
+		,"ch.nation.dbservice.dummyImporter","ch.nation.dbservice.controller"})
+@Import({DBFlywayConfiguration.class,SpringDataConfig.class, IncomingRequestLoggingConfiguration.class, HashEncoderConfig.class})
+
 public class DBServiceApplication {
 
 	public static void main(String[] args) {

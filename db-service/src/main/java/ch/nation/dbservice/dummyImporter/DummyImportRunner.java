@@ -34,6 +34,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -58,10 +59,11 @@ public class DummyImportRunner  implements ApplicationRunner {
     private final PrejudiceTriggerRepository prejudiceTriggerRepository;
     private final UnitFirstNameRepository firstNameRepository;
     private final UnitLastNameRepository lastNameRepository;
+    private final BCryptPasswordEncoder encoder;
 
 
     @Autowired
-    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository, CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository, StatPrejudiceTriggerRepository statPrejudiceTriggerRepository, SkillPrejudiceRepository skillPrejudiceRepository, StatPrejudiceRepository statPrejudiceRepository, PrejudiceRepository prej, PrejudiceTriggerRepository prejudiceTriggerRepository, UnitFirstNameRepository firstNameRepository, UnitLastNameRepository lastNameRepository) {
+    public DummyImportRunner(UnitRepository unitRepository, CharacterClassRepository characterClassRepository, SkillEffectRepository skillEffectRepository, SkillRepository skillRepository, UserRepository userRepository, GameRepository gameRepository, PlayerMoveRepository playerMoveRepository, GameUserRuntimeRepository gameUserRuntimeRepository, CharacteristicsRepository characteristicsRepository, CharacteristicPrejudiceTriggerRepository characteristicPrejudiceTriggerRepository, StatPrejudiceTriggerRepository statPrejudiceTriggerRepository, SkillPrejudiceRepository skillPrejudiceRepository, StatPrejudiceRepository statPrejudiceRepository, PrejudiceRepository prej, PrejudiceTriggerRepository prejudiceTriggerRepository, UnitFirstNameRepository firstNameRepository, UnitLastNameRepository lastNameRepository, BCryptPasswordEncoder encoder) {
         this.unitRepository = unitRepository;
         this.characterClassRepository = characterClassRepository;
         this.skillEffectRepository = skillEffectRepository;
@@ -79,6 +81,7 @@ public class DummyImportRunner  implements ApplicationRunner {
         this.prejudiceTriggerRepository = prejudiceTriggerRepository;
         this.firstNameRepository = firstNameRepository;
         this.lastNameRepository = lastNameRepository;
+        this.encoder = encoder;
     }
 
 
@@ -91,7 +94,7 @@ public class DummyImportRunner  implements ApplicationRunner {
      new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
         new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
        new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
-        new PlayerClassDummyGenerator(userRepository,unitRepository);
+        new PlayerClassDummyGenerator(userRepository,unitRepository, encoder);
         new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository, gameUserRuntimeRepository);
         new GamesDummyGenerator(gameRepository,userRepository,gameUserRuntimeRepository);
         new CharacteristicsDummyImporter(characteristicsRepository,skillRepository);

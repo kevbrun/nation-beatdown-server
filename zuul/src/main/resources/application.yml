@@ -17,6 +17,7 @@ logging:
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
+        security: DEBUG
 
 hystrix:
   command:
@@ -30,12 +31,24 @@ ribbon:
   ReadTimeout: 201998
   connection-timeout: 201998
 
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: 123
+
+
 zuul:
   prefix: /api/rest/v1
+  sensitiveHeaders: Cookie,Set-Cookie
   routes:
+    game-auth-service-path:
+      path: /oauth/**
+      url: http://nation-cloud-auth-service:9000/oauth
     game-logic-service-path:
       path: /logic/**
-      serviceId: nation-cloud-game-logics-service
+      serviceId: nation-cloud-auth-service
     game-resource-characteristics-service-path:
       path: /characteristics/**
       serviceId: nation-cloud-characteristics-service
