@@ -17,6 +17,7 @@ package ch.nation.user.controller;
         import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
         import org.springframework.web.bind.annotation.*;
 
+        import javax.servlet.http.HttpServletRequest;
         import java.util.List;
         import java.util.Map;
 
@@ -27,7 +28,8 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
 
     private final DBRestClientFactory factory;
 
-
+    @Autowired
+    private HttpServletRequest request;
 
     @Autowired
     public UserController(UserResourceServiceImpl client, DBRestClientFactory factory) {
@@ -40,6 +42,7 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
                                  ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        LOGGER.info("Request: "+request.toString());
         return super.getAll(page,size,projection);
     }
 

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -21,9 +22,11 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
 
         private final UserServiceClient userService;
 
-        public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userServiceClient) {
+        private final HttpServletRequest request;
+        public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userServiceClient, HttpServletRequest request) {
             super(service);
             this.userService = userServiceClient;
+            this.request = request;
         }
 
 
@@ -62,12 +65,12 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
     public ResponseEntity create(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid", required = false) Optional<String> playerTwoUuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
 
-            if(playerTwoUuid.isPresent())       return ((GameResourceServiceImpl)service).create(playerUuid,playerTwoUuid.get(),projection);
+            if(playerTwoUuid.isPresent())       return ((GameResourceServiceImpl)service).create(request.getHeader("Authorization"),playerUuid,playerTwoUuid.get(),projection);
 
-            ResponseEntity<UserDto> dummyPlayer =  userService.findByName("DummyPlayer",QueryProjection.min);
+            ResponseEntity<UserDto> dummyPlayer =  userService.findByName(request.getHeader("Authorization"),"DummyPlayer",QueryProjection.min);
 
             if(dummyPlayer.getBody()==null) throw new Exception("Could not find Dummy Player in DB!");
-            return ((GameResourceServiceImpl)service).create(playerUuid,dummyPlayer.getBody().getId(),projection);
+            return ((GameResourceServiceImpl)service).create(request.getHeader("Authorization"),playerUuid,dummyPlayer.getBody().getId(),projection);
 
     }
 

@@ -35,12 +35,12 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
     }
 
 
-    public ResponseEntity create(final String playerOneUuid, final String playerTwoUuid, final QueryProjection projection) throws Exception {
+    public ResponseEntity create(final String sessionToken, final String playerOneUuid, final String playerTwoUuid, final QueryProjection projection) throws Exception {
         LOGGER.info(String.format("START | Create Game | User one %s | User two %s", playerOneUuid,playerTwoUuid));
 
-        ResponseEntity<UserDto> playerOne = userService.findById(playerOneUuid,QueryProjection.def);
+        ResponseEntity<UserDto> playerOne = userService.findById(sessionToken,playerOneUuid,QueryProjection.def);
         if(playerOne.getBody()==null) throw new Error("Player with uuid"+playerOneUuid+"does not exist");
-        ResponseEntity<UserDto> playerTwo = userService.findById(playerTwoUuid,QueryProjection.def);
+        ResponseEntity<UserDto> playerTwo = userService.findById(sessionToken,playerTwoUuid,QueryProjection.def);
         if(playerTwo.getBody()==null) throw new Error("Player with uuid"+playerTwoUuid+"does not exist");
 
 
@@ -86,8 +86,8 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
 
 
     }
-    public ResponseEntity create(String playerOneUuid, String playerTwoUuid) throws Exception {
-        return create(playerOneUuid,playerTwoUuid, QueryProjection.def);
+    public ResponseEntity create(String sessionToken,String playerOneUuid, String playerTwoUuid) throws Exception {
+        return create(sessionToken,playerOneUuid,playerTwoUuid, QueryProjection.def);
 
     }
 

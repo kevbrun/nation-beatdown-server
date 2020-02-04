@@ -40,6 +40,9 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
 
     }
 
+
+
+
     public ResponseEntity updatePatch(TInput payload) {
         return updatePatch(payload, QueryProjection.def);
 
