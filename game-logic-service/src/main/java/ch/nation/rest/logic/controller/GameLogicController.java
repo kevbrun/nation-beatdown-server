@@ -29,6 +29,8 @@ public class GameLogicController {
         this.request = request;
     }
 
+
+
     @RequestMapping(method = RequestMethod.POST,consumes ="application/json", path = "/{gameUuid}/{playerUuid}")
     public ResponseEntity addUnitMove(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @RequestBody BasePlayerMoveDto move) throws Exception {
         if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");

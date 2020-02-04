@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
@@ -16,8 +17,8 @@ public class SkillNamedResourceController extends AbstractNamedResourceGameLogic
 
     private final SkillEffectResourceController effectController;
 
-    public SkillNamedResourceController(SkillResourceServiceImpl service, SkillEffectResourceController effectController) {
-        super(service);
+    public SkillNamedResourceController(SkillResourceServiceImpl service, SkillEffectResourceController effectController, HttpServletRequest request) {
+        super(service,request);
 
         this.effectController = effectController;
     }

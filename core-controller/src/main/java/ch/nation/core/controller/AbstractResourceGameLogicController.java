@@ -4,7 +4,6 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
-import ch.nation.core.model.dtoWrapper.SimpleResourcePageDto;
 import ch.nation.core.model.interf.rest.RestCRUDDao;
 import ch.nation.core.controller.interfaces.ChildrenNodeDao;
 
@@ -12,20 +11,21 @@ import ch.nation.core.services.AbstractEntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 public class AbstractResourceGameLogicController<TResult extends AbstractDto, TInput extends AbstractDto> implements RestCRUDDao<TInput>,ChildrenNodeDao {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     protected final AbstractEntityService service;
+    protected final HttpServletRequest request;
+    public static String AUTHORIZATION_HEADER_ENTRY="Authorization";
 
-    public AbstractResourceGameLogicController(AbstractEntityService service) {
+    public AbstractResourceGameLogicController(AbstractEntityService service, HttpServletRequest request) {
         this.service = service;
+        this.request = request;
     }
 
     @Override
@@ -38,6 +38,12 @@ public class AbstractResourceGameLogicController<TResult extends AbstractDto, TI
         if (resp.isPresent()) return new ResponseEntity<>(resp.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
+    }
+
+
+    protected String getAuthorizationTokenFromHeader(){
+        if(request==null) return "";
+        return request.getHeader(AUTHORIZATION_HEADER_ENTRY);
     }
 
 

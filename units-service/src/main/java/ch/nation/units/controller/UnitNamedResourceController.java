@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -24,8 +25,8 @@ public class UnitNamedResourceController extends AbstractMassNamedResourceGameLo
 
 
     @Autowired
-    public UnitNamedResourceController(UnitResourceServiceImpl client) {
-        super(client);
+    public UnitNamedResourceController(UnitResourceServiceImpl client, HttpServletRequest request) {
+        super(client,request);
     }
 
     @Override

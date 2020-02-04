@@ -5,12 +5,12 @@ import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 
-import ch.nation.user.runtime.service.GameUserRuntimeInfoService;
 import ch.nation.user.runtime.service.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -18,8 +18,8 @@ import java.util.List;
 public class GameUserRuntimeInfoController extends AbstractResourceGameLogicController<GameUserRuntimeInfoDto,GameUserRuntimeInfoDto> {
 
 
-    public GameUserRuntimeInfoController(GameUserRuntimeInfoServiceImpl service) {
-        super(service);
+    public GameUserRuntimeInfoController(GameUserRuntimeInfoServiceImpl service, HttpServletRequest request) {
+        super(service, request);
     }
 
     @Override

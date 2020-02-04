@@ -8,14 +8,16 @@ import ch.nation.skill.service.effects.SkillEffectsResourceServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 //@RequestMapping("/skills/effects")
 
 public class SkillEffectResourceController extends AbstractNamedResourceGameLogicController<SkillEffectDto,SkillEffectDto> {
 
 
-    public SkillEffectResourceController(SkillEffectsResourceServiceImpl service) {
-        super(service);
+    public SkillEffectResourceController(SkillEffectsResourceServiceImpl service, HttpServletRequest request) {
+        super(service,request);
     }
 
 

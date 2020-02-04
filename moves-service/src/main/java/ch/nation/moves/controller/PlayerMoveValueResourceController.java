@@ -3,21 +3,16 @@ package ch.nation.moves.controller;
 import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
-import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
-import ch.nation.moves.service.PlayerMoveResourceServiceImpl;
 import ch.nation.moves.service.values.MoveMoveValueResourceServiceImpl;
 import ch.nation.moves.service.values.PlayerMoveValueResourceServiceImpl;
 import ch.nation.moves.service.values.StatPlayerMoveValueResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/values")
@@ -27,8 +22,8 @@ public class PlayerMoveValueResourceController extends AbstractResourceGameLogic
 
 
     @Autowired
-    public PlayerMoveValueResourceController(PlayerMoveValueResourceServiceImpl service, MoveMoveValueResourceServiceImpl moveSkillValueService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService1) {
-        super(service);
+    public PlayerMoveValueResourceController(PlayerMoveValueResourceServiceImpl service, MoveMoveValueResourceServiceImpl moveSkillValueService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService, StatPlayerMoveValueResourceServiceImpl statPlayerMoveValueResourceService1, HttpServletRequest request) {
+        super(service, request);
         this.statPlayerMoveValueResourceService = statPlayerMoveValueResourceService1;
         this.moveSkillValueService = moveSkillValueService;
     }

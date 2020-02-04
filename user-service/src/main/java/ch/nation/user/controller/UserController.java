@@ -32,8 +32,8 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
     private HttpServletRequest request;
 
     @Autowired
-    public UserController(UserResourceServiceImpl client, DBRestClientFactory factory) {
-        super(client);
+    public UserController(UserResourceServiceImpl client, DBRestClientFactory factory,HttpServletRequest request) {
+        super(client,request);
         this.factory = factory;
 
     }

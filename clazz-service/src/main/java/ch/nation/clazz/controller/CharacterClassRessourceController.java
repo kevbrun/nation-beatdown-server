@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 //@RequestMapping("/classes")
 public class CharacterClassRessourceController extends AbstractNamedResourceGameLogicController<CharacterClassDto,CharacterClassDto> {
 
     @Autowired
-    public CharacterClassRessourceController(CharacterClazzResourceServiceImpl service) {
-        super(service);
+    public CharacterClassRessourceController(CharacterClazzResourceServiceImpl service, HttpServletRequest request) {
+        super(service,request);
     }
 
     @Override
