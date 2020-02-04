@@ -41,6 +41,7 @@ security:
 
 zuul:
   prefix: /api/rest/v1
+  ignoredServices: "*"
   sensitiveHeaders:
   routes:
     game-auth-service-path:
