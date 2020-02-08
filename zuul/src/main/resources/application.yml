@@ -49,7 +49,7 @@ zuul:
       url: http://nation-cloud-auth-service:9000/oauth
     game-logic-service-path:
       path: /logic/**
-      serviceId: nation-cloud-auth-service
+      serviceId: nation-cloud-game-logic-service
     game-resource-characteristics-service-path:
       path: /characteristics/**
       serviceId: nation-cloud-characteristics-service

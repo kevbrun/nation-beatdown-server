@@ -35,30 +35,11 @@ public class UserResourceServiceImpl extends AbstractMassNamedEntityService<User
 
 
     @Override
-    public Optional<UserDto> create(UserDto object) throws Exception {
-        HashPasswordIfNeeded(object);
-
-        return super.create(object);
-    }
-
-
-    @Override
     public Optional<UserDto> create(UserDto object, QueryProjection projection) throws Exception {
         HashPasswordIfNeeded(object);
         return super.create(object, projection);
     }
 
-    @Override
-    public Optional<List<AbstractDto>> createChildren(List<AbstractDto> children, QueryProjection projection) throws Exception {
-        for(int idx = 0; idx < children.size();idx++){
-            if(children.get(idx) instanceof UserDto){
-                HashPasswordIfNeeded((UserDto)children.get(idx));
-                break;
-            }
-        }
-
-        return super.createChildren(children, projection);
-    }
 
     private void HashPasswordIfNeeded(final UserDto dto){
         if(dto.getPassword()==null || dto.getPassword().isEmpty()) throw new IllegalArgumentException("Password is null or empty!");

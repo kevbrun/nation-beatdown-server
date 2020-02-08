@@ -17,6 +17,8 @@ public class GatewayConfiguration extends ResourceServerConfigurerAdapter {
                 //For registering the user
                 .antMatchers(HttpMethod.POST,"/api/rest/v1/users").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/users/search/identifier**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/rest/v1/users/search/exists**").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/rest/v1/users/deep_create").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/classes/search/identifier**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/skills/search/identifier**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/prejudices/search/identifier**").permitAll()
@@ -26,10 +28,11 @@ public class GatewayConfiguration extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/classes**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/skills**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/prejudices**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/rest/v1/units/search/exists**").permitAll()
+
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/units/full-name/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/units/first-name/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/rest/v1/units/last-name/**").permitAll()
-
 
 
                 //Endpoints used for registering user

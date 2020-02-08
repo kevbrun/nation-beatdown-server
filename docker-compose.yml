@@ -58,6 +58,9 @@ services:
       SPRING_PROFILES_ACTIVE: debug
     logging:
       driver: json-file
+    depends_on:
+      - db-service
+      - eureka-service
 
 
 
@@ -101,6 +104,9 @@ services:
       #SPRING_PROFILES_ACTIVE: mariadb-install
     logging:
       driver: json-file
+    depends_on:
+      - db
+
 
 
 # SERVICES
@@ -170,11 +176,11 @@ services:
 
 
   game-logic-service:
-    container_name: nation-cloud-game-logics-service
+    container_name: nation-cloud-game-logic-service
     build:
       context: game-logic-service
       dockerfile: Dockerfile
-    image:  nation-cloud-game-logics-service:latest
+    image:  nation-cloud-game-logic-service:latest
     ports:
       - "8881:8881"
       - "9881:9881"
@@ -332,6 +338,9 @@ services:
       - spring-cloud-network
     logging:
       driver: json-file
+    depends_on:
+      - zuul-service
+
 
 
 

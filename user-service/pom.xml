@@ -7,6 +7,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<groupId>ch.nation</groupId>
 	</parent>
+
+
 	<groupId>ch.nation</groupId>
 	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
