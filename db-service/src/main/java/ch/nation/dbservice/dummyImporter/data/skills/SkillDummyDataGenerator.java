@@ -81,7 +81,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.ANY_SINGLE);
         ActionArea actionArea = new ActionArea();
         actionArea.setSizeInXAxis(4);
-        actionArea.setSizeInXAxis(4);
+        actionArea.setSizeInYAxis(4);
         actionArea.setShape(ActionShape.CIRCLE);
         skill.setActionArea(actionArea);
 
