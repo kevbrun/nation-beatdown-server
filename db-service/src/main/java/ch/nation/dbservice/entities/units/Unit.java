@@ -225,7 +225,7 @@ public class Unit extends NamedEntityBase {
     }
 
     public UnitAssets getUnitAssets() {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
 
         if(unitAssets==null)unitAssets = new UnitAssets();
         return unitAssets;
@@ -243,7 +243,7 @@ public class Unit extends NamedEntityBase {
     }
 
     public void setCaster(List<BasePlayerMove> caster) {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
 
         if (this.caster == null) {
             this.caster = caster;

@@ -54,7 +54,7 @@ public class SkillPlayerMove extends BasePlayerMove {
     }
 
     public void setAppliedEffects(List<BasePlayerMoveValue> appliedEffects) {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
 
         if (this.appliedEffects == null) {
             this.appliedEffects = appliedEffects;

@@ -70,7 +70,7 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
     }
 
     public void setCharacteristicPrejudiceTriggers(List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers) {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
         if (this.characteristicPrejudiceTriggers == null) {
             this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
         } else if(this.characteristicPrejudiceTriggers != characteristicPrejudiceTriggers) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection

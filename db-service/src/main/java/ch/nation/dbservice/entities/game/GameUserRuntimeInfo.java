@@ -89,7 +89,7 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     }
 
     public void setUncoveredFogOfWar(Set<FogOfWar> uncoveredFogOfWar) {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
 
 
         if (this.uncoveredFogOfWar == null) {
@@ -108,7 +108,7 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     }
 
     public void setMoves(List<BasePlayerMove> moves) {
-        LOGGER.info("Execute custom setter: setMoves");
+        LOGGER.debug("Execute custom setter: setMoves");
         if (this.moves == null) {
             this.moves = moves;
         } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
