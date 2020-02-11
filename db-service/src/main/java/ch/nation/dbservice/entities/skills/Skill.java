@@ -213,7 +213,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     }
 
     public void setActions(List<BasePlayerMove> actions) {
-        LOGGER.info("Execute custom setter");
+        LOGGER.debug("Execute custom setter");
         if (this.actions == null) {
             this.actions = actions;
         } else if(this.actions != actions) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection

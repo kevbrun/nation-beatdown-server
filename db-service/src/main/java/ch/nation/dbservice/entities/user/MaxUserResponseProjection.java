@@ -10,11 +10,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 @Projection(name = "userProjection", types = User.class)
-public interface MaxUserResponseProjection extends TimestampProjection,NamedClassesProjection {
-
-    @JsonProperty("admin")
-    public boolean isAdmin();
-
+public interface MaxUserResponseProjection extends TimestampProjection,NamedClassesProjection, UserMinResponseProjection {
 
     @JsonProperty("nation")
     public Nation getNation();

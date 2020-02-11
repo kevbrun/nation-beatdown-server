@@ -33,15 +33,36 @@ services:
       driver: json-file
     depends_on:
       - eureka-service
+
+
+
+  auth-service:
+    container_name: nation-cloud-auth-service
+    build:
+      context: auth-service
+      dockerfile: Dockerfile
+    image:  nation-cloud-auth-service:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - spring-cloud-network
+    environment:
+      DEBUG_PORT: 9001
+      MAIN_CLASS_NAME: ch.nation.oauth2.authservice.AuthServiceApplication
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+      SERVER_PORT: 9000
+      SPRING_DATASOURCE_URL: jdbc:mariadb://nation-db:3306/nation?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: nation
+      SPRING_DATASOURCE_PASSWORD: nation
+      SPRING_PROFILES_ACTIVE: debug
+    logging:
+      driver: json-file
+    depends_on:
       - db-service
-      - user-runtime-service
-      - user-service
-      - units-service
-      - prejudices-service
-      - characteristics-service
-      - skill-service
-      - clazz-service
-      - game-logic-service
+      - eureka-service
+
+
 
 
   db:
@@ -84,7 +105,9 @@ services:
     logging:
       driver: json-file
     depends_on:
-      - eureka-service
+      - db
+
+
 
 # SERVICES
   game-service:
@@ -106,8 +129,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
 
   characteristics-service:
@@ -129,8 +151,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
 
   clazz-service:
@@ -152,15 +173,14 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   game-logic-service:
-    container_name: nation-cloud-game-logics-service
+    container_name: nation-cloud-game-logic-service
     build:
       context: game-logic-service
       dockerfile: Dockerfile
-    image:  nation-cloud-game-logics-service:latest
+    image:  nation-cloud-game-logic-service:latest
     ports:
       - "8881:8881"
       - "9881:9881"
@@ -174,8 +194,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   moves-service:
     container_name: nation-cloud-moves-service
@@ -196,8 +215,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   prejudices-service:
     container_name: nation-cloud-prejudices-service
@@ -218,8 +236,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
 
   skill-service:
@@ -241,8 +258,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
 
   user-runtime-service:
@@ -264,8 +280,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   units-service:
     container_name: nation-cloud-units-service
@@ -286,8 +301,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   user-service:
     container_name: nation-cloud-users-service
@@ -308,8 +322,7 @@ services:
       SPRING_PROFILES_ACTIVE: production
     logging:
       driver: json-file
-    depends_on:
-      - eureka-service
+
 
   nginx:
     container_name: nation-cloud-nginx
@@ -327,6 +340,8 @@ services:
       driver: json-file
     depends_on:
       - zuul-service
+
+
 
 
 #NETWORK

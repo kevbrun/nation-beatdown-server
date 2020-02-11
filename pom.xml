@@ -114,6 +114,7 @@
 				<module>core-controller</module>
 				<module>core-services</module>
 				<module>db-service</module>
+				<module>auth-service</module>
 				<module>characteristics-service</module>
 				<module>moves-service</module>
 				<module>units-service</module>
@@ -128,26 +129,75 @@
 		</profile>
 
 		<profile>
-			<id>gamelogic</id>
+			<id>logic-service</id>
 			<modules>
 				<module>core-model</module>
-
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
 				<module>game-logic-service</module>
 
 			</modules>
 
 		</profile>
+		<profile>
+			<id>user-service</id>
+			<modules>
+				<module>core-model</module>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
+				<module>user-service</module>
 
+			</modules>
+
+		</profile>
 
 		<profile>
-			<id>db</id>
+			<id>eureka-service</id>
 			<modules>
+				<module>eurekaserver</module>
+			</modules>
+
+		</profile>
+
+		<profile>
+			<id>db-service</id>
+			<modules>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
 				<module>core-model</module>
 				<module>db-service</module>
 			</modules>
 
 		</profile>
 
+
+		<profile>
+			<id>auth-service</id>
+			<modules>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
+				<module>core-model</module>
+				<module>auth-service</module>
+			</modules>
+
+		</profile>
+
+
+		<profile>
+			<id>zuul-service</id>
+			<modules>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
+				<module>core-model</module>
+				<module>zuul</module>
+			</modules>
+
+		</profile>
 
 	</profiles>
 	<repositories>

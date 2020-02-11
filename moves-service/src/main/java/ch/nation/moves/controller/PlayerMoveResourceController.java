@@ -6,7 +6,6 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
-import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.services.AbstractEntityService;
 import ch.nation.moves.service.PlayerMoveResourceServiceImpl;
 import ch.nation.moves.service.SkillPlayerMoveResourceServiceImpl;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +25,8 @@ public class PlayerMoveResourceController extends AbstractResourceGameLogicContr
 
 
 
-    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service, SkillPlayerMoveResourceServiceImpl skillService) {
-        super(service);
+    public PlayerMoveResourceController(PlayerMoveResourceServiceImpl service, SkillPlayerMoveResourceServiceImpl skillService, HttpServletRequest request) {
+        super(service, request);
         this.skillService = skillService;
     }
 

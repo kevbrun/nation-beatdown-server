@@ -14,8 +14,10 @@ package ch.nation.user.controller;
         import org.springframework.hateoas.Resources;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.ResponseEntity;
+        import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
         import org.springframework.web.bind.annotation.*;
 
+        import javax.servlet.http.HttpServletRequest;
         import java.util.List;
         import java.util.Map;
 
@@ -27,15 +29,20 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
     private final DBRestClientFactory factory;
 
     @Autowired
-    public UserController(UserResourceServiceImpl client, DBRestClientFactory factory) {
-        super(client);
+    private HttpServletRequest request;
+
+    @Autowired
+    public UserController(UserResourceServiceImpl client, DBRestClientFactory factory,HttpServletRequest request) {
+        super(client,request);
         this.factory = factory;
+
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
                                  ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+        LOGGER.info("Request: "+request.toString());
         return super.getAll(page,size,projection);
     }
 

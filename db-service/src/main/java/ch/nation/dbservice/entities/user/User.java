@@ -29,9 +29,7 @@ public class User extends NamedEntityBase implements Serializable {
     @Column(name="password",nullable = false)
     @JsonProperty("password")
     private String password;
-    @Column(name="admin")
-    @JsonProperty("admin")
-    private boolean isAdmin;
+
     @OneToOne(cascade = ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     @RestResource(path="nation",rel = "nation",exported = false)
@@ -49,6 +47,8 @@ public class User extends NamedEntityBase implements Serializable {
     @RestResource(path = "moves", rel="moves")
     private List<BasePlayerMove> playerMoves = new ArrayList<>();
 
+    @Column(name="role",nullable = false)
+    private String role;
 
 
 
@@ -58,17 +58,11 @@ public class User extends NamedEntityBase implements Serializable {
         super();
         games = new ArrayList<>();
         units = new ArrayList<>();
+        role = "USER";
 
 
     }
 
-    public User(String name, String description, String password, boolean isAdmin, Nation nation, List<Game> games) {
-        super(name, description);
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-        this.games = games;
-    }
 
     public List<BasePlayerMove> getPlayerMoves() {
         return playerMoves;
@@ -91,7 +85,13 @@ public class User extends NamedEntityBase implements Serializable {
     }
 
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getPassword() {
         return password;
@@ -101,13 +101,7 @@ public class User extends NamedEntityBase implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
 
     public Nation getNation() {
         return nation;
@@ -163,17 +157,18 @@ public class User extends NamedEntityBase implements Serializable {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return isAdmin == user.isAdmin &&
-
-                Objects.equals(password, user.password);
+        return Objects.equals(password, user.password) &&
+                Objects.equals(nation, user.nation) &&
+                Objects.equals(games, user.games) &&
+                Objects.equals(units, user.units) &&
+                Objects.equals(playerMoves, user.playerMoves) &&
+                Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(super.hashCode(), password, isAdmin);
+        return Objects.hash(super.hashCode(), password, nation, games, units, playerMoves, role);
     }
-
 
     //Manual functions
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +18,8 @@ import java.util.Optional;
 public abstract class AbstractMassNamedResourceGameLogicController<TResult extends NamedObjectAbstractDto, TInput extends NamedObjectAbstractDto> extends AbstractNamedResourceGameLogicController<TResult, TInput> {
 
 
-    public AbstractMassNamedResourceGameLogicController(AbstractMassNamedEntityService service) {
-        super(service);
+    public AbstractMassNamedResourceGameLogicController(AbstractMassNamedEntityService service, HttpServletRequest request) {
+        super(service,request);
     }
 
 

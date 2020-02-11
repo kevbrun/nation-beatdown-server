@@ -54,7 +54,6 @@ public final class DummyEntitiesCreator {
     public static User getUser(){
         User user = new User();
         user.setName("Kevin");
-        user.setAdmin(false);
         user.setPassword("123");
         return user;
 

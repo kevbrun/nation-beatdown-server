@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public abstract class AbstractNamedResourceGameLogicController<TResult extends NamedObjectAbstractDto, TInput extends NamedObjectAbstractDto> extends AbstractResourceGameLogicController<TResult, TInput> implements FindByNameCRUDDao<CharacterClassDto> {
 
 
-    public AbstractNamedResourceGameLogicController(AbstractNamedEntityService service) {
-        super(service);
+    public AbstractNamedResourceGameLogicController(AbstractNamedEntityService service, HttpServletRequest request) {
+        super(service, request);
     }
 
 

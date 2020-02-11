@@ -22,56 +22,56 @@ public interface BaseServiceRestClientInterface<TResult,TInput>  {
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "")
-    ResponseEntity<TResult> getAll(@RequestParam(value = "projection", required = false) QueryProjection projection);
+    ResponseEntity<TResult> getAll(@RequestHeader(value = "Authorization",required = false) String token,@RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    ResponseEntity<TResult> create(TInput object, @RequestParam(value = "projection", required = false) QueryProjection projection);
+    ResponseEntity<TResult> create(@RequestHeader(value = "Authorization",required = false) String token,TInput object, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    ResponseEntity create(List<TInput> objects, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity create(@RequestHeader(value = "Authorization",required = false) String token,List<TInput> objects, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/children")
-    ResponseEntity<List<AbstractDto>> createChildren(List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity<List<AbstractDto>> createChildren(@RequestHeader(value = "Authorization",required = false) String token,List<AbstractDto> children, @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    ResponseEntity createAssociation(@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity createAssociation(@RequestHeader(value = "Authorization",required = false) String token,@PathVariable("uuid") String uuid, @RequestBody AbstractDto child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.POST,consumes = "application/json",path = "/{uuid}/{resourceCollection}/batch")
-    ResponseEntity createAssociation(@PathVariable("uuid") String uuid,@RequestBody List<AbstractDto> child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity createAssociation(@RequestHeader(value = "Authorization",required = false) String token,@PathVariable("uuid") String uuid,@RequestBody List<AbstractDto> child, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path = "/{uuid}/{resourceCollection}")
-    ResponseEntity<List<AbstractDto>> getChildrenByResourceType(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity<List<AbstractDto>> getChildrenByResourceType(@RequestHeader(value = "Authorization",required = false) String token,@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection,  @RequestParam(value = "projection",required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.PUT,consumes = "application/json")
-    public ResponseEntity updatePut(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
+    public ResponseEntity updatePut(@RequestHeader(value = "Authorization",required = false) String token,@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.PATCH,consumes = "application/json",headers = {"X-HTTP-Method-Override=PATCH"})
-    public ResponseEntity updatePatch(@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
+    public ResponseEntity updatePatch(@RequestHeader(value = "Authorization",required = false) String token,@RequestBody TInput payload, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
         @RequestMapping(method = RequestMethod.GET,path = "/{uuid}")
-        ResponseEntity<TResult> findById(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection);
+        ResponseEntity<TResult> findById(@RequestHeader(value = "Authorization",required = false) String token,@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
 
     @RequestMapping(method = RequestMethod.DELETE,path="/{uuid}")
-    ResponseEntity<?> delete(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection);
+    ResponseEntity<?> delete(@RequestHeader(value = "Authorization",required = false) String token,@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
 
     @RequestMapping(method = RequestMethod.GET,path="/search")
-        ResponseEntity<TResult> findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) QueryProjection projection);
+        ResponseEntity<TResult> findByName(@RequestHeader(value = "Authorization",required = false) String token,@RequestParam("name") String name, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
     @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
-    ResponseEntity<TResult> findByIdentifier(@RequestParam("identifier") String identifier, @RequestParam(value = "projection", required = false) QueryProjection projection);
+    ResponseEntity<TResult> findByIdentifier(@RequestHeader(value = "Authorization",required = false) String token,@RequestParam("identifier") String identifier, @RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
     @RequestMapping(method = RequestMethod.GET,path = "/search/exists")
-        ResponseEntity<Boolean> existsById(@RequestParam("uuid") String uuid);
+        ResponseEntity<Boolean> existsById(@RequestHeader(value = "Authorization",required = false) String token,@RequestParam("uuid") String uuid);
 
     @RequestMapping(method = RequestMethod.GET,path = "/search/exists")
-    ResponseEntity<Boolean> existsByName(@RequestParam("name") String name);
+    ResponseEntity<Boolean> existsByName(@RequestHeader(value = "Authorization",required = false) String token,@RequestParam("name") String name);
 
 
 

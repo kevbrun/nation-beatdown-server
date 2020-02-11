@@ -220,7 +220,7 @@ public class Game extends AbstractNationEntityBase {
     }
 
     public void setUsers(List<User> users) {
-        LOGGER.info("Execute custom setter: setUsers");
+        LOGGER.debug("Execute custom setter: setUsers");
 
         if (this.users == null) {
             this.users = users;

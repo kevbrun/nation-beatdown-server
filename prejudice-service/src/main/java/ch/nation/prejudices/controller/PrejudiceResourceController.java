@@ -7,13 +7,15 @@ import ch.nation.prejudices.service.PrejudiceResourceServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 public class PrejudiceResourceController extends AbstractNamedResourceGameLogicController<AbstractPrejudiceDto,AbstractPrejudiceDto> {
 
 
-    public PrejudiceResourceController(PrejudiceResourceServiceImpl service) {
-        super(service);
+    public PrejudiceResourceController(PrejudiceResourceServiceImpl service, HttpServletRequest request) {
+        super(service,request);
     }
 
     @Override

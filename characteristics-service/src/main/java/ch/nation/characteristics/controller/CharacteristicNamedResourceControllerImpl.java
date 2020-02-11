@@ -11,6 +11,8 @@ import ch.nation.characteristics.services.CharacteristicResourceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 //@RequestMapping("/characteristics")
 public class CharacteristicNamedResourceControllerImpl extends AbstractNamedResourceGameLogicController<AbstractCharacteristicsDto,AbstractCharacteristicsDto> implements CharacteristicResourceController {
@@ -18,8 +20,8 @@ public class CharacteristicNamedResourceControllerImpl extends AbstractNamedReso
     private final CharacteristicResourceService service;
 
 
-    public CharacteristicNamedResourceControllerImpl(BaseCharacteristicResourceServiceImpl service) {
-        super(service);
+    public CharacteristicNamedResourceControllerImpl(BaseCharacteristicResourceServiceImpl service, HttpServletRequest request) {
+        super(service,request);
         this.service =service;
     }
 
