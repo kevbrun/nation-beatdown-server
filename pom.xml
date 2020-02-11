@@ -153,6 +153,20 @@
 
 		</profile>
 
+
+		<profile>
+			<id>game-service</id>
+			<modules>
+				<module>core-model</module>
+				<module>core-clients</module>
+				<module>core-controller</module>
+				<module>core-services</module>
+				<module>game-service</module>
+
+			</modules>
+
+		</profile>
+
 		<profile>
 			<id>eureka-service</id>
 			<modules>

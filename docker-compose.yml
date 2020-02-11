@@ -58,9 +58,7 @@ services:
       SPRING_PROFILES_ACTIVE: debug
     logging:
       driver: json-file
-    depends_on:
-      - db-service
-      - eureka-service
+
 
 
 

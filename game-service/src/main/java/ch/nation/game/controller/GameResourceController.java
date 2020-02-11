@@ -69,6 +69,7 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
     public ResponseEntity create(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid", required = false) Optional<String> playerTwoUuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
 
+
             if(playerTwoUuid.isPresent())       return ((GameResourceServiceImpl)service).create(getAuthorizationTokenFromHeader(),playerUuid,playerTwoUuid.get(),projection);
 
             ResponseEntity<UserDto> dummyPlayer =  userService.findByName(request.getHeader("Authorization"),"DummyPlayer",QueryProjection.min);

@@ -9,7 +9,6 @@ import ch.nation.core.clients.services.units.UnitServiceClient;
 import ch.nation.core.clients.services.users.UserServiceClient;
 import ch.nation.core.clients.services.users.runtime.UserGameRuntimeServiceClient;
 import ch.nation.core.model.Enums.GameStatus;
-import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
@@ -33,9 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -314,10 +310,10 @@ public class GameLogicService {
         return new ResponseEntity<>(Optional.empty(),HttpStatus.OK);
     }
 
-    public ResponseEntity createNewGame(final String sesssionToken,final String playerUuid, final  String playerTwoUuid,  final QueryProjection projection) throws Exception {
+    public ResponseEntity createNewGame(final String sesssionToken,final String playerUuid, final  String playerTwoUuid) throws Exception {
         LOGGER.info("*** START to create new Game ***");
         ResponseEntity<GameDto> gameDtoResponseEntity =null;
-        gameDtoResponseEntity = gameServiceClient.createGame(playerUuid,playerTwoUuid,projection);
+        gameDtoResponseEntity = gameServiceClient.createGame(playerUuid,playerTwoUuid,QueryProjection.max);
 
         if(gameDtoResponseEntity.getStatusCode() != HttpStatus.CREATED){
         throw new Exception( "Could create game! Entity from game service was null!");
@@ -345,7 +341,7 @@ public class GameLogicService {
 
 
         LOGGER.info(String.format("Load updated data from DB | Game UUID: %s",game.getId()));
-        ResponseEntity<GameDto> updatedState = gameServiceClient.findById(sesssionToken,game.getId(), projection);
+        ResponseEntity<GameDto> updatedState = gameServiceClient.findById(sesssionToken,game.getId(), QueryProjection.newgame);
         LOGGER.info("*** FINISH to create new Game ***");
         return updatedState;
     }

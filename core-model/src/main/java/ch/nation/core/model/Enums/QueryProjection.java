@@ -6,7 +6,8 @@ public enum  QueryProjection implements IEnumFromValue<QueryProjection>{
     min("min"),
     def("default"),
     max("max"),
-    max_nested_uuid("max_nested_uuid");
+    max_nested_uuid("max_nested_uuid"),
+    newgame("newgame");
 
     private String str;
 

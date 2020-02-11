@@ -54,10 +54,14 @@ public class GameLogicController {
     }**/
 
    @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
-   public ResponseEntity createGame(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid") String playerTwoUuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+   public ResponseEntity createGame(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid") String playerTwoUuid) throws Exception {
+
        if(playerUuid==null ||playerUuid.isBlank()) throw new IllegalArgumentException("Player One UUID must not be null or empty!");
        if(playerTwoUuid==null ||playerTwoUuid.isBlank()) throw new IllegalArgumentException("Player Two UUID must not be null or empty!");
-       return gameLogicService.createNewGame(request.getHeader("Authorization"),playerUuid,playerTwoUuid,projection);
+
+       if(playerTwoUuid!=null && playerUuid!=null && playerTwoUuid.equals(playerUuid)) throw new IllegalArgumentException("Same player uuid provided! Invalid Parameter!");
+
+       return gameLogicService.createNewGame(request.getHeader("Authorization"),playerUuid,playerTwoUuid);
    }
 
 
