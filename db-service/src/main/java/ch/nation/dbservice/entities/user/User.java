@@ -30,10 +30,6 @@ public class User extends NamedEntityBase implements Serializable {
     @JsonProperty("password")
     private String password;
 
-
-    @Column(name="admin")
-    @JsonProperty("admin")
-    private boolean isAdmin;
     @OneToOne(cascade = ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     @RestResource(path="nation",rel = "nation",exported = false)
@@ -105,13 +101,7 @@ public class User extends NamedEntityBase implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
 
     public Nation getNation() {
         return nation;
@@ -167,17 +157,18 @@ public class User extends NamedEntityBase implements Serializable {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return isAdmin == user.isAdmin &&
-
-                Objects.equals(password, user.password);
+        return Objects.equals(password, user.password) &&
+                Objects.equals(nation, user.nation) &&
+                Objects.equals(games, user.games) &&
+                Objects.equals(units, user.units) &&
+                Objects.equals(playerMoves, user.playerMoves) &&
+                Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(super.hashCode(), password, isAdmin);
+        return Objects.hash(super.hashCode(), password, nation, games, units, playerMoves, role);
     }
-
 
     //Manual functions
 

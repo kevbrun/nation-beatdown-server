@@ -101,7 +101,7 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     }
 
     public List<BasePlayerMove> getMoves(){
-        LOGGER.info("Execute custom getter");
+        LOGGER.debug("Execute custom getter");
 
         if(moves==null)moves = new ArrayList<>();
         return moves;

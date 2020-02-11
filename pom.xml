@@ -154,6 +154,14 @@
 		</profile>
 
 		<profile>
+			<id>eureka-service</id>
+			<modules>
+				<module>eurekaserver</module>
+			</modules>
+
+		</profile>
+
+		<profile>
 			<id>db-service</id>
 			<modules>
 				<module>core-clients</module>

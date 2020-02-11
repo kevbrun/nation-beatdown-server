@@ -80,9 +80,9 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setSkillBarOrder(1);
         skill.setTarget(Target.ANY_SINGLE);
         ActionArea actionArea = new ActionArea();
-        actionArea.setSizeInXAxis(4);
-        actionArea.setSizeInYAxis(4);
-        actionArea.setShape(ActionShape.CIRCLE);
+        actionArea.setSizeInXAxis(2);
+        actionArea.setSizeInYAxis(2);
+        actionArea.setShape(ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
 
 
@@ -135,7 +135,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(2,2,0,0,ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
 
 
@@ -162,7 +162,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(3,3,0,0,ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
 
 

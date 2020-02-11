@@ -15,10 +15,6 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     @JsonProperty("password")
     private String password;
 
-    @JsonProperty("admin")
-    private boolean isAdmin;
-
-
     @JsonProperty("nation")
     private NationDto nation;
 
@@ -30,11 +26,6 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     private String role;
 
 
-    public UserDto(String password, boolean isAdmin, NationDto nation) {
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.nation = nation;
-    }
 
 
     public UserDto() {
@@ -54,12 +45,13 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+
+    public String getRole() {
+        return role;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public NationDto getNation() {
@@ -89,7 +81,7 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     public String toString() {
         return "UserDto{" +
                 "password='" + password + '\'' +
-                ", isAdmin=" + isAdmin +
+                ", role=" + role +
                 ", nation=" + nation +
                 "} " + super.toString();
     }
