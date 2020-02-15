@@ -33,6 +33,8 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     @JsonProperty("updated")
     private Calendar updateTimemstamp;
 
+    @JsonProperty("was_reversed")
+    private boolean wasReversed;
 
 
     public AbstractPlayerMoveDto() {
@@ -47,7 +49,13 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
+    public boolean isWasReversed() {
+        return wasReversed;
+    }
 
+    public void setWasReversed(boolean wasReversed) {
+        this.wasReversed = wasReversed;
+    }
 
     public void setGameDto(GameDto gameDto) {
         this.gameDto = gameDto;

@@ -9,6 +9,7 @@ import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -52,6 +53,13 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Skill skill;
 
+    @JsonProperty("was_reversed")
+    private boolean wasReversed;
+
+
+    public BasePlayerMove() {
+        wasReversed = false;
+    }
 
     public int getSequenceIdentifier() {
         return sequenceIdentifier;
@@ -59,6 +67,14 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     public void setSequenceIdentifier(int sequenceIdentifier) {
         this.sequenceIdentifier = sequenceIdentifier;
+    }
+
+    public boolean isWasReversed() {
+        return wasReversed;
+    }
+
+    public void setWasReversed(boolean wasReversed) {
+        this.wasReversed = wasReversed;
     }
 
     public GameUserRuntimeInfo getGameInfo() {

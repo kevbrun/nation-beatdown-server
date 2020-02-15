@@ -224,12 +224,6 @@ public class GameLogicService {
         final ResponseEntity<GameDto> gameResponse = gameServiceClient.findById(sesssionToken,gameUuid, QueryProjection.max);
         if (gameResponse.getBody()==null)
             throw new IllegalArgumentException("Game with uuid " + gameUuid + " does not exist");
-        final ResponseEntity<UserDto> userResponse = userResourceService.findById(sesssionToken,playerUuid,QueryProjection.def);
-        if (gameResponse.getBody()==null)
-            throw new IllegalArgumentException("User with uuid " + userResponse + " does not exist");
-        if (move == null) throw new Exception("Move Item is null!");
-
-
         GameDto dto = gameResponse.getBody();
         GameUserRuntimeInfoDto info = dto.getUserGameUserRuntimeInfo().stream().filter(x -> x.getPlayerUuid().equals(playerUuid)).findFirst().get();
         int currentCountOfMovesOfPlayer = playerMoveServiceClient.getCountOfMovesOfGameByGameRuntimeUuid(info.getId());
