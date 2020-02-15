@@ -36,7 +36,7 @@ public class UserResourceServiceImpl extends AbstractMassNamedEntityService<User
 
     @Override
     public Optional<UserDto> create(UserDto object, QueryProjection projection) throws Exception {
-        HashPasswordIfNeeded(object);
+  //      HashPasswordIfNeeded(object);
         return super.create(object, projection);
     }
 
