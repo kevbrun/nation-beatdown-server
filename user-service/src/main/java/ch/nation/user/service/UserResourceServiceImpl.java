@@ -29,41 +29,7 @@ public class UserResourceServiceImpl extends AbstractMassNamedEntityService<User
 
     @Autowired
     public UserResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory, BCryptPasswordEncoder encoder) {
-        super(UserDto.class,factory, massRestClientFactory);
+        super(UserDto.class, factory, massRestClientFactory);
         this.encoder = encoder;
-    }
-
-
-    @Override
-    public Optional<UserDto> create(UserDto object, QueryProjection projection) throws Exception {
-  //      HashPasswordIfNeeded(object);
-        return super.create(object, projection);
-    }
-
-
-    private void HashPasswordIfNeeded(final UserDto dto){
-        if(dto.getPassword()==null || dto.getPassword().isEmpty()) throw new IllegalArgumentException("Password is null or empty!");
-        if(!wasHashed(dto.getPassword())) {
-            dto.setPassword(encoder.encode(dto.getPassword()));
-            LOGGER.info(String.format("Password of %s was hashed",dto.getName()));
-        }
-    }
-
-
-
-//$2a$10$
-    //0=$
-    //1==2
-    //a==3
-    //$==4
-    //1==5
-    //0==
-    private boolean wasHashed(final String pw){
-        if(pw.startsWith("$") && pw.charAt(4)=='$' && pw.charAt(6)=='$'){
-            LOGGER.info("String was hashed in advance!");
-            return true;
-        }
-
-        return false;
     }
 }
