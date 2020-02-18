@@ -12,10 +12,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.List;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
-        property = "type",visible = true)
+        property = "type", visible = true)
 @JsonSubTypes({
 
 
@@ -23,7 +24,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = SkillPrejudiceDto.class, name = "SkillPrejudice"),
         @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice")
 })
-public abstract class AbstractPrejudiceDto extends NamedObjectAbstractDto  {
+public abstract class AbstractPrejudiceDto extends NamedObjectAbstractDto {
 
     @JsonProperty("triggers")
     private List<AbstractPrejudiceTriggerDto> prejudiceTriggers;
@@ -40,9 +41,6 @@ public abstract class AbstractPrejudiceDto extends NamedObjectAbstractDto  {
     }
 
 
-
-
-
     public PrejudiceOperator getTriggerOperation() {
         return triggerOperation;
     }
@@ -50,9 +48,6 @@ public abstract class AbstractPrejudiceDto extends NamedObjectAbstractDto  {
     public void setTriggerOperation(PrejudiceOperator triggerOperation) {
         this.triggerOperation = triggerOperation;
     }
-
-
-
 
 
     public AbstractPrejudiceDto() {

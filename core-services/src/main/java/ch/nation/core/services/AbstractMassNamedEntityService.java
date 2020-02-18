@@ -14,8 +14,8 @@ import org.springframework.hateoas.Resources;
 import java.util.Collection;
 import java.util.Optional;
 
-public class AbstractMassNamedEntityService<TResult,TInput extends NamedObjectAbstractDto>
-        extends AbstractNamedEntityService<TResult,TInput> implements  GenericMassCrudDao<TResult,TInput> {
+public class AbstractMassNamedEntityService<TResult, TInput extends NamedObjectAbstractDto>
+        extends AbstractNamedEntityService<TResult, TInput> implements GenericMassCrudDao<TResult, TInput> {
 
 
     public AbstractMassNamedEntityService(Class<?> resourceClass, DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
@@ -24,22 +24,20 @@ public class AbstractMassNamedEntityService<TResult,TInput extends NamedObjectAb
 
     @Override
     public Optional<Resources<TResult>> batchUpdate(Collection<TInput> object) {
-        return  batchUpdate(object,QueryProjection.def);
+        return batchUpdate(object, QueryProjection.def);
     }
 
-    public Optional<Resources<TResult>> batchUpdate(Collection<TInput> object, QueryProjection projection){
+    public Optional<Resources<TResult>> batchUpdate(Collection<TInput> object, QueryProjection projection) {
 
 
         LOGGER.info(String.format("START | Batch Update | Used client %s", GetMassClient().getClass().getName()));
-        Resources<TResult>   response =null;
-        if(object.size()>0){
+        Resources<TResult> response = null;
+        if (object.size() > 0) {
 
 
-            response =   GetMassClient().updateBatch(object, projection);
+            response = GetMassClient().updateBatch(object, projection);
 
-            LOGGER.info("Items received: "+response.getContent().size());
-
-
+            LOGGER.info("Items received: " + response.getContent().size());
 
 
         }
@@ -48,18 +46,16 @@ public class AbstractMassNamedEntityService<TResult,TInput extends NamedObjectAb
         return Optional.of(response);
     }
 
-    public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object, QueryProjection projection){
+    public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object, QueryProjection projection) {
         LOGGER.info(String.format("START | Batch Update | Used client %s", GetMassClient().getClass().getName()));
         Boolean deletionStatus = false;
-        if(object.size()>0){
+        if (object.size() > 0) {
 
 
-            Resource<Boolean> response =   GetMassClient().deleteBatch(object, projection);
+            Resource<Boolean> response = GetMassClient().deleteBatch(object, projection);
 
-            LOGGER.info("Bool received: "+response.getContent());
+            LOGGER.info("Bool received: " + response.getContent());
             deletionStatus = response.getContent();
-
-
 
 
         }
@@ -72,16 +68,15 @@ public class AbstractMassNamedEntityService<TResult,TInput extends NamedObjectAb
 
     @Override
     public Optional<Resource<Boolean>> batchDeletion(Collection<TInput> object) {
-        return batchDeletion(object,QueryProjection.def);
+        return batchDeletion(object, QueryProjection.def);
     }
 
 
-    protected DBRestMassServiceBaseInterface GetMassClient(){
+    protected DBRestMassServiceBaseInterface GetMassClient() {
         DBRestMassServiceBaseInterface client = DBMassRestClientFactory.getService(GetResourceName());
         LOGGER.info(MessageUtils.getSelectedRestClientMessage(client));
         return client;
     }
-
 
 
 }

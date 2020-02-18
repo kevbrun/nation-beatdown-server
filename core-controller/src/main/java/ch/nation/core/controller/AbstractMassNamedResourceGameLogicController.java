@@ -19,7 +19,7 @@ public abstract class AbstractMassNamedResourceGameLogicController<TResult exten
 
 
     public AbstractMassNamedResourceGameLogicController(AbstractMassNamedEntityService service, HttpServletRequest request) {
-        super(service,request);
+        super(service, request);
     }
 
 

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 public interface ChildrenNodeDao {
 
 
-    ResponseEntity getChildrenNodesByResourceCollection(String uuid,String resourceCollection);
+    ResponseEntity getChildrenNodesByResourceCollection(String uuid, String resourceCollection);
 
 
 }

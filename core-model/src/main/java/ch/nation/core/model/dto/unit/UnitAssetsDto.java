@@ -2,8 +2,7 @@ package ch.nation.core.model.dto.unit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UnitAssetsDto extends AbstractAssetsDto{
-
+public class UnitAssetsDto extends AbstractAssetsDto {
 
 
     @JsonProperty("Beard")
@@ -106,7 +105,6 @@ public class UnitAssetsDto extends AbstractAssetsDto{
 
     @JsonProperty("width")
     private float width;
-
 
 
     public UnitAssetsDto() {

@@ -41,9 +41,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
-
-
-
     public GameDto getGameDto() {
         return gameDto;
     }
@@ -110,7 +107,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
-
     public SkillDto getSkillDto() {
         return skillDto;
     }
@@ -120,7 +116,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
-
     @Override
     public String ResourceCollectionName() {
         return "moves";
@@ -128,7 +123,7 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
     @Override
     public String toString() {
-        return this.getClass().getName()+" {" +
+        return this.getClass().getName() + " {" +
                 "gameDto=" + gameDto +
                 ", round=" + round +
                 ", user=" + user +

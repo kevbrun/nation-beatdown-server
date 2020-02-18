@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @DiscriminatorValue("STAT")
-@Entity(name="PLAYER_STAT_SKILL_VALUE")
+@Entity(name = "PLAYER_STAT_SKILL_VALUE")
 public class StatPlayerMoveValue extends BasePlayerMoveValue implements IDiscrimantorValue {
 
 
@@ -23,7 +23,7 @@ public class StatPlayerMoveValue extends BasePlayerMoveValue implements IDiscrim
     private float value;
 
 
-    public StatPlayerMoveValue(){
+    public StatPlayerMoveValue() {
         super();
         appliedOn = StatType.NONE;
     }

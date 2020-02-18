@@ -5,8 +5,8 @@ import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(contextId = "triggers-char-db-service",value="nation-database-service",path = "/triggers-char",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBCharacteristicsTriggerRestClient extends DBRestServiceBaseInterface<CharacteristicPrejudiceTriggerDto,CharacteristicPrejudiceTriggerDto> {
+@FeignClient(contextId = "triggers-char-db-service", value = "nation-database-service", path = "/triggers-char", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBCharacteristicsTriggerRestClient extends DBRestServiceBaseInterface<CharacteristicPrejudiceTriggerDto, CharacteristicPrejudiceTriggerDto> {
 
 
     @Override

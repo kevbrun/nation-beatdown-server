@@ -76,9 +76,8 @@ public class GameUserRuntimeInfoDto extends AbstractDto {
     }
 
 
-
-    public void addFogOfWarTilePositon(IVector3 position){
-        if(!uncoveredFogOfWar.contains(position)){
+    public void addFogOfWarTilePositon(IVector3 position) {
+        if (!uncoveredFogOfWar.contains(position)) {
             uncoveredFogOfWar.add((Vector3Int) position);
         }
     }

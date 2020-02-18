@@ -10,13 +10,12 @@ import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlayerMoveValueResourceServiceImpl extends AbstractEntityService<BasePlayerMoveValueDto,BasePlayerMoveValueDto> {
+public class PlayerMoveValueResourceServiceImpl extends AbstractEntityService<BasePlayerMoveValueDto, BasePlayerMoveValueDto> {
 
 
     public PlayerMoveValueResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
         super(BasePlayerMoveValueDto.class, factory, massRestClientFactory);
     }
-
 
 
 }

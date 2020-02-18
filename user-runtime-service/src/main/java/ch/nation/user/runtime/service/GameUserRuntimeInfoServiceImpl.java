@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Service
-public class GameUserRuntimeInfoServiceImpl extends AbstractEntityService<GameUserRuntimeInfoDto,GameUserRuntimeInfoDto> implements GameUserRuntimeInfoService{
+public class GameUserRuntimeInfoServiceImpl extends AbstractEntityService<GameUserRuntimeInfoDto, GameUserRuntimeInfoDto> implements GameUserRuntimeInfoService {
 
 
     public GameUserRuntimeInfoServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
@@ -22,21 +22,17 @@ public class GameUserRuntimeInfoServiceImpl extends AbstractEntityService<GameUs
 
     @Override
     public Optional<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(String gameUuid, String playerUuid) {
-        return getUserRuntimeInfoByGameUuidAndByPlayerUuid(gameUuid,playerUuid,QueryProjection.def);
+        return getUserRuntimeInfoByGameUuidAndByPlayerUuid(gameUuid, playerUuid, QueryProjection.def);
     }
 
     @Override
     public Optional<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(String gameUuid, String playerUuid, QueryProjection projection) {
 
-       GameUserRuntimeInfoDto result= ((DBGameRuntimeInfoRestClient)getDefaultClient()).findByGame_UuidAnAndPlayerUuid(gameUuid,playerUuid,projection);
+        GameUserRuntimeInfoDto result = ((DBGameRuntimeInfoRestClient) getDefaultClient()).findByGame_UuidAnAndPlayerUuid(gameUuid, playerUuid, projection);
 
 
         return Optional.of(result);
     }
-
-
-
-
 
 
 }

@@ -2,8 +2,8 @@ package ch.nation.core.model.Enums;
 
 import ch.nation.core.utils.EnumUtilties;
 
-public enum PrejudiceOperator implements IEnumFromValue<PrejudiceOperator>{
-    NONE("None"),AND("And"),OR("Or");
+public enum PrejudiceOperator implements IEnumFromValue<PrejudiceOperator> {
+    NONE("None"), AND("And"), OR("Or");
 
     private String str;
 
@@ -13,7 +13,7 @@ public enum PrejudiceOperator implements IEnumFromValue<PrejudiceOperator>{
 
     @Override
     public PrejudiceOperator fromValue(String value) {
-        return EnumUtilties.getEnumFromString(PrejudiceOperator.class,value);
+        return EnumUtilties.getEnumFromString(PrejudiceOperator.class, value);
     }
 
     @Override

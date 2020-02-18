@@ -7,7 +7,7 @@ public interface IEnumFromValue<T> {
 
 
     @JsonCreator
-    public  T fromValue(String value);
+    public T fromValue(String value);
 
     @JsonValue
     public String toJson();

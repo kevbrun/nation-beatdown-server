@@ -7,7 +7,7 @@ public class SkillCharacteristicsDto extends BaseCharacteristicDto {
 
 
     @JsonProperty("skill")
-    private SkillDto  skill;
+    private SkillDto skill;
 
 
     public SkillCharacteristicsDto() {

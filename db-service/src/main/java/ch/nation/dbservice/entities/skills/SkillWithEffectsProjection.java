@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 @Projection(name = "max", types = {Skill.class, MoveSkill.class})
-public interface SkillWithEffectsProjection extends TimestampProjection,NamedClassesProjection , IIdentityProjection {
+public interface SkillWithEffectsProjection extends TimestampProjection, NamedClassesProjection, IIdentityProjection {
 
 
     @JsonProperty("cost")
@@ -38,8 +38,6 @@ public interface SkillWithEffectsProjection extends TimestampProjection,NamedCla
 
     @JsonProperty("effects")
     public List<SkillEffect> getSkillEffects();
-
-
 
 
 }

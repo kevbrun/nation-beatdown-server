@@ -12,8 +12,7 @@ import org.junit.Test;
 
 import javax.transaction.Transactional;
 
-public class StatPrejudiceTrggerRepoTest extends AbstractEntityTest<StatPrejudiceTrigger,StatPrejudiceTriggerRepository> implements IHasDiscriminatorValue
-{
+public class StatPrejudiceTrggerRepoTest extends AbstractEntityTest<StatPrejudiceTrigger, StatPrejudiceTriggerRepository> implements IHasDiscriminatorValue {
     @Override
     public void setUp() {
         super.setUp();
@@ -36,7 +35,7 @@ public class StatPrejudiceTrggerRepoTest extends AbstractEntityTest<StatPrejudic
     @Override
     @Test
     public void test_if_has_discriminator_value() {
-        entityToTest=   repo.save(entityToTest);
+        entityToTest = repo.save(entityToTest);
         Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("StatPrejudiceTrigger"));
 
     }

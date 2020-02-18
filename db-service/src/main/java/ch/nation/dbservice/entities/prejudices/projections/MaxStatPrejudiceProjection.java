@@ -6,8 +6,8 @@ import ch.nation.dbservice.entities.projection.components.IIdentityProjection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(name="max",types = StatPrejudice.class)
-public interface MaxStatPrejudiceProjection extends MaxBasePrejudiceProjection , IIdentityProjection {
+@Projection(name = "max", types = StatPrejudice.class)
+public interface MaxStatPrejudiceProjection extends MaxBasePrejudiceProjection, IIdentityProjection {
 
 
     @JsonProperty("delta")

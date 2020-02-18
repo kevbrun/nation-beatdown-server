@@ -32,19 +32,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
         // @formatter:off
-       /** auth.inMemoryAuthentication()
-                .withUser("john").password(passwordEncoder.encode("123")).roles("USER").and()
-                .withUser("tom").password(passwordEncoder.encode("111")).roles("ADMIN").and()
-                .withUser("user1").password(passwordEncoder.encode("pass")).roles("USER").and()
-                .withUser("admin").password(passwordEncoder.encode("nimda")).roles("ADMIN");
-**/
-
+        /** auth.inMemoryAuthentication()
+         .withUser("john").password(passwordEncoder.encode("123")).roles("USER").and()
+         .withUser("tom").password(passwordEncoder.encode("111")).roles("ADMIN").and()
+         .withUser("user1").password(passwordEncoder.encode("pass")).roles("USER").and()
+         .withUser("admin").password(passwordEncoder.encode("nimda")).roles("ADMIN");
+         **/
 
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .authoritiesByUsernameQuery(authorityQuery)
                 .usersByUsernameQuery(authorizeQuery);
-
 
 
     }// @formatter:on
@@ -59,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/oauth/**","/api/rest/v1/oauth/**","/**/oauth/**")
+                .antMatchers("/oauth/**", "/api/rest/v1/oauth/**", "/**/oauth/**")
                 .permitAll()
-              //  .antMatchers(HttpMethod.POST,"/users").permitAll()
+                //  .antMatchers(HttpMethod.POST,"/users").permitAll()
                 .antMatchers("/**")
                 .authenticated();
         // @formatter:on

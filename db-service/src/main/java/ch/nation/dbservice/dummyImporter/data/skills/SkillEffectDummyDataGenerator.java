@@ -13,7 +13,6 @@ import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
 
-
     private SkillEffectRepository skillEffectRepository;
 
 
@@ -29,13 +28,13 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         persistData();
     }
 
-    private void createSkillEffects(){
+    private void createSkillEffects() {
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
-    createSchadenDexEffekt();
-    createSchadenStrEffekt();
-   createSelfMoveEffect();
-   createMoveEffect();
-    createTimeReversalSkill();
+        createSchadenDexEffekt();
+        createSchadenStrEffekt();
+        createSelfMoveEffect();
+        createMoveEffect();
+        createTimeReversalSkill();
         createCompleteRoundSkillEffect();
         createResetAPSkillEffect();
         createResetHPSkillEffect();
@@ -45,7 +44,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
     private void createSchadenDexEffekt() {
         SkillEffect effect;
-        effect =  new StatSkillEffect();
+        effect = new StatSkillEffect();
         effect.setName("Schadenseffekt (Dex)");
         effect.setIdentifier("dmg_target_dex");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
@@ -71,11 +70,10 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffectRepository.save(effect);
 
 
-
     }
 
-    private void createSelfMoveEffect(){
-        SelfMoveEffect effect =new SelfMoveEffect();
+    private void createSelfMoveEffect() {
+        SelfMoveEffect effect = new SelfMoveEffect();
         effect.setName("Selbstbewegungseffekt!");
         effect.setIdentifier("mv_self");
 
@@ -88,12 +86,10 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffectRepository.save(effect);
 
 
-
-
     }
 
-    private void createMoveEffect(){
-        SkillEffect effect =new SkillEffect();
+    private void createMoveEffect() {
+        SkillEffect effect = new SkillEffect();
         effect.setName("Bewegungseffekt!");
         effect.setIdentifier("mv_target");
         effect.setDescription("Etwas bewegt sich");
@@ -107,7 +103,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     }
 
 
-    private void createTimeReversalSkill(){
+    private void createTimeReversalSkill() {
         TimeReversalSkillEffect reversalSkillEffect = new TimeReversalSkillEffect();
         reversalSkillEffect.setName("Einen Schritt zurück!");
         reversalSkillEffect.setIdentifier("rev_target_step");
@@ -121,7 +117,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     }
 
 
-    private void createCompleteRoundSkillEffect(){
+    private void createCompleteRoundSkillEffect() {
         TimeReversalSkillEffect timeReversalSkillEffect = new TimeReversalSkillEffect();
         timeReversalSkillEffect.setName("Runde zurücksetzen");
         timeReversalSkillEffect.setIdentifier("rev_target_round");
@@ -136,7 +132,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
     }
 
-    private void createResetAPSkillEffect(){
+    private void createResetAPSkillEffect() {
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Reset AP");
         skillEffect.setIdentifier("reset_caster_ap");
@@ -149,7 +145,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffectRepository.save(skillEffect);
     }
 
-    private void createResetHPSkillEffect(){
+    private void createResetHPSkillEffect() {
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Reset HP");
         skillEffect.setIdentifier("reset_caster_hp");
@@ -162,7 +158,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffectRepository.save(skillEffect);
     }
 
-    private void createSelfDamageEffect(){
+    private void createSelfDamageEffect() {
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Selbstschadenseffekt");
         skillEffect.setIdentifier("dmg_caster_hp");

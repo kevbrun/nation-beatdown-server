@@ -15,13 +15,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "games",path = "games")
+@RepositoryRestResource(collectionResourceRel = "games", path = "games")
 public interface GameRepository extends IPageableDao<Game> {
 
 
-
-    Page<Game> findByUsers_IdAndGameStatus(@Param("uuid")UUID id, @Param("status") GameStatus gameStatus, Pageable pageable);
-
+    Page<Game> findByUsers_IdAndGameStatus(@Param("uuid") UUID id, @Param("status") GameStatus gameStatus, Pageable pageable);
 
 
 }

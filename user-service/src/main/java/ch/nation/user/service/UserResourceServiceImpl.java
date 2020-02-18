@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserResourceServiceImpl extends AbstractMassNamedEntityService<UserDto,UserDto> implements UserResourceService {
+public class UserResourceServiceImpl extends AbstractMassNamedEntityService<UserDto, UserDto> implements UserResourceService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private final BCryptPasswordEncoder encoder;
 

@@ -22,10 +22,10 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @TestPropertySource(locations = "classpath:test-application.properties")
-public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBase,TRepo extends IPageableDao<TEntity>> {
+public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBase, TRepo extends IPageableDao<TEntity>> {
 
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     protected TEntity entityToTest;
@@ -37,14 +37,14 @@ public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBas
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         LOGGER.info("Execute setUp");
-       listOfEntities = new ArrayList<>();
+        listOfEntities = new ArrayList<>();
     }
 
 
     @Test
-    public void save_entity_test(){
+    public void save_entity_test() {
         TEntity savedObject = repo.save(entityToTest);
         Assert.assertNotNull(savedObject);
 
@@ -53,7 +53,7 @@ public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBas
 
 
     @Test
-    public void save_entities_test(){
+    public void save_entities_test() {
         Iterable<TEntity> savedObjects = repo.saveAll(listOfEntities);
 
         Assert.assertNotNull(savedObjects);
@@ -62,58 +62,52 @@ public abstract class AbstractEntityTest<TEntity extends AbstractNationEntityBas
         List<TEntity> list = new ArrayList<>();
         savedObjects.iterator().forEachRemaining(list::add);
         Assert.assertTrue(!list.isEmpty());
-        Assert.assertTrue(list.size()== listOfEntities.size());
+        Assert.assertTrue(list.size() == listOfEntities.size());
 
     }
 
 
     @Test
-    public void find_one_by_uuid_test(){
+    public void find_one_by_uuid_test() {
         TEntity savedObject = repo.save(entityToTest);
         Assert.assertNotNull(savedObject);
 
 
-       TEntity foundObject= repo.findOneById(savedObject.getId());
+        TEntity foundObject = repo.findOneById(savedObject.getId());
 
         Assert.assertNotNull(foundObject);
-        Assert.assertEquals(savedObject.getId(),foundObject.getId());
+        Assert.assertEquals(savedObject.getId(), foundObject.getId());
     }
 
 
     @Test
-    public void find_all_test(){
+    public void find_all_test() {
         repo.saveAll(listOfEntities);
         Iterable<TEntity> foundObjects = repo.findAll();
         List<TEntity> list = new ArrayList<>();
         foundObjects.iterator().forEachRemaining(list::add);
-        Assert.assertTrue(list.size()==listOfEntities.size());
+        Assert.assertTrue(list.size() == listOfEntities.size());
 
 
     }
 
 
-
-
     @Test
-    public void delete_entities_test(){
+    public void delete_entities_test() {
         TEntity savedObject = repo.save(entityToTest);
 
         repo.delete(savedObject);
 
 
-        Assert.assertTrue(repo.count()==0);
+        Assert.assertTrue(repo.count() == 0);
     }
-
 
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         LOGGER.info("Execute Cleanup");
         repo.deleteAll();
     }
-
-
-
 
 
 }

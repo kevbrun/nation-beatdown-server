@@ -19,10 +19,13 @@ public interface GameUserRuntimeInfoMaxProjection extends MinimizedEntityRespons
 
     @JsonProperty("consideration_time")
     long getConsiderationTime();
+
     @JsonProperty("player_uuid")
     String getPlayerUuid();
+
     @JsonProperty("moves")
     List<BasePlayerMoveMaxProjection> getMoves();
+
     @JsonProperty("fow")
     Set<FogOfWar> getUncoveredFogOfWar();
 

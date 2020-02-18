@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class SkillPrejudiceResourceServiceImpl extends AbstractNamedEntityService<SkillPrejudiceDto, SkillPrejudiceDto> {
 
 
-    public SkillPrejudiceResourceServiceImpl( DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
+    public SkillPrejudiceResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
         super(SkillPrejudiceDto.class, factory, massRestClientFactory);
     }
 }

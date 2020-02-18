@@ -9,6 +9,6 @@ import javax.transaction.Transactional;
 
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "values",path = "stat-values"/**,excerptProjection = StatMovePlayerValueProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "values", path = "stat-values"/**,excerptProjection = StatMovePlayerValueProjection.class**/)
 public interface StatPlayerMoveSkillEffectValueRepository extends IPageableDao<StatPlayerMoveValue> {
 }

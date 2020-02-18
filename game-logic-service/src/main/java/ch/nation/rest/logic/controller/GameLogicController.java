@@ -19,7 +19,6 @@ public class GameLogicController {
     private final GameLogicService gameLogicService;
 
 
-
     private final HttpServletRequest request;
 
     @Autowired
@@ -30,62 +29,68 @@ public class GameLogicController {
     }
 
 
-
-    @RequestMapping(method = RequestMethod.POST,consumes ="application/json", path = "/{gameUuid}/{playerUuid}")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", path = "/{gameUuid}/{playerUuid}")
     public ResponseEntity addUnitMove(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @RequestBody BasePlayerMoveDto move) throws Exception {
-        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-        if(move==null) throw new IllegalArgumentException("Move is null!");
-        return gameLogicService.addMove(request.getHeader("Authorization"),gameUuid,playerUuid,move);
+        if (gameUuid == null || gameUuid.isEmpty()) throw new IllegalArgumentException("GameUuid is null or empty!");
+        if (playerUuid == null || playerUuid.isEmpty())
+            throw new IllegalArgumentException("GameUuid is null or empty!");
+        if (move == null) throw new IllegalArgumentException("Move is null!");
+        return gameLogicService.addMove(request.getHeader("Authorization"), gameUuid, playerUuid, move);
     }
 
-    @RequestMapping(method = RequestMethod.PUT,consumes ="application/json", path = "/{gameUuid}/{playerUuid}")
+    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json", path = "/{gameUuid}/{playerUuid}")
     public ResponseEntity updateFogOfWar(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @RequestBody List<Vector3Int> uncoveredFogOfWar) throws Exception {
-        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-        return gameLogicService.updateFogOfWarByPlayerAndGame(request.getHeader("Authorization"),gameUuid,playerUuid,uncoveredFogOfWar);
+        if (gameUuid == null || gameUuid.isEmpty()) throw new IllegalArgumentException("GameUuid is null or empty!");
+        if (playerUuid == null || playerUuid.isEmpty())
+            throw new IllegalArgumentException("GameUuid is null or empty!");
+        return gameLogicService.updateFogOfWarByPlayerAndGame(request.getHeader("Authorization"), gameUuid, playerUuid, uncoveredFogOfWar);
     }
 
-   /** @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
-    public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+    /**
+     * @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/{casterUuid}")
+     * public ResponseEntity<List<AbstractPlayerMoveDto>> getMovesOfUnitByGameUuidAndPlayerUuidAndRound(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid, @PathVariable("casterUuid") String casterUuid,@RequestParam("round") int round, @RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
+     * <p>
+     * return gameLogicService.getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid,playerUuid,casterUuid,round,projection);
+     * <p>
+     * }
+     **/
 
-        return gameLogicService.getMovesOfUnitByGameUuidAndPlayerUuidAndRound(gameUuid,playerUuid,casterUuid,round,projection);
+    @RequestMapping(method = RequestMethod.POST, path = {"/{playerUuid}/{playerTwoUuid}", "/{playerUuid}"})
+    public ResponseEntity createGame(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid") String playerTwoUuid) throws Exception {
 
-    }**/
+        if (playerUuid == null || playerUuid.isBlank())
+            throw new IllegalArgumentException("Player One UUID must not be null or empty!");
+        if (playerTwoUuid == null || playerTwoUuid.isBlank())
+            throw new IllegalArgumentException("Player Two UUID must not be null or empty!");
 
-   @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}","/{playerUuid}"})
-   public ResponseEntity createGame(@PathVariable("playerUuid") String playerUuid, @PathVariable(value = "playerTwoUuid") String playerTwoUuid) throws Exception {
+        if (playerTwoUuid != null && playerUuid != null && playerTwoUuid.equals(playerUuid))
+            throw new IllegalArgumentException("Same player uuid provided! Invalid Parameter!");
 
-       if(playerUuid==null ||playerUuid.isBlank()) throw new IllegalArgumentException("Player One UUID must not be null or empty!");
-       if(playerTwoUuid==null ||playerTwoUuid.isBlank()) throw new IllegalArgumentException("Player Two UUID must not be null or empty!");
-
-       if(playerTwoUuid!=null && playerUuid!=null && playerTwoUuid.equals(playerUuid)) throw new IllegalArgumentException("Same player uuid provided! Invalid Parameter!");
-
-       return gameLogicService.createNewGame(request.getHeader("Authorization"),playerUuid,playerTwoUuid);
-   }
-
-
-       @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
-   public ResponseEntity<Boolean> endGame(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) throws Exception {
-       if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-       if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("playerUuid is null or empty!");
-       return gameLogicService.endGame(request.getHeader("Authorization"),gameUuid,playerUuid);
-   }
-
-        @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/is-current-player")
-    public ResponseEntity<Boolean> isPlayerCurrentPlayer(@PathVariable("gameUuid")String gameUuid, @PathVariable("playerUuid") String playerUuid){
-        if(gameUuid==null ||gameUuid.isEmpty())throw new IllegalArgumentException("GameUuid is null or empty!");
-        if(playerUuid==null ||playerUuid.isEmpty())throw new IllegalArgumentException("playerUuid is null or empty!");
-        return gameLogicService.isUserCurrentUserInGame(request.getHeader("Authorization"),gameUuid,playerUuid);
-   }
+        return gameLogicService.createNewGame(request.getHeader("Authorization"), playerUuid, playerTwoUuid);
+    }
 
 
-    @RequestMapping(method = RequestMethod.PUT,path="/{gameUuid}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}/{playerUuid}/end-game")
+    public ResponseEntity<Boolean> endGame(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) throws Exception {
+        if (gameUuid == null || gameUuid.isEmpty()) throw new IllegalArgumentException("GameUuid is null or empty!");
+        if (playerUuid == null || playerUuid.isEmpty())
+            throw new IllegalArgumentException("playerUuid is null or empty!");
+        return gameLogicService.endGame(request.getHeader("Authorization"), gameUuid, playerUuid);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{gameUuid}/{playerUuid}/is-current-player")
+    public ResponseEntity<Boolean> isPlayerCurrentPlayer(@PathVariable("gameUuid") String gameUuid, @PathVariable("playerUuid") String playerUuid) {
+        if (gameUuid == null || gameUuid.isEmpty()) throw new IllegalArgumentException("GameUuid is null or empty!");
+        if (playerUuid == null || playerUuid.isEmpty())
+            throw new IllegalArgumentException("playerUuid is null or empty!");
+        return gameLogicService.isUserCurrentUserInGame(request.getHeader("Authorization"), gameUuid, playerUuid);
+    }
+
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{gameUuid}")
     public ResponseEntity<?> endTurn(@PathVariable("gameUuid") String gameUuid, @RequestBody GameUserRuntimeInfoDto currentPlayerRuntimeInfo) throws Exception {
-        return gameLogicService.endTurn(request.getHeader("Authorization"),gameUuid,currentPlayerRuntimeInfo);
+        return gameLogicService.endTurn(request.getHeader("Authorization"), gameUuid, currentPlayerRuntimeInfo);
     }
-
-
 
 
 }

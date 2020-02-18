@@ -16,23 +16,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
 
-    @Parameterized.Parameter(value=0)
+    @Parameterized.Parameter(value = 0)
     public String endpoint;
 
-    @Parameterized.Parameter(value=1)
+    @Parameterized.Parameter(value = 1)
     public NamedEntityBase payload;
 
 
+    @Parameterized.Parameter(value = 2)
+    public Class<? extends NamedEntityBase> classToTest;
 
-    @Parameterized.Parameter(value=2)
-    public Class<? extends NamedEntityBase>    classToTest;
 
-
-    @Parameterized.Parameter(value=3)
+    @Parameterized.Parameter(value = 3)
     @Autowired
     public CrudRepository repository;
 
@@ -42,19 +41,18 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
 
     @Test
     @Ignore
-    public void findByTest(){
+    public void findByTest() {
 
-     created= (NamedEntityBase) repository.save(payload);
+        created = (NamedEntityBase) repository.save(payload);
 
-        ResponseEntity<? extends NamedEntityBase> responseEntity=   template.getForEntity(endpoint+"/"+created.getId(),classToTest);
-
+        ResponseEntity<? extends NamedEntityBase> responseEntity = template.getForEntity(endpoint + "/" + created.getId(), classToTest);
 
 
         Assert.assertNotNull(responseEntity);
         Assert.assertNotNull(responseEntity.getBody());
 
         Assert.assertTrue(responseEntity.getBody() instanceof NamedEntityBase);
-        Assert.assertTrue(responseEntity.getBody().getId()!=null);
+        Assert.assertTrue(responseEntity.getBody().getId() != null);
         Assert.assertTrue(responseEntity.getBody().getName().equals(payload.getName()));
 
 
@@ -63,12 +61,11 @@ public class FindByDataRestControllerTest extends BaseDataRestControllerTest {
     @Parameterized.Parameters // Note 4
     public static Collection<Object[]> data() {
         Collection<Object[]> params = new ArrayList<>();
-       // params.add(new Object[] { "/users", new User("Test","Test"),User.class,UserRepository.class});
-       // params.add(new Object[] { "/nations", new Nation("Test"),Nation.class,NationRepository.class});
+        // params.add(new Object[] { "/users", new User("Test","Test"),User.class,UserRepository.class});
+        // params.add(new Object[] { "/nations", new Nation("Test"),Nation.class,NationRepository.class});
 
         return params;
     }
-
 
 
 }

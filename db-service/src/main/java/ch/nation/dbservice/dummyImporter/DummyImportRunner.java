@@ -38,7 +38,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DummyImportRunner  implements ApplicationRunner {
+public class DummyImportRunner implements ApplicationRunner {
 
 
     private final UnitRepository unitRepository;
@@ -87,24 +87,24 @@ public class DummyImportRunner  implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-     LOGGER.info("START MIGRATION OF DUMMY DATA!");
+        LOGGER.info("START MIGRATION OF DUMMY DATA!");
 
         new NameImporter(firstNameRepository, lastNameRepository);
-       new SkillEffectDummyDataGenerator(skillEffectRepository);
-     new SkillDummyDataGenerator(skillRepository,skillEffectRepository);
-        new CharacterClassDummyGenerator(characterClassRepository,skillRepository);
-       new UnitsClassDummyGenerator(unitRepository,characterClassRepository);
-        new PlayerClassDummyGenerator(userRepository,unitRepository, encoder);
-        new MoveDummyGenerator(userRepository,playerMoveRepository,gameRepository,skillRepository, gameUserRuntimeRepository);
-        new GamesDummyGenerator(gameRepository,userRepository,gameUserRuntimeRepository);
-        new CharacteristicsDummyImporter(characteristicsRepository,skillRepository);
-        new PrejudiceTriggerDummyImporter(characteristicPrejudiceTriggerRepository,characteristicsRepository,statPrejudiceTriggerRepository);
-        new PrejudiceDummyImporter(prejudiceTriggerRepository,skillPrejudiceRepository,skillRepository,statPrejudiceTriggerRepository,statPrejudiceRepository,characteristicPrejudiceTriggerRepository);
+        new SkillEffectDummyDataGenerator(skillEffectRepository);
+        new SkillDummyDataGenerator(skillRepository, skillEffectRepository);
+        new CharacterClassDummyGenerator(characterClassRepository, skillRepository);
+        new UnitsClassDummyGenerator(unitRepository, characterClassRepository);
+        new PlayerClassDummyGenerator(userRepository, unitRepository, encoder);
+        new MoveDummyGenerator(userRepository, playerMoveRepository, gameRepository, skillRepository, gameUserRuntimeRepository);
+        new GamesDummyGenerator(gameRepository, userRepository, gameUserRuntimeRepository);
+        new CharacteristicsDummyImporter(characteristicsRepository, skillRepository);
+        new PrejudiceTriggerDummyImporter(characteristicPrejudiceTriggerRepository, characteristicsRepository, statPrejudiceTriggerRepository);
+        new PrejudiceDummyImporter(prejudiceTriggerRepository, skillPrejudiceRepository, skillRepository, statPrejudiceTriggerRepository, statPrejudiceRepository, characteristicPrejudiceTriggerRepository);
         LOGGER.info("FINISH MIGRATING DATA");
     }
 
 
-    private void LoadCharacterClasses(){
+    private void LoadCharacterClasses() {
         LOGGER.info("START MIGRATING CHARACTER CLASSES");
         CharacterClass characterClass = new CharacterClass();
         characterClass.setName("Warrior");

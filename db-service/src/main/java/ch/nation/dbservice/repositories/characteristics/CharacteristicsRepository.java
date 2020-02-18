@@ -8,9 +8,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "characteristics",path = "characteristics")
+@RepositoryRestResource(collectionResourceRel = "characteristics", path = "characteristics")
 @Transactional
-public interface CharacteristicsRepository extends IPageableDao<BaseCharacteristic>,INamedObjectDao<BaseCharacteristic>, IFindByIdentifier<BaseCharacteristic>{
+public interface CharacteristicsRepository extends IPageableDao<BaseCharacteristic>, INamedObjectDao<BaseCharacteristic>, IFindByIdentifier<BaseCharacteristic> {
 
 
 }

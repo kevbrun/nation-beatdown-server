@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<UnitDto,UnitDto> implements UnitResourceService {
+public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<UnitDto, UnitDto> implements UnitResourceService {
 
     private final DBUnitFirstNameRestClient firstNameRestClient;
     private final DBUnitLastNameRestClient lastNameRestClient;
@@ -27,14 +27,14 @@ public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<Unit
 
     @Autowired
     public UnitResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory, DBUnitFirstNameRestClient firstNameRestClient, DBUnitLastNameRestClient lastNameRestClient, DBNameBuilderRestClient nameRestClient) {
-        super(UnitDto.class,factory, massRestClientFactory);
+        super(UnitDto.class, factory, massRestClientFactory);
         this.firstNameRestClient = firstNameRestClient;
         this.lastNameRestClient = lastNameRestClient;
         this.nameRestClient = nameRestClient;
     }
 
 
-    public ResponseEntity<UnitFirstNameDto> getRandomFirstName(){
+    public ResponseEntity<UnitFirstNameDto> getRandomFirstName() {
         UnitFirstNameDto firstName = createFirstName();
         return ResponseEntity.ok(firstName);
     }
@@ -42,11 +42,11 @@ public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<Unit
     private UnitFirstNameDto createFirstName() {
         LOGGER.info("Get Random First name");
         UnitFirstNameDto firstName = nameRestClient.getRandomFirstName();
-        LOGGER.info("Got name "+firstName);
+        LOGGER.info("Got name " + firstName);
         return firstName;
     }
 
-    public ResponseEntity<UnitLastNameDto> getRandomLastName(){
+    public ResponseEntity<UnitLastNameDto> getRandomLastName() {
         UnitLastNameDto lastName = createRandomLastName();
         return ResponseEntity.ok(lastName);
     }
@@ -54,7 +54,7 @@ public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<Unit
     private UnitLastNameDto createRandomLastName() {
         LOGGER.info("Get Random last name");
         UnitLastNameDto lastName = nameRestClient.getRandomLastName();
-        LOGGER.info("Got name "+lastName);
+        LOGGER.info("Got name " + lastName);
         return lastName;
     }
 
@@ -66,28 +66,26 @@ public class UnitResourceServiceImpl extends AbstractMassNamedEntityService<Unit
     private UnitCompleteNameDto createRandomFullName() {
         LOGGER.info("Get Random full name");
         UnitCompleteNameDto fullname = nameRestClient.getRandomFullName();
-        LOGGER.info("Got name "+fullname);
+        LOGGER.info("Got name " + fullname);
         return fullname;
     }
 
-    public ResponseEntity<List<UnitCompleteNameDto>> getRandomFullNames(int countOfNamesToCreate){
+    public ResponseEntity<List<UnitCompleteNameDto>> getRandomFullNames(int countOfNamesToCreate) {
 
-        LOGGER.info(String.format("START|Create a list of full names | Count: %d",countOfNamesToCreate));
+        LOGGER.info(String.format("START|Create a list of full names | Count: %d", countOfNamesToCreate));
         final List<UnitCompleteNameDto> names = new ArrayList<>(countOfNamesToCreate);
-        if(countOfNamesToCreate<=0) countOfNamesToCreate=1;
+        if (countOfNamesToCreate <= 0) countOfNamesToCreate = 1;
 
-        for(int idx =0; idx < countOfNamesToCreate;idx++){
+        for (int idx = 0; idx < countOfNamesToCreate; idx++) {
             names.add(createRandomFullName());
 
-            if(LOGGER.isDebugEnabled()) LOGGER.debug(String.format("Created Name %s",names.get(idx)));
+            if (LOGGER.isDebugEnabled()) LOGGER.debug(String.format("Created Name %s", names.get(idx)));
         }
 
 
-
-        LOGGER.info(String.format("FINISH|Create a list of full names | Count: %d",countOfNamesToCreate));
-        return  ResponseEntity.ok(names);
+        LOGGER.info(String.format("FINISH|Create a list of full names | Count: %d", countOfNamesToCreate));
+        return ResponseEntity.ok(names);
     }
-
 
 
 }

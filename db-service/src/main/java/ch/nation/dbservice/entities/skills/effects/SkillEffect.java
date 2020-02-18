@@ -17,44 +17,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Table(name="SKILL_EFFECTS")
-@Entity(name="SKILL_EFFECTS")
+@Table(name = "SKILL_EFFECTS")
+@Entity(name = "SKILL_EFFECTS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="SKILL_EFFECT_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "SKILL_EFFECT_TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
 public class SkillEffect extends NationRessource implements IDiscrimantorValue {
 
-    @Column(name="effectTarget",nullable = false)
+    @Column(name = "effectTarget", nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("effectTarget")
     private SkillEffectTarget effectTarget = SkillEffectTarget.NONE;
 
-    @Column(name="calcSource",nullable = false)
+    @Column(name = "calcSource", nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("calcSource")
-    private StatType typeUsedForCalculation= StatType.NONE;
+    private StatType typeUsedForCalculation = StatType.NONE;
 
-    @Column(name="calcTarget",nullable = false)
+    @Column(name = "calcTarget", nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty("calcTarget")
     private StatType applyCalculationOnStat = StatType.NONE;
 
-    @Column(name="negative")
+    @Column(name = "negative")
     @JsonProperty("negative")
     private boolean resultIsNegative = true;
 
-    @ManyToMany(mappedBy = "skillEffects",cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy = "skillEffects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
-    @RestResource(path = "skills", rel="skills")
+    @RestResource(path = "skills", rel = "skills")
     private List<Skill> skills;
 
 
-  /**  @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    private List<BasePlayerMove> playerMoves;**/
+    /**
+     * @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+     * private List<BasePlayerMove> playerMoves;
+     **/
 
 
-    @OneToMany(mappedBy = "skillEffect",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @RestResource(path="moves",rel="moves")
+    @OneToMany(mappedBy = "skillEffect", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @RestResource(path = "moves", rel = "moves")
     private List<BasePlayerMoveValue> moveValues;
 
 
@@ -118,7 +120,7 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     public List<Skill> getSkills() {
 
 
-        if( skills==null)  skills = new ArrayList<>();
+        if (skills == null) skills = new ArrayList<>();
 
         return skills;
     }
@@ -128,13 +130,15 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     }
 
 
- /**   public List<BasePlayerMove> getPlayerMoves() {
-        return playerMoves;
-    }
-
-    public void setPlayerMoves(List<BasePlayerMove> playerMoves) {
-        this.playerMoves = playerMoves;
-    }**/
+    /**
+     * public List<BasePlayerMove> getPlayerMoves() {
+     * return playerMoves;
+     * }
+     * <p>
+     * public void setPlayerMoves(List<BasePlayerMove> playerMoves) {
+     * this.playerMoves = playerMoves;
+     * }
+     **/
 
     @Override
     public String toString() {
@@ -148,22 +152,22 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
 
     //REGION NOT GENERATED FUNCTIONS
 
-    public void addSkill(Skill skill){
-        if(getSkills()!=null){
+    public void addSkill(Skill skill) {
+        if (getSkills() != null) {
             this.getSkills().add(skill);
             skill.getSkillEffects().add(this);
         }
     }
 
-    public void removeSkill(Skill skill){
-        if(this.getSkills()!=null){
+    public void removeSkill(Skill skill) {
+        if (this.getSkills() != null) {
             this.getSkills().remove(skill);
             skill.getSkillEffects().remove(this);
         }
     }
 
-    public void removeMoveValue(BasePlayerMoveValue value){
-        if(getMoveValues().contains(value)){
+    public void removeMoveValue(BasePlayerMoveValue value) {
+        if (getMoveValues().contains(value)) {
             getMoveValues().remove(value);
             value.setSkillEffect(null);
         }

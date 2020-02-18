@@ -31,16 +31,16 @@ public class GamesDummyGenerator extends AbstractDummyGenerator {
     @Override
     protected void handleCration() throws Exception {
 
-      User user=  userRepository.findByName("DummyPlayer");
+        User user = userRepository.findByName("DummyPlayer");
 
         GameUserRuntimeInfo info = new GameUserRuntimeInfo();
         info.setConsiderationTime(30000);
         info.setPlayerUuid(user.getId().toString());
 
-       info =  gameUserRuntimeRepository.save(info);
+        info = gameUserRuntimeRepository.save(info);
 
 
-        Game game =new Game();
+        Game game = new Game();
 
         game.setFirstPlayerUuid(user.getId().toString());
         game.setNextPlayerUuid(user.getId().toString());
@@ -48,17 +48,17 @@ public class GamesDummyGenerator extends AbstractDummyGenerator {
         game.setGameStatus(GameStatus.Finished);
         game.setUsers(new ArrayList<>());
         game.setUserRuntimeInfos(new ArrayList<>());
-        game= gameRepository.save(game);
+        game = gameRepository.save(game);
 
 
-      //  List<GameUserRuntimeInfo> infos = new ArrayList<>(1);
-     //   infos.add(info);
+        //  List<GameUserRuntimeInfo> infos = new ArrayList<>(1);
+        //   infos.add(info);
 
 
         game.addUserRuntimeInfos(info);
-     //   game.setUserRuntimeInfos(infos);
+        //   game.setUserRuntimeInfos(infos);
 
-       game= gameRepository.save(game);
+        game = gameRepository.save(game);
 
     }
 }

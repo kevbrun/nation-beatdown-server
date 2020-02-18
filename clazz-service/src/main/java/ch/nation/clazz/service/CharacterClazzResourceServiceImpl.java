@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class CharacterClazzResourceServiceImpl extends AbstractNamedEntityService<CharacterClassDto,CharacterClassDto> implements CharacterClazzResourceService {
+public class CharacterClazzResourceServiceImpl extends AbstractNamedEntityService<CharacterClassDto, CharacterClassDto> implements CharacterClazzResourceService {
 
 
     @Autowired
     public CharacterClazzResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
-        super(CharacterClassDto.class,factory, massRestClientFactory);
+        super(CharacterClassDto.class, factory, massRestClientFactory);
     }
 
 }

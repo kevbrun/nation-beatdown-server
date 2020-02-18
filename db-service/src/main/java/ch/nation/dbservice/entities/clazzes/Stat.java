@@ -13,25 +13,24 @@ import java.util.Objects;
 public class Stat {
 
 
-        @Column(name="base")
-        @JsonProperty("base")
-        private float baseValue;
+    @Column(name = "base")
+    @JsonProperty("base")
+    private float baseValue;
 
-        @Column(name="min")
-        @JsonProperty("min")
-        private float minValue;
+    @Column(name = "min")
+    @JsonProperty("min")
+    private float minValue;
 
-        @Column(name="max")
-        @JsonProperty("max")
-        private float maxValue;
-        @Enumerated(EnumType.STRING)
-        @JsonProperty("growthType")
-        private StatGrowthType growthType = StatGrowthType.NONE;
-
+    @Column(name = "max")
+    @JsonProperty("max")
+    private float maxValue;
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("growthType")
+    private StatGrowthType growthType = StatGrowthType.NONE;
 
 
     public Stat() {
-       super();
+        super();
     }
 
 

@@ -14,8 +14,8 @@ public class NameImporter extends AbstractNamesImporter {
     private final UnitFirstNameRepository firstNameRepository;
     private final UnitLastNameRepository secondNameRepository;
 
-    private final String PATH_TO_FIRST_NAME_CSV ="babies-first-names-2009.csv";
-    private final String PATH_TO_SECOND_NAME_CSV ="last-names.csv";
+    private final String PATH_TO_FIRST_NAME_CSV = "babies-first-names-2009.csv";
+    private final String PATH_TO_SECOND_NAME_CSV = "last-names.csv";
 
 
     public NameImporter(UnitFirstNameRepository firstNameRepository, UnitLastNameRepository secondNameRepository) throws Exception {
@@ -33,7 +33,7 @@ public class NameImporter extends AbstractNamesImporter {
 
     private void importFirstNames() {
         LOGGER.info("START importing First names");
-        importName(UnitFirstName.class,PATH_TO_FIRST_NAME_CSV,firstNameRepository);
+        importName(UnitFirstName.class, PATH_TO_FIRST_NAME_CSV, firstNameRepository);
 
         LOGGER.info("STOP importing First names");
     }
@@ -41,7 +41,7 @@ public class NameImporter extends AbstractNamesImporter {
     private void importLastNames() {
 
         LOGGER.info("START importing Last names");
-        importName(UnitLastName.class,PATH_TO_SECOND_NAME_CSV,secondNameRepository);
+        importName(UnitLastName.class, PATH_TO_SECOND_NAME_CSV, secondNameRepository);
         LOGGER.info("STOP importing last names");
     }
 

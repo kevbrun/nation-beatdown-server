@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,PrejudiceRepository> {
+public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice, PrejudiceRepository> {
 
     @Autowired
     private PrejudiceTriggerRepository prejudiceTriggerRepository;
@@ -40,28 +40,26 @@ public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,Prejudi
     }
 
 
-
-
     @Test
     @Transactional
-    public void add_trigger_to_prejudice(){
+    public void add_trigger_to_prejudice() {
         entityToTest = repo.save(entityToTest);
 
 
         BasePrejudiceTrigger trigger = new StatPrejudiceTrigger();
-        trigger=prejudiceTriggerRepository.save(trigger);
+        trigger = prejudiceTriggerRepository.save(trigger);
 
         entityToTest.addTrigger(trigger);
         entityToTest = repo.save(entityToTest);
 
 
-        StatPrejudiceTrigger statPrejudiceTrigger =new StatPrejudiceTrigger();
+        StatPrejudiceTrigger statPrejudiceTrigger = new StatPrejudiceTrigger();
         statPrejudiceTrigger.setThreshold(100f);
         statPrejudiceTrigger.setComparer(ConditionComparer.EQUALS);
         statPrejudiceTrigger.setStatType(StatType.ACTION_POINTS);
 
 
-        statPrejudiceTrigger= statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
+        statPrejudiceTrigger = statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
 
 
         entityToTest.addTrigger(statPrejudiceTrigger);
@@ -71,12 +69,9 @@ public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,Prejudi
 
 
         LOGGER.info(entityToTest.toString());
-        Assert.assertTrue(entityToTest.getPrejudiceTriggers().size()==2);
+        Assert.assertTrue(entityToTest.getPrejudiceTriggers().size() == 2);
         Assert.assertTrue(entityToTest.getPrejudiceTriggers().contains(trigger));
         Assert.assertTrue(entityToTest.getPrejudiceTriggers().contains(statPrejudiceTrigger));
-
-
-
 
 
     }
@@ -84,24 +79,24 @@ public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,Prejudi
 
     @Transactional
     @Test
-    public void remove_trigger_from_prejduice(){
+    public void remove_trigger_from_prejduice() {
         entityToTest = repo.save(entityToTest);
 
 
         BasePrejudiceTrigger trigger = new StatPrejudiceTrigger();
-        trigger=prejudiceTriggerRepository.save(trigger);
+        trigger = prejudiceTriggerRepository.save(trigger);
 
         entityToTest.addTrigger(trigger);
         entityToTest = repo.save(entityToTest);
 
 
-        StatPrejudiceTrigger statPrejudiceTrigger =new StatPrejudiceTrigger();
+        StatPrejudiceTrigger statPrejudiceTrigger = new StatPrejudiceTrigger();
         statPrejudiceTrigger.setThreshold(100f);
         statPrejudiceTrigger.setComparer(ConditionComparer.EQUALS);
         statPrejudiceTrigger.setStatType(StatType.ACTION_POINTS);
 
 
-        statPrejudiceTrigger= statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
+        statPrejudiceTrigger = statPrejudiceTriggerRepository.save(statPrejudiceTrigger);
 
 
         entityToTest.addTrigger(statPrejudiceTrigger);
@@ -113,7 +108,7 @@ public class PrejudiceTest extends AbstractNamedEntityTest<BasePrejudice,Prejudi
         entityToTest.removeTrigger(trigger);
         entityToTest = repo.save(entityToTest);
 
-        Assert.assertTrue(entityToTest.getPrejudiceTriggers().size()==1);
+        Assert.assertTrue(entityToTest.getPrejudiceTriggers().size() == 1);
         Assert.assertTrue(entityToTest.getPrejudiceTriggers().contains(statPrejudiceTrigger));
 
     }

@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
-@FeignClient(contextId = "user-mass-db-rest-service",value="nation-database-service",path = "/users",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBMassUserRestClient extends DBRestMassServiceBaseInterface<UserDto,UserDto> {
+@FeignClient(contextId = "user-mass-db-rest-service", value = "nation-database-service", path = "/users", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBMassUserRestClient extends DBRestMassServiceBaseInterface<UserDto, UserDto> {
 
 
     @Override

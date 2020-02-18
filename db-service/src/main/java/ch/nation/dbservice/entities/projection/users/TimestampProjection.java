@@ -9,6 +9,7 @@ public interface TimestampProjection extends MinimizedEntityResponseProjection {
 
     @JsonProperty("created")
     public Calendar getCreationTimestamp();
+
     @JsonProperty("updated")
     public Calendar getUpdateTimemstamp();
 

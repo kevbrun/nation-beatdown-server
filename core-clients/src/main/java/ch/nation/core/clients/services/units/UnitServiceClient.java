@@ -8,6 +8,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
-@FeignClient(contextId = "units-resource-service",value="nation-cloud-units-service",decode404 = true, configuration = FeignClientConfig.class)
-public interface UnitServiceClient extends BaseServiceRestClientInterface<UnitDto,UnitDto> {
+@FeignClient(contextId = "units-resource-service", value = "nation-cloud-units-service", decode404 = true, configuration = FeignClientConfig.class)
+public interface UnitServiceClient extends BaseServiceRestClientInterface<UnitDto, UnitDto> {
 }

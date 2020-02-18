@@ -45,18 +45,17 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     protected void handleCration() throws Exception {
         createHandleWeakNationPrejudice();
         createHandleHighIntelligencPrejduice();
-      createHateAgainstExplosivPeople();
+        createHateAgainstExplosivPeople();
     }
 
 
-
-    private void createHandleWeakNationPrejudice(){
+    private void createHandleWeakNationPrejudice() {
         SkillPrejudice prejudice = new SkillPrejudice();
         prejudice.setName("Schwache Leute machen wütend!");
         prejudice.setIdentifier("weak_people_angry");
         prejudice.setDescription("Die Nation wird explosiv,wenn diese auf schwache Menschen trifft");
         prejudice.setTriggerOperation(PrejudiceOperator.OR);
-        prejudice= skillPrejudiceRepository.save(prejudice);
+        prejudice = skillPrejudiceRepository.save(prejudice);
         BasePrejudiceTrigger prejudiceTrigger = prejudiceTriggerRepository.findByIdentifier("less_str_10");
         prejudice.addTrigger(prejudiceTrigger);
         prejudice = skillPrejudiceRepository.save(prejudice);
@@ -66,7 +65,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     }
 
 
-    private void createHandleHighIntelligencPrejduice(){
+    private void createHandleHighIntelligencPrejduice() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Intelligente Leute. Viel Luft aber nichts dahinter!");
         prejudice.setIdentifier("int_but_str");
@@ -74,13 +73,13 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
                 "Sie fühlen sich dumm.Daher kriegen diese einen Boni auf Stärke und verlieren an Intelligenz. Wenn die Intelligenz der Nation höher als 20 ist.");
 
         StatBonusDelta statBonusDelta = new StatBonusDelta();
-        statBonusDelta.setStrBonus( new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
-        statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f,StatModTarget.VALUE));
+        statBonusDelta.setStrBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
+        statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
 
         prejudice.setTriggerOperation(PrejudiceOperator.OR);
         prejudice.setDelta(statBonusDelta);
 
-        prejudice=statPrejudiceRepository.save(prejudice);
+        prejudice = statPrejudiceRepository.save(prejudice);
 
 
         BasePrejudiceTrigger trigger = prejudiceTriggerRepository.findByIdentifier("more_int_20");
@@ -92,15 +91,15 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
 
     }
 
-    private void createHateAgainstExplosivPeople(){
+    private void createHateAgainstExplosivPeople() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Dicke Haut gegen Explosive Menschen!");
         prejudice.setIdentifier("thick_skin_expl");
         prejudice.setDescription("Nation hat eine Dicke Haut gegen expl. Menschen");
 
         StatBonusDelta statBonusDelta = new StatBonusDelta();
-        statBonusDelta.setStrBonus( new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
-        statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f,StatModTarget.VALUE));
+        statBonusDelta.setStrBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
+        statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
         prejudice.setDelta(statBonusDelta);
         prejudice.setTriggerOperation(PrejudiceOperator.OR);
 
@@ -112,13 +111,9 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         prejudice.addTrigger(chr);
 
 
-
         statPrejudiceRepository.save(prejudice);
 
     }
-
-
-
 
 
 }

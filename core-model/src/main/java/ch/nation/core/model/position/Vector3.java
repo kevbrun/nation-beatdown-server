@@ -48,9 +48,9 @@ public class Vector3<T> implements IVector3<T> {
     public boolean equals(Object o) {
 
         Vector3<T> vector3 = (Vector3<T>) o;
-        if(this.getX()==null || vector3.getX()==null ||this.getX()!= vector3.getX()) return false;
-        if(this.getY()==null || vector3.getY()==null ||this.getY()!= vector3.getY()) return false;
-        if(this.getZ()==null || vector3.getZ()==null ||this.getZ()!= vector3.getZ()) return false;
+        if (this.getX() == null || vector3.getX() == null || this.getX() != vector3.getX()) return false;
+        if (this.getY() == null || vector3.getY() == null || this.getY() != vector3.getY()) return false;
+        if (this.getZ() == null || vector3.getZ() == null || this.getZ() != vector3.getZ()) return false;
         return true;
     }
 
@@ -64,6 +64,6 @@ public class Vector3<T> implements IVector3<T> {
 
     @Override
     public String toString() {
-        return getX()+"|"+getY()+"|"+getZ();
+        return getX() + "|" + getY() + "|" + getZ();
     }
 }

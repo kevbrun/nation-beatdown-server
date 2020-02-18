@@ -13,18 +13,18 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 
 
-@Entity(name="PLAYER_MOVES_VALUES")
-@Table(name="PLAYER_MOVES_VALUES")
+@Entity(name = "PLAYER_MOVES_VALUES")
+@Table(name = "PLAYER_MOVES_VALUES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="PLAYER_MOVE_VALUE_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "PLAYER_MOVE_VALUE_TYPE", discriminatorType = DiscriminatorType.STRING)
 @Transactional
 @DiscriminatorValue("BASE")
 //@JsonDeserialize(using = PlayerMoveValueDeserializer.class)
 public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDiscrimantorValue {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="move_id")
-    @RestResource(path = "moves",rel = "moves")
+    @JoinColumn(name = "move_id")
+    @RestResource(path = "moves", rel = "moves")
     @JsonIgnore
     private BasePlayerMove move;
 
@@ -32,15 +32,15 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
     //LAZY Will cause Buddy Exception
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "target_id")
-    @RestResource(path = "target", rel="target",exported = false)
+    @RestResource(path = "target", rel = "target", exported = false)
     // @JsonBackReference(value = "unit-target")
     @JsonProperty("target")
     private Unit target;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="skill_effect_id")
-    @RestResource(path = "skill-effect",rel = "skill-effect",exported = false)
+    @JoinColumn(name = "skill_effect_id")
+    @RestResource(path = "skill-effect", rel = "skill-effect", exported = false)
     @JsonProperty("skill_effect")
     private SkillEffect skillEffect;
 
@@ -97,19 +97,19 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
     }
 
 
-    public void removeTarget(){
-        if(target!=null){
+    public void removeTarget() {
+        if (target != null) {
             target.removeMovementValue(this);
-            target =null;
+            target = null;
             LOGGER.info("Remove associations with Target");
 
         }
     }
 
-    public void removeSkillEffect(){
-        if(skillEffect!=null){
+    public void removeSkillEffect() {
+        if (skillEffect != null) {
             skillEffect.removeMoveValue(this);
-            skillEffect=null;
+            skillEffect = null;
             LOGGER.info("Remove associations with SkillEffect");
 
         }
@@ -118,7 +118,7 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
 
 
     @PreRemove
-    public void preRemoveEntity(){
+    public void preRemoveEntity() {
         LOGGER.info("Start to remove associations between objects:");
         removeTarget();
         removeSkillEffect();

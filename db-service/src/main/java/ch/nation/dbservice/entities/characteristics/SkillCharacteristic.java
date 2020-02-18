@@ -9,10 +9,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name="SKILL_CHARACTERISTICS")
+@Entity(name = "SKILL_CHARACTERISTICS")
 @DiscriminatorValue("SKILL")
 public class SkillCharacteristic extends BaseCharacteristic implements IDiscrimantorValue {
-
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,9 +35,6 @@ public class SkillCharacteristic extends BaseCharacteristic implements IDiscrima
     }
 
 
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,25 +53,24 @@ public class SkillCharacteristic extends BaseCharacteristic implements IDiscrima
 
     //Manual
 
-    public void addSkill(Skill skill){
-        if(skill!=null){
+    public void addSkill(Skill skill) {
+        if (skill != null) {
             this.setSkill(skill);
             skill.addSkillCharacteristic(this);
         }
 
     }
 
-    public void removeSkill(){
+    public void removeSkill() {
 
-        if(skill!=null){
+        if (skill != null) {
 
             skill.removeSkillCharacteristics(this);
-            skill =null;
+            skill = null;
 
         }
 
     }
-
 
 
 }

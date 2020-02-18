@@ -16,8 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name="USER_RUNTIME_INFO")
-@Table(name="USER_RUNTIME_INFO")
+@Entity(name = "USER_RUNTIME_INFO")
+@Table(name = "USER_RUNTIME_INFO")
 public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDiscrimantorValue {
 
 
@@ -28,9 +28,9 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
             orphanRemoval = false,
             fetch = FetchType.LAZY
     )
-    @RestResource(path = "moves", rel="moves",exported = true)
+    @RestResource(path = "moves", rel = "moves", exported = true)
     @JsonProperty("moves")
-   // @OrderBy("creationTimestamp")
+    // @OrderBy("creationTimestamp")
     //   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> moves;
 
@@ -38,10 +38,9 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     private String playerUuid;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="game_id")
-    @RestResource(path = "games",rel = "games",exported = false)
+    @JoinColumn(name = "game_id")
+    @RestResource(path = "games", rel = "games", exported = false)
     @JsonIgnore
     private Game game;
 
@@ -49,8 +48,8 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     @JsonProperty("fow")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "fog_id")
-    @Column(name="fow")
-    @RestResource(path="fow",rel="fow",exported = false)
+    @Column(name = "fow")
+    @RestResource(path = "fow", rel = "fow", exported = false)
     private Set<FogOfWar> uncoveredFogOfWar;
 
     public GameUserRuntimeInfo() {
@@ -100,10 +99,10 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
         }
     }
 
-    public List<BasePlayerMove> getMoves(){
+    public List<BasePlayerMove> getMoves() {
         LOGGER.debug("Execute custom getter");
 
-        if(moves==null)moves = new ArrayList<>();
+        if (moves == null) moves = new ArrayList<>();
         return moves;
     }
 
@@ -111,9 +110,9 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
         LOGGER.debug("Execute custom setter: setMoves");
         if (this.moves == null) {
             this.moves = moves;
-        } else if(this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.moves != moves) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.moves.clear();
-            if(moves != null){
+            if (moves != null) {
                 this.moves.addAll(moves);
             }
         }
@@ -123,14 +122,14 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
     }
 
 
-    public void AddFogOfWarTilePositions(IVector3 vector){
-        if(!uncoveredFogOfWar.contains(vector)){
+    public void AddFogOfWarTilePositions(IVector3 vector) {
+        if (!uncoveredFogOfWar.contains(vector)) {
             uncoveredFogOfWar.add((FogOfWar) vector);
         }
     }
 
-    public void removeMove(BasePlayerMove move){
-        if(getMoves().contains(move)){
+    public void removeMove(BasePlayerMove move) {
+        if (getMoves().contains(move)) {
             getMoves().remove(move);
             move.setGameInfo(null);
         }
@@ -138,9 +137,9 @@ public class GameUserRuntimeInfo extends AbstractNationEntityBase implements IDi
 
     @PrePersist
     @PreUpdate
-    public void PreUpdate(){
+    public void PreUpdate() {
 
-        for(BasePlayerMove move : moves){
+        for (BasePlayerMove move : moves) {
             move.setGameInfo(this);
         }
     }

@@ -9,7 +9,7 @@ import ch.nation.core.services.AbstractNamedEntityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SkillCharacteristicResourceServiceImpl extends AbstractNamedEntityService<SkillCharacteristicsDto,SkillCharacteristicsDto> {
+public class SkillCharacteristicResourceServiceImpl extends AbstractNamedEntityService<SkillCharacteristicsDto, SkillCharacteristicsDto> {
 
 
     public SkillCharacteristicResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {

@@ -10,21 +10,21 @@ import java.util.Objects;
 
 
 @Entity
-public class UnitFirstName  {
+public class UnitFirstName {
 
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY,generator = "native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name="first_name",unique = true,nullable = false)
+    @Column(name = "first_name", unique = true, nullable = false)
     @JsonProperty("first_name")
     private String firstName;
 
 
-    @Column(name="sex")
+    @Column(name = "sex")
     @JsonProperty("sex")
     @Enumerated(EnumType.STRING)
     private Sex sex;
@@ -58,7 +58,6 @@ public class UnitFirstName  {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
 
 }

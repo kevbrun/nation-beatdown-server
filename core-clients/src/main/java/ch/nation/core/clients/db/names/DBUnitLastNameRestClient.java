@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(contextId = "last-name-rest-service",value="nation-database-service",path = "/last-name",decode404 = true, configuration = FeignClientConfig.class)
+@FeignClient(contextId = "last-name-rest-service", value = "nation-database-service", path = "/last-name", decode404 = true, configuration = FeignClientConfig.class)
 public interface DBUnitLastNameRestClient {
 
-    @RequestMapping(method = RequestMethod.GET,path = "/{id}")
-        Resource<UnitLastNameDto> findById(@PathVariable("id")long id);
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    Resource<UnitLastNameDto> findById(@PathVariable("id") long id);
 
 
-
-
-    }
+}

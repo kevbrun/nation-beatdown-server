@@ -32,13 +32,13 @@ public class SpringDataConfig implements RepositoryRestConfigurer {
                         .toArray(Class[]::new));
 
 
-     Iterator<EntityType<?>> d = entityManager.getMetamodel().getEntities().iterator();
+        Iterator<EntityType<?>> d = entityManager.getMetamodel().getEntities().iterator();
 
-     while(d.hasNext()){
-         EntityType<?> entry = d.next();
+        while (d.hasNext()) {
+            EntityType<?> entry = d.next();
 
-         LOGGER.info(entry.getName());
-     }
+            LOGGER.info(entry.getName());
+        }
 
 
     }

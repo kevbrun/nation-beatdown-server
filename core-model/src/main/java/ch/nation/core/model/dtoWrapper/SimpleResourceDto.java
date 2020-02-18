@@ -15,21 +15,20 @@ public class SimpleResourceDto implements Serializable {
     private SimpleResourcePageDto pageInfo;
 
     @JsonProperty("elements")
-    private List<AbstractDto>  elements;
+    private List<AbstractDto> elements;
 
 
     public SimpleResourceDto(long size, long totalElements, long totalPages, long number, List<AbstractDto> elements) {
-        this.pageInfo = new SimpleResourcePageDto(size,totalElements,totalPages,number);
+        this.pageInfo = new SimpleResourcePageDto(size, totalElements, totalPages, number);
         this.elements = elements;
     }
 
 
-
-    public SimpleResourceDto(PagedResources resource){
+    public SimpleResourceDto(PagedResources resource) {
         this(resource.getMetadata().getSize()
-                ,resource.getMetadata().getTotalElements()
-                ,resource.getMetadata().getTotalPages()
-                ,resource.getMetadata().getNumber(),
+                , resource.getMetadata().getTotalElements()
+                , resource.getMetadata().getTotalPages()
+                , resource.getMetadata().getNumber(),
                 new ArrayList<>(resource.getContent()));
 
 

@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Entity(name="TIME_REVERSAL_SKILL")
+@Entity(name = "TIME_REVERSAL_SKILL")
 @DiscriminatorValue("TIME_REVERSAL_EFFECT")
 public class TimeReversalSkillEffect extends SkillEffect implements IDiscrimantorValue {
 
 
-    @Column(name="reversal_def")
+    @Column(name = "reversal_def")
     @Enumerated(EnumType.STRING)
     @JsonProperty("reversal_def")
     private TimeReversakSkillEffectRoundDefinition definition;
 
 
-    @Column(name="count_of_skills")
+    @Column(name = "count_of_skills")
     @JsonProperty("count_of_skills")
     private Integer countOfSkillEffectToReverse;
 

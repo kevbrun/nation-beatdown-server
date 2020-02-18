@@ -4,28 +4,27 @@ import ch.nation.core.model.Enums.ActionShape;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-
 public class ActionAreaDto {
 
 
-        @JsonProperty("sizeXAxis")
-        private int sizeInXAxis;
+    @JsonProperty("sizeXAxis")
+    private int sizeInXAxis;
 
 
-        @JsonProperty("sizeYAxis")
-        private int sizeInYAxis;
+    @JsonProperty("sizeYAxis")
+    private int sizeInYAxis;
 
 
-        @JsonProperty("offsetXAxis")
-        private int offsetInXAxis;
+    @JsonProperty("offsetXAxis")
+    private int offsetInXAxis;
 
 
-        @JsonProperty("offsetYAxis")
-        private int offsetInYAxis;
+    @JsonProperty("offsetYAxis")
+    private int offsetInYAxis;
 
 
-        @JsonProperty("shape")
-        private ActionShape shape;
+    @JsonProperty("shape")
+    private ActionShape shape;
 
 
     public ActionAreaDto(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, ActionShape shape) {

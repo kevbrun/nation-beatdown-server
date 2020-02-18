@@ -33,5 +33,4 @@ public class CharacteristicPrejudiceTriggerDto extends AbstractPrejudiceTriggerD
     }
 
 
-
 }

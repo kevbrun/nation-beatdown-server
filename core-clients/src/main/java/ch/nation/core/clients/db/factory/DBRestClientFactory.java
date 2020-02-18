@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class DBRestClientFactory {
 
-    private final Logger LOGGER =LoggerFactory.getLogger(this.getClass());
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private List<DBRestServiceBaseInterface> services;
@@ -27,15 +27,15 @@ public class DBRestClientFactory {
     @PostConstruct
     public void initMyServiceCache() {
         LOGGER.info("Load DB Service Cache");
-        for(DBRestServiceBaseInterface service : services) {
+        for (DBRestServiceBaseInterface service : services) {
             myServiceCache.put(service.getType(), service);
-            LOGGER.debug("Load Service: "+service.getType());
+            LOGGER.debug("Load Service: " + service.getType());
         }
     }
 
     public static DBRestServiceBaseInterface getService(String type) {
         DBRestServiceBaseInterface service = myServiceCache.get(type);
-        if(service == null) throw new RuntimeException("Unknown service type: " + type);
+        if (service == null) throw new RuntimeException("Unknown service type: " + type);
         return service;
     }
 

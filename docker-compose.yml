@@ -1,15 +1,15 @@
 version: '3.7'
 services:
   eureka-service:
-   # container_name: eureka-service
+    # container_name: eureka-service
     build:
-       context: eurekaserver
-       dockerfile: Dockerfile
+      context: eurekaserver
+      dockerfile: Dockerfile
     image:  nation-euraka-service:latest
     ports:
-     - "8761-8762:8761"
+      - "8761-8762:8761"
     networks:
-     - spring-cloud-network
+      - spring-cloud-network
     environment:
       SERVER_PORT: 8761
     logging:
@@ -17,7 +17,7 @@ services:
 
 
   zuul-service:
-   # container_name: zuul-service
+    # container_name: zuul-service
     build:
       context: zuul
       dockerfile: Dockerfile
@@ -107,7 +107,7 @@ services:
 
 
 
-# SERVICES
+  # SERVICES
   game-service:
     #container_name: nation-cloud-games-service
     build:

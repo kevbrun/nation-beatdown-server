@@ -33,7 +33,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-    private void createDumbButStrongCharacteristic(){
+    private void createDumbButStrongCharacteristic() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Dumm aber Stark!");
         statCharacteristic.setIdentifier("less_int_10_more_str_10");
@@ -46,7 +46,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-    private void createWeakButIntelligent(){
+    private void createWeakButIntelligent() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Intelligent aber schwach\n wie eine Brezel!");
         statCharacteristic.setIdentifier("less_str_10_more_str_15");
@@ -60,19 +60,18 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(statCharacteristic);
     }
 
-    private void createExplosiveCharacteristics(){
+    private void createExplosiveCharacteristics() {
         SkillCharacteristic cc = new SkillCharacteristic();
         cc.setName("Explosiver Character");
         cc.setIdentifier("expl");
         cc.setDescription("Die Nation wird schnell wütend");
-        cc= characteristicsRepository.save(cc);
+        cc = characteristicsRepository.save(cc);
 
         Skill skill = skillRepository.findByIdentifier("dmg_expl_target_hp");
         cc.setSkill(skill);
 
         characteristicsRepository.save(cc);
     }
-
 
 
 }

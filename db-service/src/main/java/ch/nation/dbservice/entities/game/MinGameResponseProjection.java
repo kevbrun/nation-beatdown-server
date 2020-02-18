@@ -10,18 +10,22 @@ import java.util.List;
 import java.util.UUID;
 
 @Projection(name = "min", types = {Game.class})
-public interface MinGameResponseProjection extends MinimizedEntityResponseProjection
-{
+public interface MinGameResponseProjection extends MinimizedEntityResponseProjection {
     @JsonProperty("round")
     public int getRound();
+
     @JsonProperty("status")
     public GameStatus getGameStatus();
+
     @JsonProperty("users")
     List<UserMinResponseProjection> getUsers();
+
     @JsonProperty("current_player")
     public String getCurrentPlayerUuid();
+
     @JsonProperty("first_player")
-    UUID getFirstPlayerUuid() ;
+    UUID getFirstPlayerUuid();
+
     @JsonProperty("next_player")
     UUID getNextPlayerUuid();
 }

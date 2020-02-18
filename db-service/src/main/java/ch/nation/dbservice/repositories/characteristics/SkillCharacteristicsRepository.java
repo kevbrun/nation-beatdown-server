@@ -11,6 +11,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import javax.transaction.Transactional;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "characteristics",path = "characteristics-skill",excerptProjection = SkillCharacteristicDefaultProjection.class)
+@RepositoryRestResource(collectionResourceRel = "characteristics", path = "characteristics-skill", excerptProjection = SkillCharacteristicDefaultProjection.class)
 public interface SkillCharacteristicsRepository extends IPageableDao<SkillCharacteristic>, INamedObjectDao<SkillCharacteristic>, IFindByIdentifier<SkillCharacteristic> {
 }

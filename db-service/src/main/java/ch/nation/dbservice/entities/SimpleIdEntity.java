@@ -12,7 +12,7 @@ import java.util.Objects;
 public abstract class SimpleIdEntity {
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public SimpleIdEntity() {

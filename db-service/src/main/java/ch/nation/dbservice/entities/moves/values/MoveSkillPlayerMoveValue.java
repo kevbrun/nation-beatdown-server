@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @DiscriminatorValue("MOVE")
-@Entity(name="PLAYER_MOVE_SKILL_VALUE")
+@Entity(name = "PLAYER_MOVE_SKILL_VALUE")
 public class MoveSkillPlayerMoveValue extends BasePlayerMoveValue implements IDiscrimantorValue {
 
     @JsonProperty("source_pos")

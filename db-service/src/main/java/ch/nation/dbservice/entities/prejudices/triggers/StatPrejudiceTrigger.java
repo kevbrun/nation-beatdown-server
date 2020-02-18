@@ -14,16 +14,16 @@ import java.util.Objects;
 public class StatPrejudiceTrigger extends BasePrejudiceTrigger implements IDiscrimantorValue {
 
     @JsonProperty("threshold")
-    @Column(name="threshold")
+    @Column(name = "threshold")
     private float threshold;
 
     @JsonProperty("stat")
-    @Column(name="stat")
+    @Column(name = "stat")
     @Enumerated(EnumType.STRING)
     private StatType statType;
 
     @JsonProperty("comp")
-    @Column(name="comp")
+    @Column(name = "comp")
     @Enumerated(EnumType.STRING)
     private ConditionComparer comparer;
 
@@ -31,10 +31,9 @@ public class StatPrejudiceTrigger extends BasePrejudiceTrigger implements IDiscr
     public StatPrejudiceTrigger() {
         super();
         threshold = 0;
-        statType  =  StatType.NONE;
+        statType = StatType.NONE;
         comparer = ConditionComparer.EQUALS;
     }
-
 
 
     public float getThreshold() {

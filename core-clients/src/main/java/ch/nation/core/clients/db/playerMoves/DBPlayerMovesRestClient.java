@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@FeignClient(contextId = "game-moves-rest-service",value="nation-database-service",path = "/moves",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBPlayerMovesRestClient  extends DBRestServiceBaseInterface<BasePlayerMoveDto,BasePlayerMoveDto> {
+@FeignClient(contextId = "game-moves-rest-service", value = "nation-database-service", path = "/moves", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBPlayerMovesRestClient extends DBRestServiceBaseInterface<BasePlayerMoveDto, BasePlayerMoveDto> {
 
     @Override
     default String getType() {
@@ -21,20 +21,20 @@ public interface DBPlayerMovesRestClient  extends DBRestServiceBaseInterface<Bas
     }
 
 
-    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_IdAndCaster_IdAndRound")
-    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(@RequestParam("runtime")String gameRuntimeUuid,
+    @RequestMapping(method = RequestMethod.GET, consumes = "application/json", path = "/search/findAllByGameInfo_IdAndCaster_IdAndRound")
+    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuidAndCasterUuidAndRound(@RequestParam("runtime") String gameRuntimeUuid,
                                                                                         @RequestParam("caster") String casterUuid,
                                                                                         @RequestParam("round") int round,
-                                                                                        @RequestParam(name = "projection",required=false)
-                                                                                QueryProjection projection);
+                                                                                        @RequestParam(name = "projection", required = false)
+                                                                                                QueryProjection projection);
 
-    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/findAllByGameInfo_Id")
-    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid,@RequestParam(value = "page",required = false,defaultValue = "0") long page,
-                                                                   @RequestParam(value = "size",required = false, defaultValue = "20") long size,
-                                                                                   @RequestParam(name = "projection",required=false)
-                                                                                           QueryProjection projection);
+    @RequestMapping(method = RequestMethod.GET, consumes = "application/json", path = "/search/findAllByGameInfo_Id")
+    PagedResources<BasePlayerMoveDto> getAllMovesByGameRuntimeUuid(@RequestParam("runtime") String gameRuntimeUuid, @RequestParam(value = "page", required = false, defaultValue = "0") long page,
+                                                                   @RequestParam(value = "size", required = false, defaultValue = "20") long size,
+                                                                   @RequestParam(name = "projection", required = false)
+                                                                           QueryProjection projection);
 
 
-    @RequestMapping(method = RequestMethod.GET,consumes = "application/json",path="/search/countAllByGameInfo_Id")
-    int getAllMovesPerPlayerByGameRuntimeUuid(@RequestParam("runtime")String gameRuntimeUuid);
+    @RequestMapping(method = RequestMethod.GET, consumes = "application/json", path = "/search/countAllByGameInfo_Id")
+    int getAllMovesPerPlayerByGameRuntimeUuid(@RequestParam("runtime") String gameRuntimeUuid);
 }

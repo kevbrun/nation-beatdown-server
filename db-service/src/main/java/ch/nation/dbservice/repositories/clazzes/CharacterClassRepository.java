@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import javax.transaction.Transactional;
 
 
-@RepositoryRestResource(collectionResourceRel = "classes",path = "classes")
+@RepositoryRestResource(collectionResourceRel = "classes", path = "classes")
 @Transactional
 public interface CharacterClassRepository extends IPageableDao<CharacterClass>, INamedObjectDao<CharacterClass>, IFindByIdentifier<CharacterClass> {
 }

@@ -11,7 +11,6 @@ import java.util.List;
 public class UserDto extends NamedObjectAbstractDto implements Serializable {
 
 
-
     @JsonProperty("password")
     private String password;
 
@@ -24,8 +23,6 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
 
     @JsonProperty("role")
     private String role;
-
-
 
 
     public UserDto() {
@@ -73,7 +70,7 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     // Helper Functions
     @JsonIgnore
     public boolean isPasswordValid() {
-        return password!=null && !password.isBlank();
+        return password != null && !password.isBlank();
     }
 
 

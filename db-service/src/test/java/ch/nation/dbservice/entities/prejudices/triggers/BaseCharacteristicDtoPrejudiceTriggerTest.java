@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTest<CharacteristicPrejudiceTrigger,CharacteristicPrejudiceTriggerRepository> implements IHasDiscriminatorValue {
+public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTest<CharacteristicPrejudiceTrigger, CharacteristicPrejudiceTriggerRepository> implements IHasDiscriminatorValue {
 
 
     @Autowired
@@ -38,98 +38,91 @@ public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTes
         Assert.assertTrue(entityToTest.getDiscriminatorValue().equals("CharacteristicPrejudiceTrigger"));
     }
 
-/**
-    @Test
-    @Transactional
-    public void add_characteristic_to_prejudice_trigger(){
-        entityToTest = repo.save(entityToTest);
-
-        BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
-        baseCharacteristic.setName("Inteligent aber hässlich!");
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-
-        CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
-        trigger=characteristicPrejudiceTriggerRepository.save(trigger);
-
-        baseCharacteristic.addTrigger(trigger);
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-        Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().get(0).equals(trigger));
-
-    }
-
-    @Test
-    @Transactional
-    public void add_multiple_characteristic_to_prejudice_trigger(){
-        entityToTest = repo.save(entityToTest);
-
-        BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
-        baseCharacteristic.setName("Inteligent aber hässlich!");
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-
-        CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
-        trigger=characteristicPrejudiceTriggerRepository.save(trigger);
-
-        baseCharacteristic.addTrigger(trigger);
-
-        CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
-        trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
-        baseCharacteristic.addTrigger(trigger2);
-
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-
-
-
-
-
-
-       Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().size()==2);
-
-    }
-
-
-    @Test
-    @Transactional
-    public void remove_multiple_characteristic_to_prejudice_trigger(){
-        entityToTest = repo.save(entityToTest);
-
-        BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
-        baseCharacteristic.setName("Inteligent aber hässlich!");
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-
-        CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
-        trigger=characteristicPrejudiceTriggerRepository.save(trigger);
-
-        baseCharacteristic.addTrigger(trigger);
-
-        CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
-        trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
-        baseCharacteristic.addTrigger(trigger2);
-
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-        baseCharacteristic.removeTrigger(trigger);
-        baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
-
-
-
-
-
-        Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().size()==1);
-
-    }
-
-**/
+    /**
+     * @Test
+     * @Transactional public void add_characteristic_to_prejudice_trigger(){
+     * entityToTest = repo.save(entityToTest);
+     * <p>
+     * BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
+     * baseCharacteristic.setName("Inteligent aber hässlich!");
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * <p>
+     * CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
+     * trigger=characteristicPrejudiceTriggerRepository.save(trigger);
+     * <p>
+     * baseCharacteristic.addTrigger(trigger);
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().get(0).equals(trigger));
+     * <p>
+     * }
+     * @Test
+     * @Transactional public void add_multiple_characteristic_to_prejudice_trigger(){
+     * entityToTest = repo.save(entityToTest);
+     * <p>
+     * BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
+     * baseCharacteristic.setName("Inteligent aber hässlich!");
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * <p>
+     * CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
+     * trigger=characteristicPrejudiceTriggerRepository.save(trigger);
+     * <p>
+     * baseCharacteristic.addTrigger(trigger);
+     * <p>
+     * CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
+     * trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
+     * baseCharacteristic.addTrigger(trigger2);
+     * <p>
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().size()==2);
+     * <p>
+     * }
+     * @Test
+     * @Transactional public void remove_multiple_characteristic_to_prejudice_trigger(){
+     * entityToTest = repo.save(entityToTest);
+     * <p>
+     * BaseCharacteristic baseCharacteristic = new BaseCharacteristic();
+     * baseCharacteristic.setName("Inteligent aber hässlich!");
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * <p>
+     * CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
+     * trigger=characteristicPrejudiceTriggerRepository.save(trigger);
+     * <p>
+     * baseCharacteristic.addTrigger(trigger);
+     * <p>
+     * CharacteristicPrejudiceTrigger trigger2 = new CharacteristicPrejudiceTrigger();
+     * trigger2=characteristicPrejudiceTriggerRepository.save(trigger2);
+     * baseCharacteristic.addTrigger(trigger2);
+     * <p>
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * baseCharacteristic.removeTrigger(trigger);
+     * baseCharacteristic = characteristicsRepository.save(baseCharacteristic);
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * Assert.assertTrue(baseCharacteristic.getCharacteristicPrejudiceTriggers().size()==1);
+     * <p>
+     * }
+     **/
     @Override
     public void cleanUp() {
         super.cleanUp();

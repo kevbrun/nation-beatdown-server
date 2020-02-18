@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BaseCharacteristicResourceServiceImpl extends AbstractNamedEntityService<BaseCharacteristicDto,BaseCharacteristicDto> implements CharacteristicResourceService {
+public class BaseCharacteristicResourceServiceImpl extends AbstractNamedEntityService<BaseCharacteristicDto, BaseCharacteristicDto> implements CharacteristicResourceService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public BaseCharacteristicResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
-        super(BaseCharacteristicDto.class,factory, massRestClientFactory);
+        super(BaseCharacteristicDto.class, factory, massRestClientFactory);
     }
 
 }

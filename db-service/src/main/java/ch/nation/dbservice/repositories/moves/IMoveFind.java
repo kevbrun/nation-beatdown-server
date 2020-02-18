@@ -11,16 +11,15 @@ import java.util.UUID;
 public interface IMoveFind<T> {
 
 
-    Page<T> findAllByGameInfo_IdAndCaster_IdAndRound(@Param("runtime") UUID runtimeUuid, @Param("caster")UUID casterUuid, @Param("round") int round, Pageable pageable);
+    Page<T> findAllByGameInfo_IdAndCaster_IdAndRound(@Param("runtime") UUID runtimeUuid, @Param("caster") UUID casterUuid, @Param("round") int round, Pageable pageable);
 
     Iterable<T> findAllByCaster_Id(@Param("caster") UUID caster);
 
     Iterable<T> findAllByRound(@Param("round") int round);
 
-    Page<T> findAllByGameInfo_Id(@Param("runtime")UUID runtimeUuid, Pageable pageable);
+    Page<T> findAllByGameInfo_Id(@Param("runtime") UUID runtimeUuid, Pageable pageable);
 
     long countAllByGameInfo_Id(@Param("runtime") UUID runtimeUuid);
-
 
 
 }

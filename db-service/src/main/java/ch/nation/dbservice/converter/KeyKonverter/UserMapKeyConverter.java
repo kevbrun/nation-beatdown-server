@@ -7,7 +7,7 @@ import org.springframework.boot.jackson.JsonComponent;
 import java.io.IOException;
 
 @JsonComponent
-public class UserMapKeyConverter  extends KeyDeserializer {
+public class UserMapKeyConverter extends KeyDeserializer {
     @Override
     public Object deserializeKey(String key, DeserializationContext ctxt) throws IOException {
         return null;

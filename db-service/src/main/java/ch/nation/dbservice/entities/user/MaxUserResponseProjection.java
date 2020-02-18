@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 @Projection(name = "userProjection", types = User.class)
-public interface MaxUserResponseProjection extends TimestampProjection,NamedClassesProjection, UserMinResponseProjection {
+public interface MaxUserResponseProjection extends TimestampProjection, NamedClassesProjection, UserMinResponseProjection {
 
     @JsonProperty("nation")
     public Nation getNation();
@@ -22,8 +22,6 @@ public interface MaxUserResponseProjection extends TimestampProjection,NamedClas
 
     @JsonProperty("units")
     public List<Unit> getUnits();
-
-
 
 
 }

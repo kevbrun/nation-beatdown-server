@@ -36,6 +36,7 @@ public interface UnitBaseFields {
 
     @JsonProperty("vit")
     public int getVitality();
+
     @JsonProperty("int")
     public int getIntelligence();
 

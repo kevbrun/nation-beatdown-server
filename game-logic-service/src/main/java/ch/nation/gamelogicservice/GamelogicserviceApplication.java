@@ -13,13 +13,13 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
-@EnableFeignClients(basePackages ={"ch.nation.core.clients"})
+@EnableFeignClients(basePackages = {"ch.nation.core.clients"})
 @ComponentScan(basePackages = {"ch.nation"})
-@Import({IncomingRequestLoggingConfiguration.class,FeignClientConfig.class})
+@Import({IncomingRequestLoggingConfiguration.class, FeignClientConfig.class})
 public class GamelogicserviceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GamelogicserviceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GamelogicserviceApplication.class, args);
+    }
 
 }

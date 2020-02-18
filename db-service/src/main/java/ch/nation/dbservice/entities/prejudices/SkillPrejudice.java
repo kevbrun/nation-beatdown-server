@@ -10,14 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Objects;
 
-@Entity(name="SKILL_PREJUDICE")
+@Entity(name = "SKILL_PREJUDICE")
 @DiscriminatorValue("SKILL")
-public class SkillPrejudice extends BasePrejudice  implements IDiscrimantorValue {
+public class SkillPrejudice extends BasePrejudice implements IDiscrimantorValue {
 
 
     @ManyToOne
     @JsonProperty("skill")
-    @RestResource(rel="skill",path = "skills")
+    @RestResource(rel = "skill", path = "skills")
     private Skill skill;
 
     public SkillPrejudice() {

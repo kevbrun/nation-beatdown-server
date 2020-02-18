@@ -7,10 +7,10 @@ import ch.nation.core.services.AbstractEntityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MoveMoveValueResourceServiceImpl extends AbstractEntityService<MoveSkillEffectPlayerMoveSkillValueDto,MoveSkillEffectPlayerMoveSkillValueDto> {
+public class MoveMoveValueResourceServiceImpl extends AbstractEntityService<MoveSkillEffectPlayerMoveSkillValueDto, MoveSkillEffectPlayerMoveSkillValueDto> {
 
 
-    public MoveMoveValueResourceServiceImpl( DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
-        super( MoveSkillEffectPlayerMoveSkillValueDto.class,factory, massRestClientFactory);
+    public MoveMoveValueResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
+        super(MoveSkillEffectPlayerMoveSkillValueDto.class, factory, massRestClientFactory);
     }
 }

@@ -9,19 +9,18 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class UnitLastName  {
+public class UnitLastName {
 
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY,generator = "native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @JsonProperty("last_name")
-    @Column(name="last_name",unique = true,nullable = false)
+    @Column(name = "last_name", unique = true, nullable = false)
     private String secondName;
-
 
 
     public UnitLastName() {

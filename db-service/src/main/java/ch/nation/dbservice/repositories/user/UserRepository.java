@@ -9,13 +9,9 @@ import org.springframework.hateoas.Resource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "users",path = "users"/**,excerptProjection = MaxUserResponseProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "users", path = "users"/**,excerptProjection = MaxUserResponseProjection.class**/)
 @Transactional
 public interface UserRepository extends IPageableDao<User>, INamedObjectDao<User> {
-
-
-
-
 
 
 }

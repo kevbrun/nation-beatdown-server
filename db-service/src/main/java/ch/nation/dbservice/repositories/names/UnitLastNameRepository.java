@@ -6,8 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "names",path = "last-name")
-public interface UnitLastNameRepository extends PagingAndSortingRepository<UnitLastName,Long> {
+@RepositoryRestResource(collectionResourceRel = "names", path = "last-name")
+public interface UnitLastNameRepository extends PagingAndSortingRepository<UnitLastName, Long> {
 
 
 }

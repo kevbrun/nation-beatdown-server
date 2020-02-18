@@ -14,11 +14,11 @@ import java.util.Objects;
 @Embeddable
 public class EmbeddableIntegerBonus implements IBonus<Integer> {
     @JsonProperty("bonus")
-    private  Integer bonus;
+    private Integer bonus;
 
     @JsonProperty("stat_target")
     @Enumerated(EnumType.STRING)
-    @Column(name="stat_target")
+    @Column(name = "stat_target")
     private StatModTarget statTarget;
 
     public EmbeddableIntegerBonus(Integer bonus, StatModTarget statTarget) {

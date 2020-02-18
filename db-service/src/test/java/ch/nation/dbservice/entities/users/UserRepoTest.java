@@ -5,7 +5,7 @@ import ch.nation.dbservice.entities.user.User;
 import ch.nation.dbservice.repositories.user.UserRepository;
 import org.junit.Assert;
 
-public class UserRepoTest extends AbstractNamedEntityTest<User,UserRepository> {
+public class UserRepoTest extends AbstractNamedEntityTest<User, UserRepository> {
 
 
     @Override
@@ -33,7 +33,7 @@ public class UserRepoTest extends AbstractNamedEntityTest<User,UserRepository> {
         savedObject.setPassword("judas");
 
         savedObject = repo.save(savedObject);
-        Assert.assertEquals("judas",savedObject.getPassword());
+        Assert.assertEquals("judas", savedObject.getPassword());
 
     }
 }

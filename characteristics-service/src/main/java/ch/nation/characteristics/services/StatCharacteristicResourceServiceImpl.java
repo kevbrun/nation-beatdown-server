@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StatCharacteristicResourceServiceImpl extends AbstractNamedEntityService<StatCharacteristicsDto,StatCharacteristicsDto> implements CharacteristicResourceService {
+public class StatCharacteristicResourceServiceImpl extends AbstractNamedEntityService<StatCharacteristicsDto, StatCharacteristicsDto> implements CharacteristicResourceService {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public StatCharacteristicResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {

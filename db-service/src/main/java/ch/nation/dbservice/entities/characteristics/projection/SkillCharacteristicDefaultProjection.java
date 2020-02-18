@@ -7,8 +7,8 @@ import ch.nation.dbservice.entities.skills.SkillWithEffectsProjection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(types = SkillCharacteristic.class,name="def")
-public interface SkillCharacteristicDefaultProjection extends BaseCharacteristicProjecton{
+@Projection(types = SkillCharacteristic.class, name = "def")
+public interface SkillCharacteristicDefaultProjection extends BaseCharacteristicProjecton {
 
 
     @JsonProperty("skill")

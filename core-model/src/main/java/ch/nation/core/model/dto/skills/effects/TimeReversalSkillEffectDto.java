@@ -6,7 +6,7 @@ import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class TimeReversalSkillEffectDto extends SkillEffectDto{
+public class TimeReversalSkillEffectDto extends SkillEffectDto {
 
     @JsonProperty("reversal_def")
     private TimeReversakSkillEffectRoundDefinition definition;
@@ -22,8 +22,6 @@ public class TimeReversalSkillEffectDto extends SkillEffectDto{
 
     public TimeReversalSkillEffectDto() {
     }
-
-
 
 
     public TimeReversakSkillEffectRoundDefinition getDefinition() {

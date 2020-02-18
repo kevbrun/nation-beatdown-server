@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(contextId = "first-name-rest-service",value="nation-database-service",path = "/first-name",decode404 = true, configuration = FeignClientConfig.class)
+@FeignClient(contextId = "first-name-rest-service", value = "nation-database-service", path = "/first-name", decode404 = true, configuration = FeignClientConfig.class)
 public interface DBUnitFirstNameRestClient {
 
-    @RequestMapping(method = RequestMethod.GET,path = "/{id}")
-        Resource<UnitLastNameDto> findById(@PathVariable("id") long id);
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    Resource<UnitLastNameDto> findById(@PathVariable("id") long id);
 
-    }
+}

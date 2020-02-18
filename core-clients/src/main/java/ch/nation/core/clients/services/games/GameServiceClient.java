@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Component
-@FeignClient(contextId = "game-resource-service",value="nation-cloud-games-service",decode404 = true, configuration = FeignClientConfig.class)
-public interface GameServiceClient extends BaseServiceRestClientInterface<GameDto,GameDto> {
+@FeignClient(contextId = "game-resource-service", value = "nation-cloud-games-service", decode404 = true, configuration = FeignClientConfig.class)
+public interface GameServiceClient extends BaseServiceRestClientInterface<GameDto, GameDto> {
 
-    @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}/{playerTwoUuid}"})
+    @RequestMapping(method = RequestMethod.POST, path = {"/{playerUuid}/{playerTwoUuid}"})
     ResponseEntity<GameDto> createGame(@PathVariable("playerUuid") String playerUuid,
-                              @PathVariable(value = "playerTwoUuid", required = false) String playerTwoUuid,
-                              @RequestParam(value = "projection", required = false) QueryProjection projection);
+                                       @PathVariable(value = "playerTwoUuid", required = false) String playerTwoUuid,
+                                       @RequestParam(value = "projection", required = false) QueryProjection projection);
 
-    @RequestMapping(method = RequestMethod.POST,path = {"/{playerUuid}"})
+    @RequestMapping(method = RequestMethod.POST, path = {"/{playerUuid}"})
     ResponseEntity<GameDto> createGame(@PathVariable("playerUuid") String playerUuid,
-                              @RequestParam(value = "projection", required = false) QueryProjection projection);
+                                       @RequestParam(value = "projection", required = false) QueryProjection projection);
 
 
 }

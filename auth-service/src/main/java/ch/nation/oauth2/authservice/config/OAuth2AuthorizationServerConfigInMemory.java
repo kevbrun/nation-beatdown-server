@@ -1,4 +1,5 @@
 package ch.nation.oauth2.authservice.config;
+
 import java.util.Arrays;
 
 import javax.sql.DataSource;

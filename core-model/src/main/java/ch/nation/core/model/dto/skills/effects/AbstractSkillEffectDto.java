@@ -8,16 +8,17 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
-/**@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
-        property = "type",visible = true)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
-        @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
-        @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "SelfMoveEffect"),
-        @JsonSubTypes.Type(value = StatSkillEffectDto.class, name = "StatSkillEffect"),
-})**/
+/**
+ * @JsonTypeInfo( use = JsonTypeInfo.Id.NAME,
+ * include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
+ * property = "type",visible = true)
+ * @JsonSubTypes({
+ * @JsonSubTypes.Type(value = SkillEffectDto.class, name = "SkillEffect"),
+ * @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "TimeReversalSkillEffect"),
+ * @JsonSubTypes.Type(value = TimeReversalSkillEffectDto.class, name = "SelfMoveEffect"),
+ * @JsonSubTypes.Type(value = StatSkillEffectDto.class, name = "StatSkillEffect"),
+ * })
+ **/
 public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
 
     @JsonProperty("effectTarget")

@@ -8,6 +8,6 @@ import ch.nation.dbservice.repositories.IPageableDao;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-@RepositoryRestResource(collectionResourceRel = "prejudices",path = "prejudices-skill")
+@RepositoryRestResource(collectionResourceRel = "prejudices", path = "prejudices-skill")
 public interface SkillPrejudiceRepository extends IPageableDao<SkillPrejudice>, INamedObjectDao<SkillPrejudice>, IFindByIdentifier<SkillPrejudice> {
 }

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@FeignClient(contextId = "characteristic-db-rest-service",value="nation-database-service",path = "/characteristics",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBBaseCharacteristicRestClient extends DBRestServiceBaseInterface<BaseCharacteristicDto,BaseCharacteristicDto> {
+@FeignClient(contextId = "characteristic-db-rest-service", value = "nation-database-service", path = "/characteristics", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBBaseCharacteristicRestClient extends DBRestServiceBaseInterface<BaseCharacteristicDto, BaseCharacteristicDto> {
 
     @Override
     default String getType() {

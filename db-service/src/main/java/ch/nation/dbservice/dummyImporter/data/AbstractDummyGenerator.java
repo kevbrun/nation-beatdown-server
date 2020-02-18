@@ -13,7 +13,7 @@ public abstract class AbstractDummyGenerator<TData> implements IDummyGenerator<T
 
     public AbstractDummyGenerator() throws Exception {
         entities = new ArrayList<>();
-        
+
 
     }
 

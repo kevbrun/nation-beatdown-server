@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "skills",path = "skills"/**, excerptProjection = SkillWithEffectsProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "skills", path = "skills"/**, excerptProjection = SkillWithEffectsProjection.class**/)
 @Transactional
 public interface SkillRepository extends IPageableDao<Skill>, INamedObjectDao<Skill>, IFindByIdentifier<Skill> {
 }
