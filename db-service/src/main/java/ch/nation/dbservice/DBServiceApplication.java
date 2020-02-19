@@ -6,6 +6,7 @@ import ch.nation.dbservice.config.IncomingRequestLoggingConfiguration;
 import ch.nation.dbservice.config.SpringDataConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = {"ch.nation.dbservice.entities", "ch.nation.dbservice.repositories", "ch.nation.dbservice.utils"
         , "ch.nation.dbservice.dummyImporter", "ch.nation.dbservice.controller"})
 @Import({DBFlywayConfiguration.class, SpringDataConfig.class, IncomingRequestLoggingConfiguration.class, HashEncoderConfig.class})
-
+@EnableCaching
 public class DBServiceApplication {
 
     public static void main(String[] args) {
