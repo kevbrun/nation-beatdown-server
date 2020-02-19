@@ -6,11 +6,7 @@ import ch.nation.dbservice.entities.projection.users.NamedClassesProjection;
 import org.springframework.data.rest.core.config.Projection;
 
 @Projection(name = "max", types = {Unit.class})
-public interface UnitMaxResponseProjection extends MinimizedEntityResponseProjection, NamedClassesProjection , UnitBaseFields{
-
-
-
-
+public interface UnitMaxResponseProjection extends MinimizedEntityResponseProjection, NamedClassesProjection, UnitBaseFields {
 
 
 }

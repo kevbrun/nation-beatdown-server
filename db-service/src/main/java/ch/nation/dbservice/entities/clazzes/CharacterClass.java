@@ -17,31 +17,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="CLAZZES")
-@Table(name="CLAZZES")
+@Entity(name = "CLAZZES")
+@Table(name = "CLAZZES")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class CharacterClass extends NationRessource {
-    @Column(name="lvl")
+    @Column(name = "lvl")
     @JsonProperty("lvl")
     private int level;
 
-    @Column(name ="exp")
+    @Column(name = "exp")
     @JsonProperty("exp")
     private int exp;
     @JsonProperty("exp_for_level_up")
-    @Column(name="exp_for_level_up")
+    @Column(name = "exp_for_level_up")
     private int expToLevelUp;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
-  //  @Column(name="skills")
+    //  @Column(name="skills")
 
-    @JoinTable(name="CLAZZ_TO_SKILL",
-            joinColumns={@JoinColumn(name="CLASS_ID", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="SKILL_ID", referencedColumnName="id")})
-    @RestResource(path="skill",rel = "skill",exported = false)
+    @JoinTable(name = "CLAZZ_TO_SKILL",
+            joinColumns = {@JoinColumn(name = "CLASS_ID", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "SKILL_ID", referencedColumnName = "id")})
+    @RestResource(path = "skill", rel = "skill", exported = false)
     @JsonProperty("skills")
     private List<Skill> skills;
 
@@ -51,7 +51,7 @@ public class CharacterClass extends NationRessource {
             orphanRemoval = true
 
     )
-    @RestResource(path = "units", rel="units")
+    @RestResource(path = "units", rel = "units")
     @JsonProperty("units")
 
     private List<Unit> units = new ArrayList<>();
@@ -64,10 +64,9 @@ public class CharacterClass extends NationRessource {
             @AttributeOverride(name = "growthType", column = @Column(name = "hp_growth"))
 
     })
-    @Column(name="hp")
+    @Column(name = "hp")
     @JsonProperty("hp")
     private Stat healthPoints;
-
 
 
     @Embedded
@@ -79,11 +78,9 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="ap")
+    @Column(name = "ap")
     @JsonProperty("ap")
     private Stat actionPoints;
-
-
 
 
     @Embedded
@@ -95,10 +92,9 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="speed")
+    @Column(name = "speed")
     @JsonProperty("speed")
     private Stat movementSpeed;
-
 
 
     @Embedded
@@ -110,7 +106,7 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="str")
+    @Column(name = "str")
     @JsonProperty("str")
     private Stat strength;
 
@@ -123,7 +119,7 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="vit")
+    @Column(name = "vit")
     @JsonProperty("vit")
     private Stat vitality;
 
@@ -136,7 +132,7 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="int")
+    @Column(name = "int")
     @JsonProperty("int")
     private Stat intelligence;
 
@@ -149,7 +145,7 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="dex")
+    @Column(name = "dex")
     @JsonProperty("dex")
     private Stat dexterity;
 
@@ -162,24 +158,22 @@ public class CharacterClass extends NationRessource {
 
 
     })
-    @Column(name="agi")
+    @Column(name = "agi")
     @JsonProperty("agi")
     private Stat agility;
 //TODO Check if applied stats effect of unity game should be saved too
 
 
-
-
     public CharacterClass() {
         super();
-        if(healthPoints==null) healthPoints = new Stat();
-        if(actionPoints==null) actionPoints = new Stat();
-        if(movementSpeed==null)movementSpeed = new Stat();
-        if(strength==null) strength = new Stat();
-        if(vitality==null) vitality = new Stat();
-        if(intelligence==null) intelligence = new Stat();
-        if(dexterity==null) dexterity = new Stat();
-        if(agility==null) agility = new Stat();
+        if (healthPoints == null) healthPoints = new Stat();
+        if (actionPoints == null) actionPoints = new Stat();
+        if (movementSpeed == null) movementSpeed = new Stat();
+        if (strength == null) strength = new Stat();
+        if (vitality == null) vitality = new Stat();
+        if (intelligence == null) intelligence = new Stat();
+        if (dexterity == null) dexterity = new Stat();
+        if (agility == null) agility = new Stat();
     }
 
     public CharacterClass(String name, String description, String identifier, int level, int exp, int expToLevelUp, List<Skill> skills, List<Unit> units, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
@@ -204,7 +198,6 @@ public class CharacterClass extends NationRessource {
         //Weak side of relation!
         return units;
     }
-
 
 
     public void setUnits(List<Unit> units) {
@@ -237,7 +230,7 @@ public class CharacterClass extends NationRessource {
 
     public List<Skill> getSkills() {
 
-        if(skills==null) skills = new ArrayList<>();
+        if (skills == null) skills = new ArrayList<>();
 
         return skills;
     }
@@ -247,7 +240,7 @@ public class CharacterClass extends NationRessource {
     }
 
     public Stat getHealthPoints() {
-        if(healthPoints==null) healthPoints = new Stat();
+        if (healthPoints == null) healthPoints = new Stat();
         return healthPoints;
     }
 
@@ -256,7 +249,7 @@ public class CharacterClass extends NationRessource {
     }
 
     public Stat getActionPoints() {
-        if(actionPoints==null) actionPoints = new Stat();
+        if (actionPoints == null) actionPoints = new Stat();
 
         return actionPoints;
     }
@@ -267,7 +260,7 @@ public class CharacterClass extends NationRessource {
 
     public Stat getMovementSpeed() {
 
-        if(movementSpeed==null) movementSpeed = new Stat();
+        if (movementSpeed == null) movementSpeed = new Stat();
 
         return movementSpeed;
     }
@@ -277,7 +270,7 @@ public class CharacterClass extends NationRessource {
     }
 
     public Stat getStrength() {
-        if(strength==null) strength = new Stat();
+        if (strength == null) strength = new Stat();
 
 
         return strength;
@@ -289,7 +282,7 @@ public class CharacterClass extends NationRessource {
 
     public Stat getVitality() {
 
-        if(vitality==null) vitality = new Stat();
+        if (vitality == null) vitality = new Stat();
 
 
         return vitality;
@@ -300,7 +293,7 @@ public class CharacterClass extends NationRessource {
     }
 
     public Stat getIntelligence() {
-        if(intelligence==null) intelligence = new Stat();
+        if (intelligence == null) intelligence = new Stat();
 
 
         return intelligence;
@@ -312,7 +305,7 @@ public class CharacterClass extends NationRessource {
 
     public Stat getDexterity() {
 
-        if(dexterity==null) dexterity = new Stat();
+        if (dexterity == null) dexterity = new Stat();
 
 
         return dexterity;
@@ -323,7 +316,7 @@ public class CharacterClass extends NationRessource {
     }
 
     public Stat getAgility() {
-        if(agility==null) agility = new Stat();
+        if (agility == null) agility = new Stat();
 
 
         return agility;
@@ -332,11 +325,6 @@ public class CharacterClass extends NationRessource {
     public void setAgility(Stat agility) {
         this.agility = agility;
     }
-
-
-
-
-
 
 
     @Override
@@ -388,21 +376,20 @@ public class CharacterClass extends NationRessource {
     //Connection functions
 
 
-    public void addSkill(Skill skill){
-        if(!getSkills().contains(skill)){
+    public void addSkill(Skill skill) {
+        if (!getSkills().contains(skill)) {
             getSkills().add(skill);
             skill.addCharacterClass(this);
 
         }
     }
 
-    public void removeSkill(Skill skill){
-        if(getSkills().contains(skill)){
+    public void removeSkill(Skill skill) {
+        if (getSkills().contains(skill)) {
             getSkills().remove(skill);
             skill.removeCharacterClass(this);
         }
     }
-
 
 
 }

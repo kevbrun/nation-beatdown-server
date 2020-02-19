@@ -12,13 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-public abstract class AbstractNamedEntityTest<TEntity extends NamedEntityBase,TRepo extends IPageableDao<TEntity>> extends AbstractEntityTest<TEntity,TRepo> {
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public abstract class AbstractNamedEntityTest<TEntity extends NamedEntityBase, TRepo extends IPageableDao<TEntity>> extends AbstractEntityTest<TEntity, TRepo> {
 
 
     @Test
-    public  void update_entities_test(){
+    public void update_entities_test() {
         TEntity savedObject = repo.save(entityToTest);
         savedObject.setName("After updatePut");
         savedObject = repo.save(savedObject);

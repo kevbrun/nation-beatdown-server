@@ -38,13 +38,13 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
 
     @Override
     public void test_if_has_discriminator_value() {
-       LOGGER.info("NOT IMPLEMENTED YET!");
+        LOGGER.info("NOT IMPLEMENTED YET!");
     }
 
 
     @Test
     @Transactional
-    public void test_adding_caster(){
+    public void test_adding_caster() {
         LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
         Unit dummy = new Unit();
         dummy.setName("123 Polizei");
@@ -56,21 +56,19 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
         action.setCaster(dummy);
 
 
-        action  = repo.save(action);
+        action = repo.save(action);
 
 
-        Assert.assertEquals("123 Polizei",action.getCaster().getName());
+        Assert.assertEquals("123 Polizei", action.getCaster().getName());
         Assert.assertTrue(action.getCaster().equals(dummy));
 
 
-
     }
-
 
 
     @Test
     @Transactional
-    public void remove_caster(){
+    public void remove_caster() {
         LOGGER.info("TEST RUNS WITH @Transactional ANNOTATION!");
         Unit dummy = new Unit();
         dummy.setName("123 Polizei");
@@ -82,15 +80,13 @@ public class PlayerMoveRepositoryTest extends AbstractEntityTest<BasePlayerMove,
         action.setCaster(dummy);
 
 
-        action  = repo.save(action);
+        action = repo.save(action);
 
 
         action.setCaster(null);
-        Assert.assertTrue(action.getCaster()==null);
-        Assert.assertTrue(dummy.getCaster().size()==0);
+        Assert.assertTrue(action.getCaster() == null);
+        Assert.assertTrue(dummy.getCaster().size() == 0);
     }
-
-
 
 
 }

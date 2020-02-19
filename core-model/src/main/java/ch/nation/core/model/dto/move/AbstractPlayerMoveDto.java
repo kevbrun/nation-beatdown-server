@@ -33,13 +33,12 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     @JsonProperty("updated")
     private Calendar updateTimemstamp;
 
+    @JsonProperty("was_reversed")
+    private boolean wasReversed;
 
 
     public AbstractPlayerMoveDto() {
     }
-
-
-
 
 
     public GameDto getGameDto() {
@@ -47,7 +46,13 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
+    public boolean isWasReversed() {
+        return wasReversed;
+    }
 
+    public void setWasReversed(boolean wasReversed) {
+        this.wasReversed = wasReversed;
+    }
 
     public void setGameDto(GameDto gameDto) {
         this.gameDto = gameDto;
@@ -102,7 +107,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
-
     public SkillDto getSkillDto() {
         return skillDto;
     }
@@ -112,7 +116,6 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
     }
 
 
-
     @Override
     public String ResourceCollectionName() {
         return "moves";
@@ -120,7 +123,7 @@ public abstract class AbstractPlayerMoveDto extends AbstractDto {
 
     @Override
     public String toString() {
-        return this.getClass().getName()+" {" +
+        return this.getClass().getName() + " {" +
                 "gameDto=" + gameDto +
                 ", round=" + round +
                 ", user=" + user +

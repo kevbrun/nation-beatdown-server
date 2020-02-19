@@ -12,14 +12,14 @@ import java.util.Objects;
 public class FogOfWar extends SimpleIdEntity implements IVector3<Float> {
 
     @JsonProperty("x")
-    @Column(name="x",precision = 5,scale = 5)
+    @Column(name = "x", precision = 5, scale = 5)
     private Float x;
 
-    @Column(name="y",precision = 5,scale = 5)
+    @Column(name = "y", precision = 5, scale = 5)
     @JsonProperty("y")
     private Float y;
 
-    @Column(name="z",precision = 5,scale = 5)
+    @Column(name = "z", precision = 5, scale = 5)
     @JsonProperty("z")
     private Float z;
 

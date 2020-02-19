@@ -6,8 +6,8 @@ import ch.nation.core.clients.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 
 
-@FeignClient(contextId = "game-stat-value-rest-service",value="nation-database-service",path = "/stat-values",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBPlayerStatMoveValueRestClient extends DBRestServiceBaseInterface<StatSkillPlayerMoveSkillValueDto,StatSkillPlayerMoveSkillValueDto> {
+@FeignClient(contextId = "game-stat-value-rest-service", value = "nation-database-service", path = "/stat-values", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBPlayerStatMoveValueRestClient extends DBRestServiceBaseInterface<StatSkillPlayerMoveSkillValueDto, StatSkillPlayerMoveSkillValueDto> {
 
     @Override
     default String getType() {

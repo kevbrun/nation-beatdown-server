@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="CHARACTERISTICS")
+@Entity(name = "CHARACTERISTICS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="CHARACTERISTICS_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "CHARACTERISTICS_TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type",visible = true)
+        property = "type", visible = true)
 @JsonSubTypes({
 
         //BASE
@@ -32,18 +32,16 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = BaseCharacteristic.class, name = "BaseCharacteristic")
 })
 
-public  abstract class BaseCharacteristic extends NationRessource implements IDiscrimantorValue {
+public abstract class BaseCharacteristic extends NationRessource implements IDiscrimantorValue {
 
 
-    @ManyToMany(mappedBy = "characteristics",fetch =  FetchType.EAGER)
+    @ManyToMany(mappedBy = "characteristics", fetch = FetchType.EAGER)
     @JsonIgnore
-    @RestResource(path = "triggers", rel="triggers")
+    @RestResource(path = "triggers", rel = "triggers")
     private List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers;
 
 
-
-
-    @RestResource(path="nations",rel="nations")
+    @RestResource(path = "nations", rel = "nations")
     @ManyToMany(mappedBy = "characteristics")
     @JsonIgnore
     private List<Nation> nations;
@@ -51,8 +49,8 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
 
     public BaseCharacteristic() {
         super();
-        if(characteristicPrejudiceTriggers==null) characteristicPrejudiceTriggers = new ArrayList<>();
-        if(nations==null) nations = new ArrayList<>();
+        if (characteristicPrejudiceTriggers == null) characteristicPrejudiceTriggers = new ArrayList<>();
+        if (nations == null) nations = new ArrayList<>();
 
 
     }
@@ -65,7 +63,7 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
         this.nations = nations;
     }
 
-  public List<CharacteristicPrejudiceTrigger> getCharacteristicPrejudiceTriggers() {
+    public List<CharacteristicPrejudiceTrigger> getCharacteristicPrejudiceTriggers() {
         return characteristicPrejudiceTriggers;
     }
 
@@ -73,9 +71,9 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
         LOGGER.debug("Execute custom setter");
         if (this.characteristicPrejudiceTriggers == null) {
             this.characteristicPrejudiceTriggers = characteristicPrejudiceTriggers;
-        } else if(this.characteristicPrejudiceTriggers != characteristicPrejudiceTriggers) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.characteristicPrejudiceTriggers != characteristicPrejudiceTriggers) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.characteristicPrejudiceTriggers.clear();
-            if(characteristicPrejudiceTriggers != null){
+            if (characteristicPrejudiceTriggers != null) {
                 this.characteristicPrejudiceTriggers.addAll(characteristicPrejudiceTriggers);
             }
         }
@@ -99,8 +97,8 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
 
     //Manuel
     @Transactional
-    public void addTrigger(CharacteristicPrejudiceTrigger trigger){
-        if(!getCharacteristicPrejudiceTriggers().contains(trigger)){
+    public void addTrigger(CharacteristicPrejudiceTrigger trigger) {
+        if (!getCharacteristicPrejudiceTriggers().contains(trigger)) {
             getCharacteristicPrejudiceTriggers().add(trigger);
             trigger.addCharacteristic(this);
         }
@@ -110,15 +108,13 @@ public  abstract class BaseCharacteristic extends NationRessource implements IDi
 
     //Manuel
     @Transactional
-    public void removeTrigger(CharacteristicPrejudiceTrigger trigger){
-        if(getCharacteristicPrejudiceTriggers().contains(trigger)){
+    public void removeTrigger(CharacteristicPrejudiceTrigger trigger) {
+        if (getCharacteristicPrejudiceTriggers().contains(trigger)) {
             getCharacteristicPrejudiceTriggers().remove(trigger);
             trigger.removeCharacteristic(this);
         }
 
     }
-
-
 
 
 }

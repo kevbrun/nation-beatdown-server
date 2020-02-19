@@ -11,15 +11,12 @@ import java.util.List;
 public class StatPrejudiceDto extends BasePrejudiceDto {
 
 
-
-
-
     @JsonProperty("delta")
     private StatBonusDeltaDto deltaDto;
 
 
     public StatPrejudiceDto() {
-    super();
+        super();
 
     }
 

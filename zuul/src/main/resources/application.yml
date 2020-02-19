@@ -6,18 +6,6 @@ eureka:
     registerWithEureka: true
   instance:
     preferIpAddress: true
-logging:
-  level:
-    ch:
-      nation:
-        rest:
-          clients: DEBUG
-    org:
-      springframework:
-        web:
-          filter:
-            CommonsRequestLoggingFilter: DEBUG
-        security: DEBUG
 
 hystrix:
   command:
@@ -84,3 +72,20 @@ server:
 spring:
   application:
     name: nation-cloud-zuul-service
+
+
+---
+spring:
+  profiles: debug
+logging:
+  level:
+    ch:
+      nation:
+        rest:
+          clients: DEBUG
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+        security: DEBUG

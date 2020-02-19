@@ -24,7 +24,7 @@ public class UnitCompleteNameDto {
         this.sex = sex;
     }
 
-    public UnitCompleteNameDto(UnitFirstNameDto firstNameDto, UnitLastNameDto lastNameDto){
+    public UnitCompleteNameDto(UnitFirstNameDto firstNameDto, UnitLastNameDto lastNameDto) {
         this.firstName = firstNameDto.getFirstName();
         this.lastName = lastNameDto.getLastName();
         this.sex = firstNameDto.getSex();

@@ -13,9 +13,9 @@ import javax.persistence.Entity;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="STAT_PREJUDICE")
+@Entity(name = "STAT_PREJUDICE")
 @DiscriminatorValue("STAT")
-public class StatPrejudice extends BasePrejudice   implements IDiscrimantorValue {
+public class StatPrejudice extends BasePrejudice implements IDiscrimantorValue {
 
 
     @Embedded
@@ -31,14 +31,13 @@ public class StatPrejudice extends BasePrejudice   implements IDiscrimantorValue
     }
 
 
-
     public StatPrejudice(StatBonusDelta delta) {
         this.delta = delta;
     }
 
     public StatBonusDelta getDelta() {
 
-        if(delta==null)delta = new StatBonusDelta();
+        if (delta == null) delta = new StatBonusDelta();
         return delta;
     }
 

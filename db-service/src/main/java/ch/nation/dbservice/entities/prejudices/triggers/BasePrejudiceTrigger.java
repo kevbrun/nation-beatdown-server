@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Table(name="PREJUDICE_TRIGGERS")
-@Entity(name="PREJUDICE_TRIGGERS")
+@Table(name = "PREJUDICE_TRIGGERS")
+@Entity(name = "PREJUDICE_TRIGGERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TRIGGER_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "TRIGGER_TYPE", discriminatorType = DiscriminatorType.STRING)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type",visible = true)
+        property = "type", visible = true)
 @JsonSubTypes({
 
         //BASE
@@ -33,17 +33,17 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = CharacteristicPrejudiceTrigger.class, name = "CharacteristicPrejudiceTrigger"),
         @JsonSubTypes.Type(value = BasePrejudiceTrigger.class, name = "BasePrejudiceTrigger")
 })
-public   abstract class BasePrejudiceTrigger extends NationRessource implements IDiscrimantorValue {
+public abstract class BasePrejudiceTrigger extends NationRessource implements IDiscrimantorValue {
 
-    @ManyToMany(mappedBy = "prejudiceTriggers",fetch = FetchType.EAGER)
-    @RestResource(path = "prejudices", rel="prejudices")
+    @ManyToMany(mappedBy = "prejudiceTriggers", fetch = FetchType.EAGER)
+    @RestResource(path = "prejudices", rel = "prejudices")
     @JsonProperty("prejudices")
     private List<BasePrejudice> prejudices;
 
 
     public BasePrejudiceTrigger() {
         super();
-        if(prejudices==null)        prejudices = new ArrayList<>();
+        if (prejudices == null) prejudices = new ArrayList<>();
     }
 
 
@@ -65,15 +65,15 @@ public   abstract class BasePrejudiceTrigger extends NationRessource implements 
 
     //Manual association func
 
-    public void addPrejudice(BasePrejudice prejudice){
-        if(!getPrejudices().contains(prejudice)){
+    public void addPrejudice(BasePrejudice prejudice) {
+        if (!getPrejudices().contains(prejudice)) {
             getPrejudices().add(prejudice);
             prejudice.addTrigger(this);
         }
     }
 
-    public void removeTrigger(BasePrejudice prejudice){
-        if(getPrejudices().contains(prejudice)){
+    public void removeTrigger(BasePrejudice prejudice) {
+        if (getPrejudices().contains(prejudice)) {
             getPrejudices().remove(prejudice);
             prejudice.removeTrigger(this);
         }

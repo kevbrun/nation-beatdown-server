@@ -39,31 +39,30 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(200f,0.0f,200f,StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(100f,0.0f,100f,StatGrowthType.LOGARITHMIC));
-        characterClass.setStrength(new Stat(10f,10f,999f,StatGrowthType.LINEAR));
-        characterClass.setAgility(new Stat(6f,6f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setIntelligence(new Stat(3f,3f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setDexterity(new Stat(7f,7f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setVitality(new Stat(8f,8f,999f,StatGrowthType.LINEAR));
-        characterClass.setMovementSpeed(new Stat(5f,5f,5f,StatGrowthType.NONE));
+        characterClass.setHealthPoints(new Stat(200f, 0.0f, 200f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
+        characterClass.setStrength(new Stat(10f, 10f, 999f, StatGrowthType.LINEAR));
+        characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setIntelligence(new Stat(3f, 3f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setDexterity(new Stat(7f, 7f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setVitality(new Stat(8f, 8f, 999f, StatGrowthType.LINEAR));
+        characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
 
         characterClassRepository.save(characterClass);
 
         Skill skill = skillRepository.findByIdentifier("dmg_target_str");
 
-        if(skill==null) throw new Exception("Could not found Nahkampf!");
+        if (skill == null) throw new Exception("Could not found Nahkampf!");
 
         characterClass.addSkill(skill);
 
         Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
-        if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
+        if (moveSkill == null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
         characterClass.addSkill(moveSkill);
 
         characterClassRepository.save(characterClass);
-
 
 
     }
@@ -76,31 +75,30 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(200f,0.0f,200f,StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(100f,0.0f,100f,StatGrowthType.LOGARITHMIC));
-        characterClass.setStrength(new Stat(10f,10f,999f,StatGrowthType.LINEAR));
-        characterClass.setAgility(new Stat(6f,6f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setIntelligence(new Stat(3f,3f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setDexterity(new Stat(7f,7f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setVitality(new Stat(8f,8f,999f,StatGrowthType.LINEAR));
-        characterClass.setMovementSpeed(new Stat(5f,5f,5f,StatGrowthType.NONE));
+        characterClass.setHealthPoints(new Stat(200f, 0.0f, 200f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
+        characterClass.setStrength(new Stat(10f, 10f, 999f, StatGrowthType.LINEAR));
+        characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setIntelligence(new Stat(3f, 3f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setDexterity(new Stat(7f, 7f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setVitality(new Stat(8f, 8f, 999f, StatGrowthType.LINEAR));
+        characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
 
         characterClassRepository.save(characterClass);
 
         Skill skill = skillRepository.findByIdentifier("dmg_target_str");
 
-        if(skill==null) throw new Exception("Could not found Nahkampf!");
+        if (skill == null) throw new Exception("Could not found Nahkampf!");
 
         characterClass.addSkill(skill);
 
         Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
-        if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
+        if (moveSkill == null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
         characterClass.addSkill(moveSkill);
 
         characterClassRepository.save(characterClass);
-
 
 
     }
@@ -114,45 +112,42 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(100f,0.0f,100f,StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(150f,0.0f,150f,StatGrowthType.LOGARITHMIC));
-        characterClass.setStrength(new Stat(5f,5f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setAgility(new Stat(6f,6f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setIntelligence(new Stat(7f,3f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setDexterity(new Stat(10f,7f,999f,StatGrowthType.LOGARITHMIC));
-        characterClass.setVitality(new Stat(4f,8f,999f,StatGrowthType.LINEAR));
-        characterClass.setMovementSpeed(new Stat(5f,5f,5f,StatGrowthType.NONE));
+        characterClass.setHealthPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(150f, 0.0f, 150f, StatGrowthType.LOGARITHMIC));
+        characterClass.setStrength(new Stat(5f, 5f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setIntelligence(new Stat(7f, 3f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setDexterity(new Stat(10f, 7f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setVitality(new Stat(4f, 8f, 999f, StatGrowthType.LINEAR));
+        characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
 
         characterClassRepository.save(characterClass);
 
         Skill skill = skillRepository.findByIdentifier("dmg-range_target_str");
 
-        if(skill==null) throw new Exception("Could not found Fernkampf!");
+        if (skill == null) throw new Exception("Could not found Fernkampf!");
 
         characterClass.addSkill(skill);
 
 
         Skill timeTravelCompleteRoundSkill = skillRepository.findByIdentifier("rev_any_round");
 
-        if(timeTravelCompleteRoundSkill==null) throw new Exception("Could not found Zurückgesetzt!");
+        if (timeTravelCompleteRoundSkill == null) throw new Exception("Could not found Zurückgesetzt!");
 
 
         characterClass.addSkill(timeTravelCompleteRoundSkill);
 
         Skill moveSkill = skillRepository.findByIdentifier("mv_self");
 
-        if(moveSkill==null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
+        if (moveSkill == null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
         characterClass.addSkill(moveSkill);
-
 
 
         characterClassRepository.save(characterClass);
 
 
-
     }
-
 
 
 }

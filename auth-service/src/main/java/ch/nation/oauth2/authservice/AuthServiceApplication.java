@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 //@ComponentScan(basePackages = {"ch.nation.oauth2"})
 public class AuthServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AuthServiceApplication.class, args);
+    }
 
 }

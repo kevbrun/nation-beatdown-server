@@ -14,23 +14,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Projection(name = "max", types = {Game.class})
-public interface MaxGameResponseProjection extends MinGameResponseProjection, TimestampProjection,MinimizedEntityResponseProjection {
+public interface MaxGameResponseProjection extends MinGameResponseProjection, TimestampProjection, MinimizedEntityResponseProjection {
 
 
-  /**  @JsonProperty("round")
-    public int getRound();
-    @JsonProperty("status")
-    public GameStatus getGameStatus();
-    @JsonProperty("users")
-    List<MaxUserResponseProjection> getUsers();
-    @JsonProperty("current_player")
-    public UUID getCurrentPlayerUuid();
-    @JsonProperty("first_player")
-    UUID getFirstPlayerUuid() ;
-    @JsonProperty("next_player")
-    UUID getNextPlayerUuid();**/
+    /**
+     * @JsonProperty("round") public int getRound();
+     * @JsonProperty("status") public GameStatus getGameStatus();
+     * @JsonProperty("users") List<MaxUserResponseProjection> getUsers();
+     * @JsonProperty("current_player") public UUID getCurrentPlayerUuid();
+     * @JsonProperty("first_player") UUID getFirstPlayerUuid() ;
+     * @JsonProperty("next_player") UUID getNextPlayerUuid();
+     **/
 
-  @JsonProperty("runtimes")
-  List<GameUserRuntimeInfo> getUserRuntimeInfos();
+    @JsonProperty("runtimes")
+    List<GameUserRuntimeInfo> getUserRuntimeInfos();
 
 }

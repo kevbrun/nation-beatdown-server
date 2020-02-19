@@ -36,67 +36,62 @@ public abstract class AbstractMassRestResource<T extends AbstractNationEntityBas
 
 
     @Autowired
-    public AbstractMassRestResource(IPageableDao repo){
+    public AbstractMassRestResource(IPageableDao repo) {
         this.repo = repo;
 
     }
 
 
-    @RequestMapping(method = POST, value = "/update-batch",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = POST, value = "/update-batch", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<?> batchUpdate(@RequestBody Collection<T> objectToSave) throws NoSuchMethodException {
 
-        LOGGER.info("START | Executing save All | Controller :"+this.getClass().getName() );
-        LOGGER.debug(String.format("Try to save collection | Size %s",objectToSave));
+        LOGGER.info("START | Executing save All | Controller :" + this.getClass().getName());
+        LOGGER.debug(String.format("Try to save collection | Size %s", objectToSave));
 
-        if(objectToSave.size()>0){
-
-
+        if (objectToSave.size() > 0) {
 
 
+            Iterable<T> savedObects = repo.saveAll(objectToSave);
 
-         Iterable<T> savedObects=   repo.saveAll(objectToSave);
+            Resources<T> resources = new Resources<T>(savedObects);
 
-          Resources<T> resources = new Resources<T>(savedObects);
+            //   resources.add(linkTo(this.getClass(),)).withSelfRel());
+            LOGGER.info("Saved objects count: " + resources.getContent().size());
 
-         //   resources.add(linkTo(this.getClass(),)).withSelfRel());
-            LOGGER.info("Saved objects count: "+resources.getContent().size());
-
-          return ResponseEntity.ok(resources);
+            return ResponseEntity.ok(resources);
 
 
-        }else{
+        } else {
             LOGGER.info("Nothing to do");
         }
 
-        LOGGER.info("FINISH | Executing save All | Controller :"+this.getClass().getName() );
+        LOGGER.info("FINISH | Executing save All | Controller :" + this.getClass().getName());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }
 
 
-    @RequestMapping(method = DELETE, value = "/delete-batch",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = DELETE, value = "/delete-batch", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<?> batchDelete(@RequestBody Collection<T> objectToDelete) throws NoSuchMethodException {
 
 
-        LOGGER.info("START | Deleting batch | Controller :"+this.getClass().getName() );
-        LOGGER.debug(String.format("Try to save collection | Size %s",objectToDelete));
+        LOGGER.info("START | Deleting batch | Controller :" + this.getClass().getName());
+        LOGGER.debug(String.format("Try to save collection | Size %s", objectToDelete));
 
-        if(objectToDelete.size()>0){
-             repo.deleteAll(objectToDelete);
-
-
+        if (objectToDelete.size() > 0) {
+            repo.deleteAll(objectToDelete);
 
 
             return ResponseEntity.ok(new Resource(Boolean.TRUE));
 
 
-        }else{
+        } else {
             LOGGER.info("Nothing to do");
         }
 
-        LOGGER.info("START | Deleting batch | Controller :"+this.getClass().getName() );
+        LOGGER.info("START | Deleting batch | Controller :" + this.getClass().getName());
 
         return ResponseEntity.ok(new Resource(Boolean.TRUE));
 

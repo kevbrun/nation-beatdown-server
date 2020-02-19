@@ -45,18 +45,18 @@ public abstract class AbstractNamedEntityService<TResult, TInput extends NamedOb
         return findByName(name, QueryProjection.def);
     }
 
-    public Optional<Boolean> existsByName(String name){
+    public Optional<Boolean> existsByName(String name) {
         LOGGER.info(String.format("START | Exists By Name | name : %s", name));
         if (name == null || name.isBlank())
             return Optional.of(false);
         boolean response = (boolean) GetBaseClient().existsByName(name);
-         LOGGER.info("Entity exists: ", Boolean.valueOf(response));
+        LOGGER.info("Entity exists: ", Boolean.valueOf(response));
         LOGGER.info(String.format("STOP | Exists By Name | name : %s", name));
         return Optional.of(response);
     }
 
 
-    public Optional<TResult> findByIdentifier(final String identifier, final QueryProjection queryProjection ){
+    public Optional<TResult> findByIdentifier(final String identifier, final QueryProjection queryProjection) {
         LOGGER.info(String.format("START | Find by Identifier | Used client %s", GetBaseClient().getClass().getName()));
         if (identifier == null || identifier.isBlank())
             throw new IllegalArgumentException(String.format("Provided parameter %s is not valid!", identifier));

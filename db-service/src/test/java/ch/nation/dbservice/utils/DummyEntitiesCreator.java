@@ -16,24 +16,20 @@ import ch.nation.dbservice.entities.user.User;
 public final class DummyEntitiesCreator {
 
 
-
-    public static Unit getUnit(){
+    public static Unit getUnit() {
         Unit unit = new Unit();
         unit.setName("Kevin");
-        unit.setPosition(new EmeddableVector3(5f,5f,5f));
+        unit.setPosition(new EmeddableVector3(5f, 5f, 5f));
         unit.setUnitIsDead(true);
-   //     unit.setCharacterClass(getClazz());
-
-
-
+        //     unit.setCharacterClass(getClazz());
 
 
         return unit;
     }
 
 
-    public static SkillEffect getSkillEffect(){
-        SkillEffect effect =  new SkillEffect();
+    public static SkillEffect getSkillEffect() {
+        SkillEffect effect = new SkillEffect();
         effect.setName("Some Skill Effect");
         effect.setDescription("Some desc");
         return effect;
@@ -42,7 +38,7 @@ public final class DummyEntitiesCreator {
     }
 
 
-    public static Skill getSkill(){
+    public static Skill getSkill() {
         Skill dummySkill = new Skill();
         dummySkill.setName("Dummy_skill");
         dummySkill.setDescription("Some dummy skill");
@@ -51,7 +47,7 @@ public final class DummyEntitiesCreator {
         return dummySkill;
     }
 
-    public static User getUser(){
+    public static User getUser() {
         User user = new User();
         user.setName("Kevin");
         user.setPassword("123");
@@ -61,7 +57,7 @@ public final class DummyEntitiesCreator {
     }
 
 
-    public static Nation getNation(){
+    public static Nation getNation() {
         Nation nation = new Nation();
         nation.setName("Super Tolle Nation");
         return nation;
@@ -70,31 +66,28 @@ public final class DummyEntitiesCreator {
     }
 
 
-
-    public static CharacterClass getClazz(){
+    public static CharacterClass getClazz() {
         CharacterClass characterClass = new CharacterClass();
         characterClass.setName("Warrior");
         characterClass.setLevel(100);
-        characterClass.setHealthPoints(new Stat(40,0,100, StatGrowthType.LINEAR));
+        characterClass.setHealthPoints(new Stat(40, 0, 100, StatGrowthType.LINEAR));
         characterClass.setExp(100);
         return characterClass;
     }
 
 
-    public static BaseCharacteristic getBaseCharacteristics(){
+    public static BaseCharacteristic getBaseCharacteristics() {
         BaseCharacteristic chara = new StatCharacteristic();
         chara.setName("Super grosse Leute!");
         return chara;
 
     }
 
-    public static SkillCharacteristic getSkillCharacteristics(){
+    public static SkillCharacteristic getSkillCharacteristics() {
         SkillCharacteristic characteristic = new SkillCharacteristic();
         characteristic.setName("Skill BaseCharacteristicDto");
         return characteristic;
     }
-
-
 
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
-public class StatBonusDelta  {
+public class StatBonusDelta {
 
 
     public StatBonusDelta() {
@@ -18,11 +18,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "hp_stat_target")),
 
     })
-    @Column(name="hpBonus")
+    @Column(name = "hpBonus")
     @JsonProperty("hpBonus")
     private EmbeddableIntegerBonus hpBonus;
-
-
 
 
     @Embedded
@@ -31,7 +29,7 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "ap_stat_target")),
 
     })
-    @Column(name="apBonus")
+    @Column(name = "apBonus")
     @JsonProperty("apBonus")
     private EmbeddableIntegerBonus apBonus;
 
@@ -42,10 +40,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "str_stat_target")),
 
     })
-    @Column(name="strBonus")
+    @Column(name = "strBonus")
     @JsonProperty("strBonus")
     private EmbeddableIntegerBonus strBonus;
-
 
 
     @Embedded
@@ -54,10 +51,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "vit_stat_target")),
 
     })
-    @Column(name="vitBonus")
+    @Column(name = "vitBonus")
     @JsonProperty("vitBonus")
     private EmbeddableIntegerBonus vitBonus;
-
 
 
     @Embedded
@@ -66,10 +62,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "agi_stat_target")),
 
     })
-    @Column(name="agiBonus")
+    @Column(name = "agiBonus")
     @JsonProperty("agiBonus")
     private EmbeddableIntegerBonus agiBonus;
-
 
 
     @Embedded
@@ -78,11 +73,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "dex_stat_target")),
 
     })
-    @Column(name="dexBonus")
+    @Column(name = "dexBonus")
     @JsonProperty("dexBonus")
     private EmbeddableIntegerBonus dexBonus;
-
-
 
 
     @Embedded
@@ -91,15 +84,12 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "int_stat_target")),
 
     })
-    @Column(name="intBonus")
+    @Column(name = "intBonus")
     @JsonProperty("intBonus")
     private EmbeddableIntegerBonus intBonus;
 
 
-
-
     //Percantage Bonus
-
 
 
     @Embedded
@@ -108,7 +98,7 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "hp_perc_stat_target")),
 
     })
-    @Column(name="hpBonusPerc")
+    @Column(name = "hpBonusPerc")
     @JsonProperty("hpBonusPerc")
     private EmbeddableFloatBonus hpPercentageBonus;
 
@@ -119,7 +109,7 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "ap_perc_stat_target")),
 
     })
-    @Column(name="apBonusPerc")
+    @Column(name = "apBonusPerc")
     @JsonProperty("apBonusPerc")
     private EmbeddableFloatBonus apPercentageBonus;
 
@@ -130,10 +120,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "str_perc_stat_target")),
 
     })
-    @Column(name="strBonusPerc")
+    @Column(name = "strBonusPerc")
     @JsonProperty("strBonusPerc")
     private EmbeddableFloatBonus strPercentageBonus;
-
 
 
     @Embedded
@@ -142,7 +131,7 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "vit_perc_stat_target")),
 
     })
-    @Column(name="vitBonusPerc")
+    @Column(name = "vitBonusPerc")
     @JsonProperty("vitBonusPerc")
     private EmbeddableFloatBonus vitPercentageBonus;
 
@@ -153,10 +142,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "agi_perc_stat_target")),
 
     })
-    @Column(name="agiBonusPerc")
+    @Column(name = "agiBonusPerc")
     @JsonProperty("agiBonusPerc")
     private EmbeddableFloatBonus agiPercentageBonus;
-
 
 
     @Embedded
@@ -165,11 +153,9 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "dex_perc_stat_target")),
 
     })
-    @Column(name="dexBonusPerc")
+    @Column(name = "dexBonusPerc")
     @JsonProperty("dexBonusPerc")
     private EmbeddableFloatBonus dexPercentageBonus;
-
-
 
 
     @Embedded
@@ -178,13 +164,13 @@ public class StatBonusDelta  {
             @AttributeOverride(name = "statTarget", column = @Column(name = "int_perc_stat_target")),
 
     })
-    @Column(name="intBonusPerc")
+    @Column(name = "intBonusPerc")
     @JsonProperty("intBonusPerc")
     private EmbeddableFloatBonus intPercentageBonus;
 
 
     public EmbeddableIntegerBonus getHpBonus() {
-        if(hpBonus==null) hpBonus = new EmbeddableIntegerBonus();
+        if (hpBonus == null) hpBonus = new EmbeddableIntegerBonus();
 
         return hpBonus;
     }
@@ -194,7 +180,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getApBonus() {
-        if(apBonus ==null) apBonus = new EmbeddableIntegerBonus();
+        if (apBonus == null) apBonus = new EmbeddableIntegerBonus();
 
 
         return apBonus;
@@ -206,7 +192,7 @@ public class StatBonusDelta  {
 
     public EmbeddableIntegerBonus getStrBonus() {
 
-       if(strBonus==null) strBonus =new EmbeddableIntegerBonus();
+        if (strBonus == null) strBonus = new EmbeddableIntegerBonus();
 
         return strBonus;
     }
@@ -218,7 +204,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getVitBonus() {
-        if(vitBonus==null) vitBonus = new EmbeddableIntegerBonus();
+        if (vitBonus == null) vitBonus = new EmbeddableIntegerBonus();
         return vitBonus;
     }
 
@@ -227,7 +213,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getAgiBonus() {
-        if(agiBonus==null) agiBonus = new EmbeddableIntegerBonus();
+        if (agiBonus == null) agiBonus = new EmbeddableIntegerBonus();
 
         return agiBonus;
     }
@@ -237,7 +223,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableIntegerBonus getDexBonus() {
-        if(dexBonus==null) dexBonus = new EmbeddableIntegerBonus();
+        if (dexBonus == null) dexBonus = new EmbeddableIntegerBonus();
 
         return dexBonus;
     }
@@ -248,7 +234,7 @@ public class StatBonusDelta  {
 
     public EmbeddableIntegerBonus getIntBonus() {
 
-        if(intBonus == null) intBonus = new EmbeddableIntegerBonus();
+        if (intBonus == null) intBonus = new EmbeddableIntegerBonus();
 
         return intBonus;
     }
@@ -260,7 +246,7 @@ public class StatBonusDelta  {
     public EmbeddableFloatBonus getHpPercentageBonus() {
 
 
-        if(hpPercentageBonus ==null) hpPercentageBonus = new EmbeddableFloatBonus();
+        if (hpPercentageBonus == null) hpPercentageBonus = new EmbeddableFloatBonus();
 
         return hpPercentageBonus;
     }
@@ -270,7 +256,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getApPercentageBonus() {
-        if(apPercentageBonus ==null) apPercentageBonus = new EmbeddableFloatBonus();
+        if (apPercentageBonus == null) apPercentageBonus = new EmbeddableFloatBonus();
 
 
         return apPercentageBonus;
@@ -282,7 +268,7 @@ public class StatBonusDelta  {
 
     public EmbeddableFloatBonus getStrPercentageBonus() {
 
-        if(strPercentageBonus== null) strPercentageBonus = new EmbeddableFloatBonus();
+        if (strPercentageBonus == null) strPercentageBonus = new EmbeddableFloatBonus();
 
         return strPercentageBonus;
     }
@@ -292,7 +278,7 @@ public class StatBonusDelta  {
     }
 
     public EmbeddableFloatBonus getVitPercentageBonus() {
-        if(vitPercentageBonus == null) vitPercentageBonus = new EmbeddableFloatBonus();
+        if (vitPercentageBonus == null) vitPercentageBonus = new EmbeddableFloatBonus();
 
         return vitPercentageBonus;
     }
@@ -303,7 +289,7 @@ public class StatBonusDelta  {
 
     public EmbeddableFloatBonus getAgiPercentageBonus() {
 
-        if(agiPercentageBonus==null) agiPercentageBonus = new EmbeddableFloatBonus();
+        if (agiPercentageBonus == null) agiPercentageBonus = new EmbeddableFloatBonus();
 
         return agiPercentageBonus;
     }
@@ -314,7 +300,7 @@ public class StatBonusDelta  {
 
     public EmbeddableFloatBonus getDexPercentageBonus() {
 
-        if(dexPercentageBonus==null) dexPercentageBonus = new EmbeddableFloatBonus();
+        if (dexPercentageBonus == null) dexPercentageBonus = new EmbeddableFloatBonus();
 
 
         return dexPercentageBonus;
@@ -326,7 +312,7 @@ public class StatBonusDelta  {
 
     public EmbeddableFloatBonus getIntPercentageBonus() {
 
-        if(intPercentageBonus ==null) intPercentageBonus = new EmbeddableFloatBonus();
+        if (intPercentageBonus == null) intPercentageBonus = new EmbeddableFloatBonus();
 
 
         return intPercentageBonus;

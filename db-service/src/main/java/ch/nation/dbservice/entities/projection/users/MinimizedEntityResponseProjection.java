@@ -7,6 +7,7 @@ import java.util.UUID;
 public interface MinimizedEntityResponseProjection {
     @JsonProperty("uuid")
     UUID getId();
+
     @JsonProperty("type")
     String getDiscriminatorValue();
 }

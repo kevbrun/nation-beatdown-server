@@ -11,6 +11,7 @@ public interface MassRestCRUDDao<TInput> extends RestCRUDDao<TInput> {
 
 
     ResponseEntity batchUpdate(Collection<TInput> object);
+
     ResponseEntity batchDeletion(Collection<TInput> object);
 
 }

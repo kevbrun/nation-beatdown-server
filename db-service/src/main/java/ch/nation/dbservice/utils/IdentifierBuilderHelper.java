@@ -7,8 +7,8 @@ import ch.nation.dbservice.entities.clazzes.Stat;
 
 public final class IdentifierBuilderHelper {
 
-    public static String buildIdentifier(final String shortname, final SkillEffectTarget target, final StatType stat){
-        return String.format("%s_%s_%s",shortname.toUpperCase(),target.toString(),stat.toString());
+    public static String buildIdentifier(final String shortname, final SkillEffectTarget target, final StatType stat) {
+        return String.format("%s_%s_%s", shortname.toUpperCase(), target.toString(), stat.toString());
     }
 
 

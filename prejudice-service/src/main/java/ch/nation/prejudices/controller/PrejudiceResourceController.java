@@ -11,55 +11,54 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-public class PrejudiceResourceController extends AbstractNamedResourceGameLogicController<AbstractPrejudiceDto,AbstractPrejudiceDto> {
+public class PrejudiceResourceController extends AbstractNamedResourceGameLogicController<AbstractPrejudiceDto, AbstractPrejudiceDto> {
 
 
     public PrejudiceResourceController(PrejudiceResourceServiceImpl service, HttpServletRequest request) {
-        super(service,request);
+        super(service, request);
     }
 
     @Override
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getAll(@RequestParam(value = "page",required = false,defaultValue = "0") long page, @RequestParam(value = "size",required = false,defaultValue = "20") long size
-            ,@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.getAll(page,size,projection);
+    public ResponseEntity getAll(@RequestParam(value = "page", required = false, defaultValue = "0") long page, @RequestParam(value = "size", required = false, defaultValue = "20") long size
+            , @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.getAll(page, size, projection);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.PATCH,consumes ="application/json")
-    public ResponseEntity updatePatch(@RequestBody AbstractPrejudiceDto payload, @RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.updatePatch(payload,projection);
+    @RequestMapping(method = RequestMethod.PATCH, consumes = "application/json")
+    public ResponseEntity updatePatch(@RequestBody AbstractPrejudiceDto payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.updatePatch(payload, projection);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity create(@RequestBody AbstractPrejudiceDto object,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
-        return super.create(object,projection);
-    }
-    @Override
-    @RequestMapping(method = RequestMethod.DELETE,path = "/{uuid}")
-    public ResponseEntity delete( @PathVariable("uuid") String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) throws Exception {
-        return super.delete(uuid,projection);
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity create(@RequestBody AbstractPrejudiceDto object, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+        return super.create(object, projection);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/{uuid}")
-    public ResponseEntity findById(@PathVariable("uuid")String uuid,@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.findById(uuid,projection);
-    }
-
-
-
-
-    @Override
-    @RequestMapping(method = RequestMethod.GET,path="/search")
-    public ResponseEntity findByName(@RequestParam("name") String name,@RequestParam(value = "projection",required = false) QueryProjection projection) {
-        return super.findByName(name,projection);
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{uuid}")
+    public ResponseEntity delete(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection) throws Exception {
+        return super.delete(uuid, projection);
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
-    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+    @RequestMapping(method = RequestMethod.GET, path = "/{uuid}")
+    public ResponseEntity findById(@PathVariable("uuid") String uuid, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.findById(uuid, projection);
+    }
+
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET, path = "/search")
+    public ResponseEntity findByName(@RequestParam("name") String name, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.findByName(name, projection);
+    }
+
+    @Override
+    @RequestMapping(method = RequestMethod.GET, path = "/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier") String identfier, @RequestParam(value = "projection", required = false) QueryProjection projection) {
         return super.findByIdentifier(identfier, projection);
     }
 }

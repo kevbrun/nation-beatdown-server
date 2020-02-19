@@ -12,12 +12,11 @@ import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "moves",path = "moves-skill")
+@RepositoryRestResource(collectionResourceRel = "moves", path = "moves-skill")
 public interface SkillPlayerMoveRepository extends IPageableDao<SkillPlayerMove>, IMoveFind<SkillPlayerMove> {
 
 
     Iterable<SkillPlayerMove> findAllByGameInfo_IdAndCooldownCounterGreaterThan(@Param("runtime") UUID runtimeUuid, @Param("counter") int counter);
-
 
 
 }

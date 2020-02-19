@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SkillEffectsResourceServiceImpl extends AbstractNamedEntityService<SkillEffectDto,SkillEffectDto> implements SkillEffectsResourceService {
+public class SkillEffectsResourceServiceImpl extends AbstractNamedEntityService<SkillEffectDto, SkillEffectDto> implements SkillEffectsResourceService {
 
     @Autowired
     public SkillEffectsResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
-        super(SkillEffectDto.class,factory, massRestClientFactory);
+        super(SkillEffectDto.class, factory, massRestClientFactory);
     }
 
 

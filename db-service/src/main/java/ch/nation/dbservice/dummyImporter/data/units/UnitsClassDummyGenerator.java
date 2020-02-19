@@ -30,10 +30,10 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         createShinChanDerZeitmagaier();
     }
 
-    private void createWarrior(){
+    private void createWarrior() {
         Unit unit = new Unit();
         unit.setName("Kaffi däääää Schwärt");
-        unit.setPosition(new EmeddableVector3(5f,5f,5f));
+        unit.setPosition(new EmeddableVector3(5f, 5f, 5f));
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setWeaponType("Melee1H");
@@ -51,17 +51,15 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit.setCharacterClass(characterClass);
 
 
-
-
         unitRepository.save(unit);
 
 
     }
 
-    private void createWarrior2(){
+    private void createWarrior2() {
         Unit unit = new Unit();
         unit.setName("Dumbo");
-        unit.setPosition(new EmeddableVector3(5f,5f,5f));
+        unit.setPosition(new EmeddableVector3(5f, 5f, 5f));
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Samurai/NinjaHelm2 [Paint]");
@@ -79,17 +77,15 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
         unit.setCharacterClass(characterClass);
 
 
-
-
         unitRepository.save(unit);
 
 
     }
 
-    private void createBarbar(){
+    private void createBarbar() {
         Unit unit = new Unit();
         unit.setName("Judas der Barbar");
-        unit.setPosition(new EmeddableVector3(5f,5f,5f));
+        unit.setPosition(new EmeddableVector3(5f, 5f, 5f));
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("SpellMasters/InquisitorHat1 [Paint]");
@@ -110,10 +106,10 @@ public class UnitsClassDummyGenerator extends AbstractDummyGenerator<Unit> {
 
     }
 
-    private void createShinChanDerZeitmagaier(){
+    private void createShinChanDerZeitmagaier() {
         Unit unit = new Unit();
         unit.setName("Shin Chan der Zeitmagier");
-        unit.setPosition(new EmeddableVector3(5f,5f,5f));
+        unit.setPosition(new EmeddableVector3(5f, 5f, 5f));
         UnitAssets unitAssets = new UnitAssets();
         unitAssets.setHead("Basic/Head");
         unitAssets.setHelmet("Basic/HawkHelm");

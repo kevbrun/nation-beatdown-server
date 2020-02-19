@@ -8,7 +8,7 @@ import ch.nation.dbservice.repositories.characteristics.StatCharacteristicReposi
 import org.junit.Assert;
 import org.junit.Test;
 
-public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatCharacteristic,StatCharacteristicRepository> implements IHasDiscriminatorValue {
+public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatCharacteristic, StatCharacteristicRepository> implements IHasDiscriminatorValue {
 
 
     @Override
@@ -16,8 +16,8 @@ public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatC
         super.setUp();
         entityToTest = new StatCharacteristic();
         entityToTest.setName("Mega Stark aber dumm wie Brot!");
-        entityToTest.getDelta().setStrBonus(new EmbeddableIntegerBonus(10,StatModTarget.MAX_VALUE));
-        entityToTest.getDelta().setIntBonus(new EmbeddableIntegerBonus(-10,StatModTarget.MAX_VALUE));
+        entityToTest.getDelta().setStrBonus(new EmbeddableIntegerBonus(10, StatModTarget.MAX_VALUE));
+        entityToTest.getDelta().setIntBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
 
 
         listOfEntities.add(entityToTest);
@@ -25,13 +25,13 @@ public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatC
 
         StatCharacteristic second = new StatCharacteristic();
         second.setName("Intelligent aber schwach");
-        second.getDelta().setIntBonus(new EmbeddableIntegerBonus(100,StatModTarget.VALUE));
-        second.getDelta().setIntBonus(new EmbeddableIntegerBonus(-10,StatModTarget.ALL));
+        second.getDelta().setIntBonus(new EmbeddableIntegerBonus(100, StatModTarget.VALUE));
+        second.getDelta().setIntBonus(new EmbeddableIntegerBonus(-10, StatModTarget.ALL));
 
 
         listOfEntities.add(second);
 
-     }
+    }
 
 
     @Override
@@ -39,22 +39,19 @@ public class StatCharacteristicDtoRepoTest extends AbstractNamedEntityTest<StatC
     public void test_if_has_discriminator_value() {
         StatCharacteristic statCharacteristics = repo.save(entityToTest);
 
-        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"StatCharacteristic");
+        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(), "StatCharacteristic");
 
 
     }
 
     @Test
-    public void test_if_bonus_are_available(){
+    public void test_if_bonus_are_available() {
         StatCharacteristic obj = repo.save(entityToTest);
 
         Assert.assertTrue(obj.getDelta().getStrBonus().getBonus() == 10);
         Assert.assertTrue(obj.getDelta().getStrBonus().getStatTarget() == StatModTarget.MAX_VALUE);
 
     }
-
-
-
 
 
 }

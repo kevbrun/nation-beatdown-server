@@ -12,11 +12,8 @@ import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "moves",path = "moves")
+@RepositoryRestResource(collectionResourceRel = "moves", path = "moves")
 public interface PlayerMoveRepository extends IPageableDao<BasePlayerMove>, IMoveFind<BasePlayerMove> {
-
-
-
 
 
 }

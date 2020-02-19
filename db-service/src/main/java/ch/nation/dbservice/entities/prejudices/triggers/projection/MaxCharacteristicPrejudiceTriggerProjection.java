@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 
-@Projection(name="max",types = {CharacteristicPrejudiceTrigger.class})
+@Projection(name = "max", types = {CharacteristicPrejudiceTrigger.class})
 public interface MaxCharacteristicPrejudiceTriggerProjection extends MinimizedEntityResponseProjection, NamedClassesProjection, IIdentityProjection {
 
 

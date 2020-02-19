@@ -11,10 +11,10 @@ import java.util.Objects;
 public abstract class NamedEntityBase extends AbstractNationEntityBase {
 
 
-    @Column(name = "name",unique = true,nullable = false,length = 75)
+    @Column(name = "name", unique = true, nullable = false, length = 75)
     @JsonProperty("name")
     private String name;
-    @Column(name="description") //Desc is keyword in maridb!
+    @Column(name = "description") //Desc is keyword in maridb!
     @JsonProperty("desc")
     private String description;
 
@@ -42,8 +42,6 @@ public abstract class NamedEntityBase extends AbstractNationEntityBase {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 
 
     @Override

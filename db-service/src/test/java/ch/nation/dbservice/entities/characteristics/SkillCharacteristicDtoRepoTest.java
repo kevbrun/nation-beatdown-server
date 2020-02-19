@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<SkillCharacteristic,SkillCharacteristicsRepository> implements IHasDiscriminatorValue {
+public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<SkillCharacteristic, SkillCharacteristicsRepository> implements IHasDiscriminatorValue {
 
 
     @Autowired
@@ -32,7 +32,6 @@ public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<Skil
         listOfEntities.add(entityToTest);
 
 
-
         SkillCharacteristic second = new SkillCharacteristic();
         second.setName("Wasserversteck Jutsu!");
         listOfEntities.add(second);
@@ -45,44 +44,44 @@ public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<Skil
     public void test_if_has_discriminator_value() {
         SkillCharacteristic statCharacteristics = repo.save(entityToTest);
 
-        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(),"SkillCharacteristic");
+        Assert.assertEquals(statCharacteristics.getDiscriminatorValue(), "SkillCharacteristic");
 
 
     }
 
 
     @Test
-    public void add_skill_to_characteristic_test(){
-      SkillEffect effect = DummyEntitiesCreator.getSkillEffect();
-      effect=skillEffectRepository.save(effect);
+    public void add_skill_to_characteristic_test() {
+        SkillEffect effect = DummyEntitiesCreator.getSkillEffect();
+        effect = skillEffectRepository.save(effect);
 
-      Skill skill = DummyEntitiesCreator.getSkill();
-      skill  = skillRepository.save(skill);
+        Skill skill = DummyEntitiesCreator.getSkill();
+        skill = skillRepository.save(skill);
 
-      skill.addSkillEffect(effect);
-      skill= skillRepository.save(skill);
+        skill.addSkillEffect(effect);
+        skill = skillRepository.save(skill);
 
 
         entityToTest.addSkill(skill);
 
 
-      entityToTest = repo.save(entityToTest);
-      Assert.assertTrue(entityToTest.getSkill().getSkillEffects().get(0)!=null);
-      Assert.assertTrue(entityToTest.getSkill().getSkillCharacteristic().get(0).equals(entityToTest));
+        entityToTest = repo.save(entityToTest);
+        Assert.assertTrue(entityToTest.getSkill().getSkillEffects().get(0) != null);
+        Assert.assertTrue(entityToTest.getSkill().getSkillCharacteristic().get(0).equals(entityToTest));
 
     }
 
 
     @Test
-    public void remove_skill_to_characteristic_test(){
+    public void remove_skill_to_characteristic_test() {
         SkillEffect effect = DummyEntitiesCreator.getSkillEffect();
-        effect=skillEffectRepository.save(effect);
+        effect = skillEffectRepository.save(effect);
 
         Skill skill = DummyEntitiesCreator.getSkill();
-        skill  = skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
         skill.addSkillEffect(effect);
-        skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
 
         entityToTest.addSkill(skill);
@@ -93,8 +92,8 @@ public class SkillCharacteristicDtoRepoTest extends AbstractNamedEntityTest<Skil
 
         entityToTest.removeSkill();
 
-        Assert.assertTrue(entityToTest.getSkill()==null);
-        Assert.assertTrue(skill.getSkillCharacteristic().size()==0);
+        Assert.assertTrue(entityToTest.getSkill() == null);
+        Assert.assertTrue(skill.getSkillCharacteristic().size() == 0);
     }
 
 

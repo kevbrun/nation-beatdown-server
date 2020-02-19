@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController()
-@RequestMapping(value="/name-builder")
+@RequestMapping(value = "/name-builder")
 public class UnitNameController {
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
@@ -31,43 +31,43 @@ public class UnitNameController {
         this.firstNameRepository = firstNameRepository;
     }
 
-    @RequestMapping(path = "/first-name/random",method = RequestMethod.GET,produces ="application/json")
-    public UnitFirstNameDto getRandomFirstName(){
+    @RequestMapping(path = "/first-name/random", method = RequestMethod.GET, produces = "application/json")
+    public UnitFirstNameDto getRandomFirstName() {
         LOGGER.info("START Generating random name");
         long tableSize = firstNameRepository.count();
         long generatedLong = calculateRandomIndex(tableSize);
-        LOGGER.debug("Random value"+generatedLong);
+        LOGGER.debug("Random value" + generatedLong);
         LOGGER.info("STOP Generating random name");
         Optional<UnitFirstName> response = firstNameRepository.findById(generatedLong);
-        LOGGER.debug("Found random name "+response.get().getFirstName());
-        if(response.isEmpty()) return getRandomFirstName();
-        return new UnitFirstNameDto(response.get().getFirstName(),response.get().getSex());
+        LOGGER.debug("Found random name " + response.get().getFirstName());
+        if (response.isEmpty()) return getRandomFirstName();
+        return new UnitFirstNameDto(response.get().getFirstName(), response.get().getSex());
     }
 
 
-
-    @RequestMapping(path = "/last-name/random",method = RequestMethod.GET,produces ="application/json")
-    public UnitLastNameDto getRandomLastName(){
+    @RequestMapping(path = "/last-name/random", method = RequestMethod.GET, produces = "application/json")
+    public UnitLastNameDto getRandomLastName() {
         LOGGER.info("START Generating random name");
         long tableSize = lastNameRepository.count();
         long generatedLong = calculateRandomIndex(tableSize);
-        LOGGER.debug("Random value"+generatedLong);
+        LOGGER.debug("Random value" + generatedLong);
         LOGGER.info("STOP Generating random name");
         Optional<UnitLastName> response = lastNameRepository.findById(generatedLong);
-        LOGGER.debug("Found random name "+response.get().getSecondName());
-        if(response.isEmpty()) return getRandomLastName();
+        LOGGER.debug("Found random name " + response.get().getSecondName());
+        if (response.isEmpty()) return getRandomLastName();
         return new UnitLastNameDto(response.get().getSecondName());
     }
-    @RequestMapping(path = "/full-name/random",method = RequestMethod.GET,produces ="application/json")
-    public UnitCompleteNameDto getRandomFullName(){
+
+    @RequestMapping(path = "/full-name/random", method = RequestMethod.GET, produces = "application/json")
+    public UnitCompleteNameDto getRandomFullName() {
         LOGGER.info("START Generating random full name");
 
         final UnitFirstNameDto firstName = getRandomFirstName();
         final UnitLastNameDto lastName = getRandomLastName();
-        LOGGER.info(String.format("Created Name| First name: %s | Last name: %s | Sex: %s",firstName.getFirstName(),
+        LOGGER.info(String.format("Created Name| First name: %s | Last name: %s | Sex: %s", firstName.getFirstName(),
                 lastName.getLastName(), firstName.getSex()));
         LOGGER.info("START Generating random full name");
-        return new UnitCompleteNameDto(firstName,lastName);
+        return new UnitCompleteNameDto(firstName, lastName);
     }
 
 

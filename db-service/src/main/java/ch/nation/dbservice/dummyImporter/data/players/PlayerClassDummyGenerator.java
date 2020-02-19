@@ -27,7 +27,7 @@ public class PlayerClassDummyGenerator extends AbstractDummyGenerator<User> {
         craeateDummyPlayer();
     }
 
-    private void craeateDummyPlayer(){
+    private void craeateDummyPlayer() {
         User user = new User();
         user.setName("DummyPlayer");
         user.setPassword(encoder.encode("123"));
@@ -36,16 +36,16 @@ public class PlayerClassDummyGenerator extends AbstractDummyGenerator<User> {
         user.setNation(nation);
 
 
-          user=  userRepository.save(user);
+        user = userRepository.save(user);
 
-        Iterable<Unit> units= unitRepository.findAll();
+        Iterable<Unit> units = unitRepository.findAll();
 
 
-        for (Unit unit:
-             units) {
+        for (Unit unit :
+                units) {
 
             user.addUnit(unit);
-        user=      userRepository.save(user);
+            user = userRepository.save(user);
 
         }
 

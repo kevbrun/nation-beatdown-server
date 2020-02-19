@@ -35,23 +35,21 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
 
     }
 
-    private void createAgainstExplosivPeople(){
+    private void createAgainstExplosivPeople() {
         CharacteristicPrejudiceTrigger trigger = new CharacteristicPrejudiceTrigger();
         trigger.setName("Explisiver Character Trigger");
         trigger.setIdentifier("char_expl");
         trigger.setDescription("Wird durch die Characteristic Explosiver Character getriggered");
 
-        trigger=   characteristicPrejudiceTriggerRepository.save(trigger);
-        BaseCharacteristic characteristic= characteristicsRepository.findByName("Explosiver Character");
+        trigger = characteristicPrejudiceTriggerRepository.save(trigger);
+        BaseCharacteristic characteristic = characteristicsRepository.findByName("Explosiver Character");
         trigger.addCharacteristic(characteristic);
         characteristicPrejudiceTriggerRepository.save(trigger);
     }
 
 
-
-
-    private void createWeakStatPrejudiceTrigger(){
-        StatPrejudiceTrigger trigger  = new StatPrejudiceTrigger();
+    private void createWeakStatPrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger.setName("Schwächer als 10 trigger");
         trigger.setIdentifier("less_str_10");
 
@@ -62,8 +60,8 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         statPrejudiceTriggerRepository.save(trigger);
     }
 
-    private void createHighIntelligencePrejudiceTrigger(){
-        StatPrejudiceTrigger trigger  = new StatPrejudiceTrigger();
+    private void createHighIntelligencePrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger.setName("Gescheitere als 20 trigger");
         trigger.setIdentifier("more_int_20");
         trigger.setDescription("Wird durch klügere Nationen wie 20 getriggered");

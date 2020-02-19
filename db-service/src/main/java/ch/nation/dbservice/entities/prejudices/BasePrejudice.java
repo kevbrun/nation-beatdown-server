@@ -21,37 +21,36 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Entity(name="PREJUDICES")
+@Entity(name = "PREJUDICES")
 @Table(name = "PREJUDICES")
 @Inheritance(
         strategy = InheritanceType.SINGLE_TABLE
 )
-@DiscriminatorColumn(name="PREJUDICE_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "PREJUDICE_TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE")
-/**@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "type",visible = true)
-@JsonSubTypes({
+/**@JsonTypeInfo( use = JsonTypeInfo.Id.NAME,
+include = JsonTypeInfo.As.EXISTING_PROPERTY,
+property = "type",visible = true)
+ @JsonSubTypes({
 
-        //BASE
-        @JsonSubTypes.Type(value = SkillPrejudice.class, name = "SkillPrejudice"),
-        @JsonSubTypes.Type(value = StatPrejudice.class, name = "StatPrejudice"),
-        @JsonSubTypes.Type(value = StatPrejudice.class, name = "BasePrejudice"),
+ //BASE
+ @JsonSubTypes.Type(value = SkillPrejudice.class, name = "SkillPrejudice"),
+ @JsonSubTypes.Type(value = StatPrejudice.class, name = "StatPrejudice"),
+ @JsonSubTypes.Type(value = StatPrejudice.class, name = "BasePrejudice"),
 
-})**/
-public   class BasePrejudice extends NationRessource implements IDiscrimantorValue {
+ })**/
+public class BasePrejudice extends NationRessource implements IDiscrimantorValue {
 
     @JsonProperty("triggers")
     @ManyToMany(fetch = FetchType.LAZY)
-    @RestResource(path = "triggers",rel = "triggers")
+    @RestResource(path = "triggers", rel = "triggers")
     private List<BasePrejudiceTrigger> prejudiceTriggers;
 
     @JsonProperty("operation")
     @Enumerated(EnumType.STRING)
     private PrejudiceOperator triggerOperation;
 
-    @RestResource(path="nations",rel="nations")
+    @RestResource(path = "nations", rel = "nations")
     @ManyToMany(mappedBy = "prejudices")
     @JsonIgnore
     private List<Nation> nations;
@@ -87,16 +86,16 @@ public   class BasePrejudice extends NationRessource implements IDiscrimantorVal
 
 //Assication
 
-    public void addTrigger(BasePrejudiceTrigger trigger){
-        if(!getPrejudiceTriggers().contains(trigger)){
+    public void addTrigger(BasePrejudiceTrigger trigger) {
+        if (!getPrejudiceTriggers().contains(trigger)) {
             getPrejudiceTriggers().add(trigger);
             trigger.addPrejudice(this);
         }
 
     }
 
-    public void removeTrigger(BasePrejudiceTrigger trigger){
-        if(getPrejudiceTriggers().contains(trigger)){
+    public void removeTrigger(BasePrejudiceTrigger trigger) {
+        if (getPrejudiceTriggers().contains(trigger)) {
             getPrejudiceTriggers().remove(trigger);
             trigger.removeTrigger(this);
         }

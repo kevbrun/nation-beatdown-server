@@ -9,25 +9,26 @@ import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
 
-@Entity(name="PLAYER_MOVES")
-@Table(name="PLAYER_MOVES")
+@Entity(name = "PLAYER_MOVES")
+@Table(name = "PLAYER_MOVES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="PLAYER_MOVE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "PLAYER_MOVE", discriminatorType = DiscriminatorType.STRING)
 @Transactional
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @DiscriminatorValue("BASE")
 public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrimantorValue {
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
-    @RestResource(path = "user-runtimes", rel="user-runtimes",exported = false)
+    @RestResource(path = "user-runtimes", rel = "user-runtimes", exported = false)
     @JsonIgnore
     private GameUserRuntimeInfo gameInfo;
-    @Column(name="round")
+    @Column(name = "round")
     @JsonProperty("round")
     private int round;
 
@@ -35,23 +36,30 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     private int sequenceIdentifier;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     @JsonProperty("user")
-    @RestResource(path = "user", rel="user",exported = true)
+    @RestResource(path = "user", rel = "user", exported = true)
     private User user;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "caster_id")
     @JsonProperty("caster")
-    @RestResource(path = "caster", rel="caster",exported = true)
- //  @JsonBackReference(value = "unit-caster")
-    private     Unit caster;
+    @RestResource(path = "caster", rel = "caster", exported = true)
+    //  @JsonBackReference(value = "unit-caster")
+    private Unit caster;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="skill_id")
+    @JoinColumn(name = "skill_id")
     @JsonProperty("skill")
-    @RestResource(path = "skill", rel="skill",exported = true)
+    @RestResource(path = "skill", rel = "skill", exported = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Skill skill;
 
+    @JsonProperty("was_reversed")
+    private boolean wasReversed;
+
+
+    public BasePlayerMove() {
+        wasReversed = false;
+    }
 
     public int getSequenceIdentifier() {
         return sequenceIdentifier;
@@ -59,6 +67,14 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
 
     public void setSequenceIdentifier(int sequenceIdentifier) {
         this.sequenceIdentifier = sequenceIdentifier;
+    }
+
+    public boolean isWasReversed() {
+        return wasReversed;
+    }
+
+    public void setWasReversed(boolean wasReversed) {
+        this.wasReversed = wasReversed;
     }
 
     public GameUserRuntimeInfo getGameInfo() {
@@ -118,7 +134,6 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
 
-
     public Skill getSkill() {
         return skill;
     }
@@ -128,16 +143,16 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
 
-    public void removeSkill(){
-        if(getSkill()!=null){
+    public void removeSkill() {
+        if (getSkill() != null) {
             getSkill().removeMove(this);
             setSkill(null);
             LOGGER.info("Removed skill association");
         }
     }
 
-    public void removeUserRuntime(){
-        if(getGameInfo()!=null){
+    public void removeUserRuntime() {
+        if (getGameInfo() != null) {
             getGameInfo().removeMove(this);
             setGameInfo(null);
             LOGGER.info("Removed UserRuntime association");
@@ -145,8 +160,8 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
         }
     }
 
-    public void removeUser(){
-        if(getUser()!=null){
+    public void removeUser() {
+        if (getUser() != null) {
             getUser().removePlayerMove(this);
             setUser(null);
             LOGGER.info("Removed User association");
@@ -154,8 +169,8 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
         }
     }
 
-    public void removeCaster(){
-        if(getCaster()!=null){
+    public void removeCaster() {
+        if (getCaster() != null) {
             getCaster().removeCasterMovement(this);
             setCaster(null);
             LOGGER.info("Removed Caster association");
@@ -164,7 +179,7 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
     }
 
     @PreRemove
-    public void preRemoveEntity(){
+    public void preRemoveEntity() {
         LOGGER.info("Start to remove associations between objects:");
         removeSkill();
         removeUserRuntime();
@@ -172,9 +187,7 @@ public class BasePlayerMove extends AbstractNationEntityBase implements IDiscrim
         removeCaster();
 
 
-
     }
-
 
 
 }

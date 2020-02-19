@@ -14,22 +14,21 @@ import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
 public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
-    private  SkillEffectRepository skillEffectRepository;
-    private  SkillRepository skillRepository;
+    private SkillEffectRepository skillEffectRepository;
+    private SkillRepository skillRepository;
 
-    public SkillDummyDataGenerator(SkillRepository skillRepository,SkillEffectRepository skillEffectRepository) throws Exception {
+    public SkillDummyDataGenerator(SkillRepository skillRepository, SkillEffectRepository skillEffectRepository) throws Exception {
         super();
         this.skillEffectRepository = skillEffectRepository;
         this.skillRepository = skillRepository;
-           handleCration();
+        handleCration();
     }
-
 
 
     @Override
     protected void handleCration() throws Exception {
         LOGGER.info("START CREATING  SKILLS!");
-       createSelfMoveSkill();
+        createSelfMoveSkill();
         createNahkampfSkill();
         createMoveOtherSkill();
         createFernkampfSkill();
@@ -42,7 +41,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
     private void createSelfMoveSkill() throws Exception {
-        Skill skill =  new SelfMoveSkill();
+        Skill skill = new SelfMoveSkill();
         skill.setName("Bewegung Schweinebacke!");
         skill.setIdentifier("mv_self");
         skill.setDescription("Setzt eigene Einheit in Bewegung");
@@ -51,21 +50,20 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.SELF);
 
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(4,4,0,0,ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(4, 4, 0, 0, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
-       skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
-       SkillEffect effect= skillEffectRepository.findByIdentifier("mv_self");
-
-
-
-       if(effect==null) throw new Exception("Could not find. Skill Effect with name: Selbstbewegungseffekt!");
-
-       skill.addSkillEffect(effect);
-       skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
 
 
-       entities.add(skill);
+        if (effect == null) throw new Exception("Could not find. Skill Effect with name: Selbstbewegungseffekt!");
+
+        skill.addSkillEffect(effect);
+        skillRepository.save(skill);
+
+
+        entities.add(skill);
     }
 
 
@@ -86,10 +84,10 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setActionArea(actionArea);
 
 
-      skill=  skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
-       SkillEffect effect= skillEffectRepository.findByIdentifier("rev_target_round");
-        if(effect==null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("rev_target_round");
+        if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
 
         skill.addSkillEffect(effect);
 
@@ -99,7 +97,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
     private void createMoveOtherSkill() throws Exception {
-        Skill skill =  new MoveSkill();
+        Skill skill = new MoveSkill();
         skill.setName("Bewegung du Sack!");
         skill.setIdentifier("mv_target");
 
@@ -109,15 +107,14 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.ENEMY_SINGLE);
 
         skill.setSkillBarOrder(5);
-        ActionArea actionArea = new ActionArea(4,4,0,0,ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(4, 4, 0, 0, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
-        skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
-        SkillEffect effect= skillEffectRepository.findByIdentifier("mv_target");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("mv_target");
 
 
-
-        if(effect==null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+        if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
 
         skill.addSkillEffect(effect);
         skillRepository.save(skill);
@@ -135,9 +132,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(2,2,0,0,ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(2, 2, 0, 0, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
-
 
 
         skill = skillRepository.save(skill);
@@ -162,7 +158,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(3,3,0,0,ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(3, 3, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
 
 
@@ -179,7 +175,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
 
-    private void createResetAPSkill(){
+    private void createResetAPSkill() {
         Skill skill = new Skill();
         skill.setName("Reset AP");
         skill.setIdentifier("reset_caster_ap");
@@ -189,12 +185,12 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
 
 
-        skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
         SkillEffect effect = skillEffectRepository.findByIdentifier("reset_caster_ap");
 
         skill.addSkillEffect(effect);
@@ -203,7 +199,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
 
-    private void createResetHPSkill(){
+    private void createResetHPSkill() {
         Skill skill = new Skill();
         skill.setName("Reset HP");
         skill.setIdentifier("reset_caster_hp");
@@ -213,12 +209,12 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
 
 
-        skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
         SkillEffect effect = skillEffectRepository.findByIdentifier("reset_caster_hp");
 
         skill.addSkillEffect(effect);
@@ -226,32 +222,31 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skillRepository.save(skill);
     }
 
-      private void createSelfExplosion(){
-         Skill skill = new Skill();
-         skill.setName("Explosion!");
-          skill.setIdentifier("dmg_expl_target_hp");
-         skill.setDescription("Einheit explodiert vor Wut!");
-         skill.setCost(0);
-         skill.setCooldown(10000);
-          skill.setSkillBarOrder(9999);
-          ActionArea actionArea = new ActionArea(5,5,0,0,ActionShape.FILLED_CIRCLE);
-          skill.setTarget(Target.AREA_ENEMY);
-          skill.setActionArea(actionArea);
+    private void createSelfExplosion() {
+        Skill skill = new Skill();
+        skill.setName("Explosion!");
+        skill.setIdentifier("dmg_expl_target_hp");
+        skill.setDescription("Einheit explodiert vor Wut!");
+        skill.setCost(0);
+        skill.setCooldown(10000);
+        skill.setSkillBarOrder(9999);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
+        skill.setTarget(Target.AREA_ENEMY);
+        skill.setActionArea(actionArea);
 
 
-          skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
-          SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_caster_hp");
-          skill.addSkillEffect(effect);
-
-
-          effect = skillEffectRepository.findByIdentifier("dmg_target_str");
-
-          skill.addSkillEffect(effect);
-          skill = skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_caster_hp");
+        skill.addSkillEffect(effect);
 
 
+        effect = skillEffectRepository.findByIdentifier("dmg_target_str");
 
-      }
+        skill.addSkillEffect(effect);
+        skill = skillRepository.save(skill);
+
+
+    }
 
 }

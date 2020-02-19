@@ -11,7 +11,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "prejudices_triggers",path = "triggers-char"/**,excerptProjection = MaxCharacteristicPrejudiceTriggerProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "prejudices_triggers", path = "triggers-char"/**,excerptProjection = MaxCharacteristicPrejudiceTriggerProjection.class**/)
 @Transactional
-public interface CharacteristicPrejudiceTriggerRepository extends IPageableDao<CharacteristicPrejudiceTrigger> , INamedObjectDao<CharacteristicPrejudiceTrigger>, IFindByIdentifier<CharacteristicPrejudiceTrigger> {
+public interface CharacteristicPrejudiceTriggerRepository extends IPageableDao<CharacteristicPrejudiceTrigger>, INamedObjectDao<CharacteristicPrejudiceTrigger>, IFindByIdentifier<CharacteristicPrejudiceTrigger> {
 }

@@ -10,9 +10,9 @@ public interface IDiscrimantorValue {
 
     @Transient
     @JsonProperty("type")
-    public default String getDiscriminatorValue(){
-        String val =  this.getClass().getSimpleName();
-      return val;
+    public default String getDiscriminatorValue() {
+        String val = this.getClass().getSimpleName();
+        return val;
 
 
     }

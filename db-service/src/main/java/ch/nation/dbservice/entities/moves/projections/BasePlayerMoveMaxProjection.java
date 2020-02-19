@@ -14,22 +14,27 @@ import java.util.Calendar;
 import java.util.List;
 
 
-@Projection(name = "max",types = {BasePlayerMove.class})
-public interface BasePlayerMoveMaxProjection   extends MinimizedEntityResponseProjection{
+@Projection(name = "max", types = {BasePlayerMove.class})
+public interface BasePlayerMoveMaxProjection extends MinimizedEntityResponseProjection {
 
     @JsonProperty("user")
     User getUser();
+
     @JsonProperty("caster")
     Unit getCaster();
+
     @JsonProperty("round")
     int getRound();
+
     @JsonProperty("skill")
     Skill getSkill();
 
     @JsonProperty("created")
-     Calendar getCreationTimestamp();
+    Calendar getCreationTimestamp();
+
     @JsonProperty("updated")
-     Calendar getUpdateTimemstamp();
+    Calendar getUpdateTimemstamp();
+
     @JsonProperty("seqId")
     int getSequenceIdentifier();
 

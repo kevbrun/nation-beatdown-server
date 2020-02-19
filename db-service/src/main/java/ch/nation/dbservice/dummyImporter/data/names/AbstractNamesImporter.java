@@ -16,7 +16,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractNamesImporter<T> extends AbstractDummyGenerator<T>  {
+public abstract class AbstractNamesImporter<T> extends AbstractDummyGenerator<T> {
 
 
     public AbstractNamesImporter() throws Exception {
@@ -27,19 +27,19 @@ public abstract class AbstractNamesImporter<T> extends AbstractDummyGenerator<T>
 
     }
 
-    public void removeIdFromList(List<T> list ){
+    public void removeIdFromList(List<T> list) {
 
-       for(int idx=0; idx < list.size();idx++){
-           T item = list.get(idx);
+        for (int idx = 0; idx < list.size(); idx++) {
+            T item = list.get(idx);
 
-           if(item instanceof UnitFirstName){
-               ((UnitFirstName)item).setId(null);
-           }
+            if (item instanceof UnitFirstName) {
+                ((UnitFirstName) item).setId(null);
+            }
 
-           if(item instanceof UnitLastName){
-               ((UnitLastName)item).setId(null);
-           }
-       }
+            if (item instanceof UnitLastName) {
+                ((UnitLastName) item).setId(null);
+            }
+        }
 
 
     }

@@ -11,7 +11,6 @@ public class BooleanDto implements Serializable {
     private boolean value;
 
 
-
     public boolean isValue() {
         return value;
     }

@@ -38,10 +38,10 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
     }
 
 
-    private void createMove(){
+    private void createMove() {
 
 
-       User player= userRepository.findByName("DummyPlayer");
+        User player = userRepository.findByName("DummyPlayer");
 
 
         Game game = new Game();
@@ -51,31 +51,30 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         game.setUserRuntimeInfos(new ArrayList<>());
         game.setUsers(new ArrayList<>());
 
-        List<GameUserRuntimeInfo> infos =new ArrayList<>();
+        List<GameUserRuntimeInfo> infos = new ArrayList<>();
         GameUserRuntimeInfo info = new GameUserRuntimeInfo();
 
         info.setPlayerUuid(player.getId().toString());
         info.setConsiderationTime(6000);
-                infos.add(info);
+        infos.add(info);
         game.setUserRuntimeInfos(infos);
 
-       game = gameRepository.save(game);
+        game = gameRepository.save(game);
 
 
-
-       SkillPlayerMove move = new SkillPlayerMove();
+        SkillPlayerMove move = new SkillPlayerMove();
         MoveSkillPlayerMoveValue value = new MoveSkillPlayerMoveValue();
 
-        value.setTargetPosition(new EmeddableVector3(0.4f,0.0f,-100f));
-        value.setSourcePosition(new EmeddableVector3(0.4f,0.0f,-160f));
+        value.setTargetPosition(new EmeddableVector3(0.4f, 0.0f, -100f));
+        value.setSourcePosition(new EmeddableVector3(0.4f, 0.0f, -160f));
         move.setSkillCost(2323);
         move.setRound(5);
-        ArrayList<BasePlayerMoveValue> values =new ArrayList<>();
+        ArrayList<BasePlayerMoveValue> values = new ArrayList<>();
 
         values.add(value);
         move.setAppliedEffects(values);
 
-         move= playerMoveRepository.save(move);
+        move = playerMoveRepository.save(move);
 
         // move.setGame(game);
         move.setUser(player);
@@ -89,8 +88,6 @@ public class MoveDummyGenerator extends AbstractDummyGenerator<BasePlayerMove> {
         move = playerMoveRepository.save(move);
 
     }
-
-
 
 
     @Override

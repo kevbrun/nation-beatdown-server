@@ -2,8 +2,8 @@ package ch.nation.core.model.Enums;
 
 import ch.nation.core.utils.EnumUtilties;
 
-public enum  GameStatus implements IEnumFromValue<GameStatus>{
-    None("None"),InProgress("InProgress"),WaitingForPlayer("WaitingForPlayer"),Finished("Finished");
+public enum GameStatus implements IEnumFromValue<GameStatus> {
+    None("None"), InProgress("InProgress"), WaitingForPlayer("WaitingForPlayer"), Finished("Finished");
 
     private String str;
 
@@ -13,7 +13,7 @@ public enum  GameStatus implements IEnumFromValue<GameStatus>{
 
     @Override
     public GameStatus fromValue(String value) {
-        return EnumUtilties.getEnumFromString(GameStatus.class,value);
+        return EnumUtilties.getEnumFromString(GameStatus.class, value);
     }
 
     @Override

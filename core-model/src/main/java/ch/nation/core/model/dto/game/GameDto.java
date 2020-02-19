@@ -96,13 +96,13 @@ public class GameDto extends NamedObjectAbstractDto {
         this.userGameUserRuntimeInfo = userGameUserRuntimeInfo;
     }
 
-    public void addUser(UserDto userDto){
-        if(users==null) users = new ArrayList<>();
-        if(!users.contains(userDto)) users.add(userDto);
+    public void addUser(UserDto userDto) {
+        if (users == null) users = new ArrayList<>();
+        if (!users.contains(userDto)) users.add(userDto);
     }
 
-    public void removeUser(UserDto userDto){
-        if(users!=null && users.contains(userDto)){
+    public void removeUser(UserDto userDto) {
+        if (users != null && users.contains(userDto)) {
 
             users.remove(userDto);
 

@@ -10,8 +10,6 @@ import java.util.List;
 public abstract class AbstractPrejudiceTriggerDto extends NamedObjectAbstractDto {
 
 
-
-
     public AbstractPrejudiceTriggerDto() {
     }
 

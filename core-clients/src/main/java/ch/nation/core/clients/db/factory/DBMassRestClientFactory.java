@@ -1,7 +1,6 @@
 package ch.nation.core.clients.db.factory;
 
 
-
 import ch.nation.core.clients.db.DBRestMassServiceBaseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +21,14 @@ public class DBMassRestClientFactory {
 
     @PostConstruct
     public void initMyServiceCache() {
-        for(DBRestMassServiceBaseInterface service : services) {
+        for (DBRestMassServiceBaseInterface service : services) {
             myServiceCache.put(service.getType(), service);
         }
     }
 
     public static DBRestMassServiceBaseInterface getService(String type) {
         DBRestMassServiceBaseInterface service = myServiceCache.get(type);
-        if(service == null) throw new RuntimeException("Unknown service type: " + type);
+        if (service == null) throw new RuntimeException("Unknown service type: " + type);
         return service;
     }
 

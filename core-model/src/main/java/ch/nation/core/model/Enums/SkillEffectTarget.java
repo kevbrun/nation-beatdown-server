@@ -4,7 +4,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum SkillEffectTarget implements IEnumFromValue<SkillEffectTarget> {
-    NONE("None"),CASTER("Caster"),TARGET("Target"),RANDOM_TARGET("Random_Target");
+    NONE("None"), CASTER("Caster"), TARGET("Target"), RANDOM_TARGET("Random_Target");
 
     private String str;
 
@@ -14,7 +14,7 @@ public enum SkillEffectTarget implements IEnumFromValue<SkillEffectTarget> {
 
 
     public SkillEffectTarget fromValue(String value) {
-        return  EnumUtilties.getEnumFromString(SkillEffectTarget.class,value);
+        return EnumUtilties.getEnumFromString(SkillEffectTarget.class, value);
     }
 
 

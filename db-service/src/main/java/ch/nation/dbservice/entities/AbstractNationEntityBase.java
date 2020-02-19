@@ -23,20 +23,19 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @JsonProperty("uuid")
-    @Column(name="id",columnDefinition = "BINARY(16)")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID id;
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created",updatable = false)
+    @Column(name = "created", updatable = false)
     //@JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone="UTC" )
     @JsonProperty("created")
     private Calendar creationTimestamp;
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="updated")
+    @Column(name = "updated")
     @JsonProperty("updated")
     private Calendar updateTimemstamp;
-
 
 
     public UUID getId() {
@@ -73,7 +72,7 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
 
     @PreUpdate
     protected void onUpdate() {
-        LOGGER.debug(String.format("Execute onUpdate() | Entity id=%s,uuid=%s",this.getId().toString(),this.getId()));
+        LOGGER.debug(String.format("Execute onUpdate() | Entity id=%s,uuid=%s", this.getId().toString(), this.getId()));
         updateTimemstamp = Calendar.getInstance();
 
     }
@@ -96,9 +95,9 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
     }
 
 
-    public boolean sameAsFormer(AbstractNationEntityBase current,AbstractNationEntityBase newItem){
+    public boolean sameAsFormer(AbstractNationEntityBase current, AbstractNationEntityBase newItem) {
 
-        return current ==null ? newItem == null : current.equals(newItem);
+        return current == null ? newItem == null : current.equals(newItem);
 
     }
 
@@ -108,7 +107,7 @@ public abstract class AbstractNationEntityBase implements Serializable, IDiscrim
                 "id=" + id +
                 ", creationTimestamp=" + creationTimestamp +
                 ", updateTimemstamp=" + updateTimemstamp +
-                ", type="+getDiscriminatorValue()+
+                ", type=" + getDiscriminatorValue() +
                 '}';
     }
 }

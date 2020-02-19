@@ -1,4 +1,5 @@
 package ch.nation.oauth2.authservice.config;
+
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;

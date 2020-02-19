@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterClass,CharacterClassRepository> {
+public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterClass, CharacterClassRepository> {
 
 
     @Autowired
@@ -43,10 +43,8 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
     }
 
 
-
-
     @Test
-    public void stats_should_not_be_null_after_saving(){
+    public void stats_should_not_be_null_after_saving() {
         CharacterClass clazz = repo.save(entityToTest);
 
 
@@ -63,8 +61,8 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
 
 
     @Test
-    public void add_skill_to_clazz_test(){
-        CharacterClass characterClass =repo.save(entityToTest);
+    public void add_skill_to_clazz_test() {
+        CharacterClass characterClass = repo.save(entityToTest);
 
 
         //Skill Effect
@@ -72,35 +70,32 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
         skillRepository.save(move);
         characterClass.addSkill(move);
 
-       characterClass= repo.save(characterClass);
+        characterClass = repo.save(characterClass);
 
 
-       Assert.assertTrue(characterClass.getSkills().size()==1);
-       Assert.assertTrue(characterClass.getSkills().get(0).getName().equals("Bewegung!"));
-       Assert.assertTrue(characterClass.getSkills().get(0).getSkillEffects().get(0).getName().equals("Bewegungs Effect"));
-
-
+        Assert.assertTrue(characterClass.getSkills().size() == 1);
+        Assert.assertTrue(characterClass.getSkills().get(0).getName().equals("Bewegung!"));
+        Assert.assertTrue(characterClass.getSkills().get(0).getSkillEffects().get(0).getName().equals("Bewegungs Effect"));
 
 
     }
 
 
-
     @Test
-    public void remove_skill_from_clazz_test(){
-        CharacterClass characterClass =repo.save(entityToTest);
+    public void remove_skill_from_clazz_test() {
+        CharacterClass characterClass = repo.save(entityToTest);
         Skill move = createMoveSkillDummy();
 
 
         skillRepository.save(move);
         characterClass.addSkill(move);
 
-        characterClass= repo.save(characterClass);
+        characterClass = repo.save(characterClass);
 
 
         characterClass.removeSkill(move);
 
-        Assert.assertTrue(characterClass.getSkills().size()==0);
+        Assert.assertTrue(characterClass.getSkills().size() == 0);
 
     }
 
@@ -108,7 +103,7 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
         //Skill Effect
         SkillEffect moveEffect = new SkillEffect();
         moveEffect.setName("Bewegungs Effect");
-        moveEffect= skillEffectRepository.save(moveEffect);
+        moveEffect = skillEffectRepository.save(moveEffect);
 
         LOGGER.info(moveEffect.toString());
 
@@ -125,7 +120,7 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
 
 
     @Test
-    public void add_multiple_skills_to_clazz(){
+    public void add_multiple_skills_to_clazz() {
         Skill moveSkil = createMoveSkillDummy();
 
         SkillEffect effect = new SkillEffect();
@@ -137,7 +132,7 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
         Skill secondSkill = new Skill();
         secondSkill.setName("Attacke!");
         secondSkill.addSkillEffect(effect);
-       secondSkill= skillRepository.save(secondSkill);
+        secondSkill = skillRepository.save(secondSkill);
 
         CharacterClass clazz = repo.save(entityToTest);
 
@@ -147,16 +142,15 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
         clazz = repo.save(clazz);
 
 
-        Assert.assertTrue(clazz.getSkills().size()==2);
-        Assert.assertTrue(clazz.getSkills().get(0)!=null);
-        Assert.assertTrue(clazz.getSkills().get(1)!=null);
-
+        Assert.assertTrue(clazz.getSkills().size() == 2);
+        Assert.assertTrue(clazz.getSkills().get(0) != null);
+        Assert.assertTrue(clazz.getSkills().get(1) != null);
 
 
     }
 
     @Test
-    public void remove_skill_from_skills_list(){
+    public void remove_skill_from_skills_list() {
         Skill moveSkil = createMoveSkillDummy();
 
         SkillEffect effect = new SkillEffect();
@@ -168,7 +162,7 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
         Skill secondSkill = new Skill();
         secondSkill.setName("Attacke!");
         secondSkill.addSkillEffect(effect);
-        secondSkill=  skillRepository.save(secondSkill);
+        secondSkill = skillRepository.save(secondSkill);
 
         CharacterClass clazz = repo.save(entityToTest);
 
@@ -179,27 +173,26 @@ public class CharacterClassRepoTest extends AbstractNamedEntityTest<CharacterCla
 
         clazz.removeSkill(moveSkil);
 
-        Assert.assertTrue(clazz.getSkills().size()==1);
+        Assert.assertTrue(clazz.getSkills().size() == 1);
         Assert.assertTrue(clazz.getSkills().get(0).equals(secondSkill));
 
     }
 
     @Test
-    public void update_stat_test(){
+    public void update_stat_test() {
         CharacterClass saved = repo.save(entityToTest);
-        saved.setHealthPoints(new Stat(10f,0f,100f,StatGrowthType.EXPONENTIAL));
+        saved.setHealthPoints(new Stat(10f, 0f, 100f, StatGrowthType.EXPONENTIAL));
 
-        saved= repo.save(saved);
+        saved = repo.save(saved);
 
 
-        Assert.assertTrue(saved.getHealthPoints().getBaseValue()==10f);
-        Assert.assertTrue(saved.getHealthPoints().getMaxValue()==100f);
-        Assert.assertTrue(saved.getHealthPoints().getMinValue()==0f);
+        Assert.assertTrue(saved.getHealthPoints().getBaseValue() == 10f);
+        Assert.assertTrue(saved.getHealthPoints().getMaxValue() == 100f);
+        Assert.assertTrue(saved.getHealthPoints().getMinValue() == 0f);
         Assert.assertTrue(saved.getHealthPoints().getGrowthType() == StatGrowthType.EXPONENTIAL);
 
 
     }
-
 
 
     @Override

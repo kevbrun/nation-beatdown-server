@@ -13,8 +13,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.*;
 
-@Table(name="GAME")
-@Entity(name="GAME")
+@Table(name = "GAME")
+@Entity(name = "GAME")
 public class Game extends AbstractNationEntityBase {
 
 
@@ -23,9 +23,9 @@ public class Game extends AbstractNationEntityBase {
             joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "users_id",
                     referencedColumnName = "id"))
-    @Column(name="players")
+    @Column(name = "players")
     @JsonProperty("users")
-    @RestResource(path = "users", rel="users")
+    @RestResource(path = "users", rel = "users")
     private List<User> users;
 
     @JsonProperty("round")
@@ -34,24 +34,24 @@ public class Game extends AbstractNationEntityBase {
 
     @Enumerated(EnumType.STRING)
     @JsonProperty("status")
-    @Column(name = "status",nullable = false)
+    @Column(name = "status", nullable = false)
     private GameStatus gameStatus = GameStatus.None;
 
 
     @JsonProperty("current_player")
-    @Column(name="current_player",nullable = false)
+    @Column(name = "current_player", nullable = false)
     private String currentPlayerUuid;
 
     @JsonProperty("first_player")
-    @Column(name="first_player",nullable = false)
+    @Column(name = "first_player", nullable = false)
     private String firstPlayerUuid;
 
     @JsonProperty("next_player")
-    @Column(name="next_player",nullable = false)
+    @Column(name = "next_player", nullable = false)
     private String nextPlayerUuid;
 
     @JsonProperty("winner_player")
-    @Column(name="winner_player")
+    @Column(name = "winner_player")
     private String winner;
 
     @OneToMany(
@@ -59,7 +59,7 @@ public class Game extends AbstractNationEntityBase {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
-    @RestResource(path = "user-runtimes", rel="user-runtimes",exported = true)
+    @RestResource(path = "user-runtimes", rel = "user-runtimes", exported = true)
     @JsonProperty("runtimes")
     private List<GameUserRuntimeInfo> userRuntimeInfos;
 
@@ -76,9 +76,8 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-
     public List<User> getUsers() {
-        if(users==null) users = new ArrayList<>();
+        if (users == null) users = new ArrayList<>();
 
 
         return users;
@@ -134,7 +133,6 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-
     @Override
     public String toString() {
         return "game{" +
@@ -168,20 +166,19 @@ public class Game extends AbstractNationEntityBase {
 
     //JPA
 
-    public void addUser(User user){
-        if(!this.users.contains(user)){
+    public void addUser(User user) {
+        if (!this.users.contains(user)) {
             this.users.add(user);
             user.addGame(this);
         }
     }
 
-    public void removeUser(User user){
-        if(this.users.contains(user)){
+    public void removeUser(User user) {
+        if (this.users.contains(user)) {
             this.users.remove(user);
             user.removeGame(this);
         }
     }
-
 
 
     public List<GameUserRuntimeInfo> getUserRuntimeInfos() {
@@ -194,9 +191,9 @@ public class Game extends AbstractNationEntityBase {
 
         if (this.userRuntimeInfos == null) {
             this.userRuntimeInfos = userRuntimeInfos;
-        } else if(this.userRuntimeInfos != userRuntimeInfos) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.userRuntimeInfos != userRuntimeInfos) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.userRuntimeInfos.clear();
-            if(userRuntimeInfos != null){
+            if (userRuntimeInfos != null) {
                 this.userRuntimeInfos.addAll(userRuntimeInfos);
             }
         }
@@ -212,7 +209,7 @@ public class Game extends AbstractNationEntityBase {
         }
     }
 
-    public void removeUserRuntimeInfos(GameUserRuntimeInfo info){
+    public void removeUserRuntimeInfos(GameUserRuntimeInfo info) {
         if (userRuntimeInfos.contains(info)) {
             userRuntimeInfos.remove(info);
             info.setGame(null);
@@ -224,9 +221,9 @@ public class Game extends AbstractNationEntityBase {
 
         if (this.users == null) {
             this.users = users;
-        } else if(this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.users != users) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.users.clear();
-            if(users != null){
+            if (users != null) {
                 this.users.addAll(users);
             }
         }
@@ -236,22 +233,19 @@ public class Game extends AbstractNationEntityBase {
     }
 
 
-
-
     @PrePersist
     @PreUpdate
-    public void prePersist(){
-        for (User user:
-             users) {
+    public void prePersist() {
+        for (User user :
+                users) {
             user.addGame(this);
 
 
         }
 
-        for(GameUserRuntimeInfo runtime : userRuntimeInfos){
+        for (GameUserRuntimeInfo runtime : userRuntimeInfos) {
             runtime.setGame(this);
         }
-
 
 
     }

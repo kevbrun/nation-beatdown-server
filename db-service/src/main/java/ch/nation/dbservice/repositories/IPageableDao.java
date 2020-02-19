@@ -15,18 +15,17 @@ import java.util.UUID;
 @NoRepositoryBean
 public interface IPageableDao<T extends AbstractNationEntityBase> extends PagingAndSortingRepository<T, UUID> {
 
-    @Cacheable
+
     T findOneById(UUID id);
 
-    @Cacheable
+
     Iterable<T> findAll();
 
-    @Cacheable
+
     Iterable<T> findAll(Sort sort);
 
-    @Cacheable
-    Page<T> findAll(Pageable pageable);
 
+    Page<T> findAll(Pageable pageable);
 
 
 }

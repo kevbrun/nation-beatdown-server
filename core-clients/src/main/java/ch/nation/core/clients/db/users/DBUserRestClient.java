@@ -9,9 +9,8 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@FeignClient(contextId = "user-db-rest-service",value="nation-database-service",path = "/users",decode404 = true, configuration = FeignClientConfig.class)
-public interface DBUserRestClient  extends DBRestServiceBaseInterface<UserDto,UserDto>{
-
+@FeignClient(contextId = "user-db-rest-service", value = "nation-database-service", path = "/users", decode404 = true, configuration = FeignClientConfig.class)
+public interface DBUserRestClient extends DBRestServiceBaseInterface<UserDto, UserDto> {
 
 
     @Override

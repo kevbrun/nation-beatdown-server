@@ -7,7 +7,7 @@ import ch.nation.core.services.AbstractNamedEntityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StatPrejudiceResourceServiceImpl extends AbstractNamedEntityService<StatPrejudiceDto,StatPrejudiceDto> {
+public class StatPrejudiceResourceServiceImpl extends AbstractNamedEntityService<StatPrejudiceDto, StatPrejudiceDto> {
     public StatPrejudiceResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {
         super(StatPrejudiceDto.class, factory, massRestClientFactory);
     }

@@ -8,7 +8,7 @@ import ch.nation.core.services.AbstractEntityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StatPlayerMoveValueResourceServiceImpl extends AbstractEntityService<StatSkillPlayerMoveSkillValueDto,StatSkillPlayerMoveSkillValueDto> {
+public class StatPlayerMoveValueResourceServiceImpl extends AbstractEntityService<StatSkillPlayerMoveSkillValueDto, StatSkillPlayerMoveSkillValueDto> {
 
 
     public StatPlayerMoveValueResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory) {

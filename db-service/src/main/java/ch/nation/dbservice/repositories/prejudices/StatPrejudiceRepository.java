@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "prejudices",path = "prejudices-stat"/**,excerptProjection = MaxStatPrejudiceProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "prejudices", path = "prejudices-stat"/**,excerptProjection = MaxStatPrejudiceProjection.class**/)
 @Transactional
-public interface StatPrejudiceRepository extends IPageableDao<StatPrejudice>, INamedObjectDao<StatPrejudice> , IFindByIdentifier<StatPrejudice> {
+public interface StatPrejudiceRepository extends IPageableDao<StatPrejudice>, INamedObjectDao<StatPrejudice>, IFindByIdentifier<StatPrejudice> {
 }

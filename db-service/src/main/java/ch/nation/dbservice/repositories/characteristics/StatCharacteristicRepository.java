@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "characteristics",path = "characteristics-stat",excerptProjection = StatCharacteristicDefaultProjection.class)
+@RepositoryRestResource(collectionResourceRel = "characteristics", path = "characteristics-stat", excerptProjection = StatCharacteristicDefaultProjection.class)
 @Transactional
-public interface StatCharacteristicRepository extends IPageableDao<StatCharacteristic> , INamedObjectDao<StatCharacteristic>, IFindByIdentifier<StatCharacteristic> {
+public interface StatCharacteristicRepository extends IPageableDao<StatCharacteristic>, INamedObjectDao<StatCharacteristic>, IFindByIdentifier<StatCharacteristic> {
 }

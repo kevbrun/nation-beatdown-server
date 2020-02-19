@@ -13,41 +13,38 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="NATION")
-@Table(name="NATION")
-@AttributeOverride(name = "name", column = @Column(name = "name",unique = false,nullable = false))
+@Entity(name = "NATION")
+@Table(name = "NATION")
+@AttributeOverride(name = "name", column = @Column(name = "name", unique = false, nullable = false))
 public class Nation extends NamedEntityBase implements Serializable {
 
     @OneToOne(mappedBy = "nation")
-    @RestResource(path = "user", rel="user",exported = false)
+    @RestResource(path = "user", rel = "user", exported = false)
     @JsonBackReference
     private User user;
 
 
     @ManyToMany
-    @RestResource(path = "characteristics",rel = "characteristics",exported = false)
+    @RestResource(path = "characteristics", rel = "characteristics", exported = false)
     @JsonProperty("characteristics")
     private List<BaseCharacteristic> characteristics;
 
 
     @ManyToMany
-    @RestResource(path = "prejudices",rel = "prejudices",exported = false)
+    @RestResource(path = "prejudices", rel = "prejudices", exported = false)
     @JsonProperty("prejudices")
     private List<BasePrejudice> prejudices;
 
 
-    public Nation(){
+    public Nation() {
         super();
     }
 
     public User getUser() {
 
 
-
         return user;
     }
-
-
 
 
     public List<BasePrejudice> getPrejudices() {
@@ -57,6 +54,7 @@ public class Nation extends NamedEntityBase implements Serializable {
     public void setPrejudices(List<BasePrejudice> prejudices) {
         this.prejudices = prejudices;
     }
+
     public List<BaseCharacteristic> getCharacteristics() {
         return characteristics;
     }
@@ -92,7 +90,6 @@ public class Nation extends NamedEntityBase implements Serializable {
                 ", characteristics=" + characteristics +
                 '}';
     }
-
 
 
 }

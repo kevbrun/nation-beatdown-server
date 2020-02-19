@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import javax.transaction.Transactional;
 
 @Transactional
-@RepositoryRestResource(collectionResourceRel = "values",path = "move-values"/**,excerptProjection = MoveSkillPlayerMoveValueProjection.class**/)
+@RepositoryRestResource(collectionResourceRel = "values", path = "move-values"/**,excerptProjection = MoveSkillPlayerMoveValueProjection.class**/)
 public interface PlayerMoveSkillEffectValueRepository extends IPageableDao<MoveSkillPlayerMoveValue> {
 }
 

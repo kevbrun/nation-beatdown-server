@@ -12,26 +12,26 @@ import java.util.Objects;
 @Embeddable
 public class ActionArea {
 
-        @Column(name="sizeXAxis")
-        @JsonProperty("sizeXAxis")
-        private int sizeInXAxis;
+    @Column(name = "sizeXAxis")
+    @JsonProperty("sizeXAxis")
+    private int sizeInXAxis;
 
-        @Column(name="sizeYAxis")
-        @JsonProperty("sizeYAxis")
-        private int sizeInYAxis;
+    @Column(name = "sizeYAxis")
+    @JsonProperty("sizeYAxis")
+    private int sizeInYAxis;
 
-        @Column(name="offsetXAxis")
-        @JsonProperty("offsetXAxis")
-        private int offsetInXAxis;
+    @Column(name = "offsetXAxis")
+    @JsonProperty("offsetXAxis")
+    private int offsetInXAxis;
 
-        @Column(name="offsetYAxis")
-        @JsonProperty("offsetYAxis")
-        private int offsetInYAxis;
+    @Column(name = "offsetYAxis")
+    @JsonProperty("offsetYAxis")
+    private int offsetInYAxis;
 
-        @Enumerated(EnumType.STRING)
-        @Column(name="shape")
-        @JsonProperty("shape")
-        private ActionShape shape;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "shape")
+    @JsonProperty("shape")
+    private ActionShape shape;
 
 
     public ActionArea(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, ActionShape shape) {

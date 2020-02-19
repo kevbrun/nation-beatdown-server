@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
-public class SkillNamedResourceController extends AbstractNamedResourceGameLogicController<SkillDto,SkillDto> {
+public class SkillNamedResourceController extends AbstractNamedResourceGameLogicController<SkillDto, SkillDto> {
 
     private final SkillEffectResourceController effectController;
 
     public SkillNamedResourceController(SkillResourceServiceImpl service, SkillEffectResourceController effectController, HttpServletRequest request) {
-        super(service,request);
+        super(service, request);
 
         this.effectController = effectController;
     }
@@ -68,8 +68,8 @@ public class SkillNamedResourceController extends AbstractNamedResourceGameLogic
     }
 
     @Override
-    @RequestMapping(method = RequestMethod.GET,path="/search/identifier")
-    public ResponseEntity findByIdentifier(@RequestParam("identifier")String identfier,@RequestParam(value = "projection",required = false) QueryProjection projection) {
+    @RequestMapping(method = RequestMethod.GET, path = "/search/identifier")
+    public ResponseEntity findByIdentifier(@RequestParam("identifier") String identfier, @RequestParam(value = "projection", required = false) QueryProjection projection) {
         return super.findByIdentifier(identfier, projection);
     }
 
@@ -77,25 +77,22 @@ public class SkillNamedResourceController extends AbstractNamedResourceGameLogic
     //Effects
 
 
-    @RequestMapping(method = RequestMethod.GET,path = "/effects")
+    @RequestMapping(method = RequestMethod.GET, path = "/effects")
     public ResponseEntity getAllSkillEffects() {
-     return effectController.getAll();
+        return effectController.getAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET,path="/effects/{uuid}")
-    public ResponseEntity findEffectById(@PathVariable("uuid")String uuid) {
+    @RequestMapping(method = RequestMethod.GET, path = "/effects/{uuid}")
+    public ResponseEntity findEffectById(@PathVariable("uuid") String uuid) {
         return effectController.findById(uuid);
     }
 
 
-
-
-    @RequestMapping(method = RequestMethod.GET,path="/effects/search")
+    @RequestMapping(method = RequestMethod.GET, path = "/effects/search")
     public ResponseEntity findSkillEffectByName(@RequestParam("name") String name) {
-       return effectController.findByName(name);
+        return effectController.findByName(name);
 
     }
-
 
 
 }

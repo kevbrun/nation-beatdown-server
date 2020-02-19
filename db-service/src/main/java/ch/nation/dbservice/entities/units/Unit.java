@@ -18,35 +18,34 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Table(name="UNITS")
-@Entity(name="UNITS")
+@Table(name = "UNITS")
+@Entity(name = "UNITS")
 public class Unit extends NamedEntityBase {
-
 
 
     @JsonProperty("class")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clazz_id")
-    @RestResource(path = "classes", rel="classes",exported = false)
+    @RestResource(path = "classes", rel = "classes", exported = false)
     private CharacterClass characterClass;
 
     @JsonProperty("state")
-    @Column(name="unit_state")
+    @Column(name = "unit_state")
     @Enumerated(EnumType.STRING)
     private UnitState state = UnitState.INIT_OBJECT;
 
     @JsonProperty("dead")
-    @Column(name="is_dead")
+    @Column(name = "is_dead")
     private boolean UnitIsDead = false;
 
-   // @Column(name="position")
+    // @Column(name="position")
     @JsonProperty("pos")
     @Embedded
     private EmeddableVector3 position;
 
     @Embedded
     @JsonProperty("assets")
-    @RestResource(path = "assets", rel="assets")
+    @RestResource(path = "assets", rel = "assets")
 
     private UnitAssets unitAssets;
 
@@ -57,9 +56,9 @@ public class Unit extends NamedEntityBase {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    @RestResource(rel = "caster",path = "caster")
+    @RestResource(rel = "caster", path = "caster")
     @JsonProperty("caster")
-  // @JsonManagedReference(value="unit-caster")
+    // @JsonManagedReference(value="unit-caster")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMove> caster = new ArrayList<>();
 
@@ -69,52 +68,50 @@ public class Unit extends NamedEntityBase {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    @RestResource(rel="target",path = "target",exported = true)
+    @RestResource(rel = "target", path = "target", exported = true)
     @JsonProperty("target")
- //   @JsonManagedReference(value = "unit-target")
+    //   @JsonManagedReference(value = "unit-target")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<BasePlayerMoveValue> target = new ArrayList<>();
 
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
 
-
-    @Column(name="hp")
+    @Column(name = "hp")
     @JsonProperty("hp")
     private int healthPoints;
 
 
-    @Column(name="ap")
+    @Column(name = "ap")
     @JsonProperty("ap")
     private int actionPoints;
 
 
-    @Column(name="str")
+    @Column(name = "str")
     @JsonProperty("str")
     private int strength;
 
 
-    @Column(name="vit")
+    @Column(name = "vit")
     @JsonProperty("vit")
     private int vitality;
 
-    @Column(name="intelligence")
+    @Column(name = "intelligence")
     @JsonProperty("int")
     private int intelligence;
 
 
-    @Column(name="dex")
+    @Column(name = "dex")
     @JsonProperty("dex")
     private int dexterity;
 
 
-    @Column(name="agi")
+    @Column(name = "agi")
     @JsonProperty("agi")
     private int agility;
-
 
 
     public Unit() {
@@ -216,7 +213,7 @@ public class Unit extends NamedEntityBase {
 
     public EmeddableVector3 getPosition() {
 
-        if(position==null) position = new EmeddableVector3();
+        if (position == null) position = new EmeddableVector3();
         return position;
     }
 
@@ -227,7 +224,7 @@ public class Unit extends NamedEntityBase {
     public UnitAssets getUnitAssets() {
         LOGGER.debug("Execute custom setter");
 
-        if(unitAssets==null)unitAssets = new UnitAssets();
+        if (unitAssets == null) unitAssets = new UnitAssets();
         return unitAssets;
     }
 
@@ -237,7 +234,7 @@ public class Unit extends NamedEntityBase {
 
     public List<BasePlayerMove> getCaster() {
 
-        if(caster ==null) caster = new ArrayList<>();
+        if (caster == null) caster = new ArrayList<>();
 
         return caster;
     }
@@ -247,20 +244,19 @@ public class Unit extends NamedEntityBase {
 
         if (this.caster == null) {
             this.caster = caster;
-        } else if(this.caster != caster) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.caster != caster) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.caster.clear();
-            if(caster != null){
+            if (caster != null) {
                 this.caster.addAll(caster);
             }
         }
-
 
 
     }
 
     public List<BasePlayerMoveValue> getTarget() {
 
-        if(target==null) target = new ArrayList<>();
+        if (target == null) target = new ArrayList<>();
         return target;
     }
 
@@ -268,17 +264,15 @@ public class Unit extends NamedEntityBase {
 
         if (this.target == null) {
             this.target = target;
-        } else if(this.target != target) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.target != target) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.target.clear();
-            if(target != null){
+            if (target != null) {
                 this.target.addAll(target);
             }
         }
 
 
-
     }
-
 
 
     @Override
@@ -316,24 +310,24 @@ public class Unit extends NamedEntityBase {
 
     //JPA
 
-    public void addCasterMovement(BasePlayerMove action){
-        if(!getCaster().add(action)){
+    public void addCasterMovement(BasePlayerMove action) {
+        if (!getCaster().add(action)) {
             getCaster().add(action);
             action.setCaster(this);
 
-            }
+        }
     }
 
-    public void removeCasterMovement(BasePlayerMove action){
-        if(getCaster().contains(action)){
+    public void removeCasterMovement(BasePlayerMove action) {
+        if (getCaster().contains(action)) {
             getCaster().remove(action);
             action.setCaster(null);
         }
     }
 
 
-    public void removeMovementValue(BasePlayerMoveValue value){
-        if(getTarget().contains(value)){
+    public void removeMovementValue(BasePlayerMoveValue value) {
+        if (getTarget().contains(value)) {
             getTarget().remove(value);
             value.setTarget(null);
         }
@@ -342,22 +336,21 @@ public class Unit extends NamedEntityBase {
     }
 
 
-  /**  public void addTargetMovement(BasePlayerMoveValue action){
-        if(!getTarget().add(action)){
-            getTarget().add(action);
-            action.setTarget(this);
-        }
-    }
+    /**  public void addTargetMovement(BasePlayerMoveValue action){
+     if(!getTarget().add(action)){
+     getTarget().add(action);
+     action.setTarget(this);
+     }
+     }
 
 
-    public void removeTargetMovement(BasePlayerMoveValue action){
-        if(getTarget().contains(action)){
-            getTarget().remove(action);
-            action.setTarget(null);
-        }
-    }
-
-**/
+     public void removeTargetMovement(BasePlayerMoveValue action){
+     if(getTarget().contains(action)){
+     getTarget().remove(action);
+     action.setTarget(null);
+     }
+     }
+     **/
 
 
 }

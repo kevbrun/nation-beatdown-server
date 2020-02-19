@@ -4,7 +4,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum TimeReversakSkillEffectRoundDefinition implements IEnumFromValue<TimeReversakSkillEffectRoundDefinition> {
-    COMPLETE_ROUND("CompleteRound"),STEP("Step");
+    COMPLETE_ROUND("CompleteRound"), STEP("Step");
 
     private String str;
 
@@ -21,9 +21,8 @@ public enum TimeReversakSkillEffectRoundDefinition implements IEnumFromValue<Tim
 
 
     public TimeReversakSkillEffectRoundDefinition fromValue(String value) {
-        return EnumUtilties.getEnumFromString(TimeReversakSkillEffectRoundDefinition.class,value);
+        return EnumUtilties.getEnumFromString(TimeReversakSkillEffectRoundDefinition.class, value);
     }
-
 
 
     public String toJson() {

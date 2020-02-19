@@ -15,7 +15,6 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
     private UserDto user;
 
 
-
     @JsonProperty("characteristics")
     private List<AbstractCharacteristicsDto> characteristics;
 
@@ -28,7 +27,7 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
         this.user = user;
     }
 
-    public NationDto(){
+    public NationDto() {
         super();
     }
 

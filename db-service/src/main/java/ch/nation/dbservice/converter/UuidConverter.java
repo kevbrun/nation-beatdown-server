@@ -3,6 +3,7 @@ package ch.nation.dbservice.converter;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.UUID;
+
 @Converter(autoApply = true)
 public class UuidConverter implements AttributeConverter<UUID, UUID> {
 

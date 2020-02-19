@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "units",path = "units")
+@RepositoryRestResource(collectionResourceRel = "units", path = "units")
 @Transactional
-public interface UnitRepository  extends IPageableDao<Unit>, INamedObjectDao<Unit> {
+public interface UnitRepository extends IPageableDao<Unit>, INamedObjectDao<Unit> {
 }

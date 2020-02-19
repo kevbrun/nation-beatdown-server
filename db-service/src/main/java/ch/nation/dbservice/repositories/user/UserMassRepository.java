@@ -21,9 +21,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class UserMassRepository extends AbstractMassRestResource<User> {
 
 
-
-
-
     @Autowired
     public UserMassRepository(UserRepository repo) {
 

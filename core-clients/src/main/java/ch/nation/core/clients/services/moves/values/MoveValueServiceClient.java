@@ -10,6 +10,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
-@FeignClient(contextId = "move-value-resource-service",value="nation-cloud-moves-service",path = "/values",decode404 = true, configuration = FeignClientConfig.class)
-public interface MoveValueServiceClient extends BaseServiceRestClientInterface<AbstractMoveSkillEffectValueDto,AbstractMoveSkillEffectValueDto> {
+@FeignClient(contextId = "move-value-resource-service", value = "nation-cloud-moves-service", path = "/values", decode404 = true, configuration = FeignClientConfig.class)
+public interface MoveValueServiceClient extends BaseServiceRestClientInterface<AbstractMoveSkillEffectValueDto, AbstractMoveSkillEffectValueDto> {
 }

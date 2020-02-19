@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
-@Entity(name="STAT_CHARACTERISTICS")
+@Entity(name = "STAT_CHARACTERISTICS")
 @DiscriminatorValue("STAT")
-public class StatCharacteristic extends BaseCharacteristic  implements IDiscrimantorValue {
+public class StatCharacteristic extends BaseCharacteristic implements IDiscrimantorValue {
 
 
     @Embedded
@@ -24,14 +24,13 @@ public class StatCharacteristic extends BaseCharacteristic  implements IDiscrima
     }
 
 
-
     public StatCharacteristic(StatBonusDelta delta) {
         this.delta = delta;
     }
 
     public StatBonusDelta getDelta() {
 
-        if(delta==null) delta = new StatBonusDelta();
+        if (delta == null) delta = new StatBonusDelta();
 
         return delta;
     }
@@ -46,7 +45,6 @@ public class StatCharacteristic extends BaseCharacteristic  implements IDiscrima
                 "delta=" + delta +
                 "} " + super.toString();
     }
-
 
 
 }

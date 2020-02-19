@@ -10,12 +10,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import javax.transaction.Transactional;
 import java.util.UUID;
 
-@RepositoryRestResource(collectionResourceRel = "user-runtimes",path = "user-runtimes",exported = true)
+@RepositoryRestResource(collectionResourceRel = "user-runtimes", path = "user-runtimes", exported = true)
 @Transactional
 public interface GameUserRuntimeRepository extends IPageableDao<GameUserRuntimeInfo> {
 
     GameUserRuntimeInfo findByGame_IdAndPlayerUuid(@Param("gameUuid") UUID gameUuid, @Param("playerUuid") String playerUuid);
-
 
 
     boolean existsById(@Param("id") UUID id);

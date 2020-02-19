@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
 
-@RepositoryRestResource(collectionResourceRel = "prejudices_triggers",path = "triggers")
+@RepositoryRestResource(collectionResourceRel = "prejudices_triggers", path = "triggers")
 @Transactional
-public interface PrejudiceTriggerRepository extends IPageableDao<BasePrejudiceTrigger>  , INamedObjectDao<StatPrejudiceTrigger>, IFindByIdentifier<StatPrejudiceTrigger> {
+public interface PrejudiceTriggerRepository extends IPageableDao<BasePrejudiceTrigger>, INamedObjectDao<StatPrejudiceTrigger>, IFindByIdentifier<StatPrejudiceTrigger> {
 }

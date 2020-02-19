@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Component
-@FeignClient(contextId = "user-runtime-resource-service",value="nation-cloud-user-runtimes-service",decode404 = true, configuration = FeignClientConfig.class)
-public interface UserGameRuntimeServiceClient extends BaseServiceRestClientInterface<GameUserRuntimeInfoDto,GameUserRuntimeInfoDto> {
-
+@FeignClient(contextId = "user-runtime-resource-service", value = "nation-cloud-user-runtimes-service", decode404 = true, configuration = FeignClientConfig.class)
+public interface UserGameRuntimeServiceClient extends BaseServiceRestClientInterface<GameUserRuntimeInfoDto, GameUserRuntimeInfoDto> {
 
 
     @RequestMapping(path = "/search/findByGame_IdAndPlayerUuid")
-    ResponseEntity<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(@RequestParam(value = "game_uuid")String gameUUid, @RequestParam(value = "player_uuid")String playerUUid, @RequestParam(value = "projection",required = false) QueryProjection projection);
+    ResponseEntity<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(@RequestParam(value = "game_uuid") String gameUUid, @RequestParam(value = "player_uuid") String playerUUid, @RequestParam(value = "projection", required = false) QueryProjection projection);
 }

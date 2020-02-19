@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.List;
 
 
-@Projection(name = "max",types = BasePrejudice.class)
+@Projection(name = "max", types = BasePrejudice.class)
 public interface MaxBasePrejudiceProjection extends MinimizedEntityResponseProjection, NamedClassesProjection, IIdentityProjection {
 
 

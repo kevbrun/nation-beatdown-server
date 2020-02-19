@@ -5,6 +5,6 @@ import org.springframework.cache.annotation.Cacheable;
 
 public interface IFindByIdentifier<T extends NationRessource> {
 
-    @Cacheable
+
     T findByIdentifier(String identifier);
 }

@@ -12,15 +12,15 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients(basePackages ={"ch.nation.core"})
+@EnableFeignClients(basePackages = {"ch.nation.core"})
 @ComponentScan(basePackages = {"ch.nation"})
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @Import({IncomingRequestLoggingConfiguration.class, FeignClientConfig.class})
 
 public class ClazzServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ClazzServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ClazzServiceApplication.class, args);
+    }
 
 }

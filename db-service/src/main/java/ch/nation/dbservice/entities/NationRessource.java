@@ -11,7 +11,7 @@ import java.util.Objects;
 public abstract class NationRessource extends NamedEntityBase {
 
 
-    @Column(name="identifier",unique = true,nullable = true,length = 50)
+    @Column(name = "identifier", unique = true, nullable = true, length = 50)
     @JsonProperty("ident")
     private String identifier;
 

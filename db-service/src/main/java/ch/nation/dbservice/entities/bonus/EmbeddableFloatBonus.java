@@ -18,7 +18,7 @@ public class EmbeddableFloatBonus implements IBonus<Float> {
 
     @JsonProperty("stat_target")
     @Enumerated(EnumType.STRING)
-    @Column(name="stat_target")
+    @Column(name = "stat_target")
     private StatModTarget statTarget;
 
 
@@ -39,7 +39,7 @@ public class EmbeddableFloatBonus implements IBonus<Float> {
 
     @Override
     public void setBonus(Float bonus) {
-        this.bonus =bonus;
+        this.bonus = bonus;
     }
 
     @Override

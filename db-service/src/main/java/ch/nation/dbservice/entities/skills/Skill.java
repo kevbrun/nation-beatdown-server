@@ -20,72 +20,70 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name="SKILLS")
-@Entity(name="SKILLS")
+@Table(name = "SKILLS")
+@Entity(name = "SKILLS")
 @Inheritance(
         strategy = InheritanceType.SINGLE_TABLE
 )
-@DiscriminatorColumn(name="SKILL_TYPE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "SKILL_TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("BASE_SKILL")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Skill extends NationRessource implements IDiscrimantorValue {
 
 
-    @Column(name="cost")
+    @Column(name = "cost")
     @JsonProperty("cost")
     private int cost;
 
-    @Column(name="base_value")
+    @Column(name = "base_value")
     @JsonProperty("base_value")
     private int baseValue;
 
-    @Column(name="cooldown")
+    @Column(name = "cooldown")
     @JsonProperty("cooldown")
     private int cooldown;
 
-    @Column(name="current_cooldown")
+    @Column(name = "current_cooldown")
     @JsonProperty("current_cooldown")
     private int currentCooldownTimer;
 
-    @Column(name="skill_bar_order")
+    @Column(name = "skill_bar_order")
     @JsonProperty("skill_bar_order")
     private int skillBarOrder;
 
-    @Column(name="area")
+    @Column(name = "area")
     @JsonProperty("area")
     private ActionArea actionArea;
 
-    @Column(name="skill_target",nullable = false)
+    @Column(name = "skill_target", nullable = false)
     @JsonProperty("skill_target")
     @Enumerated(EnumType.STRING)
     private Target target;
 
 
-
-
-    @ManyToMany(mappedBy = "skills",fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy = "skills", fetch = FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL },fetch=FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(
             name = "SKILL_SKILL_EFFECTS",
-            joinColumns = { @JoinColumn(name = "skill_id") },
-            inverseJoinColumns = { @JoinColumn(name = "skill_effect_id") }
+            joinColumns = {@JoinColumn(name = "skill_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_effect_id")}
     )
-    @RestResource(path="effects",rel = "effects",exported = false)
+    @RestResource(path = "effects", rel = "effects", exported = false)
     @JsonProperty("effects")
     private List<SkillEffect> skillEffects;
 
-    @OneToMany(mappedBy = "skill",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     @RestResource(exported = false)
     private List<SkillCharacteristic> skillCharacteristic;
 
 
-    @OneToMany(mappedBy = "skill",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "skill", fetch = FetchType.LAZY)
     @JsonProperty("prejudices")
     private List<SkillPrejudice> skillPrejudices;
 
@@ -97,9 +95,8 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
             fetch = FetchType.LAZY
     )
     @JsonIgnore
-    @RestResource(exported = false  )
+    @RestResource(exported = false)
     private List<BasePlayerMove> actions = new ArrayList<>();
-
 
 
     public Skill() {
@@ -109,7 +106,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
 
     public List<SkillCharacteristic> getSkillCharacteristic() {
-        if(skillCharacteristic==null)skillCharacteristic = new ArrayList<>();
+        if (skillCharacteristic == null) skillCharacteristic = new ArrayList<>();
         return skillCharacteristic;
     }
 
@@ -122,7 +119,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     }
 
     public void setSkillPrejudices(List<SkillPrejudice> skillPrejudices) {
-        if(skillPrejudices==null) skillPrejudices = new ArrayList<>();
+        if (skillPrejudices == null) skillPrejudices = new ArrayList<>();
         this.skillPrejudices = skillPrejudices;
     }
 
@@ -168,7 +165,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
     public ActionArea getActionArea() {
 
-        if(actionArea==null)actionArea = new ActionArea();
+        if (actionArea == null) actionArea = new ActionArea();
 
         return actionArea;
     }
@@ -187,7 +184,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
     public List<CharacterClass> getCharacterClasses() {
 
-        if(characterClasses==null) characterClasses = new ArrayList<>();
+        if (characterClasses == null) characterClasses = new ArrayList<>();
 
 
         return characterClasses;
@@ -198,7 +195,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     }
 
     public List<SkillEffect> getSkillEffects() {
-        if(skillEffects==null) skillEffects = new ArrayList<>();
+        if (skillEffects == null) skillEffects = new ArrayList<>();
 
         return skillEffects;
     }
@@ -216,21 +213,19 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
         LOGGER.debug("Execute custom setter");
         if (this.actions == null) {
             this.actions = actions;
-        } else if(this.actions != actions) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+        } else if (this.actions != actions) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
             this.actions.clear();
-            if(actions != null){
+            if (actions != null) {
                 this.actions.addAll(actions);
             }
         }
-
-
 
 
     }
 
     @Override
     public String toString() {
-        return this.getClass().getName()+"{" +
+        return this.getClass().getName() + "{" +
                 "cost=" + cost +
                 ", baseValue=" + baseValue +
                 ", cooldown=" + cooldown +
@@ -243,57 +238,57 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     }
 
 
-        //REGION NOT GENERATED FUNCTIONS
+    //REGION NOT GENERATED FUNCTIONS
 
-    public void addSkillEffect(SkillEffect skillEffect){
-        if(getSkillEffects()!=null) {
+    public void addSkillEffect(SkillEffect skillEffect) {
+        if (getSkillEffects() != null) {
             this.getSkillEffects().add(skillEffect);
             skillEffect.getSkills().add(this);
         }
     }
 
-    public void removeSkillEffect(SkillEffect skillEffect){
-        if(this.getSkillEffects()!=null){
+    public void removeSkillEffect(SkillEffect skillEffect) {
+        if (this.getSkillEffects() != null) {
             this.skillEffects.remove(skillEffect);
             skillEffect.getSkills().remove(this);
         }
     }
 
-    public void addCharacterClass(CharacterClass clazz){
-        if(!getCharacterClasses().contains(clazz)){
+    public void addCharacterClass(CharacterClass clazz) {
+        if (!getCharacterClasses().contains(clazz)) {
             getCharacterClasses().add(clazz);
             clazz.addSkill(this);
 
         }
     }
 
-    public void removeCharacterClass(CharacterClass clazz){
-        if(getCharacterClasses().contains(clazz)){
+    public void removeCharacterClass(CharacterClass clazz) {
+        if (getCharacterClasses().contains(clazz)) {
             getCharacterClasses().remove(clazz);
             clazz.removeSkill(this);
         }
     }
 
-    public void addSkillCharacteristic(SkillCharacteristic characteristic){
-        if(!getSkillCharacteristic().contains(characteristic)){
+    public void addSkillCharacteristic(SkillCharacteristic characteristic) {
+        if (!getSkillCharacteristic().contains(characteristic)) {
             getSkillCharacteristic().add(characteristic);
             characteristic.addSkill(this);
         }
     }
 
 
-    public void removeSkillCharacteristics(SkillCharacteristic characteristic){
-        if(getSkillCharacteristic().contains(characteristic)){
+    public void removeSkillCharacteristics(SkillCharacteristic characteristic) {
+        if (getSkillCharacteristic().contains(characteristic)) {
             getSkillCharacteristic().remove(characteristic);
             characteristic.setSkill(null);
         }
     }
 
-    public void removeMove(BasePlayerMove move){
-       if(getActions().contains(move)){
-           getActions().remove(move);
-           move.setSkill(null);
-       }
+    public void removeMove(BasePlayerMove move) {
+        if (getActions().contains(move)) {
+            getActions().remove(move);
+            move.setSkill(null);
+        }
     }
 
 }
