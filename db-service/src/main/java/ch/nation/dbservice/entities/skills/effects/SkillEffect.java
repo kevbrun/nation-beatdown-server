@@ -1,11 +1,9 @@
 package ch.nation.dbservice.entities.skills.effects;
 
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -49,6 +47,14 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     private List<Skill> skills;
 
 
+    @JsonProperty("animations")
+    @ElementCollection
+    @CollectionTable(
+            name="ANIMATION_INFO",
+            joinColumns=@JoinColumn(name="ANIM_ID")
+    )
+    private List<SkillEffectAnimationInfo> info;
+
     /**
      * @ManyToMany(mappedBy = "appliedEffects",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
      * private List<BasePlayerMove> playerMoves;
@@ -63,6 +69,7 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     public SkillEffect() {
         super();
         moveValues = new ArrayList<>();
+        info = new ArrayList<SkillEffectAnimationInfo>();
 
     }
 
@@ -75,6 +82,14 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
         this.skills = skills;
     }
 
+
+    public List<SkillEffectAnimationInfo> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<SkillEffectAnimationInfo> info) {
+        this.info = info;
+    }
 
     public List<BasePlayerMoveValue> getMoveValues() {
         return moveValues;
