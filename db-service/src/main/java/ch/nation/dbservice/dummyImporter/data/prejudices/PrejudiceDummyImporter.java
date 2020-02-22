@@ -44,8 +44,9 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     @Override
     protected void handleCration() throws Exception {
         createHandleWeakNationPrejudice();
-        createHandleHighIntelligencPrejduice();
+        createHateAgainstDumPeoplePrejudice();
         createHateAgainstExplosivPeople();
+        createHateAgainstIntPeoplePrejudice();
     }
 
 
@@ -65,12 +66,32 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     }
 
 
-    private void createHandleHighIntelligencPrejduice() {
+    private void createHateAgainstDumPeoplePrejudice() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Intelligente Leute. Viel Luft aber nichts dahinter!");
         prejudice.setIdentifier("int_but_str");
-        prejudice.setDescription("Die Nation hat eine Abneigung gegen intelligente Leute.\n" +
-                "Sie fühlen sich dumm.Daher kriegen diese einen Boni auf Stärke und verlieren an Intelligenz. Wenn die Intelligenz der Nation höher als 20 ist.");
+        prejudice.setDescription("Die Nation hat eine Abneigung gegen dumme Menschen.\n" +
+                "Sie fühlen sich klüger als andere, daher kriegen diese einen Boni auf Intelligenz und verlieren an Stärle. " +
+                "Wenn die Intelligenz der gegnerischen Nation tiefer als 10 ist.");
+        StatBonusDelta statBonusDelta = new StatBonusDelta();
+        statBonusDelta.setIntBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
+        statBonusDelta.setStrPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
+        prejudice.setTriggerOperation(PrejudiceOperator.OR);
+        prejudice.setDelta(statBonusDelta);
+        prejudice = statPrejudiceRepository.save(prejudice);
+        BasePrejudiceTrigger trigger = prejudiceTriggerRepository.findByIdentifier("less_int_10");
+        prejudice.addTrigger(trigger);
+        statPrejudiceRepository.save(prejudice);
+    }
+
+
+    private void createHateAgainstIntPeoplePrejudice() {
+        StatPrejudice prejudice = new StatPrejudice();
+        prejudice.setName("Der dumme Mob");
+        prejudice.setIdentifier("str_but_int");
+        prejudice.setDescription("Die Nation hat eine Abneigung gegen kluge Menschen.\n" +
+                "Sie fühlen sich stärker als andere, daher kriegen diese einen Boni auf Stärke und verlieren an Intelligenz. " +
+                "Wenn die Intelligenz der gegnerischen Nation höher als 20 ist.");
 
         StatBonusDelta statBonusDelta = new StatBonusDelta();
         statBonusDelta.setStrBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));

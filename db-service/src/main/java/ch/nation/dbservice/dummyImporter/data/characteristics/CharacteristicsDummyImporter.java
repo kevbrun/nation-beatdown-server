@@ -29,6 +29,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         createExplosiveCharacteristics();
         createDumbButStrongCharacteristic();
         createWeakButIntelligent();
+        createFastButLowHealth();
 
     }
 
@@ -55,6 +56,20 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         StatBonusDelta bonus = new StatBonusDelta();
         bonus.setStrBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
         bonus.setIntBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+
+        characteristicsRepository.save(statCharacteristic);
+    }
+
+    private void createFastButLowHealth() {
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Beweglich aber laut und ungenau");
+        statCharacteristic.setIdentifier("less_dex_10_more_agi_15");
+
+        statCharacteristic.setDescription("Beweglich aber laut und ungenau!");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setAgiBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
+        bonus.setDexBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
         statCharacteristic.setDelta(bonus);
 
         characteristicsRepository.save(statCharacteristic);
