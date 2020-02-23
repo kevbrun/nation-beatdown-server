@@ -37,9 +37,10 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
 
     @JsonProperty("negative")
     private boolean resultIsNegative;
-
     @JsonProperty("animations")
-    private List<SkillEffectAnimationInfoDto> info;
+    private List<SkillAnimationInfoDto> info;
+
+
 
     public AbstractSkillEffectDto(SkillEffectTarget effectTarget, StatType typeUsedForCalculation, StatType applyCalculationOnStat, boolean resultIsNegative) {
         this.effectTarget = effectTarget;
@@ -51,11 +52,12 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
     public AbstractSkillEffectDto() {
     }
 
-    public List<SkillEffectAnimationInfoDto> getInfo() {
+
+    public List<SkillAnimationInfoDto> getInfo() {
         return info;
     }
 
-    public void setInfo(List<SkillEffectAnimationInfoDto> info) {
+    public void setInfo(List<SkillAnimationInfoDto> info) {
         this.info = info;
     }
 
@@ -103,6 +105,7 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
                 ", typeUsedForCalculation=" + typeUsedForCalculation +
                 ", applyCalculationOnStat=" + applyCalculationOnStat +
                 ", resultIsNegative=" + resultIsNegative +
-                "} " + super.toString();
+                ", info=" + info +
+                '}';
     }
 }

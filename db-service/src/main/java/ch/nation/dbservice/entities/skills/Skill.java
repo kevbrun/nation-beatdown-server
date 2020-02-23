@@ -1,7 +1,6 @@
 package ch.nation.dbservice.entities.skills;
 
 
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
@@ -9,8 +8,8 @@ import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.prejudices.SkillPrejudice;
+import ch.nation.dbservice.entities.skills.effects.SkillAnimationInfo;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -99,11 +98,30 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     private List<BasePlayerMove> actions = new ArrayList<>();
 
 
+    @JsonProperty("animations")
+    @ElementCollection
+    @CollectionTable(
+            name="SKILL_ANIMATION_INFO",
+            joinColumns=@JoinColumn(name="ANIM_ID")
+    )
+    private List<SkillAnimationInfo> info;
+
+
+
     public Skill() {
         super();
+        info = new ArrayList<>();
 
     }
 
+
+    public List<SkillAnimationInfo> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<SkillAnimationInfo> info) {
+        this.info = info;
+    }
 
     public List<SkillCharacteristic> getSkillCharacteristic() {
         if (skillCharacteristic == null) skillCharacteristic = new ArrayList<>();
@@ -207,6 +225,22 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
     public List<BasePlayerMove> getActions() {
         return actions;
+    }
+
+    public void addAnimInfo(SkillAnimationInfo info){
+        if(this.getInfo()==null) setInfo(new ArrayList<SkillAnimationInfo>());
+
+        if(info!=null){
+            getInfo().add(info);
+        }
+
+    }
+
+
+    public void removeAnimInfo(SkillAnimationInfo info){
+        if(this.getInfo()!=null && this.getInfo().size()>0){
+            this.getInfo().remove(info);
+        }
     }
 
     public void setActions(List<BasePlayerMove> actions) {

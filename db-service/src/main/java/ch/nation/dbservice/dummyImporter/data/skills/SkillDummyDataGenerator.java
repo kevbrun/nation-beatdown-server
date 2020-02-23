@@ -6,9 +6,8 @@ import ch.nation.dbservice.entities.skills.ActionArea;
 import ch.nation.dbservice.entities.skills.MoveSkill;
 import ch.nation.dbservice.entities.skills.SelfMoveSkill;
 import ch.nation.dbservice.entities.skills.Skill;
-import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
+import ch.nation.dbservice.entities.skills.effects.SkillAnimationInfo;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 

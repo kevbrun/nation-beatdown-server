@@ -5,6 +5,7 @@ import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.clazzes.CharacterClassDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.skills.effects.AbstractSkillEffectDto;
+import ch.nation.core.model.dto.skills.effects.SkillAnimationInfoDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -46,6 +47,9 @@ public class SkillDto extends NamedObjectAbstractDto {
 
     @JsonProperty("moves")
     private List<AbstractPlayerMoveDto> actions;
+
+    @JsonProperty("animations")
+    private List<SkillAnimationInfoDto> info;
 
 
     public SkillDto(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionAreaDto actionArea, Target target, List<CharacterClassDto> characterClasses, List<AbstractSkillEffectDto> skillEffects, List<AbstractPlayerMoveDto> actions) {
@@ -133,6 +137,15 @@ public class SkillDto extends NamedObjectAbstractDto {
         this.characterClasses = characterClasses;
     }
 
+
+    public List<SkillAnimationInfoDto> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<SkillAnimationInfoDto> info) {
+        this.info = info;
+    }
+
     public List<AbstractSkillEffectDto> getSkillEffects() {
         return skillEffects;
     }
@@ -162,6 +175,7 @@ public class SkillDto extends NamedObjectAbstractDto {
                 ", characterClasses=" + characterClasses +
                 ", skillEffects=" + skillEffects +
                 ", actions=" + actions +
-                "} " + super.toString();
+                ", info=" + info +
+                '}';
     }
 }
