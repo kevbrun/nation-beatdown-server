@@ -1,6 +1,7 @@
 package ch.nation.dbservice.dummyImporter.data.clazzes;
 
 import ch.nation.core.model.Enums.StatGrowthType;
+import ch.nation.core.model.Enums.WeaponType;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.clazzes.Stat;
@@ -47,7 +48,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setDexterity(new Stat(7f, 7f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setVitality(new Stat(8f, 8f, 999f, StatGrowthType.LINEAR));
         characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
-
+        characterClass.setWeaponType(WeaponType.MELEE1H);
         characterClassRepository.save(characterClass);
 
         Skill skill = skillRepository.findByIdentifier("dmg_target_str");
@@ -83,6 +84,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setDexterity(new Stat(7f, 7f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setVitality(new Stat(8f, 8f, 999f, StatGrowthType.LINEAR));
         characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
+        characterClass.setWeaponType(WeaponType.MELEE2H);
 
         characterClassRepository.save(characterClass);
 
@@ -120,6 +122,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setDexterity(new Stat(10f, 7f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setVitality(new Stat(4f, 8f, 999f, StatGrowthType.LINEAR));
         characterClass.setMovementSpeed(new Stat(5f, 5f, 5f, StatGrowthType.NONE));
+        characterClass.setWeaponType(WeaponType.BOW);
 
         characterClassRepository.save(characterClass);
 

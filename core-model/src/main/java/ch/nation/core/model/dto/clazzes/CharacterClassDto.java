@@ -1,5 +1,6 @@
 package ch.nation.core.model.dto.clazzes;
 
+import ch.nation.core.model.Enums.WeaponType;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.unit.UnitDto;
@@ -57,6 +58,9 @@ public class CharacterClassDto extends NamedObjectAbstractDto {
     @JsonProperty("agi")
     private StatDto agility;
 
+    @JsonProperty("weapon_type")
+    private WeaponType weaponType;
+
 
     public CharacterClassDto(int level, int exp, int expToLevelUp, List<SkillDto> skills, List<UnitDto> units, StatDto healthPoints, StatDto actionPoints, StatDto movementSpeed, StatDto strength, StatDto vitality, StatDto intelligence, StatDto dexterity, StatDto agility) {
         this.level = level;
@@ -75,6 +79,15 @@ public class CharacterClassDto extends NamedObjectAbstractDto {
     }
 
     public CharacterClassDto() {
+    }
+
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
     }
 
     @Override
