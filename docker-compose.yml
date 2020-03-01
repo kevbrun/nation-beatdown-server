@@ -87,7 +87,7 @@ services:
     image:  nation-cloud-database-service:latest
     ports:
       - "8100-8105:8889"
-      - "8106:8111"
+      - "8106:9999"
     networks:
       - spring-cloud-network
     environment:

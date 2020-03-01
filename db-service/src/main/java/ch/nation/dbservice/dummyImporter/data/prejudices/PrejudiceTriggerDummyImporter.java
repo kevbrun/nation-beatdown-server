@@ -35,6 +35,7 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         createDumbassIntelligencePrejudiceTrigger();
         createSlowNationPrejudiceTrigger();
         createFastNationPrejudiceTrigger();
+        createNoneTrigger();
 
     }
 
@@ -118,6 +119,17 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         trigger.setComparer(ConditionComparer.SMALLER_THAN);
         trigger.setThreshold(10);
         trigger.setStatType(StatType.AGILITY);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
+    private void createNoneTrigger(){
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("None");
+        trigger.setIdentifier("char_none");
+        trigger.setDescription("None");
+        trigger.setComparer(ConditionComparer.NONE);
+        trigger.setThreshold(0);
+        trigger.setStatType(StatType.NONE);
         statPrejudiceTriggerRepository.save(trigger);
     }
 

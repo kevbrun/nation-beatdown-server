@@ -44,6 +44,9 @@ public class BasePrejudice extends NationRessource implements IDiscrimantorValue
     @JsonProperty("triggers")
     @ManyToMany(fetch = FetchType.LAZY)
     @RestResource(path = "triggers", rel = "triggers")
+ /**   @JoinTable(name="PREJUDICE_PREJUDICE_TRIGGERS",
+            joinColumns=@JoinColumn(name="BASEPREJUDICE_ID"),
+            inverseJoinColumns=@JoinColumn(name="BASEPREJUDICETRIGGER_ID"))**/
     private List<BasePrejudiceTrigger> prejudiceTriggers;
 
     @JsonProperty("operation")
@@ -58,6 +61,7 @@ public class BasePrejudice extends NationRessource implements IDiscrimantorValue
     public BasePrejudice() {
         super();
         prejudiceTriggers = new ArrayList<>();
+        nations  = new ArrayList<>();
     }
 
     public List<BasePrejudiceTrigger> getPrejudiceTriggers() {
