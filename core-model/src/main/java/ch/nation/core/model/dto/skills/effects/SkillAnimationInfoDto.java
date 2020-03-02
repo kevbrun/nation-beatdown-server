@@ -2,6 +2,7 @@ package ch.nation.core.model.dto.skills.effects;
 
 import ch.nation.core.model.Enums.AnimationSource;
 import ch.nation.core.model.Enums.SkillEffectTarget;
+import ch.nation.core.model.Enums.WeaponType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -18,6 +19,8 @@ public class SkillAnimationInfoDto implements Serializable {
     private String name;
     @JsonProperty("anim_source")
     private AnimationSource source;
+    @JsonProperty("anim_weapon")
+    private WeaponType weaponType;
 
     public SkillAnimationInfoDto() {
     }
@@ -60,6 +63,14 @@ public class SkillAnimationInfoDto implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
     }
 
     @Override

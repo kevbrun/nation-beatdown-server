@@ -1,9 +1,6 @@
 package ch.nation.dbservice.dummyImporter.data.skills;
 
-import ch.nation.core.model.Enums.AnimationSource;
-import ch.nation.core.model.Enums.SkillEffectTarget;
-import ch.nation.core.model.Enums.StatType;
-import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
+import ch.nation.core.model.Enums.*;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.skills.effects.*;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
@@ -53,8 +50,9 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
-        info.setName("WEAPON_ATTACK");
-        info.setTarget(SkillEffectTarget.CASTER);
+        info.setName("TAKING_DAMAGE");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
         effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
@@ -73,8 +71,10 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
-        info.setName("WEAPON_ATTACK");
-        info.setTarget(SkillEffectTarget.CASTER);
+        info.setName("TAKING_DAMAGE");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.BOW);
+
         effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
@@ -91,12 +91,12 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
         effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
-        SkillAnimationInfo info = new SkillAnimationInfo();
+     /**   SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
         info.setSource(AnimationSource.SCRIPT);
         info.setName("SELF_MOVE_ANIMATION");
         info.setTarget(SkillEffectTarget.CASTER);
-        effect.addAnimInfo(info);
+        effect.addAnimInfo(info);**/
         skillEffectRepository.save(effect);
 
 
@@ -182,6 +182,14 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffect.setResultIsNegative(true);
         skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
         skillEffect.setTypeUsedForCalculation(StatType.HEALTH_POINTS);
+
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("TAKING_DAMAGE");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
 
 

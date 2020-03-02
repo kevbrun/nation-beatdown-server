@@ -134,7 +134,13 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         ActionArea actionArea = new ActionArea(2, 2, 0, 0, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
 
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("WEAPON_ATTACK");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
         skill = skillRepository.save(skill);
 
         SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_target_str");
@@ -159,7 +165,13 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setSkillBarOrder(9998);
         ActionArea actionArea = new ActionArea(3, 3, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("WEAPON_ATTACK");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.BOW);
+        skill.addAnimInfo(info);
 
         skill = skillRepository.save(skill);
 
@@ -232,16 +244,10 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.AREA_ENEMY);
         skill.setActionArea(actionArea);
-
-
         skill = skillRepository.save(skill);
-
         SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_caster_hp");
         skill.addSkillEffect(effect);
-
-
         effect = skillEffectRepository.findByIdentifier("dmg_target_str");
-
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
 

@@ -2,6 +2,7 @@ package ch.nation.dbservice.entities.skills.effects;
 
 import ch.nation.core.model.Enums.AnimationSource;
 import ch.nation.core.model.Enums.SkillEffectTarget;
+import ch.nation.core.model.Enums.WeaponType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -26,15 +27,26 @@ public class SkillAnimationInfo {
         @Enumerated(EnumType.STRING)
         private AnimationSource source;
 
+        @JsonProperty("anim_weapon")
+        @Enumerated(EnumType.STRING)
+        private WeaponType weaponType;
+
     public SkillAnimationInfo() {
         effectPath="";
         duration = 0.0f;
         target = SkillEffectTarget.NONE;
         source = AnimationSource.NONE;
+        weaponType = WeaponType.MELEE1H;
     }
 
 
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
 
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
+    }
 
     public SkillEffectTarget getTarget() {
         return target;
