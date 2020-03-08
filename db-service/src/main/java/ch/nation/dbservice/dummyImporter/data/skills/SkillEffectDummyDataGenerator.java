@@ -48,10 +48,11 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.DEXTERITY);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
         SkillAnimationInfo info = new SkillAnimationInfo();
-        info.setDuration(3.0f);
+        info.setDuration(1.5f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
         info.setName("TAKING_DAMAGE");
         info.setTarget(SkillEffectTarget.TARGET);
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
         info.setWeaponType(WeaponType.MELEE1H);
         effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
@@ -69,9 +70,11 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setEffectTarget(SkillEffectTarget.TARGET);
 
         SkillAnimationInfo info = new SkillAnimationInfo();
-        info.setDuration(3.0f);
+        info.setDuration(1.5f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
         info.setName("TAKING_DAMAGE");
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
+
         info.setTarget(SkillEffectTarget.TARGET);
         info.setWeaponType(WeaponType.BOW);
 
@@ -184,10 +187,12 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffect.setTypeUsedForCalculation(StatType.HEALTH_POINTS);
 
         SkillAnimationInfo info = new SkillAnimationInfo();
-        info.setDuration(3.0f);
+        info.setDuration(1.5f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
         info.setName("TAKING_DAMAGE");
         info.setTarget(SkillEffectTarget.CASTER);
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
+
         info.setWeaponType(WeaponType.MELEE1H);
         skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
