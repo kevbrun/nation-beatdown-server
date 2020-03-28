@@ -50,9 +50,9 @@ zuul:
     game-resource-moves-service-path:
       path: /moves/**
       serviceId: nation-cloud-moves-service
-    game-resource-prejudices-service-path:
-      path: /prejudices/**
-      serviceId: nation-cloud-prejudices-service
+  #  game-resource-prejudices-service-path:
+  #    path: /prejudices/**
+  #    serviceId: nation-cloud-prejudices-service
     game-resource-skills-service-path:
       path: /skills/**
       serviceId: nation-cloud-skills-service
