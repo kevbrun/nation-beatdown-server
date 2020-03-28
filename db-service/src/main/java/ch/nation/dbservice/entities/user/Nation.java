@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +45,8 @@ public class Nation extends NamedEntityBase implements Serializable {
 
     public Nation() {
         super();
+        prejudices = new ArrayList<>();
+        characteristics = new ArrayList<>();
     }
 
     public User getUser() {
