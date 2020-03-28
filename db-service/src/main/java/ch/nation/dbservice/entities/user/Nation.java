@@ -34,18 +34,18 @@ public class Nation extends NamedEntityBase implements Serializable {
     private List<BaseCharacteristic> characteristics;
 
 
-    @ManyToMany
-    @RestResource(path = "prejudices", rel = "prejudices", exported = false)
-    @JoinTable(name="NATIONS_PREJUDICES",
+  /** // @ManyToMany
+    //@RestResource(path = "prejudices", rel = "prejudices", exported = false)
+    //@JoinTable(name="NATIONS_PREJUDICES",
     joinColumns = @JoinColumn(name = "NATIONS_ID"),
             inverseJoinColumns = @JoinColumn(name = "PREJUDICES_ID"))
-    @JsonProperty("prejudices")
-    private List<BasePrejudice> prejudices;
+   // @JsonProperty("prejudices")
+    private List<BasePrejudice> prejudices;**/
 
 
     public Nation() {
         super();
-        prejudices = new ArrayList<>();
+      //  prejudices = new ArrayList<>();
         characteristics = new ArrayList<>();
     }
 
@@ -56,7 +56,7 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
-    public List<BasePrejudice> getPrejudices() {
+/**   public List<BasePrejudice> getPrejudices() {
 
         if(prejudices==null) prejudices = new ArrayList<>();
         return prejudices;
@@ -64,7 +64,7 @@ public class Nation extends NamedEntityBase implements Serializable {
 
     public void setPrejudices(List<BasePrejudice> prejudices) {
         this.prejudices = prejudices;
-    }
+    }**/
 
     public List<BaseCharacteristic> getCharacteristics() {
 
@@ -107,11 +107,5 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
-    @PrePersist
-    public void PrePersist(){
-        LOGGER.debug("EXECUTE PREPERSIST IN NATION (Check if Lists empty)");
-        if(characteristics == null) characteristics = new ArrayList<>();
-        if(prejudices == null) prejudices = new ArrayList<>();
-    }
 
 }
