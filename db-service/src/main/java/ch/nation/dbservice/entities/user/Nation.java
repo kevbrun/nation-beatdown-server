@@ -26,12 +26,18 @@ public class Nation extends NamedEntityBase implements Serializable {
 
     @ManyToMany
     @RestResource(path = "characteristics", rel = "characteristics", exported = false)
+    @JoinTable(name="NATIONS_CHARACTERISTICS",
+            joinColumns = @JoinColumn(name = "NATIONS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CHARACTERISTICS_ID"))
     @JsonProperty("characteristics")
     private List<BaseCharacteristic> characteristics;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @RestResource(path = "prejudices", rel = "prejudices", exported = false)
+    @JoinTable(name="NATIONS_PREJUDICES",
+    joinColumns = @JoinColumn(name = "NATIONS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PREJUDICES_ID"))
     @JsonProperty("prejudices")
     private List<BasePrejudice> prejudices;
 
