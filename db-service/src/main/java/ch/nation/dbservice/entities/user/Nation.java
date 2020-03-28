@@ -34,7 +34,7 @@ public class Nation extends NamedEntityBase implements Serializable {
     private List<BaseCharacteristic> characteristics;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @RestResource(path = "prejudices", rel = "prejudices", exported = false)
     @JoinTable(name="NATIONS_PREJUDICES",
     joinColumns = @JoinColumn(name = "NATIONS_ID"),
@@ -57,6 +57,8 @@ public class Nation extends NamedEntityBase implements Serializable {
 
 
     public List<BasePrejudice> getPrejudices() {
+
+        if(prejudices==null) prejudices = new ArrayList<>();
         return prejudices;
     }
 
@@ -65,10 +67,14 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
     public List<BaseCharacteristic> getCharacteristics() {
+
+        if(characteristics == null) characteristics = new ArrayList<>();
         return characteristics;
     }
 
     public void setCharacteristics(List<BaseCharacteristic> characteristics) {
+
+
         this.characteristics = characteristics;
     }
 
