@@ -107,4 +107,11 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
+    @PrePersist
+    public void PrePersist(){
+        LOGGER.debug("EXECUTE PREPERSIST IN NATION (Check if Lists empty)");
+        if(characteristics == null) characteristics = new ArrayList<>();
+        if(prejudices == null) prejudices = new ArrayList<>();
+    }
+
 }
