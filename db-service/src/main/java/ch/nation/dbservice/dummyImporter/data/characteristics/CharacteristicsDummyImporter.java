@@ -34,6 +34,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         createLessVitButStr();
         createIntelligent();
         createLessStr();
+        createLessVit();
 
     }
 
@@ -50,7 +51,8 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(statCharacteristic);
     }
 
-//
+
+    //
     private void createWeakButIntelligent() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Intelligent aber schwach\n wie eine Brezel!");
@@ -66,7 +68,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-    //
+//
     private void createFastButLowHealth() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Beweglich aber laut und ungenau");
@@ -82,7 +84,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-    //
+//
     private void createDrunk() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Dauer besoffen!");
@@ -97,7 +99,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(statCharacteristic);
     }
 
-    //
+//
     private void createExplosiveCharacteristics() {
         SkillCharacteristic cc = new SkillCharacteristic();
         cc.setName("Explosiver Character");
@@ -111,7 +113,8 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(cc);
     }
 
-//
+
+    //
     private void createLessVitButStr(){
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Leute mit grosser Schnauze");
@@ -134,18 +137,30 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         statCharacteristic.setDelta(bonus);
         characteristicsRepository.save(statCharacteristic);
     }
-//
+
+    //
     private void createLessStr(){
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Strength");
         statCharacteristic.setIdentifier("less_str_5");
         statCharacteristic.setDescription("Nation ist schwach");
         StatBonusDelta bonus = new StatBonusDelta();
-        bonus.setStrBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
+        bonus.setStrBonus(new EmbeddableIntegerBonus(-5, StatModTarget.MAX_VALUE));
         statCharacteristic.setDelta(bonus);
         characteristicsRepository.save(statCharacteristic);
     }
 
+    //
+    private void createLessVit(){
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Fast Food macht träge!");
+        statCharacteristic.setIdentifier("less_vit_5");
+        statCharacteristic.setDescription("Fast Food macht träge!");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setVitBonus(new EmbeddableIntegerBonus(-5, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+        characteristicsRepository.save(statCharacteristic);
+    }
 
 
 
