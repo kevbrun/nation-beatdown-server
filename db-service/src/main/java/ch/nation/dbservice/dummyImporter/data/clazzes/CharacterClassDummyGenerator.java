@@ -126,7 +126,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClassRepository.save(characterClass);
 
-        Skill skill = skillRepository.findByIdentifier("dmg-range_target_str");
+        Skill skill = skillRepository.findByIdentifier("range_target_str");
 
         if (skill == null) throw new Exception("Could not found Fernkampf!");
 
