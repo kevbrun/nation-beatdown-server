@@ -147,6 +147,13 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.addSkill(moveSkill);
 
 
+
+
+        Skill oneBack = skillRepository.findByIdentifier("rev_any_action");
+
+        if (oneBack == null) throw new Exception("could no find skill: rev_any_action!");
+
+        characterClass.addSkill(oneBack);
         characterClassRepository.save(characterClass);
 
 

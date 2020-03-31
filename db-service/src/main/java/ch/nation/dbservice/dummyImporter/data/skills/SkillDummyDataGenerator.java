@@ -31,10 +31,11 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createNahkampfSkill();
         createMoveOtherSkill();
         createFernkampfSkill();
-        createTimeTravelSkill();
+        createReturnOneRoundBackSkill();
         createResetAPSkill();
         createResetHPSkill();
         createSelfExplosion();
+        createOnSkillBackSkill();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -66,14 +67,14 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
 
-    private void createTimeTravelSkill() throws Exception {
+    private void createReturnOneRoundBackSkill() throws Exception {
         Skill skill = new Skill();
-        skill.setName("Zurückgesetzt");
+        skill.setName("Auf Anfang!");
         skill.setIdentifier("rev_any_round");
 
-        skill.setDescription("Setze die Figur um einen Zug zurück");
+        skill.setDescription("Mache alle Züge einer Einheit der letzten Runde rückgängig");
         skill.setCost(30);
-        skill.setCooldown(5);
+        skill.setCooldown(999);
         skill.setSkillBarOrder(1);
         skill.setTarget(Target.ANY_SINGLE);
         ActionArea actionArea = new ActionArea();
@@ -87,6 +88,34 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         SkillEffect effect = skillEffectRepository.findByIdentifier("rev_target_round");
         if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+
+        skill.addSkillEffect(effect);
+
+        skillRepository.save(skill);
+
+
+    }
+
+    private void createOnSkillBackSkill() throws Exception {
+        Skill skill = new Skill();
+        skill.setName("Nope!");
+        skill.setIdentifier("rev_any_action");
+
+        skill.setDescription("Mache die letzte Aktion rückganging!");
+        skill.setCost(30);
+        skill.setCooldown(999);
+        skill.setSkillBarOrder(2);
+        skill.setTarget(Target.ANY_SINGLE);
+        ActionArea actionArea = new ActionArea();
+        actionArea.setSizeInXAxis(5);
+        actionArea.setSizeInYAxis(5);
+        actionArea.setShape(ActionShape.CROSS);
+        skill.setActionArea(actionArea);
+
+
+        skill = skillRepository.save(skill);
+
+        SkillEffect effect = skillEffectRepository.findByIdentifier("rev_target_step");
 
         skill.addSkillEffect(effect);
 
