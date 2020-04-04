@@ -105,6 +105,9 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
 
     }
 
+
+
+
     private void createMoveEffect() {
         SkillEffect effect = new SkillEffect();
         effect.setName("Bewegungseffekt!");

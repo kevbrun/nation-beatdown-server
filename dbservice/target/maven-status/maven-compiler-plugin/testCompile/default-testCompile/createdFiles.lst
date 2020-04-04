@@ -1,0 +1,17 @@
+ch\nation\dbservice\entities\moves\PlayerMoveRepositoryTest.class
+ch\nation\dbservice\entities\prejudices\PrejudiceTest.class
+ch\nation\dbservice\entities\clazzes\CharacterClassRepoTest.class
+ch\nation\dbservice\entities\prejudices\triggers\StatPrejudiceTrggerRepoTest.class
+ch\nation\dbservice\config\RestTestsConfig.class
+ch\nation\dbservice\entities\characteristics\BaseCharacteristicDtoRepoTest.class
+ch\nation\dbservice\entities\AbstractNamedEntityTest.class
+ch\nation\dbservice\entities\prejudices\triggers\PrejudiceTriggerRepositoryTest.class
+ch\nation\dbservice\BaseDataRestControllerTest.class
+ch\nation\dbservice\entities\characteristics\SkillCharacteristicDtoRepoTest.class
+ch\nation\dbservice\utils\DummyEntitiesCreator.class
+ch\nation\dbservice\entities\users\UserRepoTest.class
+ch\nation\dbservice\FindByDataRestControllerTest.class
+ch\nation\dbservice\entities\characteristics\StatCharacteristicDtoRepoTest.class
+ch\nation\dbservice\entities\prejudices\triggers\BaseCharacteristicDtoPrejudiceTriggerTest.class
+ch\nation\dbservice\entities\AbstractEntityTest.class
+ch\nation\dbservice\entities\IHasDiscriminatorValue.class

@@ -36,6 +36,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createResetHPSkill();
         createSelfExplosion();
         createOnSkillBackSkill();
+        createSturmangriff();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -101,7 +102,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Nope!");
         skill.setIdentifier("rev_any_action");
 
-        skill.setDescription("Mache die letzte Aktion rückganging!");
+        skill.setDescription("Mache die letzte Aktion rückgänging!");
         skill.setCost(30);
         skill.setCooldown(999);
         skill.setSkillBarOrder(2);
@@ -179,6 +180,49 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.addSkillEffect(effect);
 
         skillRepository.save(skill);
+
+    }
+
+
+    private void createSturmangriff(){
+        Skill skill = new Skill();
+        skill.setName("Sturmangriff!");
+        skill.setIdentifier("move-caster_target_str");
+        skill.setDescription("Einheit bewegt sich auf eine andere Einheit zu und greift diese an!");
+        skill.setCost(50);
+        skill.setCurrentCooldownTimer(0);
+        skill.setTarget(Target.ANY_SINGLE);
+        skill.setSkillBarOrder(9000);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.CROSS);
+        skill.setActionArea(actionArea);
+
+
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.SCRIPT);
+        info.setName("SELF_MOVE_ANIMATION");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill= skillRepository.save(skill);
+
+        info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("WEAPON_ATTACK");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+
+        skill = skillRepository.save(skill);
+
+       SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
+        skill.addSkillEffect(effect);
+
+        skill.addSkillEffect(skillEffectRepository.findByIdentifier("dmg_target_str"));
+
+
+        skillRepository.save(skill);
+
 
     }
 

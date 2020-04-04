@@ -65,7 +65,8 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
+   // @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(
             name = "SKILL_SKILL_EFFECTS",

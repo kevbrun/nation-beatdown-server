@@ -63,6 +63,11 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
         characterClass.addSkill(moveSkill);
 
+        Skill atk =skillRepository.findByIdentifier("move-caster_target_str");
+
+        characterClass.addSkill(atk);
+
+
         characterClassRepository.save(characterClass);
 
 
