@@ -19,8 +19,8 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
     private List<AbstractCharacteristicsDto> characteristics;
 
 
-    @JsonProperty("prejudices")
-    private List<AbstractPrejudiceDto> prejudices;
+  /**  @JsonProperty("prejudices")
+    private List<AbstractPrejudiceDto> prejudices;**/
 
 
     public NationDto(UserDto user) {
@@ -53,13 +53,13 @@ public class NationDto extends NamedObjectAbstractDto implements Serializable {
         this.characteristics = characteristics;
     }
 
-    public List<AbstractPrejudiceDto> getPrejudices() {
+ /**   public List<AbstractPrejudiceDto> getPrejudices() {
         return prejudices;
     }
 
     public void setPrejudices(List<AbstractPrejudiceDto> prejudices) {
         this.prejudices = prejudices;
-    }
+    }**/
 
     @Override
     public String toString() {

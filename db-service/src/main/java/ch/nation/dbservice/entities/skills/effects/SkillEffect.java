@@ -1,11 +1,9 @@
 package ch.nation.dbservice.entities.skills.effects;
 
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.skills.Skill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -59,6 +57,14 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     @RestResource(path = "moves", rel = "moves")
     private List<BasePlayerMoveValue> moveValues;
 
+    @JsonProperty("animations")
+    @ElementCollection
+    @CollectionTable(
+            name="SKILL_EFFECT_ANIMATION_INFO",
+            joinColumns=@JoinColumn(name="ANIM_ID")
+    )
+    private List<SkillAnimationInfo> info;
+
 
     public SkillEffect() {
         super();
@@ -75,6 +81,14 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
         this.skills = skills;
     }
 
+
+    public List<SkillAnimationInfo> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<SkillAnimationInfo> info) {
+        this.info = info;
+    }
 
     public List<BasePlayerMoveValue> getMoveValues() {
         return moveValues;
@@ -159,6 +173,9 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
         }
     }
 
+
+
+
     public void removeSkill(Skill skill) {
         if (this.getSkills() != null) {
             this.getSkills().remove(skill);
@@ -170,6 +187,22 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
         if (getMoveValues().contains(value)) {
             getMoveValues().remove(value);
             value.setSkillEffect(null);
+        }
+    }
+
+    public void addAnimInfo(SkillAnimationInfo info){
+        if(this.getInfo()==null) setInfo(new ArrayList<SkillAnimationInfo>());
+
+        if(info!=null){
+            getInfo().add(info);
+        }
+
+    }
+
+
+    public void removeAnimInfo(SkillAnimationInfo info){
+        if(this.getInfo()!=null && this.getInfo().size()>0){
+            this.getInfo().remove(info);
         }
     }
 

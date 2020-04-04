@@ -43,12 +43,16 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
 
     @Override
     protected void handleCration() throws Exception {
+        LOGGER.info("START | CREATING PREJUDICES");
         createHandleWeakNationPrejudice();
-        createHandleHighIntelligencPrejduice();
+        createHateAgainstDumPeoplePrejudice();
         createHateAgainstExplosivPeople();
+        createHateAgainstIntPeoplePrejudice();
+       createSmellPeople();
+        LOGGER.info("STOP | CREATING PREJUDICES");
     }
 
-
+//
     private void createHandleWeakNationPrejudice() {
         SkillPrejudice prejudice = new SkillPrejudice();
         prejudice.setName("Schwache Leute machen wütend!");
@@ -64,33 +68,47 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         skillPrejudiceRepository.save(prejudice);
     }
 
-
-    private void createHandleHighIntelligencPrejduice() {
+//
+    private void createHateAgainstDumPeoplePrejudice() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Intelligente Leute. Viel Luft aber nichts dahinter!");
         prejudice.setIdentifier("int_but_str");
-        prejudice.setDescription("Die Nation hat eine Abneigung gegen intelligente Leute.\n" +
-                "Sie fühlen sich dumm.Daher kriegen diese einen Boni auf Stärke und verlieren an Intelligenz. Wenn die Intelligenz der Nation höher als 20 ist.");
+        prejudice.setDescription("Die Nation hat eine Abneigung gegen dumme Menschen.\n" +
+                "Sie fühlen sich klüger als andere, daher kriegen diese einen Boni auf Intelligenz und verlieren an Stärle. " +
+                "Wenn die Intelligenz der gegnerischen Nation tiefer als 10 ist.");
+        StatBonusDelta statBonusDelta = new StatBonusDelta();
+        statBonusDelta.setIntBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
+        statBonusDelta.setStrPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
+        prejudice.setTriggerOperation(PrejudiceOperator.OR);
+        prejudice.setDelta(statBonusDelta);
+        prejudice = statPrejudiceRepository.save(prejudice);
+        BasePrejudiceTrigger trigger = prejudiceTriggerRepository.findByIdentifier("less_int_10");
+        prejudice.addTrigger(trigger);
+        statPrejudiceRepository.save(prejudice);
+    }
 
+
+//
+    private void createHateAgainstIntPeoplePrejudice() {
+        StatPrejudice prejudice = new StatPrejudice();
+        prejudice.setName("Der dumme Mob");
+        prejudice.setIdentifier("str_but_int");
+        prejudice.setDescription("Die Nation hat eine Abneigung gegen kluge Menschen.\n" +
+                "Sie fühlen sich stärker als andere, daher kriegen diese einen Boni auf Stärke und verlieren an Intelligenz. " +
+                "Wenn die Intelligenz der gegnerischen Nation höher als 20 ist.");
         StatBonusDelta statBonusDelta = new StatBonusDelta();
         statBonusDelta.setStrBonus(new EmbeddableIntegerBonus(10, StatModTarget.VALUE));
         statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
-
         prejudice.setTriggerOperation(PrejudiceOperator.OR);
         prejudice.setDelta(statBonusDelta);
-
         prejudice = statPrejudiceRepository.save(prejudice);
-
-
         BasePrejudiceTrigger trigger = prejudiceTriggerRepository.findByIdentifier("more_int_20");
-
         prejudice.addTrigger(trigger);
-
         statPrejudiceRepository.save(prejudice);
-
 
     }
 
+    //
     private void createHateAgainstExplosivPeople() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Dicke Haut gegen Explosive Menschen!");
@@ -102,18 +120,37 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         statBonusDelta.setIntPercentageBonus(new EmbeddableFloatBonus(0.8f, StatModTarget.VALUE));
         prejudice.setDelta(statBonusDelta);
         prejudice.setTriggerOperation(PrejudiceOperator.OR);
-
         prejudice = statPrejudiceRepository.save(prejudice);
-
-
         CharacteristicPrejudiceTrigger chr = characteristicPrejudiceTriggerRepository.findByIdentifier("char_expl");
-
         prejudice.addTrigger(chr);
+       statPrejudiceRepository.save(prejudice);
 
+    }
 
+    private void createSmellPeople() {
+        StatPrejudice prejudice = new StatPrejudice();
+        prejudice.setName("Empfindlich gegen fremde Gerüche!");
+        prejudice.setIdentifier("smell_str_but_int");
+        prejudice.setDescription("Empfindlich gegen alle fremden Gerüche");
+
+        StatBonusDelta statBonusDelta = new StatBonusDelta();
+        statBonusDelta.setStrBonus(new EmbeddableIntegerBonus(5, StatModTarget.VALUE));
+        statBonusDelta.setIntBonus(new EmbeddableIntegerBonus(-5, StatModTarget.VALUE));
+        prejudice.setDelta(statBonusDelta);
+        prejudice.setTriggerOperation(PrejudiceOperator.OR);
+        prejudice = statPrejudiceRepository.save(prejudice);
+        BasePrejudiceTrigger chr = prejudiceTriggerRepository.findByIdentifier("more_int_20");
+        LOGGER.info("OK");
+        prejudice.addTrigger(chr);
         statPrejudiceRepository.save(prejudice);
 
     }
+
+
+
+
+
+
 
 
 }

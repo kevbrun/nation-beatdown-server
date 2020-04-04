@@ -29,10 +29,16 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         createExplosiveCharacteristics();
         createDumbButStrongCharacteristic();
         createWeakButIntelligent();
+        createFastButLowHealth();
+        createDrunk();
+        createLessVitButStr();
+        createIntelligent();
+        createLessStr();
+        createLessVit();
 
     }
 
-
+//
     private void createDumbButStrongCharacteristic() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Dumm aber Stark!");
@@ -46,10 +52,11 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
+    //
     private void createWeakButIntelligent() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Intelligent aber schwach\n wie eine Brezel!");
-        statCharacteristic.setIdentifier("less_str_10_more_str_15");
+        statCharacteristic.setIdentifier("less_str_10_more_int_15");
 
         statCharacteristic.setDescription("Nation ist schwach aber intelligent");
         StatBonusDelta bonus = new StatBonusDelta();
@@ -60,6 +67,39 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(statCharacteristic);
     }
 
+
+//
+    private void createFastButLowHealth() {
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Beweglich aber laut und ungenau");
+        statCharacteristic.setIdentifier("less_dex_10_more_agi_15");
+
+        statCharacteristic.setDescription("Beweglich aber laut und ungenau!");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setAgiBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
+        bonus.setDexBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+
+        characteristicsRepository.save(statCharacteristic);
+    }
+
+
+//
+    private void createDrunk() {
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Dauer besoffen!");
+        statCharacteristic.setIdentifier("less_ap_10_more_vit_15");
+
+        statCharacteristic.setDescription("Nation ist dauernd betrunken! Sie empfinden eine höhere Ausdauer. Können sich aber nicht weit bewegen");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setVitBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
+        bonus.setApBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+
+        characteristicsRepository.save(statCharacteristic);
+    }
+
+//
     private void createExplosiveCharacteristics() {
         SkillCharacteristic cc = new SkillCharacteristic();
         cc.setName("Explosiver Character");
@@ -72,6 +112,56 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
 
         characteristicsRepository.save(cc);
     }
+
+
+    //
+    private void createLessVitButStr(){
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Leute mit grosser Schnauze");
+        statCharacteristic.setIdentifier("less_str_10_more_vit_15");
+        statCharacteristic.setDescription("Nation ist aggresiv, aber ausser heisser Luft nichts dahinter");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setVitBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
+        bonus.setStrBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+        characteristicsRepository.save(statCharacteristic);
+    }
+//
+    private void createIntelligent(){
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Intelligent");
+        statCharacteristic.setIdentifier("more_int_5");
+        statCharacteristic.setDescription("Nation ist intelligent");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setIntBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+        characteristicsRepository.save(statCharacteristic);
+    }
+
+    //
+    private void createLessStr(){
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Strength");
+        statCharacteristic.setIdentifier("less_str_5");
+        statCharacteristic.setDescription("Nation ist schwach");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setStrBonus(new EmbeddableIntegerBonus(-5, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+        characteristicsRepository.save(statCharacteristic);
+    }
+
+    //
+    private void createLessVit(){
+        StatCharacteristic statCharacteristic = new StatCharacteristic();
+        statCharacteristic.setName("Fast Food macht träge!");
+        statCharacteristic.setIdentifier("less_vit_5");
+        statCharacteristic.setDescription("Fast Food macht träge!");
+        StatBonusDelta bonus = new StatBonusDelta();
+        bonus.setVitBonus(new EmbeddableIntegerBonus(-5, StatModTarget.MAX_VALUE));
+        statCharacteristic.setDelta(bonus);
+        characteristicsRepository.save(statCharacteristic);
+    }
+
 
 
 }

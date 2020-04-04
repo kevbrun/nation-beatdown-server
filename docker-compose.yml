@@ -87,7 +87,7 @@ services:
     image:  nation-cloud-database-service:latest
     ports:
       - "8100-8105:8889"
-      - "8106:8111"
+      - "8106:9999"
     networks:
       - spring-cloud-network
     environment:
@@ -215,25 +215,25 @@ services:
       driver: json-file
 
 
-  prejudices-service:
+ #prejudices-service:
     #container_name: nation-cloud-prejudices-service
-    build:
-      context: prejudice-service
-      dockerfile: Dockerfile
-    image:  nation-cloud-prejudices-service:latest
-    ports:
-      - "8400-8405:8883"
-      - "8406-8410:9883"
-    networks:
-      - spring-cloud-network
-    environment:
-      DEBUG_PORT: 9883
-      MAIN_CLASS_NAME: ch.nation.prejudiceservice.PrejudiceServiceApplication
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
-      SERVER_PORT: 8883
-      SPRING_PROFILES_ACTIVE: production
-    logging:
-      driver: json-file
+ #   build:
+ #     context: prejudice-service
+ #     dockerfile: Dockerfile
+ #   image:  nation-cloud-prejudices-service:latest
+ #   ports:
+ #     - "8400-8405:8883"
+ #     - "8406-8410:9883"
+ #   networks:
+ #     - spring-cloud-network
+ #   environment:
+ #     DEBUG_PORT: 9883
+ #    MAIN_CLASS_NAME: ch.nation.prejudiceservice.PrejudiceServiceApplication
+ #     EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
+ #     SERVER_PORT: 8883
+ #     SPRING_PROFILES_ACTIVE: production
+ #   logging:
+ #     driver: json-file
 
 
 

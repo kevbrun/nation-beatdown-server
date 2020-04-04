@@ -37,6 +37,7 @@ public abstract class BaseCharacteristic extends NationRessource implements IDis
 
     @ManyToMany(mappedBy = "characteristics", fetch = FetchType.EAGER)
     @JsonIgnore
+    //EVTL JOIN TABLE?
     @RestResource(path = "triggers", rel = "triggers")
     private List<CharacteristicPrejudiceTrigger> characteristicPrejudiceTriggers;
 

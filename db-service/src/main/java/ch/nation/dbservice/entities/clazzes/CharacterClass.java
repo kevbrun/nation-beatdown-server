@@ -1,8 +1,7 @@
 package ch.nation.dbservice.entities.clazzes;
 
 
-import ch.nation.core.model.Enums.StatGrowthType;
-import ch.nation.dbservice.entities.NamedEntityBase;
+import ch.nation.core.model.Enums.WeaponType;
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.units.Unit;
@@ -163,6 +162,9 @@ public class CharacterClass extends NationRessource {
     private Stat agility;
 //TODO Check if applied stats effect of unity game should be saved too
 
+    @JsonProperty("weapon_type")
+    @Enumerated(EnumType.STRING)
+    private WeaponType weaponType;
 
     public CharacterClass() {
         super();
@@ -174,6 +176,7 @@ public class CharacterClass extends NationRessource {
         if (intelligence == null) intelligence = new Stat();
         if (dexterity == null) dexterity = new Stat();
         if (agility == null) agility = new Stat();
+        weaponType = WeaponType.MELEE1H;
     }
 
     public CharacterClass(String name, String description, String identifier, int level, int exp, int expToLevelUp, List<Skill> skills, List<Unit> units, Stat healthPoints, Stat actionPoints, Stat movementSpeed, Stat strength, Stat vitality, Stat intelligence, Stat dexterity, Stat agility) {
@@ -199,6 +202,14 @@ public class CharacterClass extends NationRessource {
         return units;
     }
 
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
+    }
 
     public void setUnits(List<Unit> units) {
         this.units = units;

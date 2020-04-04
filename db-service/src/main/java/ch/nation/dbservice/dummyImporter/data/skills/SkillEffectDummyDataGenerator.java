@@ -1,13 +1,8 @@
 package ch.nation.dbservice.dummyImporter.data.skills;
 
-import ch.nation.core.model.Enums.SkillEffectTarget;
-import ch.nation.core.model.Enums.StatType;
-import ch.nation.core.model.Enums.TimeReversakSkillEffectRoundDefinition;
+import ch.nation.core.model.Enums.*;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
-import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
-import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.entities.skills.effects.StatSkillEffect;
-import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
+import ch.nation.dbservice.entities.skills.effects.*;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
 public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
@@ -45,21 +40,28 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     private void createSchadenDexEffekt() {
         SkillEffect effect;
         effect = new StatSkillEffect();
-        effect.setName("Schadenseffekt (Dex)");
+        effect.setName("Waffen Schadenseffekt Schadenseffekt (Dex)");
         effect.setIdentifier("dmg_target_dex");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");
         effect.setResultIsNegative(true);
         effect.setTypeUsedForCalculation(StatType.DEXTERITY);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(1.5f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("TAKING_DAMAGE");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
+        info.setWeaponType(WeaponType.MELEE1H);
+        effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
     }
 
     private void createSchadenStrEffekt() {
         SkillEffect effect = new StatSkillEffect();
-        effect.setName("Schadenseffekt (Str)");
+        effect.setName("Waffen Schadenseffekt (Str)");
         effect.setIdentifier("dmg_target_str");
         effect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         effect.setDescription("Eine langweilige Nahkampfattacke!");
@@ -67,6 +69,16 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.STRENGTH);
         effect.setEffectTarget(SkillEffectTarget.TARGET);
 
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(1.5f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("TAKING_DAMAGE");
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
+
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.BOW);
+
+        effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
 
@@ -82,7 +94,12 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
         effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
-
+     /**   SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.SCRIPT);
+        info.setName("SELF_MOVE_ANIMATION");
+        info.setTarget(SkillEffectTarget.CASTER);
+        effect.addAnimInfo(info);**/
         skillEffectRepository.save(effect);
 
 
@@ -168,6 +185,16 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffect.setResultIsNegative(true);
         skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
         skillEffect.setTypeUsedForCalculation(StatType.HEALTH_POINTS);
+
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(1.5f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("TAKING_DAMAGE");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setEffectPath("CFX_Hit_A Red+RandomText");
+
+        info.setWeaponType(WeaponType.MELEE1H);
+        skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
 
 

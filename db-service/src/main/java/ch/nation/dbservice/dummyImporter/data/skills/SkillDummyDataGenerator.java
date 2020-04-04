@@ -6,9 +6,8 @@ import ch.nation.dbservice.entities.skills.ActionArea;
 import ch.nation.dbservice.entities.skills.MoveSkill;
 import ch.nation.dbservice.entities.skills.SelfMoveSkill;
 import ch.nation.dbservice.entities.skills.Skill;
-import ch.nation.dbservice.entities.skills.effects.SelfMoveEffect;
+import ch.nation.dbservice.entities.skills.effects.SkillAnimationInfo;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.entities.skills.effects.TimeReversalSkillEffect;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
 import ch.nation.dbservice.repositories.skills.effects.SkillEffectRepository;
 
@@ -32,10 +31,11 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createNahkampfSkill();
         createMoveOtherSkill();
         createFernkampfSkill();
-        createTimeTravelSkill();
+        createReturnOneRoundBackSkill();
         createResetAPSkill();
         createResetHPSkill();
         createSelfExplosion();
+        createOnSkillBackSkill();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -67,14 +67,14 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
 
-    private void createTimeTravelSkill() throws Exception {
+    private void createReturnOneRoundBackSkill() throws Exception {
         Skill skill = new Skill();
-        skill.setName("Zurückgesetzt");
+        skill.setName("Auf Anfang!");
         skill.setIdentifier("rev_any_round");
 
-        skill.setDescription("Setze die Figur um einen Zug zurück");
+        skill.setDescription("Mache alle Züge einer Einheit der letzten Runde rückgängig");
         skill.setCost(30);
-        skill.setCooldown(5);
+        skill.setCooldown(999);
         skill.setSkillBarOrder(1);
         skill.setTarget(Target.ANY_SINGLE);
         ActionArea actionArea = new ActionArea();
@@ -88,6 +88,34 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         SkillEffect effect = skillEffectRepository.findByIdentifier("rev_target_round");
         if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+
+        skill.addSkillEffect(effect);
+
+        skillRepository.save(skill);
+
+
+    }
+
+    private void createOnSkillBackSkill() throws Exception {
+        Skill skill = new Skill();
+        skill.setName("Nope!");
+        skill.setIdentifier("rev_any_action");
+
+        skill.setDescription("Mache die letzte Aktion rückganging!");
+        skill.setCost(30);
+        skill.setCooldown(999);
+        skill.setSkillBarOrder(2);
+        skill.setTarget(Target.ANY_SINGLE);
+        ActionArea actionArea = new ActionArea();
+        actionArea.setSizeInXAxis(5);
+        actionArea.setSizeInYAxis(5);
+        actionArea.setShape(ActionShape.CROSS);
+        skill.setActionArea(actionArea);
+
+
+        skill = skillRepository.save(skill);
+
+        SkillEffect effect = skillEffectRepository.findByIdentifier("rev_target_step");
 
         skill.addSkillEffect(effect);
 
@@ -135,7 +163,13 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         ActionArea actionArea = new ActionArea(2, 2, 0, 0, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
 
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("WEAPON_ATTACK");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
         skill = skillRepository.save(skill);
 
         SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_target_str");
@@ -158,9 +192,15 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(3, 3, 0, 0, ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("WEAPON_ATTACK");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.BOW);
+        skill.addAnimInfo(info);
 
         skill = skillRepository.save(skill);
 
@@ -233,16 +273,10 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.AREA_ENEMY);
         skill.setActionArea(actionArea);
-
-
         skill = skillRepository.save(skill);
-
         SkillEffect effect = skillEffectRepository.findByIdentifier("dmg_caster_hp");
         skill.addSkillEffect(effect);
-
-
         effect = skillEffectRepository.findByIdentifier("dmg_target_str");
-
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
 

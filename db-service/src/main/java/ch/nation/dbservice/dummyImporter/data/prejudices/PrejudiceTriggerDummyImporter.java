@@ -31,7 +31,11 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         createWeakStatPrejudiceTrigger();
         createHighIntelligencePrejudiceTrigger();
         createAgainstExplosivPeople();
-
+        createStrongStatPrejudiceTrigger();
+        createDumbassIntelligencePrejudiceTrigger();
+        createSlowNationPrejudiceTrigger();
+        createFastNationPrejudiceTrigger();
+        createNoneTrigger();
 
     }
 
@@ -60,6 +64,19 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         statPrejudiceTriggerRepository.save(trigger);
     }
 
+
+    private void createStrongStatPrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("Stärker als 20 trigger");
+        trigger.setIdentifier("more_str_20");
+
+        trigger.setDescription("Wird durch stärkere Nationen höher 20 getriggered");
+        trigger.setComparer(ConditionComparer.BIGGER_THAN);
+        trigger.setThreshold(20);
+        trigger.setStatType(StatType.STRENGTH);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
     private void createHighIntelligencePrejudiceTrigger() {
         StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger.setName("Gescheitere als 20 trigger");
@@ -70,5 +87,52 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         trigger.setStatType(StatType.INTELIGENCE);
         statPrejudiceTriggerRepository.save(trigger);
     }
+
+    private void createDumbassIntelligencePrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("Dümmer als 10 trigger");
+        trigger.setIdentifier("less_int_10");
+        trigger.setDescription("Wird durch dumme Nationen unter Intelligenzwert 10 getriggered");
+        trigger.setComparer(ConditionComparer.SMALLER_THAN);
+        trigger.setThreshold(10);
+        trigger.setStatType(StatType.INTELIGENCE);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
+    private void createSlowNationPrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("Unbeweglicher als 10 trigger");
+        trigger.setIdentifier("less_agi_10");
+        trigger.setDescription("Wird durch langsamere Nationen unter Agilität 10 getriggered");
+        trigger.setComparer(ConditionComparer.SMALLER_THAN);
+        trigger.setThreshold(10);
+        trigger.setStatType(StatType.AGILITY);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
+
+    private void createFastNationPrejudiceTrigger() {
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("Beweglicher als 20 trigger");
+        trigger.setIdentifier("more_agi_20");
+        trigger.setDescription("Wird durch schnellere Nationen über Agilität 20 getriggered");
+        trigger.setComparer(ConditionComparer.SMALLER_THAN);
+        trigger.setThreshold(10);
+        trigger.setStatType(StatType.AGILITY);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
+    private void createNoneTrigger(){
+        StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
+        trigger.setName("None");
+        trigger.setIdentifier("char_none");
+        trigger.setDescription("None");
+        trigger.setComparer(ConditionComparer.NONE);
+        trigger.setThreshold(0);
+        trigger.setStatType(StatType.NONE);
+        statPrejudiceTriggerRepository.save(trigger);
+    }
+
+
 
 }

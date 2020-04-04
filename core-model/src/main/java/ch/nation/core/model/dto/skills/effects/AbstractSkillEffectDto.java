@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.List;
+
 
 /**
  * @JsonTypeInfo( use = JsonTypeInfo.Id.NAME,
@@ -35,6 +37,10 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
 
     @JsonProperty("negative")
     private boolean resultIsNegative;
+    @JsonProperty("animations")
+    private List<SkillAnimationInfoDto> info;
+
+
 
     public AbstractSkillEffectDto(SkillEffectTarget effectTarget, StatType typeUsedForCalculation, StatType applyCalculationOnStat, boolean resultIsNegative) {
         this.effectTarget = effectTarget;
@@ -44,6 +50,15 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
     }
 
     public AbstractSkillEffectDto() {
+    }
+
+
+    public List<SkillAnimationInfoDto> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<SkillAnimationInfoDto> info) {
+        this.info = info;
     }
 
     @Override
@@ -90,6 +105,7 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
                 ", typeUsedForCalculation=" + typeUsedForCalculation +
                 ", applyCalculationOnStat=" + applyCalculationOnStat +
                 ", resultIsNegative=" + resultIsNegative +
-                "} " + super.toString();
+                ", info=" + info +
+                '}';
     }
 }

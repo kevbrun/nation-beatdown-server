@@ -187,7 +187,7 @@ public class Game extends AbstractNationEntityBase {
     }
 
     public void setUserRuntimeInfos(List<GameUserRuntimeInfo> userRuntimeInfos) {
-        LOGGER.info("Execute custom setter: setUserRuntimeInfos");
+        LOGGER.debug("Execute custom setter: setUserRuntimeInfos");
 
         if (this.userRuntimeInfos == null) {
             this.userRuntimeInfos = userRuntimeInfos;

@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = {"ch.nation.dbservice.entities", "ch.nation.dbservice.repositories", "ch.nation.dbservice.utils"
         , "ch.nation.dbservice.dummyImporter", "ch.nation.dbservice.controller"})
 @Import({DBFlywayConfiguration.class, SpringDataConfig.class, IncomingRequestLoggingConfiguration.class, HashEncoderConfig.class})
-@EnableCaching
 public class DBServiceApplication {
 
     public static void main(String[] args) {

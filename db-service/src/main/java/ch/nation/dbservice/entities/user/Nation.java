@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,18 +27,26 @@ public class Nation extends NamedEntityBase implements Serializable {
 
     @ManyToMany
     @RestResource(path = "characteristics", rel = "characteristics", exported = false)
+    @JoinTable(name="NATIONS_CHARACTERISTICS",
+            joinColumns = @JoinColumn(name = "NATIONS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CHARACTERISTICS_ID"))
     @JsonProperty("characteristics")
     private List<BaseCharacteristic> characteristics;
 
 
-    @ManyToMany
-    @RestResource(path = "prejudices", rel = "prejudices", exported = false)
-    @JsonProperty("prejudices")
-    private List<BasePrejudice> prejudices;
+  /** // @ManyToMany
+    //@RestResource(path = "prejudices", rel = "prejudices", exported = false)
+    //@JoinTable(name="NATIONS_PREJUDICES",
+    joinColumns = @JoinColumn(name = "NATIONS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PREJUDICES_ID"))
+   // @JsonProperty("prejudices")
+    private List<BasePrejudice> prejudices;**/
 
 
     public Nation() {
         super();
+      //  prejudices = new ArrayList<>();
+        characteristics = new ArrayList<>();
     }
 
     public User getUser() {
@@ -47,19 +56,25 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
-    public List<BasePrejudice> getPrejudices() {
+/**   public List<BasePrejudice> getPrejudices() {
+
+        if(prejudices==null) prejudices = new ArrayList<>();
         return prejudices;
     }
 
     public void setPrejudices(List<BasePrejudice> prejudices) {
         this.prejudices = prejudices;
-    }
+    }**/
 
     public List<BaseCharacteristic> getCharacteristics() {
+
+        if(characteristics == null) characteristics = new ArrayList<>();
         return characteristics;
     }
 
     public void setCharacteristics(List<BaseCharacteristic> characteristics) {
+
+
         this.characteristics = characteristics;
     }
 
@@ -90,6 +105,7 @@ public class Nation extends NamedEntityBase implements Serializable {
                 ", characteristics=" + characteristics +
                 '}';
     }
+
 
 
 }
