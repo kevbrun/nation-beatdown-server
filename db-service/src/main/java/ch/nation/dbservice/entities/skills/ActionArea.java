@@ -34,15 +34,29 @@ public class ActionArea {
     private ActionShape shape;
 
 
-    public ActionArea(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, ActionShape shape) {
+    @Column(name = "consider_blocked_tiles")
+    @JsonProperty("consBlockedTiles")
+    private boolean considerBlockedTiles;
+
+
+    public ActionArea(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, boolean considerBlockedTiles,ActionShape shape) {
         this.sizeInXAxis = sizeInXAxis;
         this.sizeInYAxis = sizeInYAxis;
         this.offsetInXAxis = offsetInXAxis;
         this.offsetInYAxis = offsetInYAxis;
         this.shape = shape;
+        this.considerBlockedTiles = considerBlockedTiles;
     }
 
     public ActionArea() {
+    }
+
+    public boolean isConsiderBlockedTiles() {
+        return considerBlockedTiles;
+    }
+
+    public void setConsiderBlockedTiles(boolean considerBlockedTiles) {
+        this.considerBlockedTiles = considerBlockedTiles;
     }
 
     public int getSizeInXAxis() {
@@ -85,6 +99,7 @@ public class ActionArea {
         this.shape = shape;
     }
 
+
     @Override
     public String toString() {
         return "ActionArea{" +
@@ -93,6 +108,7 @@ public class ActionArea {
                 ", offsetInXAxis=" + offsetInXAxis +
                 ", offsetInYAxis=" + offsetInYAxis +
                 ", shape=" + shape +
+                ", considerBlockedTiles=" + considerBlockedTiles +
                 '}';
     }
 

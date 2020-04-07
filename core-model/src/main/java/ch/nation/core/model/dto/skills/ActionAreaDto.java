@@ -27,15 +27,28 @@ public class ActionAreaDto {
     private ActionShape shape;
 
 
-    public ActionAreaDto(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, ActionShape shape) {
+    @JsonProperty("consBlockedTiles")
+    private boolean considerBlockedTiles;
+
+    public ActionAreaDto(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis,boolean considerBlockedTiles, ActionShape shape) {
         this.sizeInXAxis = sizeInXAxis;
         this.sizeInYAxis = sizeInYAxis;
         this.offsetInXAxis = offsetInXAxis;
         this.offsetInYAxis = offsetInYAxis;
         this.shape = shape;
+        this.considerBlockedTiles = considerBlockedTiles;
     }
 
     public ActionAreaDto() {
+    }
+
+
+    public boolean isConsiderBlockedTiles() {
+        return considerBlockedTiles;
+    }
+
+    public void setConsiderBlockedTiles(boolean considerBlockedTiles) {
+        this.considerBlockedTiles = considerBlockedTiles;
     }
 
     public int getSizeInXAxis() {

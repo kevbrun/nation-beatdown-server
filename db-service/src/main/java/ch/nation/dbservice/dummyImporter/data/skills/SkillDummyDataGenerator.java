@@ -51,7 +51,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.SELF);
 
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(4, 4, 0, 0, ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(4, 4, 0, 0, true,ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
 
@@ -136,7 +136,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.ENEMY_SINGLE);
 
         skill.setSkillBarOrder(5);
-        ActionArea actionArea = new ActionArea(4, 4, 0, 0, ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(4, 4, 0, 0, true, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
 
@@ -161,7 +161,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(2, 2, 0, 0, ActionShape.FILLED_BLOCK);
+        ActionArea actionArea = new ActionArea(2, 2, 0, 0,true, ActionShape.FILLED_BLOCK);
         skill.setActionArea(actionArea);
 
         SkillAnimationInfo info = new SkillAnimationInfo();
@@ -193,7 +193,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ANY_SINGLE);
         skill.setSkillBarOrder(9000);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.CROSS);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.CROSS);
         skill.setActionArea(actionArea);
 
 
@@ -236,7 +236,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE);
         skill.setActionArea(actionArea);
         SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
@@ -269,7 +269,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
 
@@ -293,7 +293,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
 
@@ -314,7 +314,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCost(0);
         skill.setCooldown(10000);
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, ActionShape.FILLED_CIRCLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE);
         skill.setTarget(Target.AREA_ENEMY);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);

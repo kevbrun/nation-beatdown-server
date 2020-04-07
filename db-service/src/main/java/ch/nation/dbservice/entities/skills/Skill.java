@@ -60,6 +60,9 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     private Target target;
 
 
+
+
+
     @ManyToMany(mappedBy = "skills", fetch = FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
