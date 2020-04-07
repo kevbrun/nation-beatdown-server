@@ -34,6 +34,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         createResetAPSkillEffect();
         createResetHPSkillEffect();
         createSelfDamageEffect();
+        createHealEffect();
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
     }
 
@@ -199,8 +200,20 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setWeaponType(WeaponType.MELEE1H);
         skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
+    }
 
 
+    private void createHealEffect(){
+        StatSkillEffect skillEffect = new StatSkillEffect();
+        skillEffect.setName("Heile (Eigene Enheit)");
+        skillEffect.setIdentifier("heal_target_hp");
+
+        skillEffect.setDescription("Heilt jemand");
+        skillEffect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
+        skillEffect.setResultIsNegative(false);
+        skillEffect.setEffectTarget(SkillEffectTarget.TARGET);
+        skillEffect.setTypeUsedForCalculation(StatType.INTELIGENCE);
+        skillEffectRepository.save(skillEffect);
     }
 
 }

@@ -28,6 +28,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         createWarriorClazz();
         createBarbarClazz();
         createTimeHunterClazz();
+        createHeilerClazz();
         LOGGER.info("STOP | CREATE Character Classes");
     }
 
@@ -163,6 +164,56 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
 
 
     }
+
+    private void createHeilerClazz() throws Exception {
+        CharacterClass characterClass = new CharacterClass();
+        characterClass.setName("Heiler");
+        characterClass.setIdentifier("heiler");
+        characterClass.setDescription("Ein langweiliger Heiler!");
+        characterClass.setLevel(1);
+        characterClass.setExp(0);
+        characterClass.setExpToLevelUp(1000);
+        characterClass.setHealthPoints(new Stat(50f, 0.0f, 999f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(150f, 0.0f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setStrength(new Stat(5f, 5f, 999f, StatGrowthType.LINEAR));
+        characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setIntelligence(new Stat(10f, 10f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setDexterity(new Stat(5f, 7f, 999f, StatGrowthType.LOGARITHMIC));
+        characterClass.setVitality(new Stat(5f, 8f, 999f, StatGrowthType.LINEAR));
+        characterClass.setMovementSpeed(new Stat(5f, 5f, 999f, StatGrowthType.NONE));
+        characterClass.setWeaponType(WeaponType.MELEE1H);
+
+        characterClassRepository.save(characterClass);
+
+        Skill skill = skillRepository.findByIdentifier("dmg_target_str");
+
+        if (skill == null) throw new Exception("Could not found Nahkampf!");
+
+        characterClass.addSkill(skill);
+
+        Skill moveSkill = skillRepository.findByIdentifier("mv_self");
+
+        if (moveSkill == null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
+
+        characterClass.addSkill(moveSkill);
+
+        characterClassRepository.save(characterClass);
+
+
+        Skill firstAid = skillRepository.findByIdentifier("heal_target_hp");
+
+        if (firstAid == null) throw new Exception("could no find skill: First Aid!");
+        characterClass.addSkill(firstAid);
+        characterClassRepository.save(characterClass);
+
+
+        Skill firstAidMultiple = skillRepository.findByIdentifier("heal_targets_hp");
+        if (firstAidMultiple == null) throw new Exception("could no find skill: firstAidMultiple");
+        characterClass.addSkill(firstAidMultiple);
+        characterClassRepository.save(characterClass);
+
+    }
+
 
 
 }

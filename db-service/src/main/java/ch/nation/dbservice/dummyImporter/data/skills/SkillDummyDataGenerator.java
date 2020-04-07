@@ -37,6 +37,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         createSelfExplosion();
         createOnSkillBackSkill();
         createSturmangriff();
+        createHealAllSkill();
+        createFirstAidSkill();
         persistData();
         LOGGER.info("FINISH CREATING  SKILLS!");
     }
@@ -324,7 +326,51 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
 
+    }
+
+
+    // Heal Skills
+    private void createFirstAidSkill(){
+        Skill skill = new Skill();
+        skill.setName("Erste Hilfe!");
+        skill.setIdentifier("heal_target_hp");
+        skill.setDescription("Heile eine Einheit.");
+        skill.setSkillBarOrder(8001);
+        skill.setCost(40);
+        skill.setCooldown(0);
+        skill.setTarget(Target.PARTY_SINGLE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE);
+        skill.setActionArea(actionArea);
+        skill = skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByIdentifier("heal_target_hp");
+        skill.addSkillEffect(effect);
+
+
+
 
     }
+
+
+    // Heal Skills
+    private void createHealAllSkill(){
+        Skill skill = new Skill();
+        skill.setName("Gruppenheilung!");
+        skill.setIdentifier("heal_targets_hp");
+        skill.setDescription("Heile alle Einheiten.");
+        skill.setSkillBarOrder(8000);
+        skill.setCost(40);
+        skill.setCooldown(999999);
+        skill.setTarget(Target.PARTY_ALL);
+        ActionArea actionArea = new ActionArea(3, 3, 0, 0, true,ActionShape.FILLED_CIRCLE);
+        skill.setActionArea(actionArea);
+        skill = skillRepository.save(skill);
+        SkillEffect effect = skillEffectRepository.findByIdentifier("heal_target_hp");
+        skill.addSkillEffect(effect);
+
+
+
+
+    }
+
 
 }
