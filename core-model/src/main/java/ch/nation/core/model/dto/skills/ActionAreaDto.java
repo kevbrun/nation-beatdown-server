@@ -1,6 +1,7 @@
 package ch.nation.core.model.dto.skills;
 
 import ch.nation.core.model.Enums.ActionShape;
+import ch.nation.core.model.Enums.AreaTileStyle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -27,6 +28,10 @@ public class ActionAreaDto {
     private ActionShape shape;
 
 
+    @JsonProperty("tile")
+    private AreaTileStyle tileStyle;
+
+
     @JsonProperty("consBlockedTiles")
     private boolean considerBlockedTiles;
 
@@ -42,6 +47,14 @@ public class ActionAreaDto {
     public ActionAreaDto() {
     }
 
+
+    public AreaTileStyle getTileStyle() {
+        return tileStyle;
+    }
+
+    public void setTileStyle(AreaTileStyle tileStyle) {
+        this.tileStyle = tileStyle;
+    }
 
     public boolean isConsiderBlockedTiles() {
         return considerBlockedTiles;
