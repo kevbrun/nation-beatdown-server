@@ -48,6 +48,13 @@ public class User extends NamedEntityBase implements Serializable {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "lost")
+    @JsonProperty("lost")
+    private int countOfLoosedGames;
+
+    @Column(name = "won")
+    @JsonProperty("won")
+    private int countOfWonGames;
 
     public User() {
 
@@ -56,6 +63,8 @@ public class User extends NamedEntityBase implements Serializable {
         games = new ArrayList<>();
         units = new ArrayList<>();
         role = "USER";
+        countOfLoosedGames = 0;
+        countOfLoosedGames = 0;
 
 
     }
@@ -78,6 +87,21 @@ public class User extends NamedEntityBase implements Serializable {
 
     }
 
+    public int getCountOfLoosedGames() {
+        return countOfLoosedGames;
+    }
+
+    public void setCountOfLoosedGames(int countOfLoosedGames) {
+        this.countOfLoosedGames = countOfLoosedGames;
+    }
+
+    public int getCountOfWonGames() {
+        return countOfWonGames;
+    }
+
+    public void setCountOfWonGames(int countOfWonGames) {
+        this.countOfWonGames = countOfWonGames;
+    }
 
     public String getRole() {
         return role;

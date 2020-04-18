@@ -24,4 +24,6 @@ public interface MaxUserResponseProjection extends TimestampProjection, NamedCla
     public List<Unit> getUnits();
 
 
+
+
 }

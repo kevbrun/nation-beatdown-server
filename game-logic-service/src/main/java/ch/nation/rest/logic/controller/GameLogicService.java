@@ -26,6 +26,7 @@ import ch.nation.core.model.dto.user.UserDto;
 import ch.nation.core.model.position.Vector3Int;
 
 
+import org.apache.catalina.User;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +72,10 @@ public class GameLogicService {
         LOGGER.info(String.format("START | Finish Game | game : %s | Winner:", gameUuid), uuidWinner);
         boolean wasOk = false;
         ResponseEntity<GameDto> currentGameOptional = gameServiceClient.findById(sessionToken, gameUuid, QueryProjection.def);
-        ResponseEntity<UserDto> winnerPlayer = userResourceService.findById(sessionToken, uuidWinner, QueryProjection.def);
         if (currentGameOptional.getBody() == null)
             throw new Exception(String.format("Could not end game! Game [%s] does not exist!", gameUuid));
-        if (winnerPlayer.getBody() == null)
-            throw new Exception(String.format("Could not end game! User [%s] does not exist!", gameUuid));
+
+
         GameDto game = currentGameOptional.getBody();
         game.setStatus(GameStatus.Finished);
         game.setWinner(uuidWinner);
@@ -84,12 +84,71 @@ public class GameLogicService {
 
         //TODO DELETE UserRuntimes
 
+
+
+
         //TODO Update Stats of Units and Player
+        updatePlayeStats(sessionToken,  game, uuidWinner);
+
+
+        //Looser
+
+
+
         if (updatedGame.getBody() != null) wasOk = true;
 
 
         LOGGER.info(String.format("STOP | Finish Game | game : %s | Winner:", gameUuid), uuidWinner);
         return new ResponseEntity<>(wasOk, HttpStatus.OK);
+    }
+
+    private void updatePlayeStats(String sessionToken,GameDto gameDto, String uuidWinner) {
+
+
+       ResponseEntity<List<AbstractDto>> users  = gameServiceClient.getChildrenByResourceType(sessionToken,gameDto.getId(),"users",QueryProjection.max);
+
+
+       UserDto winner=null;
+       UserDto looser= null;
+       if(users!=null && users.getBody()!=null && users.getBody().size()>0){
+
+
+           for (AbstractDto user:   users.getBody()   ) {
+
+
+               if(user.getId().equals(uuidWinner)){
+                   LOGGER.info("FOUND WINNDER in payload");
+                   winner = (UserDto)user;
+               }else{
+                   LOGGER.info("FOUND LOOSER in payload");
+                   looser = (UserDto) user;
+               }
+
+
+           }
+
+
+
+       }
+
+
+       updateWinnerPlayer(sessionToken,winner);
+       updateLooserPlayer(sessionToken,looser);
+
+
+    }
+
+    private void updateWinnerPlayer(String sessionToken, UserDto winner) {
+        LOGGER.info(String.format("Update user stats of winner player %s",winner.getName()));
+        winner.setCountOfWonGames((winner.getCountOfWonGames()+1));
+        userResourceService.updatePut(sessionToken,winner, QueryProjection.def);
+    }
+
+
+    private void updateLooserPlayer(String sessionToken, UserDto looser) {
+        LOGGER.info(String.format("Update user stats of winner player %s",looser.getName()));
+        looser.setCountOfLostGames((looser.getCountOfLostGames()+1));
+        userResourceService.updatePut(sessionToken,looser, QueryProjection.def);
     }
 
 

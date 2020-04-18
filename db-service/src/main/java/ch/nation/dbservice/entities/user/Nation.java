@@ -17,6 +17,7 @@ import java.util.Objects;
 @Entity(name = "NATION")
 @Table(name = "NATION")
 @AttributeOverride(name = "name", column = @Column(name = "name", unique = false, nullable = false))
+//@AttributeOverride(name = "id", column = @Column(name = "nations_id"))
 public class Nation extends NamedEntityBase implements Serializable {
 
     @OneToOne(mappedBy = "nation")
@@ -25,12 +26,15 @@ public class Nation extends NamedEntityBase implements Serializable {
     private User user;
 
 
+
+    //TODO Check comment below
     @ManyToMany
     @RestResource(path = "characteristics", rel = "characteristics", exported = false)
     @JoinTable(name="NATIONS_CHARACTERISTICS",
-            joinColumns = @JoinColumn(name = "NATIONS_ID"),
+            joinColumns = @JoinColumn(name = "NATIONS_id"),
             inverseJoinColumns = @JoinColumn(name = "CHARACTERISTICS_ID"))
     @JsonProperty("characteristics")
+    @JoinColumn(name = "nations_id") //TODO CHECK IF THIS IS THE PROBLEM
     private List<BaseCharacteristic> characteristics;
 
 

@@ -5,6 +5,8 @@ import ch.nation.dbservice.entities.projection.users.NamedClassesProjection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
+import javax.persistence.Column;
+
 @Projection(name = "min", types = User.class)
 public interface UserMinResponseProjection extends MinimizedEntityResponseProjection, NamedClassesProjection {
 
@@ -12,5 +14,10 @@ public interface UserMinResponseProjection extends MinimizedEntityResponseProjec
     @JsonProperty("role")
     String getRole();
 
+    @JsonProperty("lost")
+    public int getCountOfLoosedGames();
+
+    @JsonProperty("won")
+    public int getCountOfWonGames();
 
 }

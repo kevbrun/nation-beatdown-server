@@ -31,6 +31,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = StatCharacteristic.class, name = "StatCharacteristic"),
         @JsonSubTypes.Type(value = BaseCharacteristic.class, name = "BaseCharacteristic")
 })
+//@AttributeOverride(name = "id", column = @Column(name = "characteristics_id"))
 
 public abstract class BaseCharacteristic extends NationRessource implements IDiscrimantorValue {
 
@@ -43,8 +44,10 @@ public abstract class BaseCharacteristic extends NationRessource implements IDis
 
 
     @RestResource(path = "nations", rel = "nations")
-    @ManyToMany(mappedBy = "characteristics")
+    //@ManyToMany(mappedBy = "characteristics")
+    @ManyToMany
     @JsonIgnore
+    @JoinColumn(name = "CHARACTERISTICS_id")
     private List<Nation> nations;
 
 
