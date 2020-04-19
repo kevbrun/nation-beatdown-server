@@ -34,7 +34,7 @@ public class Nation extends NamedEntityBase implements Serializable {
             joinColumns = @JoinColumn(name = "NATIONS_id"),
             inverseJoinColumns = @JoinColumn(name = "CHARACTERISTICS_ID"))
     @JsonProperty("characteristics")
-    @JoinColumn(name = "nations_id") //TODO CHECK IF THIS IS THE PROBLEM
+   // @JoinColumn(name = "nations_id") //TODO CHECK IF THIS IS THE PROBLEM
     private List<BaseCharacteristic> characteristics;
 
 
