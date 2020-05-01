@@ -8,6 +8,7 @@ import ch.nation.dbservice.entities.clazzes.Stat;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
 import ch.nation.dbservice.repositories.skills.SkillRepository;
+import com.netflix.discovery.converters.jackson.EurekaXmlJacksonCodec;
 
 public class CharacterClassDummyGenerator extends AbstractDummyGenerator<CharacterClass> {
 
@@ -105,6 +106,12 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         if (moveSkill == null) throw new Exception("could no find skill: Bewegung Schweinebacke!");
 
         characterClass.addSkill(moveSkill);
+
+
+        Skill expl  = skillRepository.findByIdentifier("dmg_expl_target_hp");
+        if(expl==null) throw new Exception("Could not find explosion skill");
+
+        characterClass.addSkill(expl);
 
         characterClassRepository.save(characterClass);
 

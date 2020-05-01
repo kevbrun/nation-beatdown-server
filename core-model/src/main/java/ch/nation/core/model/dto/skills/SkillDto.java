@@ -51,6 +51,10 @@ public class SkillDto extends NamedObjectAbstractDto {
     @JsonProperty("animations")
     private List<SkillAnimationInfoDto> info;
 
+    @JsonProperty("icon_path")
+    private String iconPath;
+
+
 
     public SkillDto(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionAreaDto actionArea, Target target, List<CharacterClassDto> characterClasses, List<AbstractSkillEffectDto> skillEffects, List<AbstractPlayerMoveDto> actions) {
         this.cost = cost;
@@ -137,6 +141,14 @@ public class SkillDto extends NamedObjectAbstractDto {
         this.characterClasses = characterClasses;
     }
 
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
 
     public List<SkillAnimationInfoDto> getInfo() {
         return info;

@@ -59,6 +59,9 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     @Enumerated(EnumType.STRING)
     private Target target;
 
+    @JsonProperty("icon_path")
+    @Column(name= "icon_path")
+    private String iconPath;
 
 
 
@@ -118,6 +121,13 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
     }
 
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
 
     public List<SkillAnimationInfo> getInfo() {
         return info;
@@ -211,6 +221,8 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
         return characterClasses;
     }
+
+
 
     public void setCharacterClasses(List<CharacterClass> characterClasses) {
         this.characterClasses = characterClasses;

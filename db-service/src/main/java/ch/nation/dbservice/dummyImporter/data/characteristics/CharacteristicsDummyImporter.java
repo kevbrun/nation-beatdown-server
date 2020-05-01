@@ -93,7 +93,6 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         statCharacteristic.setDescription("Nation ist dauernd betrunken! Sie empfinden eine höhere Ausdauer. Können sich aber nicht weit bewegen");
         StatBonusDelta bonus = new StatBonusDelta();
         bonus.setVitBonus(new EmbeddableIntegerBonus(15, StatModTarget.MAX_VALUE));
-        bonus.setApBonus(new EmbeddableIntegerBonus(-10, StatModTarget.MAX_VALUE));
         statCharacteristic.setDelta(bonus);
 
         characteristicsRepository.save(statCharacteristic);
@@ -169,8 +168,6 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         statCharacteristic.setIdentifier("more_all_5_less_int_5");
         statCharacteristic.setDescription("Populismus ist der Weg zur Weltherrschaft!\nNur die Intelligenz lässt nach!");
         StatBonusDelta bonus = new StatBonusDelta();
-        bonus.setHpBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
-        bonus.setApBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
         bonus.setStrBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
         bonus.setAgiBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));
         bonus.setVitBonus(new EmbeddableIntegerBonus(5, StatModTarget.MAX_VALUE));

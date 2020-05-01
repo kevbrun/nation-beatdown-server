@@ -14,6 +14,7 @@ import ch.nation.core.services.AbstractNamedEntityService;
 
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,10 @@ import java.util.*;
 public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto, GameDto> implements GameResourceService {
 
     private final UserServiceClient userService;
+
+    @Value("${game.consideration-time}")
+    private int considerationTimesInMinutes;
+
 
 
     public GameResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory, final UserServiceClient userService) {
@@ -44,7 +49,7 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
         if (playerTwo.getBody() == null) throw new Error("Player with uuid" + playerTwoUuid + "does not exist");
 
 
-        long considerationTime = 60 * 5 * 1000;
+        long considerationTime = 60 * considerationTimesInMinutes * 1000;
 
 
         LOGGER.info("I start to create the game!");

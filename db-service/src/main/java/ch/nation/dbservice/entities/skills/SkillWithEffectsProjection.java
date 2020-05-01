@@ -39,5 +39,10 @@ public interface SkillWithEffectsProjection extends TimestampProjection, NamedCl
     @JsonProperty("effects")
     public List<SkillEffect> getSkillEffects();
 
+    @JsonProperty("icon_path")
+    String getIconPath();
+
+
+
 
 }
