@@ -19,4 +19,5 @@ public interface GameRepository extends IPageableDao<Game> {
     Page<Game> findByUsers_IdAndGameStatus(@Param("uuid") UUID id, @Param("status") GameStatus gameStatus, Pageable pageable);
 
 
+
 }

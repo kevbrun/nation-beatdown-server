@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
@@ -17,4 +18,8 @@ public interface UserGameRuntimeServiceClient extends BaseServiceRestClientInter
 
     @RequestMapping(path = "/search/findByGame_IdAndPlayerUuid")
     ResponseEntity<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(@RequestParam(value = "game_uuid") String gameUUid, @RequestParam(value = "player_uuid") String playerUUid, @RequestParam(value = "projection", required = false) QueryProjection projection);
+
+    @RequestMapping(path = "/search/countRunningGamesByPlayer")
+    ResponseEntity<Long> getCountOfRunningGamesByPlayerUuid(@RequestParam("playerUuid")String playerUuid);
+
 }

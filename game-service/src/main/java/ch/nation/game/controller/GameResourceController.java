@@ -1,6 +1,8 @@
 package ch.nation.game.controller;
 
+import ch.nation.core.clients.db.game.DBGameRuntimeInfoRestClient;
 import ch.nation.core.clients.services.users.UserServiceClient;
+import ch.nation.core.clients.services.users.runtime.UserGameRuntimeServiceClient;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
@@ -21,13 +23,15 @@ import java.util.Optional;
 public class GameResourceController extends AbstractNamedResourceGameLogicController<GameDto, GameDto> {
 
     private final UserServiceClient userService;
+    private final DBGameRuntimeInfoRestClient userGameRuntimeServiceClient;
 
 
     @Autowired
-    public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userServiceClient, HttpServletRequest request) {
+    public GameResourceController(final GameResourceServiceImpl service, final UserServiceClient userServiceClient, HttpServletRequest request, DBGameRuntimeInfoRestClient userGameRuntimeServiceClient) {
         super(service, request);
         this.userService = userServiceClient;
 
+        this.userGameRuntimeServiceClient = userGameRuntimeServiceClient;
     }
 
 
@@ -123,6 +127,21 @@ public class GameResourceController extends AbstractNamedResourceGameLogicContro
     public ResponseEntity getChildrenNodesByResourceCollection(@PathVariable("uuid") String uuid, @PathVariable("resourceCollection") String resourceCollection, @RequestParam(value = "projection", required = false) QueryProjection projection) {
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection, projection);
     }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/countByPlayerAndStatus")
+    public ResponseEntity<Long> getCountOfGamesByPlayerUuidAndGameStatus(@RequestParam("playerUuid")String playerUuid, @RequestParam("status") GameStatus status){
+        //TODO add real client to servce instead of direct DB access
+        return ResponseEntity.ok(userGameRuntimeServiceClient.countAllByPlayerUuidAndGame_GameStatus(playerUuid,status));
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/countRunningGamesByPlayer")
+    public ResponseEntity<Long> getCountOfGamesByPlayerUuidAndGameStatus(@RequestParam("playerUuid")String playerUuid){
+        //TODO add real client to servce instead of direct DB access
+        return ResponseEntity.ok(userGameRuntimeServiceClient.countAllByPlayerUuidAndGame_GameStatus(playerUuid,GameStatus.InProgress));
+    }
+
 
 
 }

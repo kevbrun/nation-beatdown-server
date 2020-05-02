@@ -7,6 +7,7 @@ import ch.nation.core.controller.interfaces.UserResourceController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.user.UserDto;
+import ch.nation.core.model.dto.user.UserStatisticsDto;
 import ch.nation.user.service.UserResourceServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,6 +121,12 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
 
         return super.getChildrenNodesByResourceCollection(uuid, resourceCollection, projection);
 
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/statistic", produces = "application/json")
+    public ResponseEntity<UserStatisticsDto> getPlayerStatistics(@RequestParam(value = "uuid")final String uuid){
+        return ((UserResourceServiceImpl)service).getUserStatistics(uuid);
     }
 
 
