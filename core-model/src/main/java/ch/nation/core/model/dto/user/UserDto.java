@@ -34,7 +34,6 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     }
 
 
-
     @Override
     public String ResourceCollectionName() {
         return "users";

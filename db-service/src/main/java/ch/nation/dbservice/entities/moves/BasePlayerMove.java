@@ -9,7 +9,6 @@ import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;

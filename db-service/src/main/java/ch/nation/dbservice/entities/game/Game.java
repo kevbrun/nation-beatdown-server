@@ -2,16 +2,14 @@ package ch.nation.dbservice.entities.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
-import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.user.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Table(name = "GAME")
 @Entity(name = "GAME")

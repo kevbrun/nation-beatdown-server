@@ -1,13 +1,12 @@
 package ch.nation.user.controller;
 
 
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.core.controller.AbstractMassNamedResourceGameLogicController;
+import ch.nation.core.controller.interfaces.UserResourceController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.core.controller.interfaces.UserResourceController;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.user.service.UserResourceServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,16 +52,13 @@ public class UserController extends AbstractMassNamedResourceGameLogicController
     }
 
 
+    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+    public ResponseEntity updatePut(@RequestBody UserDto payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
+        return super.updatePut(payload, projection);
+    }
 
 
-        @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
-        public ResponseEntity updatePut(@RequestBody UserDto payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
-            return super.updatePut(payload, projection);
-        }
-
-
-
-        @Override
+    @Override
     @RequestMapping(method = RequestMethod.PATCH, consumes = "application/json", path = "/batch_update")
     public ResponseEntity update(@RequestBody List<UserDto> payload, @RequestParam(value = "projection", required = false) QueryProjection projection) {
         return super.update(payload, projection);

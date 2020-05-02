@@ -4,7 +4,6 @@ import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
-
 import ch.nation.user.runtime.service.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

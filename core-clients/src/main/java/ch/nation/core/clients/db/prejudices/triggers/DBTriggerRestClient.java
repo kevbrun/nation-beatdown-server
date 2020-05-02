@@ -1,8 +1,8 @@
 package ch.nation.core.clients.db.prejudices.triggers;
 
-import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
 import org.springframework.cloud.openfeign.FeignClient;
 
 

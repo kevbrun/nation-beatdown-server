@@ -48,11 +48,11 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         createHateAgainstDumPeoplePrejudice();
         createHateAgainstExplosivPeople();
         createHateAgainstIntPeoplePrejudice();
-       createSmellPeople();
+        createSmellPeople();
         LOGGER.info("STOP | CREATING PREJUDICES");
     }
 
-//
+    //
     private void createHandleWeakNationPrejudice() {
         SkillPrejudice prejudice = new SkillPrejudice();
         prejudice.setName("Schwache Leute machen wütend!");
@@ -68,7 +68,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         skillPrejudiceRepository.save(prejudice);
     }
 
-//
+    //
     private void createHateAgainstDumPeoplePrejudice() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Intelligente Leute. Viel Luft aber nichts dahinter!");
@@ -88,7 +88,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
     }
 
 
-//
+    //
     private void createHateAgainstIntPeoplePrejudice() {
         StatPrejudice prejudice = new StatPrejudice();
         prejudice.setName("Der dumme Mob");
@@ -123,7 +123,7 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         prejudice = statPrejudiceRepository.save(prejudice);
         CharacteristicPrejudiceTrigger chr = characteristicPrejudiceTriggerRepository.findByIdentifier("char_expl");
         prejudice.addTrigger(chr);
-       statPrejudiceRepository.save(prejudice);
+        statPrejudiceRepository.save(prejudice);
 
     }
 
@@ -145,12 +145,6 @@ public class PrejudiceDummyImporter extends AbstractDummyGenerator<BasePrejudice
         statPrejudiceRepository.save(prejudice);
 
     }
-
-
-
-
-
-
 
 
 }

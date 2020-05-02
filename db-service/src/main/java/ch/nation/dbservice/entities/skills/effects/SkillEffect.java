@@ -60,8 +60,8 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     @JsonProperty("animations")
     @ElementCollection
     @CollectionTable(
-            name="SKILL_EFFECT_ANIMATION_INFO",
-            joinColumns=@JoinColumn(name="ANIM_ID")
+            name = "SKILL_EFFECT_ANIMATION_INFO",
+            joinColumns = @JoinColumn(name = "ANIM_ID")
     )
     private List<SkillAnimationInfo> info;
 
@@ -174,8 +174,6 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
     }
 
 
-
-
     public void removeSkill(Skill skill) {
         if (this.getSkills() != null) {
             this.getSkills().remove(skill);
@@ -190,18 +188,18 @@ public class SkillEffect extends NationRessource implements IDiscrimantorValue {
         }
     }
 
-    public void addAnimInfo(SkillAnimationInfo info){
-        if(this.getInfo()==null) setInfo(new ArrayList<SkillAnimationInfo>());
+    public void addAnimInfo(SkillAnimationInfo info) {
+        if (this.getInfo() == null) setInfo(new ArrayList<SkillAnimationInfo>());
 
-        if(info!=null){
+        if (info != null) {
             getInfo().add(info);
         }
 
     }
 
 
-    public void removeAnimInfo(SkillAnimationInfo info){
-        if(this.getInfo()!=null && this.getInfo().size()>0){
+    public void removeAnimInfo(SkillAnimationInfo info) {
+        if (this.getInfo() != null && this.getInfo().size() > 0) {
             this.getInfo().remove(info);
         }
     }

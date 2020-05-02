@@ -1,8 +1,8 @@
 package ch.nation.core.clients.db.characteristics;
 
-import ch.nation.core.model.dto.characteristics.BaseCharacteristicDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.model.dto.characteristics.BaseCharacteristicDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 

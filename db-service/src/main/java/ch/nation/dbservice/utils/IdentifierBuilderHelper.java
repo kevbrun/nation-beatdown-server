@@ -2,8 +2,6 @@ package ch.nation.dbservice.utils;
 
 import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
-import ch.nation.core.model.Enums.Target;
-import ch.nation.dbservice.entities.clazzes.Stat;
 
 public final class IdentifierBuilderHelper {
 

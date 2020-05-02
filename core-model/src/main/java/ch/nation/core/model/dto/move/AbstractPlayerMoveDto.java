@@ -2,14 +2,12 @@ package ch.nation.core.model.dto.move;
 
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
-import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.model.dto.skills.SkillDto;
 import ch.nation.core.model.dto.unit.UnitDto;
 import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Calendar;
-import java.util.List;
 
 public abstract class AbstractPlayerMoveDto extends AbstractDto {
 

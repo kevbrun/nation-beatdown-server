@@ -1,6 +1,5 @@
 package ch.nation.dbservice.repositories.prejudices.triggers;
 
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.prejudices.triggers.BasePrejudiceTrigger;
 import ch.nation.dbservice.entities.prejudices.triggers.StatPrejudiceTrigger;
 import ch.nation.dbservice.repositories.IFindByIdentifier;

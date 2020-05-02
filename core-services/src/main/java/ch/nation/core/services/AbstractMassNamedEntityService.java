@@ -1,13 +1,12 @@
 package ch.nation.core.services;
 
 import ch.nation.core.clients.db.DBRestMassServiceBaseInterface;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.clients.db.utils.MessageUtils;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.interf.services.GenericMassCrudDao;
-
-import ch.nation.core.clients.db.utils.MessageUtils;
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 

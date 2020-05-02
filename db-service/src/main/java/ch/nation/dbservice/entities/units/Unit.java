@@ -1,11 +1,9 @@
 package ch.nation.dbservice.entities.units;
 
 import ch.nation.core.model.Enums.UnitState;
-import ch.nation.dbservice.entities.clazzes.CharacterClass;
-import ch.nation.dbservice.entities.clazzes.Stat;
-import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.NamedEntityBase;
-import ch.nation.dbservice.entities.moves.SkillPlayerMove;
+import ch.nation.dbservice.entities.clazzes.CharacterClass;
+import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
 import ch.nation.dbservice.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

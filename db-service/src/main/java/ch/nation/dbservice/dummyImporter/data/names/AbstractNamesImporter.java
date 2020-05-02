@@ -1,15 +1,11 @@
 package ch.nation.dbservice.dummyImporter.data.names;
 
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
-import ch.nation.dbservice.entities.SimpleIdEntity;
 import ch.nation.dbservice.entities.names.UnitFirstName;
 import ch.nation.dbservice.entities.names.UnitLastName;
-import ch.nation.dbservice.repositories.names.UnitFirstNameRepository;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;

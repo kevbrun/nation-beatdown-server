@@ -1,11 +1,10 @@
 package ch.nation.dbservice.entities.skills;
 
 import ch.nation.core.model.Enums.Target;
-import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.projection.components.IIdentityProjection;
-import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import ch.nation.dbservice.entities.projection.users.TimestampProjection;
 import ch.nation.dbservice.entities.projection.users.NamedClassesProjection;
+import ch.nation.dbservice.entities.projection.users.TimestampProjection;
+import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;
 
@@ -41,8 +40,6 @@ public interface SkillWithEffectsProjection extends TimestampProjection, NamedCl
 
     @JsonProperty("icon_path")
     String getIconPath();
-
-
 
 
 }

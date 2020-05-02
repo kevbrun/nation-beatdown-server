@@ -45,7 +45,7 @@ public class ActionArea {
     private boolean considerBlockedTiles;
 
 
-    public ActionArea(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, boolean considerBlockedTiles,ActionShape shape,AreaTileStyle tileStyle) {
+    public ActionArea(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, boolean considerBlockedTiles, ActionShape shape, AreaTileStyle tileStyle) {
         this.sizeInXAxis = sizeInXAxis;
         this.sizeInYAxis = sizeInYAxis;
         this.offsetInXAxis = offsetInXAxis;
@@ -63,7 +63,6 @@ public class ActionArea {
     public AreaTileStyle getTileStyle() {
         return tileStyle;
     }
-
 
 
     public void setTileStyle(AreaTileStyle tileStyle) {

@@ -1,10 +1,8 @@
 package ch.nation.dbservice.entities.user;
 
 
-import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.projection.users.NamedClassesProjection;
 import ch.nation.dbservice.entities.projection.users.TimestampProjection;
-import ch.nation.dbservice.entities.units.Unit;
 import ch.nation.dbservice.entities.units.UnitMaxResponseProjection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.config.Projection;

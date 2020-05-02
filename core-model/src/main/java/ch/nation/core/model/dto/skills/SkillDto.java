@@ -55,7 +55,6 @@ public class SkillDto extends NamedObjectAbstractDto {
     private String iconPath;
 
 
-
     public SkillDto(int cost, int baseValue, int cooldown, int currentCooldownTimer, int skillBarOrder, ActionAreaDto actionArea, Target target, List<CharacterClassDto> characterClasses, List<AbstractSkillEffectDto> skillEffects, List<AbstractPlayerMoveDto> actions) {
         this.cost = cost;
         this.baseValue = baseValue;

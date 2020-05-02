@@ -3,7 +3,6 @@ package ch.nation.dbservice.dummyImporter.data.skills;
 import ch.nation.core.model.Enums.*;
 import ch.nation.dbservice.dummyImporter.data.AbstractDummyGenerator;
 import ch.nation.dbservice.entities.skills.ActionArea;
-import ch.nation.dbservice.entities.skills.MoveSkill;
 import ch.nation.dbservice.entities.skills.SelfMoveSkill;
 import ch.nation.dbservice.entities.skills.Skill;
 import ch.nation.dbservice.entities.skills.effects.SkillAnimationInfo;
@@ -29,7 +28,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         LOGGER.info("START CREATING  SKILLS!");
         createSelfMoveSkill();
         createNahkampfSkill();
-     //   createMoveOtherSkill();
+        //   createMoveOtherSkill();
         createFernkampfSkill();
         createReturnOneRoundBackSkill();
         createResetAPSkill();
@@ -53,7 +52,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setTarget(Target.SELF);
         skill.setIconPath("Skill_standart/Assassinskill_50");
         skill.setSkillBarOrder(9999);
-        ActionArea actionArea = new ActionArea(4, 4, 0, 0, true,ActionShape.FILLED_BLOCK,AreaTileStyle.WALK);
+        ActionArea actionArea = new ActionArea(4, 4, 0, 0, true, ActionShape.FILLED_BLOCK, AreaTileStyle.WALK);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
 
@@ -132,32 +131,34 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
     }
 
-   /** private void createMoveOtherSkill() throws Exception {
-        Skill skill = new MoveSkill();
-        skill.setName("Bewegung du Sack!");
-        skill.setIdentifier("mv_target");
-
-        skill.setDescription("Bewege gegnerisch Einheit!");
-        skill.setCost(20);
-        skill.setCurrentCooldownTimer(0);
-        skill.setTarget(Target.ENEMY_SINGLE);
-
-        skill.setSkillBarOrder(5);
-        ActionArea actionArea = new ActionArea(4, 4, 0, 0, true, ActionShape.FILLED_BLOCK,AreaTileStyle.WALK);
-        skill.setActionArea(actionArea);
-        skill = skillRepository.save(skill);
-
-        SkillEffect effect = skillEffectRepository.findByIdentifier("mv_target");
-
-
-        if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
-
-        skill.addSkillEffect(effect);
-        skillRepository.save(skill);
-
-
-        entities.add(skill);
-    }**/
+    /**
+     * private void createMoveOtherSkill() throws Exception {
+     * Skill skill = new MoveSkill();
+     * skill.setName("Bewegung du Sack!");
+     * skill.setIdentifier("mv_target");
+     * <p>
+     * skill.setDescription("Bewege gegnerisch Einheit!");
+     * skill.setCost(20);
+     * skill.setCurrentCooldownTimer(0);
+     * skill.setTarget(Target.ENEMY_SINGLE);
+     * <p>
+     * skill.setSkillBarOrder(5);
+     * ActionArea actionArea = new ActionArea(4, 4, 0, 0, true, ActionShape.FILLED_BLOCK,AreaTileStyle.WALK);
+     * skill.setActionArea(actionArea);
+     * skill = skillRepository.save(skill);
+     * <p>
+     * SkillEffect effect = skillEffectRepository.findByIdentifier("mv_target");
+     * <p>
+     * <p>
+     * if (effect == null) throw new Exception("Could not find. Skill Effect with name: Bewegungseffekt!");
+     * <p>
+     * skill.addSkillEffect(effect);
+     * skillRepository.save(skill);
+     * <p>
+     * <p>
+     * entities.add(skill);
+     * }
+     **/
 
     private void createNahkampfSkill() throws Exception {
         Skill skill = new Skill();
@@ -170,7 +171,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setSkillBarOrder(9998);
 
         skill.setIconPath("Skill_standart/Warriorskill_13");
-        ActionArea actionArea = new ActionArea(2, 2, 0, 0,true, ActionShape.FILLED_BLOCK,AreaTileStyle.ATTACK_AXE);
+        ActionArea actionArea = new ActionArea(2, 2, 0, 0, true, ActionShape.FILLED_BLOCK, AreaTileStyle.ATTACK_AXE);
         skill.setActionArea(actionArea);
 
         SkillAnimationInfo info = new SkillAnimationInfo();
@@ -193,7 +194,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
     }
 
 
-    private void createSturmangriff(){
+    private void createSturmangriff() {
         Skill skill = new Skill();
         skill.setName("Volles Pfund aufs Maul!");
         skill.setIdentifier("move-caster_target_str");
@@ -202,7 +203,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ANY_SINGLE);
         skill.setSkillBarOrder(9000);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.CROSS,AreaTileStyle.ATTACK_AXE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.CROSS, AreaTileStyle.ATTACK_AXE);
         skill.setActionArea(actionArea);
         skill.setIconPath("Skill_standart/Warriorskill_48");
 
@@ -213,7 +214,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         info.setTarget(SkillEffectTarget.CASTER);
         info.setWeaponType(WeaponType.MELEE1H);
         skill.addAnimInfo(info);
-        skill= skillRepository.save(skill);
+        skill = skillRepository.save(skill);
 
         info = new SkillAnimationInfo();
         info.setDuration(3.0f);
@@ -224,7 +225,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
         skill = skillRepository.save(skill);
 
-       SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
+        SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
         skill.addSkillEffect(effect);
 
         skill.addSkillEffect(skillEffectRepository.findByIdentifier("dmg_target_str"));
@@ -245,7 +246,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9998);
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE,AreaTileStyle.ATTACK_AXE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.ATTACK_AXE);
         skill.setActionArea(actionArea);
         skill.setIconPath("Skill_standart/Archerskill_12");
         SkillAnimationInfo info = new SkillAnimationInfo();
@@ -280,7 +281,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
         ActionArea actionArea = new ActionArea(5, 5, 0, 0,
-                true,ActionShape.FILLED_CIRCLE,AreaTileStyle.NONE);
+                true, ActionShape.FILLED_CIRCLE, AreaTileStyle.NONE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
         skill.setIconPath("Skill_standart/Archerskill_13");
@@ -306,7 +307,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
         skill.setIconPath("Skill_standart/Archerskill_13");
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE,AreaTileStyle.NONE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.NONE);
         skill.setTarget(Target.SELF);
         skill.setActionArea(actionArea);
 
@@ -328,7 +329,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCooldown(10000);
         skill.setSkillBarOrder(9999);
         skill.setIconPath("Skill_standart/Warriorskill_30");
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE,AreaTileStyle.ATTACK_AXE);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.ATTACK_AXE);
         skill.setTarget(Target.AREA_ENEMY);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
@@ -342,7 +343,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
 
     // Heal Skills
-    private void createFirstAidSkill(){
+    private void createFirstAidSkill() {
         Skill skill = new Skill();
         skill.setName("Erste Hilfe!");
         skill.setIdentifier("heal_target_hp");
@@ -352,7 +353,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCooldown(0);
         skill.setTarget(Target.PARTY_SINGLE);
         skill.setIconPath("Skill_standart/Priestskill_23");
-        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true,ActionShape.FILLED_CIRCLE,AreaTileStyle.POSITIVE_HEAL);
+        ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.POSITIVE_HEAL);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
         SkillEffect effect = skillEffectRepository.findByIdentifier("heal_target_hp");
@@ -360,13 +361,11 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill = skillRepository.save(skill);
 
 
-
-
     }
 
 
     // Heal Skills
-    private void createHealAllSkill(){
+    private void createHealAllSkill() {
         Skill skill = new Skill();
         skill.setName("Gruppenheilung!");
         skill.setIdentifier("heal_targets_hp");
@@ -376,14 +375,12 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setCooldown(999999);
         skill.setTarget(Target.PARTY_ALL);
         skill.setIconPath("Skill_standart/Priestskill_24");
-        ActionArea actionArea = new ActionArea(3, 3, 0, 0, true,ActionShape.FILLED_CIRCLE,AreaTileStyle.POSITIVE_HEAL);
+        ActionArea actionArea = new ActionArea(3, 3, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.POSITIVE_HEAL);
         skill.setActionArea(actionArea);
         skill = skillRepository.save(skill);
         SkillEffect effect = skillEffectRepository.findByIdentifier("heal_target_hp");
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
-
-
 
 
     }

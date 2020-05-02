@@ -1,8 +1,8 @@
 package ch.nation.core.clients.db.characteristics;
 
-import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
 import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(contextId = "characteristic-skill-db-rest-service", value = "nation-database-service", path = "/characteristics-skill", decode404 = true, configuration = FeignClientConfig.class)

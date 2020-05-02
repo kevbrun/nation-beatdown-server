@@ -3,14 +3,10 @@ package ch.nation.dbservice.entities.prejudices.triggers;
 import ch.nation.core.model.Enums.ConditionComparer;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.AbstractEntityTest;
-import ch.nation.dbservice.entities.AbstractNamedEntityTest;
 import ch.nation.dbservice.entities.IHasDiscriminatorValue;
-import ch.nation.dbservice.repositories.prejudices.StatPrejudiceRepository;
 import ch.nation.dbservice.repositories.prejudices.triggers.StatPrejudiceTriggerRepository;
 import org.junit.Assert;
 import org.junit.Test;
-
-import javax.transaction.Transactional;
 
 public class StatPrejudiceTrggerRepoTest extends AbstractEntityTest<StatPrejudiceTrigger, StatPrejudiceTriggerRepository> implements IHasDiscriminatorValue {
     @Override

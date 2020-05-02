@@ -6,7 +6,6 @@ import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.user.UserDto;
-
 import ch.nation.game.service.GameResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

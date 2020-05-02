@@ -1,5 +1,8 @@
 package ch.nation.game.service;
 
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.clients.db.game.DBGameRestClient;
 import ch.nation.core.clients.services.users.UserServiceClient;
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
@@ -7,13 +10,7 @@ import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
-import ch.nation.core.clients.db.game.DBGameRestClient;
 import ch.nation.core.services.AbstractNamedEntityService;
-
-
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -21,7 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,9 +29,8 @@ public class GameResourceServiceImpl extends AbstractNamedEntityService<GameDto,
 
     private final UserServiceClient userService;
 
-    @Value("${game.consideration-time}")
+    @Value("${game.rules.consideration-time}")
     private int considerationTimesInMinutes;
-
 
 
     public GameResourceServiceImpl(DBRestClientFactory factory, DBMassRestClientFactory massRestClientFactory, final UserServiceClient userService) {

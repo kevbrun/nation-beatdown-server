@@ -1,7 +1,6 @@
 package ch.nation.dbservice.repositories.moves.value;
 
 import ch.nation.dbservice.entities.moves.values.MoveSkillPlayerMoveValue;
-import ch.nation.dbservice.entities.moves.values.projections.MoveSkillPlayerMoveValueProjection;
 import ch.nation.dbservice.repositories.IPageableDao;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

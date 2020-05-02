@@ -3,7 +3,6 @@ package ch.nation.dbservice.entities.user;
 
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
-import ch.nation.dbservice.entities.prejudices.BasePrejudice;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -26,30 +25,31 @@ public class Nation extends NamedEntityBase implements Serializable {
     private User user;
 
 
-
     //TODO Check comment below
     @ManyToMany
     @RestResource(path = "characteristics", rel = "characteristics", exported = false)
-    @JoinTable(name="NATIONS_CHARACTERISTICS",
+    @JoinTable(name = "NATIONS_CHARACTERISTICS",
             joinColumns = @JoinColumn(name = "NATIONS_id"),
             inverseJoinColumns = @JoinColumn(name = "CHARACTERISTICS_ID"))
     @JsonProperty("characteristics")
-   // @JoinColumn(name = "nations_id") //TODO CHECK IF THIS IS THE PROBLEM
+    // @JoinColumn(name = "nations_id") //TODO CHECK IF THIS IS THE PROBLEM
     private List<BaseCharacteristic> characteristics;
 
 
-  /** // @ManyToMany
-    //@RestResource(path = "prejudices", rel = "prejudices", exported = false)
-    //@JoinTable(name="NATIONS_PREJUDICES",
-    joinColumns = @JoinColumn(name = "NATIONS_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PREJUDICES_ID"))
-   // @JsonProperty("prejudices")
-    private List<BasePrejudice> prejudices;**/
+    /**
+     * // @ManyToMany
+     * //@RestResource(path = "prejudices", rel = "prejudices", exported = false)
+     * //@JoinTable(name="NATIONS_PREJUDICES",
+     * joinColumns = @JoinColumn(name = "NATIONS_ID"),
+     * inverseJoinColumns = @JoinColumn(name = "PREJUDICES_ID"))
+     * // @JsonProperty("prejudices")
+     * private List<BasePrejudice> prejudices;
+     **/
 
 
     public Nation() {
         super();
-      //  prejudices = new ArrayList<>();
+        //  prejudices = new ArrayList<>();
         characteristics = new ArrayList<>();
     }
 
@@ -60,19 +60,21 @@ public class Nation extends NamedEntityBase implements Serializable {
     }
 
 
-/**   public List<BasePrejudice> getPrejudices() {
-
-        if(prejudices==null) prejudices = new ArrayList<>();
-        return prejudices;
-    }
-
-    public void setPrejudices(List<BasePrejudice> prejudices) {
-        this.prejudices = prejudices;
-    }**/
+    /**
+     * public List<BasePrejudice> getPrejudices() {
+     * <p>
+     * if(prejudices==null) prejudices = new ArrayList<>();
+     * return prejudices;
+     * }
+     * <p>
+     * public void setPrejudices(List<BasePrejudice> prejudices) {
+     * this.prejudices = prejudices;
+     * }
+     **/
 
     public List<BaseCharacteristic> getCharacteristics() {
 
-        if(characteristics == null) characteristics = new ArrayList<>();
+        if (characteristics == null) characteristics = new ArrayList<>();
         return characteristics;
     }
 
@@ -109,7 +111,6 @@ public class Nation extends NamedEntityBase implements Serializable {
                 ", characteristics=" + characteristics +
                 '}';
     }
-
 
 
 }

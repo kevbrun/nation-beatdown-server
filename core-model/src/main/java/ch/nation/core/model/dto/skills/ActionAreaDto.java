@@ -35,7 +35,7 @@ public class ActionAreaDto {
     @JsonProperty("consBlockedTiles")
     private boolean considerBlockedTiles;
 
-    public ActionAreaDto(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis,boolean considerBlockedTiles, ActionShape shape) {
+    public ActionAreaDto(int sizeInXAxis, int sizeInYAxis, int offsetInXAxis, int offsetInYAxis, boolean considerBlockedTiles, ActionShape shape) {
         this.sizeInXAxis = sizeInXAxis;
         this.sizeInYAxis = sizeInYAxis;
         this.offsetInXAxis = offsetInXAxis;

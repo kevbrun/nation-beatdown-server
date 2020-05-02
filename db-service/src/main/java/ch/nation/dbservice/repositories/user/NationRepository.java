@@ -1,7 +1,6 @@
 package ch.nation.dbservice.repositories.user;
 
 import ch.nation.dbservice.entities.user.Nation;
-import ch.nation.dbservice.entities.user.NationMaxResponseProjection;
 import ch.nation.dbservice.repositories.INamedObjectDao;
 import ch.nation.dbservice.repositories.IPageableDao;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

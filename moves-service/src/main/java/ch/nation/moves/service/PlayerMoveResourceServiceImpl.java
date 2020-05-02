@@ -1,21 +1,18 @@
 package ch.nation.moves.service;
 
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.clients.db.playerMoves.DBPlayerMovesRestClient;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
-import ch.nation.core.model.dtoWrapper.SimpleResourcePageDto;
 import ch.nation.core.services.AbstractEntityService;
-import ch.nation.core.clients.db.playerMoves.DBPlayerMovesRestClient;
 import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -1,14 +1,11 @@
 package ch.nation.dbservice.entities.user;
 
-import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;

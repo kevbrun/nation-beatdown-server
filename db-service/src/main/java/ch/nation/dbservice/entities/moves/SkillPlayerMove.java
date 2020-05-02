@@ -1,16 +1,10 @@
 package ch.nation.dbservice.entities.moves;
 
-import ch.nation.dbservice.entities.game.GameUserRuntimeInfo;
 import ch.nation.dbservice.entities.moves.values.BasePlayerMoveValue;
-import ch.nation.dbservice.entities.skills.Skill;
-import ch.nation.dbservice.entities.units.Unit;
-import ch.nation.dbservice.entities.user.User;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 

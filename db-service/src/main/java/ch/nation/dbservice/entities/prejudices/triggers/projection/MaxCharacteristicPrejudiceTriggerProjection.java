@@ -1,7 +1,6 @@
 package ch.nation.dbservice.entities.prejudices.triggers.projection;
 
 import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
-import ch.nation.dbservice.entities.prejudices.BasePrejudice;
 import ch.nation.dbservice.entities.prejudices.triggers.CharacteristicPrejudiceTrigger;
 import ch.nation.dbservice.entities.projection.components.IIdentityProjection;
 import ch.nation.dbservice.entities.projection.users.MinimizedEntityResponseProjection;

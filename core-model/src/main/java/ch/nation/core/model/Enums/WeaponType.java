@@ -2,7 +2,7 @@ package ch.nation.core.model.Enums;
 
 import ch.nation.core.utils.EnumUtilties;
 
-public enum WeaponType implements  IEnumFromValue<WeaponType>{
+public enum WeaponType implements IEnumFromValue<WeaponType> {
     MELEE1H("Melee1H"),
     MELEE2H("Melee2H"),
     MELEEPAIRED("MeleePaired"),
@@ -20,7 +20,7 @@ public enum WeaponType implements  IEnumFromValue<WeaponType>{
 
     @Override
     public WeaponType fromValue(String value) {
-        return EnumUtilties.getEnumFromString(WeaponType.class,value);
+        return EnumUtilties.getEnumFromString(WeaponType.class, value);
     }
 
     @Override

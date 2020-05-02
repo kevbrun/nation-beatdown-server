@@ -1,12 +1,11 @@
 package ch.nation.user.runtime.service;
 
-import ch.nation.core.model.Enums.QueryProjection;
-import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
 import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.core.clients.db.game.DBGameRuntimeInfoRestClient;
+import ch.nation.core.model.Enums.QueryProjection;
+import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.services.AbstractEntityService;
-
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

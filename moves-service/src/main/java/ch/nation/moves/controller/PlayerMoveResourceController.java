@@ -4,7 +4,6 @@ import ch.nation.core.controller.AbstractResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
-
 import ch.nation.core.model.dto.move.SkillPlayerMoveDto;
 import ch.nation.core.services.AbstractEntityService;
 import ch.nation.moves.service.PlayerMoveResourceServiceImpl;

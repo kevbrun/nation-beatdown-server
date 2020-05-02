@@ -1,9 +1,9 @@
 package ch.nation.core.clients.db.game;
 
+import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
-import ch.nation.core.clients.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

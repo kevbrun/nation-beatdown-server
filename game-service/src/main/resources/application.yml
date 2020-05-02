@@ -19,7 +19,8 @@ feign:
 
 
 game:
-  consideration-time: 10
+  rules:
+    consideration-time: 10
 
 
 ---

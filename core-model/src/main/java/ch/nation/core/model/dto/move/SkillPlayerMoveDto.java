@@ -1,6 +1,5 @@
 package ch.nation.core.model.dto.move;
 
-import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

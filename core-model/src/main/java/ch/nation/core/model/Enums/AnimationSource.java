@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum AnimationSource implements IEnumFromValue<AnimationSource> {
-    NONE("None"),ANIMATION_CONTROLLER("Animation_Controller"),FX("FX"),SCRIPT("Script");
+    NONE("None"), ANIMATION_CONTROLLER("Animation_Controller"), FX("FX"), SCRIPT("Script");
 
 
     private String str;
@@ -15,7 +15,7 @@ public enum AnimationSource implements IEnumFromValue<AnimationSource> {
 
     @Override
     public AnimationSource fromValue(String value) {
-        return EnumUtilties.getEnumFromString(AnimationSource.class,value);
+        return EnumUtilties.getEnumFromString(AnimationSource.class, value);
     }
 
     @Override

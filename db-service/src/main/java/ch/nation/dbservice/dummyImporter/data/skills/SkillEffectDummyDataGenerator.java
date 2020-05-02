@@ -95,18 +95,16 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
         effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
-     /**   SkillAnimationInfo info = new SkillAnimationInfo();
-        info.setDuration(3.0f);
-        info.setSource(AnimationSource.SCRIPT);
-        info.setName("SELF_MOVE_ANIMATION");
-        info.setTarget(SkillEffectTarget.CASTER);
-        effect.addAnimInfo(info);**/
+        /**   SkillAnimationInfo info = new SkillAnimationInfo();
+         info.setDuration(3.0f);
+         info.setSource(AnimationSource.SCRIPT);
+         info.setName("SELF_MOVE_ANIMATION");
+         info.setTarget(SkillEffectTarget.CASTER);
+         effect.addAnimInfo(info);**/
         skillEffectRepository.save(effect);
 
 
     }
-
-
 
 
     private void createMoveEffect() {
@@ -203,7 +201,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
     }
 
 
-    private void createHealEffect(){
+    private void createHealEffect() {
         StatSkillEffect skillEffect = new StatSkillEffect();
         skillEffect.setName("Heile (Eigene Enheit)");
         skillEffect.setIdentifier("heal_target_hp");

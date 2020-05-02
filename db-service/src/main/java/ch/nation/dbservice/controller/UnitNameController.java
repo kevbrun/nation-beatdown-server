@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-import java.util.Random;
 
 @RestController()
 @RequestMapping(value = "/name-builder")

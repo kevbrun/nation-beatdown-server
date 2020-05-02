@@ -38,7 +38,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         createPopulism();
     }
 
-//
+    //
     private void createDumbButStrongCharacteristic() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Dumm aber Stark!");
@@ -68,7 +68,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-//
+    //
     private void createFastButLowHealth() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Beweglich aber laut und ungenau");
@@ -84,7 +84,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-//
+    //
     private void createDrunk() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Dauer besoffen!");
@@ -98,7 +98,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         characteristicsRepository.save(statCharacteristic);
     }
 
-//
+    //
     private void createExplosiveCharacteristics() {
         SkillCharacteristic cc = new SkillCharacteristic();
         cc.setName("Explosiver Character");
@@ -114,7 +114,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
 
 
     //
-    private void createLessVitButStr(){
+    private void createLessVitButStr() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Leute mit grosser Schnauze");
         statCharacteristic.setIdentifier("less_str_10_more_vit_15");
@@ -125,8 +125,9 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         statCharacteristic.setDelta(bonus);
         characteristicsRepository.save(statCharacteristic);
     }
-//
-    private void createIntelligent(){
+
+    //
+    private void createIntelligent() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Intelligent");
         statCharacteristic.setIdentifier("more_int_5");
@@ -138,7 +139,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
     //
-    private void createLessStr(){
+    private void createLessStr() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Strength");
         statCharacteristic.setIdentifier("less_str_5");
@@ -150,7 +151,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
     //
-    private void createLessVit(){
+    private void createLessVit() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Fast Food macht träge!");
         statCharacteristic.setIdentifier("less_vit_5");
@@ -162,7 +163,7 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
     }
 
 
-    private void createPopulism(){
+    private void createPopulism() {
         StatCharacteristic statCharacteristic = new StatCharacteristic();
         statCharacteristic.setName("Populism ist sexy");
         statCharacteristic.setIdentifier("more_all_5_less_int_5");
@@ -175,12 +176,9 @@ public class CharacteristicsDummyImporter extends AbstractDummyGenerator<BaseCha
         bonus.setIntBonus(new EmbeddableIntegerBonus(-5, StatModTarget.MAX_VALUE));
 
 
-
         statCharacteristic.setDelta(bonus);
         characteristicsRepository.save(statCharacteristic);
     }
-
-
 
 
 }

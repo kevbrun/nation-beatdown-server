@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SkillAnimationInfoDto implements Serializable {
-        @JsonProperty("effect_path")
-        private String effectPath;
-        @JsonProperty("duration")
-        private float duration;
-        @JsonProperty("anim_target")
-        private SkillEffectTarget target;
+    @JsonProperty("effect_path")
+    private String effectPath;
+    @JsonProperty("duration")
+    private float duration;
+    @JsonProperty("anim_target")
+    private SkillEffectTarget target;
     @JsonProperty("anim_name")
     private String name;
     @JsonProperty("anim_source")
