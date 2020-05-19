@@ -55,7 +55,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setTarget(SkillEffectTarget.TARGET);
         info.setEffectPath("CFX_Hit_A Red+RandomText");
         info.setWeaponType(WeaponType.MELEE1H);
-        effect.addAnimInfo(info);
+  //      effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
     }
@@ -79,7 +79,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setTarget(SkillEffectTarget.TARGET);
         info.setWeaponType(WeaponType.BOW);
 
-        effect.addAnimInfo(info);
+    //    effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
 
@@ -196,7 +196,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setEffectPath("CFX_Hit_A Red+RandomText");
 
         info.setWeaponType(WeaponType.MELEE1H);
-        skillEffect.addAnimInfo(info);
+    //    skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
     }
 

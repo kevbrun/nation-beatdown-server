@@ -98,6 +98,16 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skillRepository.save(skill);
 
 
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("ONE_ROUND_BACK_SKILL");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
+
+
     }
 
     private void createOnSkillBackSkill() throws Exception {
@@ -127,7 +137,14 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.addSkillEffect(effect);
 
         skillRepository.save(skill);
-
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("ONE_SKILL_BACK_SKILL");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
 
     }
 
@@ -201,13 +218,25 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setDescription("Einheit bewegt sich auf eine andere Einheit zu und greift diese an!");
         skill.setCost(50);
         skill.setCurrentCooldownTimer(0);
-        skill.setTarget(Target.ANY_SINGLE);
+        skill.setTarget(Target.ENEMY_SINGLE);
         skill.setSkillBarOrder(9000);
         ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.CROSS, AreaTileStyle.ATTACK_AXE);
         skill.setActionArea(actionArea);
         skill.setIconPath("Skill_standart/Warriorskill_48");
 
+
         SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("STURMANGRIFF");
+        info.setTarget(SkillEffectTarget.CASTER);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
+
+    /*
+     //IMPLEMENTATION OVER ANIMATION_INTERPRETER => ADD IT AGAIN FOR FINAL PRODUCT NOT USED IN MA VERSION
+    SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
         info.setSource(AnimationSource.SCRIPT);
         info.setName("SELF_MOVE_ANIMATION");
@@ -223,14 +252,12 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         info.setTarget(SkillEffectTarget.CASTER);
         info.setWeaponType(WeaponType.MELEE1H);
 
-        skill = skillRepository.save(skill);
+        skill = skillRepository.save(skill);*/
 
-        SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
-        skill.addSkillEffect(effect);
+      /**  SkillEffect effect = skillEffectRepository.findByIdentifier("mv_self");
+        skill.addSkillEffect(effect);**/
 
         skill.addSkillEffect(skillEffectRepository.findByIdentifier("dmg_target_str"));
-
-
         skillRepository.save(skill);
 
 
@@ -249,6 +276,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.ATTACK_AXE);
         skill.setActionArea(actionArea);
         skill.setIconPath("Skill_standart/Archerskill_12");
+
         SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(3.0f);
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
@@ -339,6 +367,16 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
 
+
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("BERSERKER_SKILL");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
+
     }
 
 
@@ -359,6 +397,18 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         SkillEffect effect = skillEffectRepository.findByIdentifier("heal_target_hp");
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
+
+
+
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("HEAL_ONE");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
+
 
 
     }
@@ -382,6 +432,14 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.addSkillEffect(effect);
         skill = skillRepository.save(skill);
 
+        SkillAnimationInfo info = new SkillAnimationInfo();
+        info.setDuration(3.0f);
+        info.setSource(AnimationSource.ANIMATION_CONTROLLER);
+        info.setName("HEAL_GROUP");
+        info.setTarget(SkillEffectTarget.TARGET);
+        info.setWeaponType(WeaponType.MELEE1H);
+        skill.addAnimInfo(info);
+        skill = skillRepository.save(skill);
 
     }
 
