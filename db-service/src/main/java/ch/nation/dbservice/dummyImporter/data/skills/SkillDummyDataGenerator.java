@@ -46,7 +46,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new SelfMoveSkill();
         skill.setName("Bewegung!");
         skill.setIdentifier("mv_self");
-        skill.setDescription("Setzt eigene Einheit in Bewegung");
+        skill.setDescription("Bewege eine Einheit!");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.SELF);
@@ -75,7 +75,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setIdentifier("rev_any_round");
 
         skill.setDescription("Mache alle Züge einer Einheit der letzten Runde rückgängig");
-        skill.setCost(30);
+        skill.setCost(100);
         skill.setCooldown(999);
         skill.setSkillBarOrder(1);
         skill.setTarget(Target.ANY_SINGLE);
@@ -116,7 +116,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setIdentifier("rev_any_action");
 
         skill.setDescription("Mache die letzte Aktion rückgänging!");
-        skill.setCost(30);
+        skill.setCost(60);
         skill.setCooldown(999);
         skill.setSkillBarOrder(2);
         skill.setTarget(Target.ANY_SINGLE);
@@ -181,7 +181,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new Skill();
         skill.setName("Nahkampf!");
         skill.setIdentifier("dmg_target_str");
-        skill.setDescription("Deine eigene Einheit greift langweilig im Nahkampf an");
+        skill.setDescription("Eine langweilige Standardattacke.");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
@@ -268,7 +268,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Fernkampf!");
         skill.setIdentifier("dmg-range_target_str");
 
-        skill.setDescription("Deine eigene Einheit greift langweilig im Fernkampf an");
+        skill.setDescription("Einfacher und langweiliger Fernkampf.");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
