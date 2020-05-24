@@ -250,7 +250,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         info.setSource(AnimationSource.ANIMATION_CONTROLLER);
         info.setName("WEAPON_ATTACK");
         info.setTarget(SkillEffectTarget.CASTER);
-        info.setWeaponType(WeaponType.MELEE1H);
+        info.setWeaponType(WeaponType.MELEE1H);ex
 
         skill = skillRepository.save(skill);*/
 
@@ -350,9 +350,9 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
     private void createSelfExplosion() {
         Skill skill = new Skill();
-        skill.setName("Berserker!");
+        skill.setName("Wutausbruch!");
         skill.setIdentifier("dmg_expl_target_hp");
-        skill.setDescription("Einheit explodiert vor Wut!");
+        skill.setDescription("Setzt alle Einheiten im Bereich in Brand.");
         skill.setCost(0);
         skill.setCooldown(10000);
         skill.setSkillBarOrder(9999);
