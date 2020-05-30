@@ -46,7 +46,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new SelfMoveSkill();
         skill.setName("Bewegung!");
         skill.setIdentifier("mv_self");
-        skill.setDescription("Bewege eine Einheit!");
+        skill.setDescription("Bewege die Einheit über das Feld!");
+
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.SELF);
@@ -74,7 +75,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Auf Anfang!");
         skill.setIdentifier("rev_any_round");
 
-        skill.setDescription("Mache alle Züge einer Einheit der letzten Runde rückgängig");
+        skill.setDescription("Mache alle Züge einer Einheit der letzten Runde rückgängig!");
         skill.setCost(100);
         skill.setCooldown(999);
         skill.setSkillBarOrder(1);
@@ -112,10 +113,9 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
 
     private void createOnSkillBackSkill() throws Exception {
         Skill skill = new Skill();
-        skill.setName("Nope!");
+        skill.setName("Zurück!");
         skill.setIdentifier("rev_any_action");
-
-        skill.setDescription("Mache die letzte Aktion rückgänging!");
+        skill.setDescription("Mache die letzte Aktion einer Einheit rückgänging!");
         skill.setCost(60);
         skill.setCooldown(999);
         skill.setSkillBarOrder(2);
@@ -181,7 +181,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new Skill();
         skill.setName("Nahkampf!");
         skill.setIdentifier("dmg_target_str");
-        skill.setDescription("Eine langweilige Standardattacke.");
+        skill.setDescription("Eine langweilige Standardattacke!");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
@@ -215,7 +215,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new Skill();
         skill.setName("Volles Pfund aufs Maul!");
         skill.setIdentifier("move-caster_target_str");
-        skill.setDescription("Einheit bewegt sich auf eine andere Einheit zu und greift diese an!");
+        skill.setDescription("Einheit rennt auf Gegner zu und greift diesen an!");
         skill.setCost(50);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
@@ -268,7 +268,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Fernkampf!");
         skill.setIdentifier("dmg-range_target_str");
 
-        skill.setDescription("Einfacher und langweiliger Fernkampf.");
+        skill.setDescription("Einfacher und langweiliger Fernkampf!");
         skill.setCost(20);
         skill.setCurrentCooldownTimer(0);
         skill.setTarget(Target.ENEMY_SINGLE);
@@ -303,7 +303,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Reset AP");
         skill.setIdentifier("reset_caster_ap");
 
-        skill.setDescription("Setze AP auf Max Wert");
+        skill.setDescription("Setze AP auf Max Wert!");
         skill.setCost(0);
         skill.setCurrentCooldownTimer(0);
         skill.setCooldown(0);
@@ -352,7 +352,7 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         Skill skill = new Skill();
         skill.setName("Wutausbruch!");
         skill.setIdentifier("dmg_expl_target_hp");
-        skill.setDescription("Setzt alle Einheiten im Bereich in Brand.");
+        skill.setDescription("Deine Wut lässt dich und alle Gegner im Bereich explodieren!");
         skill.setCost(0);
         skill.setCooldown(10000);
         skill.setSkillBarOrder(9999);
