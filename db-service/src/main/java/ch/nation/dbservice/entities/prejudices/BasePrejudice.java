@@ -1,18 +1,10 @@
 package ch.nation.dbservice.entities.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.NationRessource;
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
-import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
-import ch.nation.dbservice.entities.characteristics.StatCharacteristic;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.prejudices.triggers.BasePrejudiceTrigger;
-import ch.nation.dbservice.entities.user.Nation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -44,24 +36,25 @@ public class BasePrejudice extends NationRessource implements IDiscrimantorValue
     @JsonProperty("triggers")
     @ManyToMany(fetch = FetchType.LAZY)
     @RestResource(path = "triggers", rel = "triggers")
- /**   @JoinTable(name="PREJUDICE_PREJUDICE_TRIGGERS",
-            joinColumns=@JoinColumn(name="BASEPREJUDICE_ID"),
-            inverseJoinColumns=@JoinColumn(name="BASEPREJUDICETRIGGER_ID"))**/
+    /**   @JoinTable(name="PREJUDICE_PREJUDICE_TRIGGERS", joinColumns=@JoinColumn(name="BASEPREJUDICE_ID"),
+    inverseJoinColumns=@JoinColumn(name="BASEPREJUDICETRIGGER_ID"))**/
     private List<BasePrejudiceTrigger> prejudiceTriggers;
 
     @JsonProperty("operation")
     @Enumerated(EnumType.STRING)
     private PrejudiceOperator triggerOperation;
 
- /** //  @RestResource(path = "nations", rel = "nations")
-    //@ManyToMany(mappedBy = "prejudices")
-    //@JsonIgnore
-    private List<Nation> nations;**/
+    /**
+     * //  @RestResource(path = "nations", rel = "nations")
+     * //@ManyToMany(mappedBy = "prejudices")
+     * //@JsonIgnore
+     * private List<Nation> nations;
+     **/
 
     public BasePrejudice() {
         super();
         prejudiceTriggers = new ArrayList<>();
-    //    nations  = new ArrayList<>();
+        //    nations  = new ArrayList<>();
     }
 
     public List<BasePrejudiceTrigger> getPrejudiceTriggers() {
@@ -80,16 +73,17 @@ public class BasePrejudice extends NationRessource implements IDiscrimantorValue
         this.triggerOperation = triggerOperation;
     }
 
-  /**  public List<Nation> getNations() {
-        return nations;
-    }
-
-    public void setNations(List<Nation> nations) {
-        this.nations = nations;
-    }**/
+    /**
+     * public List<Nation> getNations() {
+     * return nations;
+     * }
+     * <p>
+     * public void setNations(List<Nation> nations) {
+     * this.nations = nations;
+     * }
+     **/
 
 //Assication
-
     public void addTrigger(BasePrejudiceTrigger trigger) {
         if (!getPrejudiceTriggers().contains(trigger)) {
             getPrejudiceTriggers().add(trigger);

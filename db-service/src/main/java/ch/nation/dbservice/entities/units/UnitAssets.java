@@ -2,7 +2,8 @@ package ch.nation.dbservice.entities.units;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
@@ -145,8 +146,12 @@ public class UnitAssets {
     @Column(name = "width")
     private float width;
 
-    public UnitAssets() {
+    @JsonProperty("rem_mouth")
+    @Column(name = "remove_mouth")
+    private boolean removeMouth;
 
+    public UnitAssets() {
+        removeMouth = false;
         skinColorRed = 255f;
         skinColorGreen = 190f;
         skinColorBlue = 120f;
@@ -155,35 +160,21 @@ public class UnitAssets {
         height = 0.1f;
     }
 
-    public UnitAssets(String beard, String shield, String expressionDefaultMouth, String expressionDefaultEyebrows, String expressionDeadEyes, String expressionDefaultEyes, String helmet, String armor, String back, String expressionAngryEyebrows, String body, String ears, String hair, String firearmParams, String head, String expressionAngryMouth, String mask, String bow, String firearms, String cape, String expressionDeadMouth, String expression, String weaponType, String glasses, String primaryMeleeWeapon, String secondaryMeleeWeapon, String expressionAngryEyes, String expressionDeadEyebrows) {
-        this.beard = beard;
-        this.shield = shield;
-        this.expressionDefaultMouth = expressionDefaultMouth;
-        this.expressionDefaultEyebrows = expressionDefaultEyebrows;
-        this.expressionDeadEyes = expressionDeadEyes;
-        this.expressionDefaultEyes = expressionDefaultEyes;
-        this.helmet = helmet;
-        this.armor = armor;
-        this.back = back;
-        this.expressionAngryEyebrows = expressionAngryEyebrows;
-        this.body = body;
-        this.ears = ears;
-        this.hair = hair;
-        this.firearmParams = firearmParams;
-        this.head = head;
-        this.expressionAngryMouth = expressionAngryMouth;
-        this.mask = mask;
-        this.bow = bow;
-        this.firearms = firearms;
-        this.cape = cape;
-        this.expressionDeadMouth = expressionDeadMouth;
-        this.expression = expression;
-        this.weaponType = weaponType;
-        this.glasses = glasses;
-        this.primaryMeleeWeapon = primaryMeleeWeapon;
-        this.secondaryMeleeWeapon = secondaryMeleeWeapon;
-        this.expressionAngryEyes = expressionAngryEyes;
-        this.expressionDeadEyebrows = expressionDeadEyebrows;
+
+    public float getSkinColorAlpha() {
+        return skinColorAlpha;
+    }
+
+    public void setSkinColorAlpha(float skinColorAlpha) {
+        this.skinColorAlpha = skinColorAlpha;
+    }
+
+    public boolean isRemoveMouth() {
+        return removeMouth;
+    }
+
+    public void setRemoveMouth(boolean removeMouth) {
+        this.removeMouth = removeMouth;
     }
 
     public void setBeard(String beard) {

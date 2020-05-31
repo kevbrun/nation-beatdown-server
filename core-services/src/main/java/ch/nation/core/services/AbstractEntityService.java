@@ -1,15 +1,13 @@
 package ch.nation.core.services;
 
 import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
+import ch.nation.core.clients.db.utils.MessageUtils;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
 import ch.nation.core.model.interf.services.GenericCRUDDao;
-
-
-import ch.nation.core.clients.db.utils.MessageUtils;
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
@@ -18,7 +16,10 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class AbstractEntityService<TResult, TInput extends AbstractDto> implements GenericCRUDDao<TResult, TInput> {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());

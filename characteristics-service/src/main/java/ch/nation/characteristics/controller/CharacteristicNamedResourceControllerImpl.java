@@ -1,12 +1,12 @@
 package ch.nation.characteristics.controller;
 
 
+import ch.nation.characteristics.services.BaseCharacteristicResourceServiceImpl;
+import ch.nation.characteristics.services.CharacteristicResourceService;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.controller.interfaces.CharacteristicResourceController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
-import ch.nation.characteristics.services.BaseCharacteristicResourceServiceImpl;
-import ch.nation.characteristics.services.CharacteristicResourceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

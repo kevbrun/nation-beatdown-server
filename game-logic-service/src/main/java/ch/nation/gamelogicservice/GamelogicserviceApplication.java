@@ -1,7 +1,7 @@
 package ch.nation.gamelogicservice;
 
-import ch.nation.core.clients.config.IncomingRequestLoggingConfiguration;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.config.IncomingRequestLoggingConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

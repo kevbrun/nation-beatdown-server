@@ -5,7 +5,9 @@ import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.WeaponType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Objects;
 
 //@Table(name = "SKILL_EFFECTS_ANIM")
@@ -14,25 +16,25 @@ import java.util.Objects;
 public class SkillAnimationInfo {
 
 
-        @JsonProperty("anim_name")
-        private String name;
-        @JsonProperty("effect_path")
-        private String effectPath;
-        @JsonProperty("duration")
-        private float duration;
-        @JsonProperty("anim_target")
-        @Enumerated(EnumType.STRING)
-        private SkillEffectTarget target;
-        @JsonProperty("anim_source")
-        @Enumerated(EnumType.STRING)
-        private AnimationSource source;
+    @JsonProperty("anim_name")
+    private String name;
+    @JsonProperty("effect_path")
+    private String effectPath;
+    @JsonProperty("duration")
+    private float duration;
+    @JsonProperty("anim_target")
+    @Enumerated(EnumType.STRING)
+    private SkillEffectTarget target;
+    @JsonProperty("anim_source")
+    @Enumerated(EnumType.STRING)
+    private AnimationSource source;
 
-        @JsonProperty("anim_weapon")
-        @Enumerated(EnumType.STRING)
-        private WeaponType weaponType;
+    @JsonProperty("anim_weapon")
+    @Enumerated(EnumType.STRING)
+    private WeaponType weaponType;
 
     public SkillAnimationInfo() {
-        effectPath="";
+        effectPath = "";
         duration = 0.0f;
         target = SkillEffectTarget.NONE;
         source = AnimationSource.NONE;

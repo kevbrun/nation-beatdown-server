@@ -18,6 +18,9 @@ feign:
         readTimeout: 50000
 
 
+game:
+  rules:
+    consideration-time: 10
 
 
 ---

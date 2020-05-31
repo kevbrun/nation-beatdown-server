@@ -3,9 +3,6 @@ package ch.nation.core.model.dto.prejudices;
 
 import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
-import ch.nation.core.model.dto.characteristics.BaseCharacteristicDto;
-import ch.nation.core.model.dto.characteristics.SkillCharacteristicsDto;
-import ch.nation.core.model.dto.characteristics.StatCharacteristicsDto;
 import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

@@ -1,12 +1,9 @@
 package ch.nation.rest.logic.controller;
 
-import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
 import ch.nation.core.model.position.Vector3Int;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

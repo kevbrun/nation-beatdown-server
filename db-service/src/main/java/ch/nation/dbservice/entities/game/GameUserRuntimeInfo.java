@@ -4,8 +4,6 @@ import ch.nation.core.model.position.IVector3;
 import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
-import ch.nation.dbservice.entities.moves.SkillPlayerMove;
-import ch.nation.dbservice.entities.vectors.EmbeddableVector3Int;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.rest.core.annotation.RestResource;

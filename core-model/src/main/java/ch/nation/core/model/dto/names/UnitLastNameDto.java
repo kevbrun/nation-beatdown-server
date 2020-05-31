@@ -1,6 +1,5 @@
 package ch.nation.core.model.dto.names;
 
-import ch.nation.core.model.Enums.Sex;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UnitLastNameDto {

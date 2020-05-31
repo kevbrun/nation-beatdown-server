@@ -34,6 +34,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         createResetAPSkillEffect();
         createResetHPSkillEffect();
         createSelfDamageEffect();
+        createHealEffect();
         LOGGER.info("START MIGRATING SKILL EFFEFCTS");
     }
 
@@ -54,7 +55,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setTarget(SkillEffectTarget.TARGET);
         info.setEffectPath("CFX_Hit_A Red+RandomText");
         info.setWeaponType(WeaponType.MELEE1H);
-        effect.addAnimInfo(info);
+  //      effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
     }
@@ -78,7 +79,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setTarget(SkillEffectTarget.TARGET);
         info.setWeaponType(WeaponType.BOW);
 
-        effect.addAnimInfo(info);
+    //    effect.addAnimInfo(info);
         skillEffectRepository.save(effect);
 
 
@@ -94,16 +95,17 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         effect.setTypeUsedForCalculation(StatType.ACTION_POINTS);
         effect.setApplyCalculationOnStat(StatType.NONE);
         effect.setEffectTarget(SkillEffectTarget.CASTER);
-     /**   SkillAnimationInfo info = new SkillAnimationInfo();
-        info.setDuration(3.0f);
-        info.setSource(AnimationSource.SCRIPT);
-        info.setName("SELF_MOVE_ANIMATION");
-        info.setTarget(SkillEffectTarget.CASTER);
-        effect.addAnimInfo(info);**/
+        /**   SkillAnimationInfo info = new SkillAnimationInfo();
+         info.setDuration(3.0f);
+         info.setSource(AnimationSource.SCRIPT);
+         info.setName("SELF_MOVE_ANIMATION");
+         info.setTarget(SkillEffectTarget.CASTER);
+         effect.addAnimInfo(info);**/
         skillEffectRepository.save(effect);
 
 
     }
+
 
     private void createMoveEffect() {
         SkillEffect effect = new SkillEffect();
@@ -194,10 +196,22 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         info.setEffectPath("CFX_Hit_A Red+RandomText");
 
         info.setWeaponType(WeaponType.MELEE1H);
-        skillEffect.addAnimInfo(info);
+    //    skillEffect.addAnimInfo(info);
         skillEffectRepository.save(skillEffect);
+    }
 
 
+    private void createHealEffect() {
+        StatSkillEffect skillEffect = new StatSkillEffect();
+        skillEffect.setName("Heile (Eigene Enheit)");
+        skillEffect.setIdentifier("heal_target_hp");
+
+        skillEffect.setDescription("Heilt jemand");
+        skillEffect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
+        skillEffect.setResultIsNegative(false);
+        skillEffect.setEffectTarget(SkillEffectTarget.TARGET);
+        skillEffect.setTypeUsedForCalculation(StatType.INTELIGENCE);
+        skillEffectRepository.save(skillEffect);
     }
 
 }

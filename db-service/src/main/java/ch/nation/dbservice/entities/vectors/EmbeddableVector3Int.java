@@ -1,7 +1,6 @@
 package ch.nation.dbservice.entities.vectors;
 
 import ch.nation.core.model.position.IVector3;
-import ch.nation.core.model.position.Vector3Int;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;

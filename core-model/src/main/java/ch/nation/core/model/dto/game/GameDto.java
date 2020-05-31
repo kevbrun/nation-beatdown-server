@@ -2,18 +2,11 @@ package ch.nation.core.model.dto.game;
 
 import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.user.UserDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.catalina.User;
-import org.springframework.data.rest.core.annotation.RestResource;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class GameDto extends NamedObjectAbstractDto {
 

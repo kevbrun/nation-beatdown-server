@@ -1,6 +1,6 @@
 package ch.nation.core.model.dto;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 

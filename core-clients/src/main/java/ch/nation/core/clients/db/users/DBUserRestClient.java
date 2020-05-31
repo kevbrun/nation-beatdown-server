@@ -1,9 +1,9 @@
 package ch.nation.core.clients.db.users;
 
 
-import ch.nation.core.model.dto.user.UserDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.model.dto.user.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 

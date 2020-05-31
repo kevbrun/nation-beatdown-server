@@ -1,10 +1,8 @@
 package ch.nation.core.model.dtoWrapper;
 
 import ch.nation.core.model.dto.AbstractDto;
-import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.PagedResources;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -4,8 +4,6 @@ import ch.nation.core.model.Enums.SkillEffectTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.List;
 
@@ -39,7 +37,6 @@ public class AbstractSkillEffectDto extends NamedObjectAbstractDto {
     private boolean resultIsNegative;
     @JsonProperty("animations")
     private List<SkillAnimationInfoDto> info;
-
 
 
     public AbstractSkillEffectDto(SkillEffectTarget effectTarget, StatType typeUsedForCalculation, StatType applyCalculationOnStat, boolean resultIsNegative) {

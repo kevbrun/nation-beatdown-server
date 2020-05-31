@@ -1,12 +1,11 @@
 package ch.nation.core.clients.db.playerMoves;
 
+import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
-import ch.nation.core.clients.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,12 +1,11 @@
 package ch.nation.dbservice;
 
-import ch.nation.dbservice.config.DBFlywayConfiguration;
 import ch.nation.core.config.security.HashEncoderConfig;
+import ch.nation.dbservice.config.DBFlywayConfiguration;
 import ch.nation.dbservice.config.IncomingRequestLoggingConfiguration;
 import ch.nation.dbservice.config.SpringDataConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;

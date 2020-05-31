@@ -1,16 +1,13 @@
 package ch.nation.dbservice.entities.prejudices;
 
-import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.dbservice.entities.bonus.StatBonusDelta;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
-import ch.nation.dbservice.entities.prejudices.triggers.BasePrejudiceTrigger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "STAT_PREJUDICE")

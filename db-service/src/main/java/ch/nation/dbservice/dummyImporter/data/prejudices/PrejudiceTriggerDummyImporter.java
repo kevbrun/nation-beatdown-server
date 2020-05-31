@@ -122,7 +122,7 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         statPrejudiceTriggerRepository.save(trigger);
     }
 
-    private void createNoneTrigger(){
+    private void createNoneTrigger() {
         StatPrejudiceTrigger trigger = new StatPrejudiceTrigger();
         trigger.setName("None");
         trigger.setIdentifier("char_none");
@@ -132,7 +132,6 @@ public class PrejudiceTriggerDummyImporter extends AbstractDummyGenerator<Prejud
         trigger.setStatType(StatType.NONE);
         statPrejudiceTriggerRepository.save(trigger);
     }
-
 
 
 }

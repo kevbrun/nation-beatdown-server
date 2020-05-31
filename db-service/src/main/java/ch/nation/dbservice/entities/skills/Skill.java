@@ -1,16 +1,18 @@
 package ch.nation.dbservice.entities.skills;
 
 
+import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.characteristics.SkillCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
-import ch.nation.core.model.Enums.Target;
 import ch.nation.dbservice.entities.prejudices.SkillPrejudice;
 import ch.nation.dbservice.entities.skills.effects.SkillAnimationInfo;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -59,13 +61,18 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     @Enumerated(EnumType.STRING)
     private Target target;
 
+    @JsonProperty("icon_path")
+    @Column(name = "icon_path")
+    private String iconPath;
+
 
     @ManyToMany(mappedBy = "skills", fetch = FetchType.EAGER)
     @JsonProperty("clazz")
     private List<CharacterClass> characterClasses;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    // @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(
             name = "SKILL_SKILL_EFFECTS",
@@ -101,11 +108,10 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
     @JsonProperty("animations")
     @ElementCollection
     @CollectionTable(
-            name="SKILL_ANIMATION_INFO",
-            joinColumns=@JoinColumn(name="ANIM_ID")
+            name = "SKILL_ANIMATION_INFO",
+            joinColumns = @JoinColumn(name = "ANIM_ID")
     )
     private List<SkillAnimationInfo> info;
-
 
 
     public Skill() {
@@ -114,6 +120,13 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
 
     }
 
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
 
     public List<SkillAnimationInfo> getInfo() {
         return info;
@@ -208,6 +221,7 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
         return characterClasses;
     }
 
+
     public void setCharacterClasses(List<CharacterClass> characterClasses) {
         this.characterClasses = characterClasses;
     }
@@ -227,18 +241,18 @@ public class Skill extends NationRessource implements IDiscrimantorValue {
         return actions;
     }
 
-    public void addAnimInfo(SkillAnimationInfo info){
-        if(this.getInfo()==null) setInfo(new ArrayList<SkillAnimationInfo>());
+    public void addAnimInfo(SkillAnimationInfo info) {
+        if (this.getInfo() == null) setInfo(new ArrayList<SkillAnimationInfo>());
 
-        if(info!=null){
+        if (info != null) {
             getInfo().add(info);
         }
 
     }
 
 
-    public void removeAnimInfo(SkillAnimationInfo info){
-        if(this.getInfo()!=null && this.getInfo().size()>0){
+    public void removeAnimInfo(SkillAnimationInfo info) {
+        if (this.getInfo() != null && this.getInfo().size() > 0) {
             this.getInfo().remove(info);
         }
     }

@@ -3,7 +3,6 @@ package ch.nation.dbservice.entities.moves;
 import ch.nation.dbservice.entities.AbstractEntityTest;
 import ch.nation.dbservice.entities.IHasDiscriminatorValue;
 import ch.nation.dbservice.entities.units.Unit;
-import ch.nation.dbservice.repositories.moves.IMoveFind;
 import ch.nation.dbservice.repositories.moves.PlayerMoveRepository;
 import ch.nation.dbservice.repositories.units.UnitRepository;
 import ch.nation.dbservice.repositories.user.UserRepository;

@@ -1,12 +1,14 @@
 package ch.nation.dbservice.entities.moves.values;
 
 
-import ch.nation.core.model.Enums.StatModTarget;
 import ch.nation.core.model.Enums.StatType;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Objects;
 
 @DiscriminatorValue("STAT")

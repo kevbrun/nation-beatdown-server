@@ -1,12 +1,10 @@
 package ch.nation.core.clients.services.moves;
 
 import ch.nation.core.clients.config.FeignClientConfig;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.services.BaseServiceRestClientInterface;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.dto.move.BasePlayerMoveDto;
-import ch.nation.core.model.dto.user.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

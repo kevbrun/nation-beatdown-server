@@ -1,6 +1,5 @@
 package ch.nation.dbservice.repositories.characteristics;
 
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.characteristics.StatCharacteristic;
 import ch.nation.dbservice.entities.characteristics.projection.StatCharacteristicDefaultProjection;
 import ch.nation.dbservice.repositories.IFindByIdentifier;

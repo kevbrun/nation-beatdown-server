@@ -1,13 +1,10 @@
 package ch.nation.dbservice.entities;
 
-import ch.nation.dbservice.entities.AbstractEntityTest;
-import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.repositories.IPageableDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 

@@ -1,14 +1,11 @@
 package ch.nation.dbservice.entities.user;
 
-import ch.nation.dbservice.entities.AbstractNationEntityBase;
 import ch.nation.dbservice.entities.NamedEntityBase;
 import ch.nation.dbservice.entities.game.Game;
 import ch.nation.dbservice.entities.moves.BasePlayerMove;
 import ch.nation.dbservice.entities.units.Unit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
@@ -48,6 +45,13 @@ public class User extends NamedEntityBase implements Serializable {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "lost")
+    @JsonProperty("lost")
+    private int countOfLoosedGames;
+
+    @Column(name = "won")
+    @JsonProperty("won")
+    private int countOfWonGames;
 
     public User() {
 
@@ -56,6 +60,8 @@ public class User extends NamedEntityBase implements Serializable {
         games = new ArrayList<>();
         units = new ArrayList<>();
         role = "USER";
+        countOfLoosedGames = 0;
+        countOfLoosedGames = 0;
 
 
     }
@@ -78,6 +84,21 @@ public class User extends NamedEntityBase implements Serializable {
 
     }
 
+    public int getCountOfLoosedGames() {
+        return countOfLoosedGames;
+    }
+
+    public void setCountOfLoosedGames(int countOfLoosedGames) {
+        this.countOfLoosedGames = countOfLoosedGames;
+    }
+
+    public int getCountOfWonGames() {
+        return countOfWonGames;
+    }
+
+    public void setCountOfWonGames(int countOfWonGames) {
+        this.countOfWonGames = countOfWonGames;
+    }
 
     public String getRole() {
         return role;

@@ -1,6 +1,5 @@
 package ch.nation.dbservice.repositories.clazzes;
 
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.repositories.IFindByIdentifier;
 import ch.nation.dbservice.repositories.INamedObjectDao;

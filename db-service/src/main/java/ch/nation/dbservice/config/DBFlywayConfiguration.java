@@ -1,16 +1,6 @@
 package ch.nation.dbservice.config;
 
-import ch.nation.dbservice.utils.SpringUtility;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.flyway.*;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.ResourceLoader;
-
-import javax.sql.DataSource;
 //https://stackoverflow.com/questions/48214783/flyway-spring-boot-autowired-beans-with-jpa-dependency
 
 @Configuration

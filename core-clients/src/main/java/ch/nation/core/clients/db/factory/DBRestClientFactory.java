@@ -2,8 +2,8 @@ package ch.nation.core.clients.db.factory;
 
 
 import ch.nation.core.clients.db.DBRestServiceBaseInterface;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

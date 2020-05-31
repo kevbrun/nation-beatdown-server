@@ -1,6 +1,5 @@
 package ch.nation.dbservice.repositories.skills.effects;
 
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.entities.skills.effects.SkillEffect;
 import ch.nation.dbservice.repositories.IFindByIdentifier;
 import ch.nation.dbservice.repositories.INamedObjectDao;

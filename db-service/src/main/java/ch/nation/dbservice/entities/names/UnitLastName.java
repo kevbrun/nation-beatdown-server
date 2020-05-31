@@ -1,7 +1,5 @@
 package ch.nation.dbservice.entities.names;
 
-import ch.nation.core.model.Enums.Sex;
-import ch.nation.dbservice.entities.SimpleIdEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 

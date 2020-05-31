@@ -1,10 +1,10 @@
 package ch.nation.user.runtime.controller;
 
 import ch.nation.core.controller.AbstractResourceGameLogicController;
+import ch.nation.core.model.Enums.GameStatus;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.game.GameUserRuntimeInfoDto;
-
 import ch.nation.user.runtime.service.GameUserRuntimeInfoServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,6 +91,17 @@ public class GameUserRuntimeInfoController extends AbstractResourceGameLogicCont
         GameUserRuntimeInfoDto dto = ((GameUserRuntimeInfoServiceImpl) service).getUserRuntimeInfoByGameUuidAndByPlayerUuid(gameUUid, playerUUid, projection).get();
         return new ResponseEntity<>(dto, HttpStatus.OK);
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/countByPlayerAndStatus")
+    public ResponseEntity<Long> getCountOfGamesByPlayerUuidAndGameStatus(@RequestParam("playerUuid")String playerUuid, @RequestParam("status") GameStatus status){
+        return ResponseEntity.ok(((GameUserRuntimeInfoServiceImpl) service).getCountOfGamesByUserUuidAndGameStatus(playerUuid,status));
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/countRunningGamesByPlayer")
+    public ResponseEntity<Long> getCountOfGamesByPlayerUuidAndGameStatus(@RequestParam("playerUuid")String playerUuid){
+        return ResponseEntity.ok(((GameUserRuntimeInfoServiceImpl) service).getCountOfGamesByUserUuidAndGameStatus(playerUuid,GameStatus.InProgress));
     }
 
     @Override

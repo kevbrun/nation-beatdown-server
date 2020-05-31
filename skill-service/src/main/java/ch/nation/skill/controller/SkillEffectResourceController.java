@@ -3,10 +3,9 @@ package ch.nation.skill.controller;
 import ch.nation.core.controller.AbstractNamedResourceGameLogicController;
 import ch.nation.core.model.Enums.QueryProjection;
 import ch.nation.core.model.dto.skills.effects.SkillEffectDto;
-import ch.nation.core.services.AbstractNamedEntityService;
 import ch.nation.skill.service.effects.SkillEffectsResourceServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 

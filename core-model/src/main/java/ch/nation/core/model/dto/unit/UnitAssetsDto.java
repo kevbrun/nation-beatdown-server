@@ -106,10 +106,21 @@ public class UnitAssetsDto extends AbstractAssetsDto {
     @JsonProperty("width")
     private float width;
 
+    @JsonProperty("rem_mouth")
+    private boolean removeMouth;
+
 
     public UnitAssetsDto() {
     }
 
+
+    public boolean isRemoveMouth() {
+        return removeMouth;
+    }
+
+    public void setRemoveMouth(boolean removeMouth) {
+        this.removeMouth = removeMouth;
+    }
 
     public String getBeard() {
         return beard;

@@ -2,14 +2,10 @@ package ch.nation.dbservice.entities.prejudices.triggers;
 
 import ch.nation.dbservice.entities.AbstractEntityTest;
 import ch.nation.dbservice.entities.IHasDiscriminatorValue;
-import ch.nation.dbservice.entities.characteristics.BaseCharacteristic;
 import ch.nation.dbservice.repositories.characteristics.CharacteristicsRepository;
 import ch.nation.dbservice.repositories.prejudices.triggers.CharacteristicPrejudiceTriggerRepository;
 import org.junit.Assert;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.transaction.Transactional;
 
 public class BaseCharacteristicDtoPrejudiceTriggerTest extends AbstractEntityTest<CharacteristicPrejudiceTrigger, CharacteristicPrejudiceTriggerRepository> implements IHasDiscriminatorValue {
 

@@ -12,5 +12,10 @@ public interface UserMinResponseProjection extends MinimizedEntityResponseProjec
     @JsonProperty("role")
     String getRole();
 
+    @JsonProperty("lost")
+    public int getCountOfLoosedGames();
+
+    @JsonProperty("won")
+    public int getCountOfWonGames();
 
 }

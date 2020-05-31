@@ -1,6 +1,5 @@
 package ch.nation.core.model.dto.prejudices;
 
-import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.dto.skills.SkillDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,5 @@
 package ch.nation.core.model.dto.prejudices.triggers;
 
-import ch.nation.core.model.dto.NamedObjectAbstractDto;
 import ch.nation.core.model.dto.characteristics.AbstractCharacteristicsDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

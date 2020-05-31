@@ -1,5 +1,7 @@
 package ch.nation.units.services;
 
+import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
+import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.core.clients.db.names.DBNameBuilderRestClient;
 import ch.nation.core.clients.db.names.DBUnitFirstNameRestClient;
 import ch.nation.core.clients.db.names.DBUnitLastNameRestClient;
@@ -7,8 +9,6 @@ import ch.nation.core.model.dto.names.UnitCompleteNameDto;
 import ch.nation.core.model.dto.names.UnitFirstNameDto;
 import ch.nation.core.model.dto.names.UnitLastNameDto;
 import ch.nation.core.model.dto.unit.UnitDto;
-import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
-import ch.nation.core.clients.db.factory.DBRestClientFactory;
 import ch.nation.core.services.AbstractMassNamedEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

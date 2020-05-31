@@ -1,8 +1,8 @@
 package ch.nation.core.clients.db.playerMoves.values;
 
-import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
-import ch.nation.core.clients.db.DBRestServiceBaseInterface;
 import ch.nation.core.clients.config.FeignClientConfig;
+import ch.nation.core.clients.db.DBRestServiceBaseInterface;
+import ch.nation.core.model.dto.move.values.StatSkillPlayerMoveSkillValueDto;
 import org.springframework.cloud.openfeign.FeignClient;
 
 

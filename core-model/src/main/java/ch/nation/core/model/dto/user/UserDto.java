@@ -24,15 +24,37 @@ public class UserDto extends NamedObjectAbstractDto implements Serializable {
     @JsonProperty("role")
     private String role;
 
+    @JsonProperty("won")
+    private int countOfWonGames;
+
+    @JsonProperty("lost")
+    private int countOfLostGames;
 
     public UserDto() {
     }
+
 
     @Override
     public String ResourceCollectionName() {
         return "users";
     }
 
+
+    public int getCountOfWonGames() {
+        return countOfWonGames;
+    }
+
+    public void setCountOfWonGames(int countOfWonGames) {
+        this.countOfWonGames = countOfWonGames;
+    }
+
+    public int getCountOfLostGames() {
+        return countOfLostGames;
+    }
+
+    public void setCountOfLostGames(int countOfLostGames) {
+        this.countOfLostGames = countOfLostGames;
+    }
 
     public String getPassword() {
         return password;

@@ -1,18 +1,13 @@
 package ch.nation.core.services;
 
 
-import ch.nation.core.model.Enums.QueryProjection;
-import ch.nation.core.model.dto.NamedObjectAbstractDto;
-import ch.nation.core.model.dtoWrapper.SimpleResourceDto;
-import ch.nation.core.model.interf.services.GenericFindByNameService;
 import ch.nation.core.clients.db.factory.DBMassRestClientFactory;
 import ch.nation.core.clients.db.factory.DBRestClientFactory;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
-import org.springframework.http.ResponseEntity;
+import ch.nation.core.model.Enums.QueryProjection;
+import ch.nation.core.model.dto.NamedObjectAbstractDto;
+import ch.nation.core.model.interf.services.GenericFindByNameService;
 
-
-import java.util.*;
+import java.util.Optional;
 
 public abstract class AbstractNamedEntityService<TResult, TInput extends NamedObjectAbstractDto> extends AbstractEntityService<TResult, TInput> implements GenericFindByNameService<TResult> {
 

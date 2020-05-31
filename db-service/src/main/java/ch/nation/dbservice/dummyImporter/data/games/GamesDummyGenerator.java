@@ -10,8 +10,6 @@ import ch.nation.dbservice.repositories.game.GameUserRuntimeRepository;
 import ch.nation.dbservice.repositories.user.UserRepository;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class GamesDummyGenerator extends AbstractDummyGenerator {
 

@@ -1,17 +1,13 @@
 package ch.nation.dbservice.entities.prejudices.triggers;
 
 
-import ch.nation.dbservice.entities.NamedEntityBase;
-
 import ch.nation.dbservice.entities.NationRessource;
 import ch.nation.dbservice.entities.interfaces.IDiscrimantorValue;
 import ch.nation.dbservice.entities.prejudices.BasePrejudice;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.rest.core.annotation.RestResource;
-
 
 import javax.persistence.*;
 import java.util.ArrayList;

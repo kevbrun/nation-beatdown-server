@@ -1,6 +1,5 @@
 package ch.nation.dbservice.entities;
 
-import ch.nation.dbservice.entities.NamedEntityBase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;

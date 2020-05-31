@@ -63,7 +63,7 @@ public class BasePlayerMoveValue extends AbstractNationEntityBase implements IDi
 
     public void setTarget(Unit target) {
 
-        LOGGER.info("Custom set Method called");
+        LOGGER.debug("Custom set Method called");
 
         /**   if(target!=null) {
 

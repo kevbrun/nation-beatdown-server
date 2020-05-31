@@ -5,8 +5,6 @@ import ch.nation.core.model.dto.names.UnitCompleteNameDto;
 import ch.nation.core.model.dto.names.UnitFirstNameDto;
 import ch.nation.core.model.dto.names.UnitLastNameDto;
 import ch.nation.core.model.dto.unit.UnitDto;
-
-
 import ch.nation.units.services.UnitResourceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;

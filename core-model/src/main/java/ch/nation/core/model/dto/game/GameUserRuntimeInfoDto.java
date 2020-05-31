@@ -3,7 +3,6 @@ package ch.nation.core.model.dto.game;
 import ch.nation.core.model.dto.AbstractDto;
 import ch.nation.core.model.dto.move.AbstractPlayerMoveDto;
 import ch.nation.core.model.position.IVector3;
-import ch.nation.core.model.position.Vector3;
 import ch.nation.core.model.position.Vector3Int;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
