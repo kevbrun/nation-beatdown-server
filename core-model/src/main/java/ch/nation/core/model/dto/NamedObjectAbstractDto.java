@@ -1,7 +1,8 @@
 package ch.nation.core.model.dto;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
 
 
 public abstract class NamedObjectAbstractDto extends AbstractDto {
@@ -13,12 +14,22 @@ public abstract class NamedObjectAbstractDto extends AbstractDto {
     @JsonProperty("desc")
     private String description;
 
+    @JsonProperty("ident")
+    private String identifier;
 
     public NamedObjectAbstractDto() {
         super();
 
     }
 
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public String getName() {
         return name;
@@ -42,34 +53,23 @@ public abstract class NamedObjectAbstractDto extends AbstractDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof NamedObjectAbstractDto)) return false;
-
         NamedObjectAbstractDto that = (NamedObjectAbstractDto) o;
-
-        if (!id.equals(that.id)) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(identifier, that.identifier);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(name, description, identifier);
     }
-
-    @JsonIgnore
-    public boolean isNameValid(){
-        return getName()!=null && !getName().isBlank();
-    }
-
 
     @Override
     public String toString() {
-        return "AbstractDto{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+        return "NamedObjectAbstractDto{" +
+                "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", identifier='" + identifier + '\'' +
                 '}';
     }
 }

@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum StatModTarget implements IEnumFromValue<StatModTarget> {
-    MIN_VALUE("MinValue"),MAX_VALUE("MaxValue"),VALUE("Value"),ALL("All"),NONE("None");
+    MIN_VALUE("MinValue"), MAX_VALUE("MaxValue"), VALUE("Value"), ALL("All"), NONE("None");
 
     private String str;
 
@@ -20,7 +20,7 @@ public enum StatModTarget implements IEnumFromValue<StatModTarget> {
 
     @Override
     public StatModTarget fromValue(String value) {
-        return EnumUtilties.getEnumFromString(StatModTarget.class,value);
+        return EnumUtilties.getEnumFromString(StatModTarget.class, value);
     }
 
     @Override

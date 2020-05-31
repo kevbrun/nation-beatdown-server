@@ -2,8 +2,7 @@ package ch.nation.core.model.dto.unit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UnitAssetsDto extends AbstractAssetsDto{
-
+public class UnitAssetsDto extends AbstractAssetsDto {
 
 
     @JsonProperty("Beard")
@@ -81,7 +80,6 @@ public class UnitAssetsDto extends AbstractAssetsDto{
     @JsonProperty("PrimaryMeleeWeapon")
     private String primaryMeleeWeapon;
 
-
     @JsonProperty("SecondaryMeleeWeapon")
     private String secondaryMeleeWeapon;
 
@@ -91,40 +89,38 @@ public class UnitAssetsDto extends AbstractAssetsDto{
     @JsonProperty("Expression.Dead.Eyebrows")
     private String expressionDeadEyebrows;
 
-    public UnitAssetsDto(String beard, String shield, String expressionDefaultMouth, String expressionDefaultEyebrows, String expressionDeadEyes, String expressionDefaultEyes, String helmet, String armor, String back, String expressionAngryEyebrows, String body, String ears, String hair, String firearmParams, String head, String expressionAngryMouth, String mask, String bow, String firearms, String cape, String expressionDeadMouth, String expression, String weaponType, String glasses, String primaryMeleeWeapon, String secondaryMeleeWeapon, String expressionAngryEyes, String expressionDeadEyebrows) {
-        this.beard = beard;
-        this.shield = shield;
-        this.expressionDefaultMouth = expressionDefaultMouth;
-        this.expressionDefaultEyebrows = expressionDefaultEyebrows;
-        this.expressionDeadEyes = expressionDeadEyes;
-        this.expressionDefaultEyes = expressionDefaultEyes;
-        this.helmet = helmet;
-        this.armor = armor;
-        this.back = back;
-        this.expressionAngryEyebrows = expressionAngryEyebrows;
-        this.body = body;
-        this.ears = ears;
-        this.hair = hair;
-        this.firearmParams = firearmParams;
-        this.head = head;
-        this.expressionAngryMouth = expressionAngryMouth;
-        this.mask = mask;
-        this.bow = bow;
-        this.firearms = firearms;
-        this.cape = cape;
-        this.expressionDeadMouth = expressionDeadMouth;
-        this.expression = expression;
-        this.weaponType = weaponType;
-        this.glasses = glasses;
-        this.primaryMeleeWeapon = primaryMeleeWeapon;
-        this.secondaryMeleeWeapon = secondaryMeleeWeapon;
-        this.expressionAngryEyes = expressionAngryEyes;
-        this.expressionDeadEyebrows = expressionDeadEyebrows;
-    }
+    @JsonProperty("skin.color.r")
+    private float skinColorRed;
+    @JsonProperty("skin.color.g")
+    private float skinColorGreen;
+    @JsonProperty("skin.color.b")
+    private float skinColorBlue;
+
+    @JsonProperty("skin.color.a")
+    private float skinColorAlpha;
+
+
+    @JsonProperty("height")
+    private float height;
+
+    @JsonProperty("width")
+    private float width;
+
+    @JsonProperty("rem_mouth")
+    private boolean removeMouth;
+
 
     public UnitAssetsDto() {
     }
 
+
+    public boolean isRemoveMouth() {
+        return removeMouth;
+    }
+
+    public void setRemoveMouth(boolean removeMouth) {
+        this.removeMouth = removeMouth;
+    }
 
     public String getBeard() {
         return beard;
@@ -348,6 +344,54 @@ public class UnitAssetsDto extends AbstractAssetsDto{
 
     public void setExpressionDeadEyebrows(String expressionDeadEyebrows) {
         this.expressionDeadEyebrows = expressionDeadEyebrows;
+    }
+
+    public float getSkinColorRed() {
+        return skinColorRed;
+    }
+
+    public void setSkinColorRed(float skinColorRed) {
+        this.skinColorRed = skinColorRed;
+    }
+
+    public float getSkinColorGreen() {
+        return skinColorGreen;
+    }
+
+    public void setSkinColorGreen(float skinColorGreen) {
+        this.skinColorGreen = skinColorGreen;
+    }
+
+    public float getSkinColorBlue() {
+        return skinColorBlue;
+    }
+
+    public void setSkinColorBlue(float skinColorBlue) {
+        this.skinColorBlue = skinColorBlue;
+    }
+
+    public float getSkinColorAlpha() {
+        return skinColorAlpha;
+    }
+
+    public void setSkinColorAlpha(float skinColorAlpha) {
+        this.skinColorAlpha = skinColorAlpha;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
     }
 
     @Override

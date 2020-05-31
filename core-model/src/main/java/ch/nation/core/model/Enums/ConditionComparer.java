@@ -3,7 +3,7 @@ package ch.nation.core.model.Enums;
 import ch.nation.core.utils.EnumUtilties;
 
 public enum ConditionComparer implements IEnumFromValue<ConditionComparer> {
-    EQUALS("Equals"),SMALLER_THAN("SmallerThan"),BIGGER_THAN("BiggerThan"),NONE("None");
+    EQUALS("Equals"), SMALLER_THAN("SmallerThan"), BIGGER_THAN("BiggerThan"), NONE("None");
 
     private String str;
 
@@ -14,7 +14,7 @@ public enum ConditionComparer implements IEnumFromValue<ConditionComparer> {
 
     @Override
     public ConditionComparer fromValue(String value) {
-        return EnumUtilties.getEnumFromString(this.getDeclaringClass(),value);
+        return EnumUtilties.getEnumFromString(this.getDeclaringClass(), value);
     }
 
     @Override

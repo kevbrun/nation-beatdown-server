@@ -1,0 +1,7 @@
+[mariadb]
+innodb_compression_algorithm=lz4
+innodb_compression_default=ON
+innodb_file_format=barracuda
+innodb_default_row_format=dynamic
+innodb_file_per_table=ON
+innodb_page_size=16KB

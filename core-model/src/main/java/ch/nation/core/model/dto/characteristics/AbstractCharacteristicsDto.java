@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
-        property = "type",visible = true)
+        property = "type", visible = true)
 @JsonSubTypes({
 
         //BASE
@@ -19,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class AbstractCharacteristicsDto extends NamedObjectAbstractDto {
 
 
-     @Override
-     public String ResourceCollectionName() {
-          return "characteristics";
-     }
+    @Override
+    public String ResourceCollectionName() {
+        return "characteristics";
+    }
 }

@@ -1,17 +1,10 @@
 package ch.nation.core.model.dto.prejudices;
 
-import ch.nation.core.model.Enums.PrejudiceOperator;
 import ch.nation.core.model.dto.characteristics.StatBonusDeltaDto;
-import ch.nation.core.model.dto.prejudices.triggers.AbstractPrejudiceTriggerDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
 
 
 public class StatPrejudiceDto extends BasePrejudiceDto {
-
-
-
 
 
     @JsonProperty("delta")
@@ -19,7 +12,7 @@ public class StatPrejudiceDto extends BasePrejudiceDto {
 
 
     public StatPrejudiceDto() {
-    super();
+        super();
 
     }
 

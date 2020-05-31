@@ -25,10 +25,11 @@ import ch.nation.core.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
-        property = "type",visible = true)
+        property = "type", visible = true)
 @JsonSubTypes({
 
         //BASE
@@ -51,8 +52,6 @@ import java.io.Serializable;
         @JsonSubTypes.Type(value = StatPrejudiceDto.class, name = "StatPrejudice"),
         @JsonSubTypes.Type(value = SkillPrejudiceDto.class, name = "SkillPrejudice"),
         @JsonSubTypes.Type(value = BasePrejudiceDto.class, name = "BasePrejudice"),
-
-
 
 
         //TRIGGERS
@@ -81,8 +80,6 @@ import java.io.Serializable;
 
         //USER
         @JsonSubTypes.Type(value = UserDto.class, name = "User")
-
-
 
 
 })

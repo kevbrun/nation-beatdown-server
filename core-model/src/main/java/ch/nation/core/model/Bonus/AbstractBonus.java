@@ -6,11 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 
-
-public abstract class AbstractBonus<T> implements Serializable,IBonus<T> {
+public abstract class AbstractBonus<T> implements Serializable, IBonus<T> {
 
     @JsonProperty("bonus")
-    private  T bonus;
+    private T bonus;
 
     @JsonProperty("stat_target")
     private StatModTarget statTarget;

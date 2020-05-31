@@ -2,9 +2,9 @@ package ch.nation.core.model.Enums;
 
 import ch.nation.core.utils.EnumUtilties;
 
-public enum  UnitState implements IEnumFromValue<UnitState>{
-    IDLE("Idle"),INIT_OBJECT("InitObject"),IS_SELECTED("IsSelected"),Attack("Attack"),READY_FOR_MOVING("ReadyForMoving"),
-    IS_MOVING("IsMoving"),TAKING_DAMAGE("TakingDamage"),DEAD("DEAD"),TURN_FINISHED("TurnFinished");
+public enum UnitState implements IEnumFromValue<UnitState> {
+    IDLE("Idle"), INIT_OBJECT("InitObject"), IS_SELECTED("IsSelected"), Attack("Attack"), READY_FOR_MOVING("ReadyForMoving"),
+    IS_MOVING("IsMoving"), TAKING_DAMAGE("TakingDamage"), DEAD("DEAD"), TURN_FINISHED("TurnFinished");
 
     private String str;
 
@@ -14,7 +14,7 @@ public enum  UnitState implements IEnumFromValue<UnitState>{
 
     @Override
     public UnitState fromValue(String value) {
-        return EnumUtilties.getEnumFromString(UnitState.class,value);
+        return EnumUtilties.getEnumFromString(UnitState.class, value);
     }
 
     @Override

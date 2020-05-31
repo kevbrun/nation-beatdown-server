@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class StatBonusDeltaDto {
 
 
-
     public StatBonusDeltaDto() {
     }
 
@@ -16,18 +15,12 @@ public class StatBonusDeltaDto {
     private IntegerBonus hpBonus;
 
 
-
-
-
     @JsonProperty("apBonus")
     private IntegerBonus apBonus;
 
 
-
     @JsonProperty("strBonus")
     private IntegerBonus strBonus;
-
-
 
 
     @JsonProperty("vitBonus")
@@ -38,54 +31,39 @@ public class StatBonusDeltaDto {
     private IntegerBonus agiBonus;
 
 
-
     @JsonProperty("dexBonus")
     private IntegerBonus dexBonus;
-
-
 
 
     @JsonProperty("intBonus")
     private IntegerBonus intBonus;
 
 
-
-
     //Percantage Bonus
-
-
 
 
     @JsonProperty("hpBonusPerc")
     private FloatBonus hpPercentageBonus;
 
 
-
     @JsonProperty("apBonusPerc")
     private FloatBonus apPercentageBonus;
-
 
 
     @JsonProperty("strBonusPerc")
     private FloatBonus strPercentageBonus;
 
 
-
     @JsonProperty("vitBonusPerc")
     private FloatBonus vitPercentageBonus;
-
 
 
     @JsonProperty("agiBonusPerc")
     private FloatBonus agiPercentageBonus;
 
 
-
     @JsonProperty("dexBonusPerc")
     private FloatBonus dexPercentageBonus;
-
-
-
 
 
     @JsonProperty("intBonusPerc")

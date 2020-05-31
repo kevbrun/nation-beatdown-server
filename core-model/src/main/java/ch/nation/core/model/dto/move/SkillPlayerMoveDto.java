@@ -1,13 +1,11 @@
 package ch.nation.core.model.dto.move;
 
-import ch.nation.core.model.dto.move.values.AbstractMoveSkillEffectValueDto;
 import ch.nation.core.model.dto.move.values.BasePlayerMoveValueDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class SkillPlayerMoveDto extends BasePlayerMoveDto
-{
+public class SkillPlayerMoveDto extends BasePlayerMoveDto {
     @JsonProperty("effect_values")
     private List<BasePlayerMoveValueDto> effectValues;
 
@@ -18,14 +16,14 @@ public class SkillPlayerMoveDto extends BasePlayerMoveDto
     private int skillCost;
 
 
-    public final static String TYPE_IDENTIFER_SKILL="SkillPlayerMove";
+    public final static String TYPE_IDENTIFER_SKILL = "SkillPlayerMove";
 
 
     public SkillPlayerMoveDto() {
-     super();
+        super();
     }
 
-    public SkillPlayerMoveDto(String type){
+    public SkillPlayerMoveDto(String type) {
         super();
         this.setType(type);
     }

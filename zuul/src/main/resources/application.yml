@@ -6,17 +6,6 @@ eureka:
     registerWithEureka: true
   instance:
     preferIpAddress: true
-logging:
-  level:
-    ch:
-      nation:
-        rest:
-          clients: DEBUG
-    org:
-      springframework:
-        web:
-          filter:
-            CommonsRequestLoggingFilter: DEBUG
 
 hystrix:
   command:
@@ -30,12 +19,25 @@ ribbon:
   ReadTimeout: 201998
   connection-timeout: 201998
 
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: 123
+
+
 zuul:
   prefix: /api/rest/v1
+  ignoredServices: "*"
+  sensitiveHeaders:
   routes:
+    game-auth-service-path:
+      path: /oauth/**
+      url: http://nation-cloud-auth-service:9000/oauth
     game-logic-service-path:
       path: /logic/**
-      serviceId: nation-cloud-game-logics-service
+      serviceId: nation-cloud-game-logic-service
     game-resource-characteristics-service-path:
       path: /characteristics/**
       serviceId: nation-cloud-characteristics-service
@@ -48,9 +50,9 @@ zuul:
     game-resource-moves-service-path:
       path: /moves/**
       serviceId: nation-cloud-moves-service
-    game-resource-prejudices-service-path:
-      path: /prejudices/**
-      serviceId: nation-cloud-prejudices-service
+    #  game-resource-prejudices-service-path:
+    #    path: /prejudices/**
+    #    serviceId: nation-cloud-prejudices-service
     game-resource-skills-service-path:
       path: /skills/**
       serviceId: nation-cloud-skills-service
@@ -70,3 +72,20 @@ server:
 spring:
   application:
     name: nation-cloud-zuul-service
+
+
+---
+spring:
+  profiles: debug
+logging:
+  level:
+    ch:
+      nation:
+        rest:
+          clients: DEBUG
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+        security: DEBUG

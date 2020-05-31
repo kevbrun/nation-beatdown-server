@@ -14,14 +14,14 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @EnableEurekaClient
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 
-@EnableFeignClients(basePackages ={"ch.nation.core"})
+@EnableFeignClients(basePackages = {"ch.nation.core"})
 @ComponentScan(basePackages = {"ch.nation"})
 @Import({IncomingRequestLoggingConfiguration.class, FeignClientConfig.class})
 
 public class CharacteristicsServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CharacteristicsServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CharacteristicsServiceApplication.class, args);
+    }
 
 }

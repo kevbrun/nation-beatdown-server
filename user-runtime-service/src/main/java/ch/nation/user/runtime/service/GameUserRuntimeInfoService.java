@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface GameUserRuntimeInfoService {
 
 
-    Optional<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(String gameUuid,String playerUuid);
+    Optional<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(String gameUuid, String playerUuid);
+
     Optional<GameUserRuntimeInfoDto> getUserRuntimeInfoByGameUuidAndByPlayerUuid(String gameUuid, String playerUuid, QueryProjection projection);
 }
