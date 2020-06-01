@@ -41,8 +41,8 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(150f, 0.0f, 150f, StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(120f, 0.0f, 120f, StatGrowthType.LOGARITHMIC));
+        characterClass.setHealthPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
         characterClass.setStrength(new Stat(10f, 10f, 999f, StatGrowthType.LINEAR));
         characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setIntelligence(new Stat(3f, 3f, 999f, StatGrowthType.LOGARITHMIC));
@@ -82,7 +82,7 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(150f, 0.0f, 150f, StatGrowthType.LINEAR));
+        characterClass.setHealthPoints(new Stat(120f, 0.0f, 120f, StatGrowthType.LINEAR));
         characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
         characterClass.setStrength(new Stat(15f, 15f, 999f, StatGrowthType.LINEAR));
         characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
@@ -126,8 +126,8 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(150f, 0.0f, 150f, StatGrowthType.LOGARITHMIC));
+        characterClass.setHealthPoints(new Stat(80f, 0.0f, 80f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
         characterClass.setStrength(new Stat(5f, 5f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setIntelligence(new Stat(7f, 3f, 999f, StatGrowthType.LOGARITHMIC));
@@ -177,8 +177,8 @@ public class CharacterClassDummyGenerator extends AbstractDummyGenerator<Charact
         characterClass.setLevel(1);
         characterClass.setExp(0);
         characterClass.setExpToLevelUp(1000);
-        characterClass.setHealthPoints(new Stat(50f, 0.0f, 50f, StatGrowthType.LINEAR));
-        characterClass.setActionPoints(new Stat(150f, 0.0f, 150f, StatGrowthType.LOGARITHMIC));
+        characterClass.setHealthPoints(new Stat(60f, 0.0f, 60f, StatGrowthType.LINEAR));
+        characterClass.setActionPoints(new Stat(100f, 0.0f, 100f, StatGrowthType.LOGARITHMIC));
         characterClass.setStrength(new Stat(5f, 5f, 999f, StatGrowthType.LINEAR));
         characterClass.setAgility(new Stat(6f, 6f, 999f, StatGrowthType.LOGARITHMIC));
         characterClass.setIntelligence(new Stat(10f, 10f, 999f, StatGrowthType.LOGARITHMIC));
