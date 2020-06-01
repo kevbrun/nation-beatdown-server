@@ -353,8 +353,8 @@ public class SkillDummyDataGenerator extends AbstractDummyGenerator<Skill> {
         skill.setName("Wutausbruch!");
         skill.setIdentifier("dmg_expl_target_hp");
         skill.setDescription("Deine Wut lässt dich und alle Gegner im Bereich explodieren!");
-        skill.setCost(0);
-        skill.setCooldown(10000);
+        skill.setCost(60);
+        skill.setCooldown(0);
         skill.setSkillBarOrder(9999);
         skill.setIconPath("Skill_standart/Warriorskill_30");
         ActionArea actionArea = new ActionArea(5, 5, 0, 0, true, ActionShape.FILLED_CIRCLE, AreaTileStyle.ATTACK_AXE);

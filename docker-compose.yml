@@ -126,7 +126,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8888
       SPRING_PROFILES_ACTIVE: production
-      CONSIDERATION_TIME: 5
+      CONSIDERATION_TIME: 10
     logging:
       driver: json-file
 

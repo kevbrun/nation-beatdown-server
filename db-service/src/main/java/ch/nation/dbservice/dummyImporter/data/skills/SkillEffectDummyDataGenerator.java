@@ -186,7 +186,7 @@ public class SkillEffectDummyDataGenerator extends AbstractDummyGenerator {
         skillEffect.setApplyCalculationOnStat(StatType.HEALTH_POINTS);
         skillEffect.setResultIsNegative(true);
         skillEffect.setEffectTarget(SkillEffectTarget.CASTER);
-        skillEffect.setTypeUsedForCalculation(StatType.HEALTH_POINTS);
+        skillEffect.setTypeUsedForCalculation(StatType.STRENGTH);
 
         SkillAnimationInfo info = new SkillAnimationInfo();
         info.setDuration(1.5f);
