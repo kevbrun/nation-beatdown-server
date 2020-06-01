@@ -20,7 +20,7 @@ feign:
 
 game:
   rules:
-    consideration-time: 10
+    consideration-time: "${CONSIDERATION_TIME:10}"
 
 
 ---

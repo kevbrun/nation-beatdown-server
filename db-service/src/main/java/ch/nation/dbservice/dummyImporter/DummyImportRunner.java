@@ -5,13 +5,12 @@ import ch.nation.dbservice.dummyImporter.data.clazzes.CharacterClassDummyGenerat
 import ch.nation.dbservice.dummyImporter.data.games.GamesDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.moves.MoveDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.names.NameImporter;
-import ch.nation.dbservice.dummyImporter.data.players.PlayerClassDummyGenerator;
+import ch.nation.dbservice.dummyImporter.data.players.PlayerDummyGenerator;
 import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceDummyImporter;
 import ch.nation.dbservice.dummyImporter.data.prejudices.PrejudiceTriggerDummyImporter;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.skills.SkillEffectDummyDataGenerator;
 import ch.nation.dbservice.dummyImporter.data.units.UnitsClassDummyGenerator;
-import ch.nation.dbservice.entities.clazzes.CharacterClass;
 import ch.nation.dbservice.repositories.characteristics.CharacteristicsRepository;
 import ch.nation.dbservice.repositories.clazzes.CharacterClassRepository;
 import ch.nation.dbservice.repositories.game.GameRepository;
@@ -32,6 +31,7 @@ import ch.nation.dbservice.repositories.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,6 +40,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DummyImportRunner implements ApplicationRunner {
 
+    @Value("${nation.units.include-dummy}")
+    private boolean includeDummyPlayer;
 
     private final UnitRepository unitRepository;
     private final CharacterClassRepository characterClassRepository;
@@ -94,9 +96,9 @@ public class DummyImportRunner implements ApplicationRunner {
         new SkillDummyDataGenerator(skillRepository, skillEffectRepository);
         new CharacterClassDummyGenerator(characterClassRepository, skillRepository);
         new UnitsClassDummyGenerator(unitRepository, characterClassRepository);
-        new PlayerClassDummyGenerator(userRepository, unitRepository, encoder);
-        new MoveDummyGenerator(userRepository, playerMoveRepository, gameRepository, skillRepository, gameUserRuntimeRepository);
-        new GamesDummyGenerator(gameRepository, userRepository, gameUserRuntimeRepository);
+       if(includeDummyPlayer) new PlayerDummyGenerator(userRepository, unitRepository, encoder);
+     if(includeDummyPlayer)   new MoveDummyGenerator(userRepository, playerMoveRepository, gameRepository, skillRepository, gameUserRuntimeRepository);
+      if(includeDummyPlayer) new GamesDummyGenerator(gameRepository, userRepository, gameUserRuntimeRepository);
         new CharacteristicsDummyImporter(characteristicsRepository, skillRepository);
         new PrejudiceTriggerDummyImporter(characteristicPrejudiceTriggerRepository, characteristicsRepository, statPrejudiceTriggerRepository);
         new PrejudiceDummyImporter(prejudiceTriggerRepository, skillPrejudiceRepository, skillRepository, statPrejudiceTriggerRepository, statPrejudiceRepository, characteristicPrejudiceTriggerRepository);
@@ -104,14 +106,6 @@ public class DummyImportRunner implements ApplicationRunner {
     }
 
 
-    private void LoadCharacterClasses() {
-        LOGGER.info("START MIGRATING CHARACTER CLASSES");
-        CharacterClass characterClass = new CharacterClass();
-        characterClass.setName("Warrior");
-        characterClassRepository.save(characterClass);
-
-        LOGGER.info("STOP MIGRATING CHARACTER CLASSES");
-    }
 
 
     public UnitRepository getUnitRepository() {

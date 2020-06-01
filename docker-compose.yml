@@ -99,6 +99,7 @@ services:
       SPRING_DATASOURCE_USERNAME: nation
       SPRING_DATASOURCE_PASSWORD: nation
       SPRING_PROFILES_ACTIVE: debug
+      INCLUDE_DUMMY_PLAYER: "false"
       #SPRING_PROFILES_ACTIVE: mariadb-install
     logging:
       driver: json-file
@@ -125,6 +126,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-service:8761/eureka
       SERVER_PORT: 8888
       SPRING_PROFILES_ACTIVE: production
+      CONSIDERATION_TIME: 5
     logging:
       driver: json-file
 

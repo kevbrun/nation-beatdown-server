@@ -13,6 +13,10 @@ spring:
   application:
     name: nation-database-service
 
+nation:
+  units:
+    include-dummy: "${INCLUDE_DUMMY_PLAYER:false}"
+
 ---
 spring:
   profiles: local

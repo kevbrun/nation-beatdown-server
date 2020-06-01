@@ -8,14 +8,14 @@ import ch.nation.dbservice.repositories.units.UnitRepository;
 import ch.nation.dbservice.repositories.user.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class PlayerClassDummyGenerator extends AbstractDummyGenerator<User> {
+public class PlayerDummyGenerator extends AbstractDummyGenerator<User> {
 
     private final UserRepository userRepository;
     private final UnitRepository unitRepository;
     private final BCryptPasswordEncoder encoder;
 
 
-    public PlayerClassDummyGenerator(UserRepository repository, UnitRepository unitRepository, BCryptPasswordEncoder encoder) throws Exception {
+    public PlayerDummyGenerator(UserRepository repository, UnitRepository unitRepository, BCryptPasswordEncoder encoder) throws Exception {
         this.userRepository = repository;
         this.unitRepository = unitRepository;
         this.encoder = encoder;
