@@ -1,5 +1,7 @@
 # Nation Beatdown Server Project
 
+The server part of my master project for the game design masters at the Zurich University of Arts. It contains a small microservices based on Spring Cloud for the corresponding game "Nation Beatdown" which is a private repository. 
+
 ## Requirements
 
 For building and running the project the following tools are needed:
